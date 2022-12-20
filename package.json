@@ -1,0 +1,21 @@
+{
+  "name": "tree-sitter-br",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bindings/node",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "parse": "tree-sitter parse example.brs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nan": "^2.17.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.17",
+    "tree-sitter": "^0.20.1",
+    "tree-sitter-cli": "^0.20.7",
+    "typescript": "^4.9.4"
+  }
+}

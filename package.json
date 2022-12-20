@@ -14,8 +14,8 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.17",
-    "tree-sitter": "^0.20.1",
-    "tree-sitter-cli": "^0.20.7",
+    "tree-sitter": "0.20.1",
+    "tree-sitter-cli": "0.20.1",
     "typescript": "^4.9.4"
   }
 }

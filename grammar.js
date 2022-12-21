@@ -3,22 +3,74 @@ module.exports = grammar({
 
   rules: {
     // TODO: add the actual grammar rules
-    source_file: $ => repeat($._definition),
+    source_file: $ => repeat($.line),
+
+    line: $ => seq(
+      optional($.line_number),
+      optional($.label),
+      choice(
+        $._single_line_statement,
+        $._multi_line_statement
+      )
+    ),
+
+    _line_end: $ => /(\r?\n)/,
+
+    _single_line_statement: $ => choice(
+      $._definition
+    ),
+
+    _multi_line_statement: $ => seq(      
+      $._statement,
+      repeat(
+        seq(
+          choice(
+            /!:[\t ]*\r?\n/,
+            ":"
+          ),
+          $._statement
+        )
+      )
+    ),
+
+    _statement: $ => choice(
+      $.print_statement
+    ),
 
     _definition: $ => choice(
-      $.string_function_definition,
-      $.numeric_function_definition
+      $.function_definition,
+      // other types of definitions
+    ),
+
+    line_number: $ => /\d{1,5}\s/,
+    
+    label: $ => /[a-zA-Z_]\w*:\s/,
+
+    function_definition: $ => seq(
+      'def',
+      choice(
+        $.string_function_definition,
+        $.numeric_function_definition
+      ),
+      choice(
+        seq(
+          "=",
+          $._expression
+        ),
+        seq(
+          repeat($.line),
+          'fnend'
+        )
+      )
     ),
 
     string_function_definition: $ => seq(
-      'def',
       $.string_function_name,
       optional($.function_length),
       $.parameter_list,
     ),
 
     numeric_function_definition: $ => seq(
-      'def',
       $.numeric_function_name,
       $.parameter_list
     ),
@@ -49,15 +101,18 @@ module.exports = grammar({
       // TODO: other kinds of types
     ),
 
-    _statement: $ => choice(
-      $.return_statement
-      // TODO: other kinds of statements
-    ),
-
-    return_statement: $ => seq(
-      'return',
+    print_statement: $ => seq(
+      'print',
       $._expression,
-      ';'
+      repeat(
+        seq(
+          choice(
+            ",",
+            ";"
+          ),
+          $._expression,
+        )
+      )
     ),
 
     _expression: $ => choice(
@@ -66,8 +121,8 @@ module.exports = grammar({
       // TODO: other kinds of expressions
     ),
 
-    identifier: $ => /[a-z]\w*\$?/,
+    identifier: $ => /[a-zA-Z_]\w*\$?/,
 
-    number: $ => /\d+/
+    number: $ => /\d+(\.\d+)?/
   }
 });

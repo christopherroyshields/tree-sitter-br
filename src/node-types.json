@@ -1,5 +1,36 @@
 [
   {
+    "type": "function_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "line",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "numeric_function_definition",
+          "named": true
+        },
+        {
+          "type": "string_function_definition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "function_length",
     "named": true,
     "fields": {},
@@ -9,6 +40,33 @@
       "types": [
         {
           "type": "number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "function_definition",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "line_number",
+          "named": true
+        },
+        {
+          "type": "print_statement",
           "named": true
         }
       ]
@@ -68,11 +126,11 @@
     }
   },
   {
-    "type": "return_statement",
+    "type": "print_statement",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -95,11 +153,7 @@
       "required": false,
       "types": [
         {
-          "type": "numeric_function_definition",
-          "named": true
-        },
-        {
-          "type": "string_function_definition",
+          "type": "line",
           "named": true
         }
       ]
@@ -145,7 +199,19 @@
     "named": false
   },
   {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
     "type": ";",
+    "named": false
+  },
+  {
+    "type": "=",
     "named": false
   },
   {
@@ -157,7 +223,19 @@
     "named": false
   },
   {
+    "type": "fnend",
+    "named": false
+  },
+  {
     "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "label",
+    "named": true
+  },
+  {
+    "type": "line_number",
     "named": true
   },
   {
@@ -169,7 +247,7 @@
     "named": true
   },
   {
-    "type": "return",
+    "type": "print",
     "named": false
   },
   {

@@ -7,8 +7,35 @@ print a
 ---
     (source_file
       (line
-        (print_statement
-          (identifier)))
+        (statement
+          (print_statement
+            (numberreference
+              (numberidentifier))))))
+
+============================================
+numeric array expression
+============================================
+
+print mat a
+
+---
+    (source_file
       (line
-        (print_statement
-          (identifier))))
+        (statement
+          (print_statement
+            (numberarray
+              (numberidentifier))))))
+
+============================================
+numeric array expression (w/range)
+============================================
+
+print mat foo(1:10)
+
+---
+    (source_file
+      (line
+        (statement
+          (print_statement
+            (numberarray
+              (numberidentifier))))))                          

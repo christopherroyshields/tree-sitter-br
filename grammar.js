@@ -21,19 +21,19 @@ module.exports = grammar({
     ),
 
     _multi_line_statement: $ => seq(      
-      $._statement,
+      $.statement,
       repeat(
         seq(
           choice(
             /!:[\t ]*\r?\n/,
             ":"
           ),
-          $._statement
+          $.statement
         )
       )
     ),
 
-    _statement: $ => choice(
+    statement: $ => choice(
       $.print_statement
     ),
 
@@ -117,12 +117,12 @@ module.exports = grammar({
     ),
 
     _expression: $ => choice(
-      $.reference,
+      $._reference,
       $.number
       // TODO: other kinds of expressions
     ),
 
-    reference: $ => choice(
+    _reference: $ => choice(
       $.stringarray,
       $.numberarray,
       $.stringelement,
@@ -181,6 +181,8 @@ module.exports = grammar({
       )
     ),
 
+    numberreference: $ => $.numberidentifier,
+
     range: $ => seq(
       $._expression,
       ':',
@@ -192,7 +194,7 @@ module.exports = grammar({
     numberarray: $ => seq(
       $._mat,
       $.numberidentifier,
-      $.dimension
+      optional($.dimension)
     ),
 
     numberidentifier: $ => /[a-zA-Z_]\w*/,

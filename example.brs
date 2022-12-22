@@ -1,1 +1,2 @@
-print foo, print, bar
+print mat bar$(1,1:1)(1,2)
+print mat bar(1,1:1)(1,2)

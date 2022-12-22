@@ -1,0 +1,15 @@
+============================================
+Basic Print 
+============================================
+
+print a
+PRINT a
+
+---
+    (source_file
+      (line
+        (print_statement
+          (identifier)))
+      (line
+        (print_statement
+          (identifier))))

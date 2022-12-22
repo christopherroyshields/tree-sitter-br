@@ -1,6 +1,6 @@
 [
   {
-    "type": "function_definition",
+    "type": "dimension",
     "named": true,
     "fields": {},
     "children": {
@@ -8,9 +8,20 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "range",
           "named": true
-        },
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
         {
           "type": "line",
           "named": true
@@ -24,6 +35,10 @@
           "named": true
         },
         {
+          "type": "reference",
+          "named": true
+        },
+        {
           "type": "string_function_definition",
           "named": true
         }
@@ -33,16 +48,17 @@
   {
     "type": "function_length",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "number",
-          "named": true
-        }
-      ]
+    "fields": {
+      "length": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -67,6 +83,30 @@
         },
         {
           "type": "print_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "number",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "numberarray",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "dimension",
+          "named": true
+        },
+        {
+          "type": "numberidentifier",
           "named": true
         }
       ]
@@ -134,11 +174,49 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "number",
           "named": true
         },
         {
+          "type": "reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "range",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
           "type": "number",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "reference",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "numberarray",
+          "named": true
+        },
+        {
+          "type": "stringarray",
           "named": true
         }
       ]
@@ -183,6 +261,25 @@
     }
   },
   {
+    "type": "stringarray",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "dimension",
+          "named": true
+        },
+        {
+          "type": "stringidentifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "&",
     "named": false
   },
@@ -200,6 +297,10 @@
   },
   {
     "type": ",",
+    "named": false
+  },
+  {
+    "type": ".",
     "named": false
   },
   {
@@ -239,7 +340,7 @@
     "named": true
   },
   {
-    "type": "number",
+    "type": "numberidentifier",
     "named": true
   },
   {
@@ -247,11 +348,11 @@
     "named": true
   },
   {
-    "type": "print",
-    "named": false
+    "type": "string_function_name",
+    "named": true
   },
   {
-    "type": "string_function_name",
+    "type": "stringidentifier",
     "named": true
   }
 ]

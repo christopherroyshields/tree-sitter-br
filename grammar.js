@@ -1,6 +1,6 @@
 module.exports = grammar({
   name: 'br',
-
+  word: $ => $.identifier,
   rules: {
     // TODO: add the actual grammar rules
     source_file: $ => repeat($.line),
@@ -77,7 +77,7 @@ module.exports = grammar({
 
     function_length: $ => seq(
       '*',
-      $.number
+      field('length', $.number)
     ),
 
     string_function_name: $ => /fn\w+\$/i,
@@ -102,7 +102,8 @@ module.exports = grammar({
     ),
 
     print_statement: $ => seq(
-      'print',
+      /[pP][rR][iI][nN][tT]/,
+      /[ \t]+/,
       $._expression,
       repeat(
         seq(
@@ -116,13 +117,80 @@ module.exports = grammar({
     ),
 
     _expression: $ => choice(
-      $.identifier,
+      $.reference,
       $.number
       // TODO: other kinds of expressions
     ),
 
-    identifier: $ => /[a-zA-Z_]\w*\$?/,
+    reference: $ => choice(
+      $.stringarray,
+      $.numberarray,
+      // $.stringidentifier,
+      // $.numberidentifier
+    ),
 
-    number: $ => /\d+(\.\d+)?/
+    stringarray: $ => seq(
+      $._mat,
+      $.stringidentifier,
+      repeat($.dimension)
+    ),
+
+    dimension: $ => seq(
+      "(",
+      commaSep1(
+        $.range
+      ),
+      ")"
+    ),
+
+    stringreference: $ => seq(
+      $.stringidentifier,
+      optional($.range)
+    ),
+
+    range: $ => seq(
+      $._expression,
+      optional(
+        seq(
+          ':',
+          $._expression
+        )
+      ),
+    ),
+
+    stringidentifier: $ => /[a-zA-Z_]\w*\$/,
+
+    numberarray: $ => seq(
+      $._mat,
+      $.numberidentifier,
+      repeat($.dimension)
+    ),
+
+    numberidentifier: $ => /[a-zA-Z_]\w*/,
+
+    _mat: $ => /[mM][aA][tT][ \t]/,
+
+    identifier: $ => token(seq(
+      /[a-zA-Z_]\w*/,
+      optional(field('isString', token.immediate('$')))
+    )),
+
+    number: $ => seq(
+      /\d+/,
+      optional(
+        seq(
+          ".",
+          /\d+/
+        )
+      )
+    )
   }
 });
+
+function commaSep1(rule) {
+  return seq(rule, repeat(seq(',', rule)));
+}
+
+function commaSep(rule) {
+  return optional(commaSep1(rule));
+}

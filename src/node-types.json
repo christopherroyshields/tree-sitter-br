@@ -249,6 +249,10 @@
         {
           "type": "stringelement",
           "named": true
+        },
+        {
+          "type": "stringreference",
+          "named": true
         }
       ]
     }
@@ -328,6 +332,25 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "stringidentifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "stringreference",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "range",
           "named": true
         },
         {

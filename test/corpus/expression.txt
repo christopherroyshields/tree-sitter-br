@@ -1,0 +1,14 @@
+============================================
+numberic variable expression
+============================================
+
+print a
+
+---
+    (source_file
+      (line
+        (print_statement
+          (identifier)))
+      (line
+        (print_statement
+          (identifier))))

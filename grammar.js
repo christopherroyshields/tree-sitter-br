@@ -126,9 +126,9 @@ module.exports = grammar({
       $.stringarray,
       $.numberarray,
       $.stringelement,
-      $.numberelement
-      // $.stringidentifier,
-      // $.numberidentifier
+      $.numberelement,
+      $.stringreference,
+      $.numberreference
     ),
 
     numberelement: $ => seq(
@@ -172,17 +172,19 @@ module.exports = grammar({
 
     stringreference: $ => seq(
       $.stringidentifier,
-      optional($.range)
+      repeat(
+        seq(
+          "(",
+          $.range,
+          ")"
+        )
+      )
     ),
 
     range: $ => seq(
       $._expression,
-      optional(
-        seq(
-          ':',
-          $._expression
-        )
-      ),
+      ':',
+      $._expression
     ),
 
     stringidentifier: $ => /[a-zA-Z_]\w*\$/,

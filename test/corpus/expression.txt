@@ -2,16 +2,32 @@
 numberic variable expression
 ============================================
 
-print a
+let a
 
 ---
     (source_file
       (line
         (statement
-          (print_statement
-            (numberreference
-              (numberidentifier))))))
+          (let_statement
+            (primary_expression
+              (numberreference
+                (numberidentifier)))))))
 
+============================================
+assignment expression
+============================================
+
+let a=1
+
+---
+    (source_file
+      (line
+        (statement
+          (let_statement
+            (primary_expression
+              (numberreference
+                (numberidentifier)))))))
+                
 ============================================
 numeric array expression
 ============================================

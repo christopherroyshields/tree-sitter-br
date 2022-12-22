@@ -4,12 +4,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const tree_sitter_1 = __importDefault(require("tree-sitter"));
+const { Query } = tree_sitter_1.default;
 const br = require('./');
 const fs_1 = __importDefault(require("fs"));
 const parser = new tree_sitter_1.default();
 parser.setLanguage(br);
 const tree = parser.parse(fs_1.default.readFileSync("./example.brs").toString());
-console.log(tree.rootNode.toString());
+const refQuery = `(numberreference) @reference
+(stringidentifier) @ref2`;
+const query = new Query(br, refQuery);
+const matches = query.matches(tree.rootNode);
+console.log(matches);
 // const cursor = tree.walk()
 // cursor.gotoFirstChild()
 // do {

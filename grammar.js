@@ -1,6 +1,34 @@
 module.exports = grammar({
   name: 'br',
   word: $ => $.identifier,
+  precedences: $ => [
+    // [
+    //   'member',
+    //   'call',
+    //   $.update_expression,
+    //   'unary_not',
+    //   'unary_void',
+    //   'binary_exp',
+    //   'binary_times',
+    //   'binary_plus',
+    //   'binary_compare',
+    //   'binary_relation',
+    //   'binary_in',
+    //   'binary_and',
+    //   'binary_or',
+    //   'ternary',
+    //   $.await_expression,
+    //   $.sequence_expression,
+    //   $.arrow_function
+    // ],
+    // [$.rest_pattern, 'assign'],
+    ['assign', $.primary_expression],
+    // ['member', 'new', 'call', $.expression],
+    // ['declaration', 'literal'],
+    // [$.primary_expression, $.statement_block, 'object'],
+    // [$.import_statement, $.import],
+    // [$.export_statement, $.primary_expression],
+  ],
   rules: {
     // TODO: add the actual grammar rules
     source_file: $ => repeat($.line),
@@ -34,7 +62,8 @@ module.exports = grammar({
     ),
 
     statement: $ => choice(
-      $.print_statement
+      $.print_statement,
+      $.let_statement
     ),
 
     _definition: $ => choice(
@@ -101,6 +130,12 @@ module.exports = grammar({
       // TODO: other kinds of types
     ),
 
+    let_statement: $ => seq(
+      /[lL][eE][tT]/,
+      /[ \t]+/,
+      $._expression
+    ),
+
     print_statement: $ => seq(
       /[pP][rR][iI][nN][tT]/,
       /[ \t]+/,
@@ -117,10 +152,37 @@ module.exports = grammar({
     ),
 
     _expression: $ => choice(
-      $._reference,
-      $.number
+      $.assignment_expression,
+      // $.augmented_assignment_expression,
+      // $.unary_expression,
+      // $.binary_expression,
+      // $.new_expression,
+      $.primary_expression,
+
+      // $._reference,
+      // $.number
       // TODO: other kinds of expressions
     ),
+
+    primary_expression: $ => choice(
+      // $.subscript_expression,
+      // $.parenthesized_expression,
+      // $.identifier,
+      $._reference,
+      // alias($._reserved_identifier, $.identifier),
+      $.number,
+      // $.string,
+      // $.template_string,
+      // $.array,
+      // $.function,
+      // $.call_expression
+    ),
+
+    assignment_expression: $ => prec.right('assign', seq(
+      field('left', $._reference),
+      '=',
+      field('right', $._expression)
+    )),
 
     _reference: $ => choice(
       $.stringarray,

@@ -1,4 +1,5 @@
 import Parser from 'tree-sitter'
+const {Query} = Parser
 const br = require('./')
 import fs from 'fs'
 
@@ -7,7 +8,13 @@ parser.setLanguage(br)
 
 const tree = parser.parse(fs.readFileSync("./example.brs").toString());
 
-console.log(tree.rootNode.toString());
+const refQuery = `(stringidentifier) @stringref
+(stringidentifier) @ref2`
+
+const query = new Query(br, refQuery)
+const matches = query.matches(tree.rootNode);
+
+console.log(matches);
 
 // const cursor = tree.walk()
 // cursor.gotoFirstChild()

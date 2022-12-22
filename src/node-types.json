@@ -113,6 +113,29 @@
     }
   },
   {
+    "type": "numberelement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "numberidentifier",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "numeric_function_definition",
     "named": true,
     "fields": {},
@@ -216,7 +239,15 @@
           "named": true
         },
         {
+          "type": "numberelement",
+          "named": true
+        },
+        {
           "type": "stringarray",
+          "named": true
+        },
+        {
+          "type": "stringelement",
           "named": true
         }
       ]
@@ -270,6 +301,33 @@
       "types": [
         {
           "type": "dimension",
+          "named": true
+        },
+        {
+          "type": "stringidentifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "stringelement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "range",
+          "named": true
+        },
+        {
+          "type": "reference",
           "named": true
         },
         {

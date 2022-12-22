@@ -125,8 +125,35 @@ module.exports = grammar({
     reference: $ => choice(
       $.stringarray,
       $.numberarray,
+      $.stringelement,
+      $.numberelement
       // $.stringidentifier,
       // $.numberidentifier
+    ),
+
+    numberelement: $ => seq(
+      $.numberidentifier,
+      seq(
+        "(",
+        commaSep1($._expression),
+        ")"
+      )
+    ),
+
+    stringelement: $ => seq(
+      $.stringidentifier,
+      seq(
+        "(",
+        commaSep1($._expression),
+        ")"
+      ),
+      repeat(
+        seq(
+          "(",
+          $.range,
+          ")"
+        )
+      )
     ),
 
     stringarray: $ => seq(
@@ -163,7 +190,7 @@ module.exports = grammar({
     numberarray: $ => seq(
       $._mat,
       $.numberidentifier,
-      repeat($.dimension)
+      $.dimension
     ),
 
     numberidentifier: $ => /[a-zA-Z_]\w*/,

@@ -1,5 +1,28 @@
 [
   {
+    "type": "arguments",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "forced_assignment_expression",
+          "named": true
+        },
+        {
+          "type": "primary_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "assignment_expression",
     "named": true,
     "fields": {
@@ -51,6 +74,25 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "call_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "system_function",
+          "named": true
+        },
+        {
+          "type": "user_function",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -378,6 +420,10 @@
       "required": true,
       "types": [
         {
+          "type": "call_expression",
+          "named": true
+        },
+        {
           "type": "number",
           "named": true
         },
@@ -598,6 +644,22 @@
     }
   },
   {
+    "type": "system_function",
+    "named": true,
+    "fields": {
+      "arguments": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "arguments",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "template_string",
     "named": true,
     "fields": {},
@@ -672,6 +734,22 @@
           {
             "type": "~",
             "named": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "user_function",
+    "named": true,
+    "fields": {
+      "arguments": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "arguments",
+            "named": true
           }
         ]
       }

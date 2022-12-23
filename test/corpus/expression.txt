@@ -1,4 +1,37 @@
 ============================================
+system function
+============================================
+
+let val("1")
+let str$(5)
+
+---
+    (source_file
+      (line
+        (statement
+          (let_statement
+            (primary_expression
+              (numberreference
+                (numberidentifier)))))))
+
+============================================
+user function
+============================================
+
+let fnfoo$(1)
+let fnbar(x)
+let fnbaz
+
+---
+    (source_file
+      (line
+        (statement
+          (let_statement
+            (primary_expression
+              (numberreference
+                (numberidentifier)))))))
+
+============================================
 strings
 ============================================
 

@@ -1,1 +1,1 @@
-print `test {{ test$ }}`
+print fnval("1")

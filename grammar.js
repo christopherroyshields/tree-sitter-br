@@ -1,3 +1,11 @@
+const FORCED_ASSIGNMENT_OPERATORS = [
+  ":=",
+  "+=",
+  "-=",
+  "*=",
+  "/=",
+]
+
 module.exports = grammar({
   name: 'br',
   word: $ => $.identifier,
@@ -133,7 +141,10 @@ module.exports = grammar({
     let_statement: $ => seq(
       /[lL][eE][tT]/,
       /[ \t]+/,
-      $._expression
+      choice(
+        $.assignment_expression,
+        $._expression
+      )
     ),
 
     print_statement: $ => seq(
@@ -152,7 +163,7 @@ module.exports = grammar({
     ),
 
     _expression: $ => choice(
-      $.assignment_expression,
+      $.forced_assignment_expression,
       // $.augmented_assignment_expression,
       // $.unary_expression,
       // $.binary_expression,
@@ -181,6 +192,12 @@ module.exports = grammar({
     assignment_expression: $ => prec.right('assign', seq(
       field('left', $._reference),
       '=',
+      field('right', $._expression)
+    )),
+
+    forced_assignment_expression: $ => prec.right('assign', seq(
+      field('left', $._reference),
+      choice(...FORCED_ASSIGNMENT_OPERATORS),
       field('right', $._expression)
     )),
 

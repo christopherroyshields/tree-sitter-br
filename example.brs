@@ -1,3 +1,2 @@
-print foo
-print bar
-print foo$
+print foo:=1
+print foo/=2

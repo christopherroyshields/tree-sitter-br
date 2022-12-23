@@ -1,1 +1,1 @@
-print fnval("1")
+print 1+1*10

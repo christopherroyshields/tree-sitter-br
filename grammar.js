@@ -128,31 +128,28 @@ module.exports = grammar({
   word: $ => $.identifier,
   precedences: $ => [
     [
-    //   'member',
     //   'call',
     //   $.update_expression,
     //   'unary_not',
       'unary_void',
-    //   'binary_exp',
-    //   'binary_times',
-    //   'binary_plus',
-    //   'binary_compare',
-    //   'binary_relation',
-    //   'binary_in',
-    //   'binary_and',
-    //   'binary_or',
-    //   'ternary',
-    //   $.await_expression,
-    //   $.sequence_expression,
-    //   $.arrow_function
+      'binary_exp',
+      'binary_times',
+      'binary_plus',
+      'binary_shift',
+      // 'binary_compare',
+      'binary_relation',
+      'binary_equality',
+      'bitwise_and',
+      // 'bitwise_xor',
+      // 'bitwise_or',
+      'logical_and',
+      'logical_or',
     ],
     // [$.rest_pattern, 'assign'],
     ['assign', $.primary_expression],
     // ['member', 'new', 'call', $.expression],
     // ['declaration', 'literal'],
     // [$.primary_expression, $.statement_block, 'object'],
-    // [$.import_statement, $.import],
-    // [$.export_statement, $.primary_expression],
   ],
   rules: {
     // TODO: add the actual grammar rules
@@ -196,7 +193,7 @@ module.exports = grammar({
       // other types of definitions
     ),
 
-    line_number: $ => /\d{1,5}\s/,
+    line_number: $ => /\d{1,5}[ \t]/,
     
     label: $ => /[a-zA-Z_]\w*:\s/,
 
@@ -281,14 +278,38 @@ module.exports = grammar({
 
     _expression: $ => choice(
       $.forced_assignment_expression,
-      // $.augmented_assignment_expression,
       $.unary_expression,
-      // $.binary_expression,
+      $.binary_expression,
       $.primary_expression,
-
-      // $._reference,
-      // $.number
       // TODO: other kinds of expressions
+    ),
+
+    binary_expression: $ => choice(
+      ...[
+        ['&&', 'logical_and'],
+        ['||', 'logical_or'],
+        ['>>', 'binary_shift'],
+        ['<<', 'binary_shift'],
+        ['&', 'bitwise_and'],
+        ['+', 'binary_plus'],
+        ['-', 'binary_plus'],
+        ['*', 'binary_times'],
+        ['/', 'binary_times'],
+        ['%', 'binary_times'],
+        ['**', 'binary_exp', 'right'],
+        ['<', 'binary_relation'],
+        ['<=', 'binary_relation'],
+        ['==', 'binary_equality'],
+        ['~=', 'binary_equality'],
+        ['>=', 'binary_relation'],
+        ['>', 'binary_relation'],
+      ].map(([operator, precedence, associativity]) =>
+        (associativity === 'right' ? prec.right : prec.left)(precedence, seq(
+          field('left', $._expression),
+          field('operator', operator),
+          field('right', $._expression)
+        ))
+      )
     ),
 
     unary_expression: $ => prec.left('unary_void', seq(
@@ -297,11 +318,8 @@ module.exports = grammar({
     )),
 
     primary_expression: $ => choice(
-      // $.subscript_expression,
-      $.parenthesized_expression,
-      // $.identifier,
       $._reference,
-      // alias($._reserved_identifier, $.identifier),
+      $.parenthesized_expression,
       $.number,
       $.string,
       $.template_string,

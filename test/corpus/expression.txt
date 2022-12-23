@@ -1,4 +1,19 @@
 ============================================
+parenthesized_expression
+============================================
+
+let (test)
+
+---
+    (source_file
+      (line
+        (statement
+          (let_statement
+            (primary_expression
+              (numberreference
+                (numberidentifier)))))))
+
+============================================
 numberic variable expression
 ============================================
 

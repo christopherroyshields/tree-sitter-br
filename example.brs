@@ -1,2 +1,1 @@
-print foo:=1
-print foo/=2
+print (1)

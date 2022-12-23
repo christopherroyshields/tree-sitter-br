@@ -177,7 +177,7 @@ module.exports = grammar({
 
     primary_expression: $ => choice(
       // $.subscript_expression,
-      // $.parenthesized_expression,
+      $.parenthesized_expression,
       // $.identifier,
       $._reference,
       // alias($._reserved_identifier, $.identifier),
@@ -187,6 +187,12 @@ module.exports = grammar({
       // $.array,
       // $.function,
       // $.call_expression
+    ),
+
+    parenthesized_expression: $ => seq(
+      '(',
+      $._expression,
+      ')'
     ),
 
     assignment_expression: $ => prec.right('assign', seq(

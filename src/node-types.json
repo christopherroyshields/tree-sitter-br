@@ -327,6 +327,25 @@
     }
   },
   {
+    "type": "parenthesized_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "forced_assignment_expression",
+          "named": true
+        },
+        {
+          "type": "primary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "primary_expression",
     "named": true,
     "fields": {},
@@ -348,6 +367,10 @@
         },
         {
           "type": "numberreference",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
           "named": true
         },
         {

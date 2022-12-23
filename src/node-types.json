@@ -398,6 +398,10 @@
           "named": true
         },
         {
+          "type": "string",
+          "named": true
+        },
+        {
           "type": "stringarray",
           "named": true
         },
@@ -491,6 +495,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "string",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "string_function_definition",
@@ -627,7 +636,15 @@
     }
   },
   {
+    "type": "\"",
+    "named": false
+  },
+  {
     "type": "&",
+    "named": false
+  },
+  {
+    "type": "'",
     "named": false
   },
   {

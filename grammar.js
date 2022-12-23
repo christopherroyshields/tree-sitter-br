@@ -167,7 +167,6 @@ module.exports = grammar({
       // $.augmented_assignment_expression,
       $.unary_expression,
       // $.binary_expression,
-      // $.new_expression,
       $.primary_expression,
 
       // $._reference,
@@ -187,11 +186,30 @@ module.exports = grammar({
       $._reference,
       // alias($._reserved_identifier, $.identifier),
       $.number,
-      // $.string,
+      $.string,
       // $.template_string,
       // $.array,
       // $.function,
       // $.call_expression
+    ),
+
+    string: $ => choice(
+      seq(
+        '"',
+        token.immediate(repeat(choice(
+          /[^"\r\n]/,
+          "\"\""
+        ))),
+        '"'
+      ),
+      seq(
+        "'",
+        token.immediate(repeat(choice(
+          /[^'\r\n]/,
+          "''"
+        ))),
+        "'"
+      )
     ),
 
     parenthesized_expression: $ => seq(

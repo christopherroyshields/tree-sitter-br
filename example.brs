@@ -1,1 +1,2 @@
-print (not                        1)
+print "te""st"
+print 'test'''

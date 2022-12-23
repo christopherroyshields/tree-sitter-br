@@ -10,12 +10,12 @@ module.exports = grammar({
   name: 'br',
   word: $ => $.identifier,
   precedences: $ => [
-    // [
+    [
     //   'member',
     //   'call',
     //   $.update_expression,
     //   'unary_not',
-    //   'unary_void',
+      'unary_void',
     //   'binary_exp',
     //   'binary_times',
     //   'binary_plus',
@@ -28,7 +28,7 @@ module.exports = grammar({
     //   $.await_expression,
     //   $.sequence_expression,
     //   $.arrow_function
-    // ],
+    ],
     // [$.rest_pattern, 'assign'],
     ['assign', $.primary_expression],
     // ['member', 'new', 'call', $.expression],
@@ -165,7 +165,7 @@ module.exports = grammar({
     _expression: $ => choice(
       $.forced_assignment_expression,
       // $.augmented_assignment_expression,
-      // $.unary_expression,
+      $.unary_expression,
       // $.binary_expression,
       // $.new_expression,
       $.primary_expression,
@@ -174,6 +174,11 @@ module.exports = grammar({
       // $.number
       // TODO: other kinds of expressions
     ),
+
+    unary_expression: $ => prec.left('unary_void', seq(
+      field('operator', choice('~', '-', '+', /[nN][oO][tT][ \t]*/)),
+      field('argument', $._expression)
+    )),
 
     primary_expression: $ => choice(
       // $.subscript_expression,

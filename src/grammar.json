@@ -395,9 +395,55 @@
         },
         {
           "type": "SYMBOL",
+          "name": "unary_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "primary_expression"
         }
       ]
+    },
+    "unary_expression": {
+      "type": "PREC_LEFT",
+      "value": "unary_void",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "operator",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "~"
+                },
+                {
+                  "type": "STRING",
+                  "value": "-"
+                },
+                {
+                  "type": "STRING",
+                  "value": "+"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "[nN][oO][tT][ \\t]*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "argument",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          }
+        ]
+      }
     },
     "primary_expression": {
       "type": "CHOICE",
@@ -870,6 +916,12 @@
   ],
   "conflicts": [],
   "precedences": [
+    [
+      {
+        "type": "STRING",
+        "value": "unary_void"
+      }
+    ],
     [
       {
         "type": "STRING",

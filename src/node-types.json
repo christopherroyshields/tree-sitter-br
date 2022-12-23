@@ -44,6 +44,10 @@
           {
             "type": "primary_expression",
             "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
           }
         ]
       }
@@ -109,6 +113,10 @@
           {
             "type": "primary_expression",
             "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
           }
         ]
       }
@@ -140,6 +148,10 @@
         },
         {
           "type": "string_function_definition",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -179,6 +191,10 @@
         },
         {
           "type": "primary_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -253,6 +269,10 @@
         },
         {
           "type": "primary_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -341,6 +361,10 @@
         {
           "type": "primary_expression",
           "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
         }
       ]
     }
@@ -403,6 +427,10 @@
         {
           "type": "primary_expression",
           "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
         }
       ]
     }
@@ -421,6 +449,10 @@
         },
         {
           "type": "primary_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -525,6 +557,10 @@
         {
           "type": "stringidentifier",
           "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
         }
       ]
     }
@@ -549,6 +585,48 @@
     }
   },
   {
+    "type": "unary_expression",
+    "named": true,
+    "fields": {
+      "argument": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "forced_assignment_expression",
+            "named": true
+          },
+          {
+            "type": "primary_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "+",
+            "named": false
+          },
+          {
+            "type": "-",
+            "named": false
+          },
+          {
+            "type": "~",
+            "named": false
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "&",
     "named": false
   },
@@ -569,11 +647,19 @@
     "named": false
   },
   {
+    "type": "+",
+    "named": false
+  },
+  {
     "type": "+=",
     "named": false
   },
   {
     "type": ",",
+    "named": false
+  },
+  {
+    "type": "-",
     "named": false
   },
   {
@@ -643,5 +729,9 @@
   {
     "type": "stringidentifier",
     "named": true
+  },
+  {
+    "type": "~",
+    "named": false
   }
 ]

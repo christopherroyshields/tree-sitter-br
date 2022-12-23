@@ -1,4 +1,21 @@
 ============================================
+strings
+============================================
+
+let a="test"
+let bar='foo'
+let foo=`bar {{baz}}`
+
+---
+    (source_file
+      (line
+        (statement
+          (let_statement
+            (primary_expression
+              (numberreference
+                (numberidentifier)))))))
+
+============================================
 parenthesized_expression
 ============================================
 

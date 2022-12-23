@@ -187,10 +187,27 @@ module.exports = grammar({
       // alias($._reserved_identifier, $.identifier),
       $.number,
       $.string,
-      // $.template_string,
-      // $.array,
+      $.template_string,
       // $.function,
       // $.call_expression
+    ),
+
+    template_string: $ => seq(
+      '`',
+      repeat(choice(
+        $._template_chars,
+        "``",
+        $.template_substitution
+      )),
+      '`'
+    ),
+
+    _template_chars: $ => /[^`]/,
+
+    template_substitution: $ => seq(
+      '{{',
+      $._expression,
+      '}}'
     ),
 
     string: $ => choice(

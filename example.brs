@@ -1,2 +1,1 @@
-print "te""st"
-print 'test'''
+print `test {{ test$ }}`

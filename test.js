@@ -18,6 +18,13 @@ for (const match of matches) {
         console.log(capture.node.text + " (" + capture.name + ")");
     }
 }
+const errorQuery = new tree_sitter_1.default.Query(br, '(ERROR) @error');
+const errors = errorQuery.matches(tree.rootNode);
+for (const error of errors) {
+    for (const capture of error.captures) {
+        console.log(capture.node.text + " (" + capture.name + ")");
+    }
+}
 // const cursor = tree.walk()
 // cursor.gotoFirstChild()
 // do {

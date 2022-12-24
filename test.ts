@@ -10,11 +10,21 @@ const tree = parser.parse(fs.readFileSync("./example.brs").toString());
 const refQuery = `(numberreference (numberidentifier) @numberref)
 (stringidentifier) @stringref`
 
+
 const query = new Parser.Query(br, refQuery)
 const matches = query.matches(tree.rootNode);
 
 for (const match of matches) {
   for (const capture of match.captures) {
+    console.log(capture.node.text + " (" + capture.name + ")");
+  }
+}
+
+const errorQuery = new Parser.Query(br,'(ERROR) @error')
+const errors = errorQuery.matches(tree.rootNode);
+
+for (const error of errors) {
+  for (const capture of error.captures) {
     console.log(capture.node.text + " (" + capture.name + ")");
   }
 }

@@ -1,4 +1,4 @@
-const SYSTEM_FUNCTIONS = [
+const NUMERIC_SYSTEM_FUNCTIONS = [
   /[aA][bB][sS]/,
   /[aA][iI][dD][xX]/,
   /[aA][tT][nN]/,
@@ -73,7 +73,10 @@ const SYSTEM_FUNCTIONS = [
   /[tT][iI][mM][eE][rR]/,
   /[uU][dD][iI][mM]/,
   /[vV][aA][lL]/,
-  /[vV][eE][rR][sS][iI][oO][nN]/,
+  /[vV][eE][rR][sS][iI][oO][nN]/
+]
+
+const STRING_SYSTEM_FUNCTIONS = [
   /[bB][rR]_[fF][iI][lL][eE][nN][aA][mM][eE]\$/,
   /[bB][rR][eE][rR][rR]\$/,
   /[cC][fF][oO][rR][mM]\$/,
@@ -146,10 +149,10 @@ module.exports = grammar({
       'logical_or',
     ],
     // [$.rest_pattern, 'assign'],
-    ['assign', $.primary_expression],
+    ['assign', $.numeric_primary_expression],
     // ['member', 'new', 'call', $.expression],
     // ['declaration', 'literal'],
-    // [$.primary_expression, $.statement_block, 'object'],
+    // [$.numeric_primary_expression, $.statement_block, 'object'],
   ],
   rules: {
     // TODO: add the actual grammar rules
@@ -206,7 +209,7 @@ module.exports = grammar({
       choice(
         seq(
           "=",
-          $._expression
+          $.numeric_expression
         ),
         seq(
           repeat($.line),
@@ -257,34 +260,53 @@ module.exports = grammar({
       /[ \t]+/,
       choice(
         $.assignment_expression,
-        $._expression
+        $.numeric_expression
       )
     ),
 
     print_statement: $ => seq(
       /[pP][rR][iI][nN][tT]/,
       /[ \t]+/,
-      $._expression,
+      $.expression,
       repeat(
         seq(
           choice(
             ",",
             ";"
           ),
-          $._expression,
+          $.expression,
         )
       )
     ),
 
-    _expression: $ => choice(
-      $.forced_assignment_expression,
-      $.unary_expression,
-      $.binary_expression,
-      $.primary_expression,
+    expression: $ => choice(
+      $.numeric_expression,
+      $.string_expression
+    ),
+
+    numeric_expression: $ => choice(
+      $.numeric_forced_assignment_expression,
+      $.numeric_unary_expression,
+      $.numeric_binary_expression,
+      $.numeric_primary_expression,
       // TODO: other kinds of expressions
     ),
 
-    binary_expression: $ => choice(
+    string_expression: $ => choice(
+      // $.numeric_forced_assignment_expression,
+      // $.numeric_unary_expression,
+      $.string_binary_expression,
+      $.string_primary_expression,
+      // TODO: other kinds of expressions
+    ),
+
+    string_binary_expression: $ => prec.left(seq(
+      field('left', $.string_expression),
+      field('operator', "&"),
+      field('right', $.string_expression)
+    )),
+
+    numeric_binary_expression: $ => choice(
       ...[
         ['&&', 'logical_and'],
         ['||', 'logical_or'],
@@ -305,50 +327,73 @@ module.exports = grammar({
         ['>', 'binary_relation'],
       ].map(([operator, precedence, associativity]) =>
         (associativity === 'right' ? prec.right : prec.left)(precedence, seq(
-          field('left', $._expression),
+          field('left', $.numeric_expression),
           field('operator', operator),
-          field('right', $._expression)
+          field('right', $.numeric_expression)
         ))
       )
     ),
 
-    unary_expression: $ => prec.left('unary_void', seq(
+    numeric_unary_expression: $ => prec.left('unary_void', seq(
       field('operator', choice('~', '-', '+', /[nN][oO][tT][ \t]*/)),
-      field('argument', $._expression)
+      field('argument', $.numeric_expression)
     )),
 
-    primary_expression: $ => choice(
-      $._reference,
+    numeric_primary_expression: $ => choice(
+      $._numeric_reference,
       $.parenthesized_expression,
       $.number,
+      $.numeric_call_expression
+    ),
+
+    string_primary_expression: $ => choice(
+      $._string_reference,
       $.string,
       $.template_string,
-      $.call_expression
+      $.string_call_expression
     ),
 
-    call_expression: $ => choice(
-      $.system_function,
-      $.user_function
+    numeric_call_expression: $ => choice(
+      $.numeric_system_function,
+      $.numeric_user_function
     ),
 
-    system_function: $ => seq(
+    string_call_expression: $ => choice(
+      $.string_system_function,
+      $.string_user_function
+    ),
+
+    numeric_system_function: $ => seq(
       field('function', choice(
-        ...SYSTEM_FUNCTIONS
+        ...NUMERIC_SYSTEM_FUNCTIONS
       )),
       optional(field('arguments', $.arguments))
     ),
 
-    user_function: $ => seq(
+    string_system_function: $ => seq(
+      field('function', choice(
+        ...STRING_SYSTEM_FUNCTIONS
+      )),
+      optional(field('arguments', $.arguments))
+    ),
+
+    numeric_user_function: $ => seq(
+      field('function', choice(
+        $._numeric_function_identifier
+      )),
+      optional(field('arguments', $.arguments))
+    ),
+
+    string_user_function: $ => seq(
       field('function', choice(
         $._string_function_identifier,
-        $._numeric_function_identifier
       )),
       optional(field('arguments', $.arguments))
     ),
 
     arguments: $ => seq(
       "(",
-      commaSep1($._expression),
+      commaSep1($.expression),
       ")"
     ),
 
@@ -369,7 +414,7 @@ module.exports = grammar({
 
     template_substitution: $ => seq(
       '{{',
-      $._expression,
+      $.string_expression,
       '}}'
     ),
 
@@ -394,36 +439,39 @@ module.exports = grammar({
 
     parenthesized_expression: $ => seq(
       '(',
-      $._expression,
+      $.numeric_expression,
       ')'
     ),
 
     assignment_expression: $ => prec.right('assign', seq(
-      field('left', $._reference),
+      field('left', $._numeric_reference),
       '=',
-      field('right', $._expression)
+      field('right', $.numeric_expression)
     )),
 
-    forced_assignment_expression: $ => prec.right('assign', seq(
-      field('left', $._reference),
+    numeric_forced_assignment_expression: $ => prec.right('assign', seq(
+      field('left', $._numeric_reference),
       choice(...FORCED_ASSIGNMENT_OPERATORS),
-      field('right', $._expression)
+      field('right', $.numeric_expression)
     )),
 
-    _reference: $ => choice(
+    _numeric_reference: $ => choice(
       $.stringarray,
       $.numberarray,
-      $.stringelement,
       $.numberelement,
-      $.stringreference,
       $.numberreference
+    ),
+
+    _string_reference: $ => choice(
+      $.stringelement,
+      $.stringreference,
     ),
 
     numberelement: $ => seq(
       $.numberidentifier,
       seq(
         "(",
-        commaSep1($._expression),
+        commaSep1($.numeric_expression),
         ")"
       )
     ),
@@ -432,7 +480,7 @@ module.exports = grammar({
       $.stringidentifier,
       seq(
         "(",
-        commaSep1($._expression),
+        commaSep1($.numeric_expression),
         ")"
       ),
       repeat(
@@ -472,9 +520,9 @@ module.exports = grammar({
     numberreference: $ => $.numberidentifier,
 
     range: $ => seq(
-      $._expression,
+      $.numeric_expression,
       ':',
-      $._expression
+      $.numeric_expression
     ),
 
     stringidentifier: $ => /[a-zA-Z_]\w*\$/,

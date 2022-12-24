@@ -1,1 +1,1 @@
-print 1+1*10
+print str$(1)&"test"&str$(1)

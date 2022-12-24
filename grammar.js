@@ -289,15 +289,12 @@ module.exports = grammar({
       $.numeric_unary_expression,
       $.numeric_binary_expression,
       $.numeric_primary_expression,
-      // TODO: other kinds of expressions
     ),
 
     string_expression: $ => choice(
-      // $.numeric_forced_assignment_expression,
-      // $.numeric_unary_expression,
+      $.string_forced_assignment_expression,
       $.string_binary_expression,
       $.string_primary_expression,
-      // TODO: other kinds of expressions
     ),
 
     string_binary_expression: $ => prec.left(seq(
@@ -453,6 +450,12 @@ module.exports = grammar({
       field('left', $._numeric_reference),
       choice(...FORCED_ASSIGNMENT_OPERATORS),
       field('right', $.numeric_expression)
+    )),
+
+    string_forced_assignment_expression: $ => prec.right('assign', seq(
+      field('left', $._string_reference),
+      ":=",
+      field('right', $.string_expression)
     )),
 
     _numeric_reference: $ => choice(

@@ -727,10 +727,44 @@
           "named": true
         },
         {
+          "type": "string_forced_assignment_expression",
+          "named": true
+        },
+        {
           "type": "string_primary_expression",
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "string_forced_assignment_expression",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "stringelement",
+            "named": true
+          },
+          {
+            "type": "stringreference",
+            "named": true
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {

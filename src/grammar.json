@@ -425,6 +425,10 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "string_forced_assignment_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "string_binary_expression"
         },
         {
@@ -1986,6 +1990,35 @@
             "content": {
               "type": "SYMBOL",
               "name": "numeric_expression"
+            }
+          }
+        ]
+      }
+    },
+    "string_forced_assignment_expression": {
+      "type": "PREC_RIGHT",
+      "value": "assign",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "left",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_string_reference"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": ":="
+          },
+          {
+            "type": "FIELD",
+            "name": "right",
+            "content": {
+              "type": "SYMBOL",
+              "name": "string_expression"
             }
           }
         ]

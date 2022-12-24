@@ -1,1 +1,1 @@
-print str$(1)&"test"&str$(1)
+print foo$:=1

@@ -1,1 +1,1 @@
-print mat a$
+100 test: mat foo$(1)=("")

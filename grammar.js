@@ -187,8 +187,51 @@ module.exports = grammar({
     ),
 
     statement: $ => choice(
+      $.mat_statement,
       $.print_statement,
       $.let_statement
+    ),
+
+    mat_statement: $ => seq(
+      $._mat,
+      choice(
+        seq(
+          $.stringidentifier,
+          optional(
+            seq(
+              "(",
+              commaSep1($.numeric_expression),
+              ")",
+              optional(
+                seq(
+                  "=",
+                  "(",
+                  $.string_expression,
+                  ")"
+                )
+              )
+            )
+          )
+        ),
+        seq(
+          $.numberidentifier,
+          optional(
+            seq(
+              "(",
+              commaSep1($.numeric_expression),
+              ")",
+              optional(
+                seq(
+                  "=",
+                  "(",
+                  $.numeric_expression,
+                  ")"
+                )
+              )
+            )
+          )
+        )
+      )
     ),
 
     _definition: $ => choice(

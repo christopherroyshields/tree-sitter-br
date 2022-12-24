@@ -176,6 +176,29 @@
     }
   },
   {
+    "type": "mat_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "numeric_expression",
+          "named": true
+        },
+        {
+          "type": "string_expression",
+          "named": true
+        },
+        {
+          "type": "stringidentifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "number",
     "named": true,
     "fields": {}
@@ -701,6 +724,10 @@
       "types": [
         {
           "type": "let_statement",
+          "named": true
+        },
+        {
+          "type": "mat_statement",
           "named": true
         },
         {

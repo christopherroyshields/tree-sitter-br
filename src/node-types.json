@@ -23,19 +23,11 @@
         "required": true,
         "types": [
           {
-            "type": "numberarray",
-            "named": true
-          },
-          {
             "type": "numberelement",
             "named": true
           },
           {
             "type": "numberreference",
-            "named": true
-          },
-          {
-            "type": "stringarray",
             "named": true
           }
         ]
@@ -76,7 +68,15 @@
       "required": true,
       "types": [
         {
+          "type": "numeric_array_expression",
+          "named": true
+        },
+        {
           "type": "numeric_expression",
+          "named": true
+        },
+        {
+          "type": "string_array_expression",
           "named": true
         },
         {
@@ -228,6 +228,78 @@
       "types": [
         {
           "type": "numberidentifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "numeric_array_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "numeric_array_forced_assignment_expression",
+          "named": true
+        },
+        {
+          "type": "numeric_array_primary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "numeric_array_forced_assignment_expression",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "numberarray",
+            "named": true
+          }
+        ]
+      },
+      "right": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "numeric_array_expression",
+            "named": true
+          },
+          {
+            "type": "numeric_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "numeric_array_primary_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "numberarray",
           "named": true
         }
       ]
@@ -388,19 +460,11 @@
         "required": true,
         "types": [
           {
-            "type": "numberarray",
-            "named": true
-          },
-          {
             "type": "numberelement",
             "named": true
           },
           {
             "type": "numberreference",
-            "named": true
-          },
-          {
-            "type": "stringarray",
             "named": true
           }
         ]
@@ -449,10 +513,6 @@
           "named": true
         },
         {
-          "type": "numberarray",
-          "named": true
-        },
-        {
           "type": "numberelement",
           "named": true
         },
@@ -466,10 +526,6 @@
         },
         {
           "type": "parenthesized_expression",
-          "named": true
-        },
-        {
-          "type": "stringarray",
           "named": true
         }
       ]
@@ -658,6 +714,78 @@
     "type": "string",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "string_array_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string_array_forced_assignment_expression",
+          "named": true
+        },
+        {
+          "type": "string_array_primary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string_array_forced_assignment_expression",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "stringarray",
+            "named": true
+          }
+        ]
+      },
+      "right": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "string_array_expression",
+            "named": true
+          },
+          {
+            "type": "string_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "string_array_primary_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "stringarray",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "string_binary_expression",

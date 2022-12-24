@@ -280,8 +280,20 @@ module.exports = grammar({
     ),
 
     expression: $ => choice(
+      $.string_array_expression,
+      $.numeric_array_expression,
       $.numeric_expression,
       $.string_expression
+    ),
+
+    string_array_expression: $ => choice(
+      $.string_array_forced_assignment_expression,
+      $.string_array_primary_expression
+    ),
+
+    numeric_array_expression: $ => choice(
+      $.numeric_array_forced_assignment_expression,
+      $.numeric_array_primary_expression
     ),
 
     numeric_expression: $ => choice(
@@ -335,6 +347,14 @@ module.exports = grammar({
       field('operator', choice('~', '-', '+', /[nN][oO][tT][ \t]*/)),
       field('argument', $.numeric_expression)
     )),
+
+    numeric_array_primary_expression: $ => choice(
+      $.numberarray
+    ),
+
+    string_array_primary_expression: $ => choice(
+      $.stringarray,
+    ),
 
     numeric_primary_expression: $ => choice(
       $._numeric_reference,
@@ -446,6 +466,38 @@ module.exports = grammar({
       field('right', $.numeric_expression)
     )),
 
+    string_array_forced_assignment_expression: $ => prec.right('assign', seq(
+      field('left', $.stringarray),
+      ":=",
+      field('right', choice(
+        seq(
+          "(",
+          choice(
+            $.string_expression,
+            $.string_array_expression
+          ),
+          ")"
+        ),
+        $.string_array_expression
+      ))
+    )),
+
+    numeric_array_forced_assignment_expression: $ => prec.right('assign', seq(
+      field('left', $.numberarray),
+      ":=",
+      field('right', choice(
+        seq(
+          "(",
+          choice(
+            $.numeric_expression,
+            $.numeric_array_expression
+          ),
+          ")"
+        ),
+        $.numeric_array_expression
+      ))
+    )),
+
     numeric_forced_assignment_expression: $ => prec.right('assign', seq(
       field('left', $._numeric_reference),
       choice(...FORCED_ASSIGNMENT_OPERATORS),
@@ -459,8 +511,6 @@ module.exports = grammar({
     )),
 
     _numeric_reference: $ => choice(
-      $.stringarray,
-      $.numberarray,
       $.numberelement,
       $.numberreference
     ),

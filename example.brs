@@ -1,1 +1,1 @@
-print foo$:=1
+print mat a$

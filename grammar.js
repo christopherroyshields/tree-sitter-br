@@ -154,6 +154,9 @@ module.exports = grammar({
     // ['declaration', 'literal'],
     // [$.numeric_primary_expression, $.statement_block, 'object'],
   ],
+  externals: $ => [
+    $.eol
+  ],
   rules: {
     // TODO: add the actual grammar rules
     source_file: $ => repeat($.line),
@@ -164,7 +167,8 @@ module.exports = grammar({
       choice(
         $._single_line_statement,
         $._multi_line_statement
-      )
+      ),
+      $.eol
     ),
 
     _line_end: $ => /(\r?\n)/,
@@ -190,6 +194,16 @@ module.exports = grammar({
       $.mat_statement,
       $.print_statement,
       $.let_statement
+    ),
+
+    let_statement: $ => seq(
+      optional(seq(/[lL][eE][tT]/,
+      /[ \t]+/)),
+      choice(
+        $.string_assignment_expression,
+        $.numeric_assignment_expression,
+        $.numeric_expression
+      )
     ),
 
     mat_statement: $ => seq(
@@ -296,15 +310,6 @@ module.exports = grammar({
     _type: $ => choice(
       'bool'
       // TODO: other kinds of types
-    ),
-
-    let_statement: $ => seq(
-      /[lL][eE][tT]/,
-      /[ \t]+/,
-      choice(
-        $.assignment_expression,
-        $.numeric_expression
-      )
     ),
 
     print_statement: $ => seq(
@@ -503,10 +508,22 @@ module.exports = grammar({
       ')'
     ),
 
-    assignment_expression: $ => prec.right('assign', seq(
+    string_assignment_expression: $ => prec.right('assign', seq(
+      field('left', $._string_reference),
+      '=',
+      field('right', choice(
+        $.string_expression,
+        $.string_assignment_expression
+      ))
+    )),
+
+    numeric_assignment_expression: $ => prec.right('assign', seq(
       field('left', $._numeric_reference),
       '=',
-      field('right', $.numeric_expression)
+      field('right', choice(
+        $.numeric_expression,
+        $.numeric_assignment_expression
+      ))
     )),
 
     string_array_forced_assignment_expression: $ => prec.right('assign', seq(

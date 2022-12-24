@@ -15,36 +15,6 @@
     }
   },
   {
-    "type": "assignment_expression",
-    "named": true,
-    "fields": {
-      "left": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "numberelement",
-            "named": true
-          },
-          {
-            "type": "numberreference",
-            "named": true
-          }
-        ]
-      },
-      "right": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "numeric_expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "dimension",
     "named": true,
     "fields": {},
@@ -138,11 +108,15 @@
       "required": true,
       "types": [
         {
-          "type": "assignment_expression",
+          "type": "numeric_assignment_expression",
           "named": true
         },
         {
           "type": "numeric_expression",
+          "named": true
+        },
+        {
+          "type": "string_assignment_expression",
           "named": true
         }
       ]
@@ -154,8 +128,12 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "eol",
+          "named": true
+        },
         {
           "type": "function_definition",
           "named": true
@@ -183,6 +161,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "numberidentifier",
+          "named": true
+        },
         {
           "type": "numeric_expression",
           "named": true
@@ -326,6 +308,40 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "numeric_assignment_expression",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "numberelement",
+            "named": true
+          },
+          {
+            "type": "numberreference",
+            "named": true
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "numeric_assignment_expression",
+            "named": true
+          },
+          {
+            "type": "numeric_expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -815,6 +831,40 @@
     }
   },
   {
+    "type": "string_assignment_expression",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "stringelement",
+            "named": true
+          },
+          {
+            "type": "stringreference",
+            "named": true
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_assignment_expression",
+            "named": true
+          },
+          {
+            "type": "string_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "string_binary_expression",
     "named": true,
     "fields": {
@@ -1230,6 +1280,10 @@
   {
     "type": "def",
     "named": false
+  },
+  {
+    "type": "eol",
+    "named": true
   },
   {
     "type": "fnend",

@@ -382,16 +382,6 @@
     "want_separate_host_toolset": 0,
     "nodedir": "C:\\Users\\chris\\AppData\\Local\\node-gyp\\Cache\\18.12.1",
     "standalone_static_library": 1,
-    "msbuild_path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe",
-    "cache": "C:\\Users\\chris\\AppData\\Local\\npm-cache",
-    "globalconfig": "C:\\Users\\chris\\AppData\\Roaming\\npm\\etc\\npmrc",
-    "global_prefix": "C:\\Users\\chris\\AppData\\Roaming\\npm",
-    "init_module": "C:\\Users\\chris\\.npm-init.js",
-    "local_prefix": "C:\\Users\\chris\\projects\\tree-sitter\\tree-sitter-br",
-    "metrics_registry": "https://registry.npmjs.org/",
-    "node_gyp": "C:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\\node-gyp\\bin\\node-gyp.js",
-    "prefix": "C:\\Users\\chris\\AppData\\Roaming\\npm",
-    "userconfig": "C:\\Users\\chris\\.npmrc",
-    "user_agent": "npm/8.19.2 node/v18.12.1 win32 x64 workspaces/false"
+    "msbuild_path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe"
   }
 }

@@ -68,12 +68,24 @@
         }
       ]
     },
+    "statement_separator": {
+      "type": "STRING",
+      "value": ":"
+    },
+    "continuation": {
+      "type": "PATTERN",
+      "value": "!:[\\t ]*(\\r?\\n)?"
+    },
     "_multi_line_statement": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
           "name": "statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "comment"
         },
         {
           "type": "REPEAT",
@@ -84,12 +96,12 @@
                 "type": "CHOICE",
                 "members": [
                   {
-                    "type": "PATTERN",
-                    "value": "!:[\\t ]*\\r?\\n"
+                    "type": "SYMBOL",
+                    "name": "continuation"
                   },
                   {
-                    "type": "STRING",
-                    "value": ":"
+                    "type": "SYMBOL",
+                    "name": "statement_separator"
                   }
                 ]
               },
@@ -733,7 +745,73 @@
                 "name": "operator",
                 "content": {
                   "type": "STRING",
+                  "value": "and"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "right",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "numeric_expression"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "PREC_LEFT",
+          "value": "logical_and",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "left",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "numeric_expression"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "operator",
+                "content": {
+                  "type": "STRING",
                   "value": "&&"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "right",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "numeric_expression"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "PREC_LEFT",
+          "value": "logical_or",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "left",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "numeric_expression"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "operator",
+                "content": {
+                  "type": "STRING",
+                  "value": "or"
                 }
               },
               {
@@ -2800,7 +2878,7 @@
   "extras": [
     {
       "type": "PATTERN",
-      "value": "\\s"
+      "value": "[ \\t]"
     }
   ],
   "conflicts": [],
@@ -2862,6 +2940,10 @@
     {
       "type": "SYMBOL",
       "name": "eol"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "comment"
     }
   ],
   "inline": [],

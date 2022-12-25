@@ -155,8 +155,14 @@ module.exports = grammar({
     // [$.numeric_primary_expression, $.statement_block, 'object'],
   ],
   externals: $ => [
-    $.eol
+    $.eol,
+    $.comment
   ],
+
+  extras: $ => [
+    /[ \t]/
+  ],
+
   rules: {
     // TODO: add the actual grammar rules
     source_file: $ => repeat($.line),
@@ -177,15 +183,22 @@ module.exports = grammar({
       $._definition
     ),
 
+    statement_separator: $ => ":",
+
+    continuation: $=> /!:[\t ]*(\r?\n)?/,
+
     _multi_line_statement: $ => seq(      
       $.statement,
+      $.comment,
       repeat(
         seq(
           choice(
-            /!:[\t ]*\r?\n/,
-            ":"
+            $.continuation,
+            $.statement_separator
+            // $.comment_continuation,
+            // $.comment_sep
           ),
-          $.statement
+          $.statement,
         )
       )
     ),
@@ -365,7 +378,9 @@ module.exports = grammar({
 
     numeric_binary_expression: $ => choice(
       ...[
+        ['and', 'logical_and'],
         ['&&', 'logical_and'],
+        ['or', 'logical_or'],
         ['||', 'logical_or'],
         ['>>', 'binary_shift'],
         ['<<', 'binary_shift'],

@@ -131,6 +131,14 @@
       "required": true,
       "types": [
         {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "continuation",
+          "named": true
+        },
+        {
           "type": "eol",
           "named": true
         },
@@ -148,6 +156,10 @@
         },
         {
           "type": "statement",
+          "named": true
+        },
+        {
+          "type": "statement_separator",
           "named": true
         }
       ]
@@ -420,6 +432,14 @@
           },
           {
             "type": ">>",
+            "named": false
+          },
+          {
+            "type": "and",
+            "named": false
+          },
+          {
+            "type": "or",
             "named": false
           },
           {
@@ -752,6 +772,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "statement_separator",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "string",
@@ -1274,8 +1299,20 @@
     "named": false
   },
   {
+    "type": "and",
+    "named": false
+  },
+  {
     "type": "bool",
     "named": false
+  },
+  {
+    "type": "comment",
+    "named": true
+  },
+  {
+    "type": "continuation",
+    "named": true
   },
   {
     "type": "def",
@@ -1308,6 +1345,10 @@
   {
     "type": "numeric_function_name",
     "named": true
+  },
+  {
+    "type": "or",
+    "named": false
   },
   {
     "type": "string_function_name",

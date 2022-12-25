@@ -189,7 +189,6 @@ module.exports = grammar({
 
     _multi_line_statement: $ => seq(      
       $.statement,
-      $.comment,
       repeat(
         seq(
           choice(
@@ -204,9 +203,15 @@ module.exports = grammar({
     ),
 
     statement: $ => choice(
-      $.mat_statement,
-      $.print_statement,
-      $.let_statement
+      $.comment,
+      seq(
+        choice(
+          $.mat_statement,
+          $.print_statement,
+          $.let_statement,
+        ),
+        optional($.comment)
+      )
     ),
 
     let_statement: $ => seq(

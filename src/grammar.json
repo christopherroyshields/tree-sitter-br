@@ -84,10 +84,6 @@
           "name": "statement"
         },
         {
-          "type": "SYMBOL",
-          "name": "comment"
-        },
-        {
           "type": "REPEAT",
           "content": {
             "type": "SEQ",
@@ -119,15 +115,41 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "mat_statement"
+          "name": "comment"
         },
         {
-          "type": "SYMBOL",
-          "name": "print_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "let_statement"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "mat_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "print_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "let_statement"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "comment"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
         }
       ]
     },

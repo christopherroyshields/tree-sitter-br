@@ -36,20 +36,26 @@ bool tree_sitter_br_external_scanner_scan(
           lexer->advance(lexer, false);
           if (lexer->lookahead == ':'){
             return true;
+          } else {
+            lexer->mark_end(lexer);
           }
         } else {
           if (lexer->lookahead == 0 || lexer->lookahead == '\n'){
             return true;
           } else {
-            lexer->mark_end(lexer);
             lexer->advance(lexer, false);
+            lexer->mark_end(lexer);
           }
         }
       } else {
         if (lexer->lookahead == '!') {
-          isComment = true;
-          lexer->mark_end(lexer);
           lexer->advance(lexer, false);
+          if (lexer->lookahead == ':'){
+            return false;  
+          } else {
+            lexer->mark_end(lexer);
+            isComment = true;
+          }
           // lexer->mark_end(lexer);
         } else {
           if (!iswspace(lexer->lookahead)) return false;
@@ -57,30 +63,6 @@ bool tree_sitter_br_external_scanner_scan(
         }
       }
     }
-    // for (;;) {
-    //   if (lexer->lookahead == '!') {
-    //     lexer->advance(lexer, false);
-    //     lexer->mark_end(lexer);
-    //     return true;
-    //   }
-    //   if (!iswspace(lexer->lookahead)) return false;
-    //   lexer->advance(lexer, true);
-    // }
-    // printf("test");
-    // if (lexer->lookahead == "!"){
-    //   return true;
-    //   lexer->advance(lexer, false);
-    //   if (lexer->lookahead == ":") return false;
-    //   if (lexer->lookahead == "\n" || lexer->lookahead == "\n" == 0) return true;
-    //   lexer->advance(lexer, false);
-    //   for (;;) {
-    //     if (lexer->lookahead == "\n") return true;
-    //     if (lexer->lookahead == 0) return true;
-    //     lexer->advance(lexer, false);
-    //   }
-    // } else {
-    //   return false;
-    // }
   } else {
     return false;
   }

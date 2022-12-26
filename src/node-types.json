@@ -65,6 +65,10 @@
       "required": true,
       "types": [
         {
+          "type": "int",
+          "named": true
+        },
+        {
           "type": "numberreference",
           "named": true
         }
@@ -76,11 +80,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "formspec",
+          "named": true
+        },
+        {
+          "type": "multiplier",
           "named": true
         }
       ]
@@ -89,17 +97,24 @@
   {
     "type": "formspec",
     "named": true,
-    "fields": {},
+    "fields": {
+      "size": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "number",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
           "type": "form_multiplier",
-          "named": true
-        },
-        {
-          "type": "number",
           "named": true
         }
       ]
@@ -147,6 +162,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "int",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "let_statement",
@@ -1389,6 +1409,10 @@
   },
   {
     "type": "line_number",
+    "named": true
+  },
+  {
+    "type": "multiplier",
     "named": true
   },
   {

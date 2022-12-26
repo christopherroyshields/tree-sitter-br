@@ -1,1 +1,1 @@
-FORM C*C 1
+FORM X*C

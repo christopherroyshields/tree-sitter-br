@@ -7,7 +7,7 @@ parser.setLanguage(br)
 
 const tree = parser.parse(fs.readFileSync("./example.brs").toString());
 
-const refQuery = `(numberreference (numberidentifier) @numberref)
+const refQuery = `(numberreference) @numberref
 (stringidentifier) @stringref`
 
 

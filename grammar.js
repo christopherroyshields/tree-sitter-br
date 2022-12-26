@@ -249,18 +249,34 @@ module.exports = grammar({
 
     form_statement: $ => seq(
       STATEMENTS.FORM,
-      $.formspec
+      commaSep1(
+        choice(
+          $.formspec,
+          seq(
+            $.multiplier,
+            "*",
+            "(",
+            commaSep1($.formspec),
+            ")"
+          )
+        )
+      )
     ),
 
     form_multiplier: $ => seq(
-      alias($.multiplier, $.numberreference),
+      choice(
+        alias($.multiplier, $.numberreference),
+        $.int
+      ),
       "*"
     ),
+
+    int: $ => /\d+/,
 
     formspec: $ => seq(
       optional($.form_multiplier),
       choice(...FORMAT_SPECS),
-      optional($.number)
+      field("size", optional($.number))
     ),
 
     let_statement: $ => seq(

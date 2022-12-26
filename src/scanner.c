@@ -3,7 +3,8 @@
 
 enum TokenType {
   EOL,
-  COMMENT
+  COMMENT,
+  MULTIPLIER
 };
 
 const char NEWLINE = '\n';
@@ -49,14 +50,60 @@ void consume_comment(TSLexer *lexer){
   }
 }
 
+bool valid_char(TSLexer *lexer){
+  const a = lexer->lookahead;
+  bool isValid = false;
+  if ((a >= 'a' && a <= 'z') || (a >= 'A' && a <= 'Z') || (a >= '0' && a <= '9') || a == '_'){
+    isValid = true;
+  }
+  return isValid;
+}
+
+bool consume_var(TSLexer *lexer){
+  fprintf(fp, "start consume\n");
+  lexer->advance(lexer, false);
+  lexer->mark_end(lexer);
+  
+  if (lexer->lookahead == '*'){
+    lexer->result_symbol = MULTIPLIER;
+    return true;
+  }
+
+  for (;;){
+    if (iswspace(lexer->lookahead)) break;
+    if (!valid_char(lexer)){
+      return false;
+    } else {
+      lexer->mark_end(lexer);
+      lexer->advance(lexer, false);
+    }
+  }
+  fprintf(fp, "finished var");
+  for (;;){
+    if (iswspace(lexer->lookahead)){
+      lexer->advance(lexer, true);
+    } else {
+      if (lexer->lookahead == '*'){
+        lexer->result_symbol = MULTIPLIER;
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+}
+
 bool tree_sitter_br_external_scanner_scan(
   void *payload,
   TSLexer *lexer,
   const bool *valid_symbols
 ) {
-  fprintf(fp, "scan start");
+  // fprintf(fp, "scan start");
 
-  if (!(valid_symbols[EOL] || valid_symbols[COMMENT])) return false;
+  if (!(valid_symbols[EOL] || valid_symbols[COMMENT] || valid_symbols[MULTIPLIER])) return false;
+
+  bool var_found = false;
+  bool var_done = false;
 
   for (;;) {
     if (valid_symbols[EOL]){
@@ -78,7 +125,16 @@ bool tree_sitter_br_external_scanner_scan(
       }
     }
 
-    if (valid_symbols[EOL] || valid_symbols[COMMENT]){
+    if (valid_symbols[MULTIPLIER]){
+      if (lexer->lookahead == '_' || (lexer->lookahead >= 'a' && lexer->lookahead <= 'z') || (lexer->lookahead >= 'A' && lexer->lookahead <= 'Z')){
+        fprintf(fp, "found var\n");
+        bool found = false;
+        found = consume_var(lexer);
+        return found;
+      }
+    }
+
+    if (valid_symbols[EOL] || valid_symbols[COMMENT] || valid_symbols[MULTIPLIER]){
       if (!iswspace(lexer->lookahead)) return false;
       lexer->advance(lexer, true);
     }

@@ -126,6 +126,37 @@ const FORCED_ASSIGNMENT_OPERATORS = [
   "/=",
 ]
 
+const STATEMENTS = {
+  FORM: /[fF][oO][rR][mM]/
+}
+
+const FORMAT_SPECS = [
+  /[bB][lL]/,
+  /[bB][hH]/,
+  /[bB]/,
+  /[cC][cC]/,
+  /[cC][rR]/,
+  /[cC]/,
+  /[dD][hH]/,
+  /[dD][lL]/,
+  /[dD][tT]/,
+  /[dD]/,
+  /[gG][fF]/,
+  /[gG][zZ]/,
+  /[gG]/,
+  /[lL]/,
+  /[nN][zZ]/,
+  /[nN]/,
+  /[pP][oO][sS]/,
+  /[pP][dD]/,
+  /[pP]/,
+  /[sS][kK][iI][pP]/,
+  /[sS]/,
+  /[vV]/,
+  /[xX]/,
+  /[zZ][dD]/
+]
+
 module.exports = grammar({
   name: 'br',
   word: $ => $.identifier,
@@ -156,7 +187,8 @@ module.exports = grammar({
   ],
   externals: $ => [
     $.eol,
-    $.comment
+    $.comment,
+    $.multiplier
   ],
 
   extras: $ => [
@@ -209,9 +241,26 @@ module.exports = grammar({
           $.mat_statement,
           $.print_statement,
           $.let_statement,
+          $.form_statement
         ),
         optional($.comment)
       )
+    ),
+
+    form_statement: $ => seq(
+      STATEMENTS.FORM,
+      $.formspec
+    ),
+
+    form_multiplier: $ => seq(
+      alias($.multiplier, $.numberreference),
+      "*"
+    ),
+
+    formspec: $ => seq(
+      optional($.form_multiplier),
+      choice(...FORMAT_SPECS),
+      optional($.number)
     ),
 
     let_statement: $ => seq(
@@ -670,10 +719,7 @@ module.exports = grammar({
 
     _mat: $ => /[mM][aA][tT][ \t]/,
 
-    identifier: $ => token(seq(
-      /[a-zA-Z_]\w*/,
-      optional(field('isString', token.immediate('$')))
-    )),
+    identifier: $ => /\w+\$?/,
 
     number: $ => seq(
       /\d+/,

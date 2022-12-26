@@ -4,32 +4,24 @@
   "version": "2.0.0",
   "tasks": [
     {
-        "command": "node_modules/.bin/tree-sitter generate",
-        "label": "tree-sitter: generate",
-        "group": {
-            "kind": "build",
-            "isDefault": true
-        }
+      "type": "typescript",
+      "tsconfig": "tsconfig.json",
+      "problemMatcher": ["$tsc"],
+      "label": "tsc: build - tsconfig.json"
     },
     {
-        "command": "node-gyp build",
-        "label": "tree-sitter: build",
-        "group": {
-            "kind": "build",
-            "isDefault": true
-        }
+      "type": "shell",
+      "command": "node-gyp build",
+      "label": "node-gyp - build"
     },
     {
-        "type": "typescript",
-        "tsconfig": "tsconfig.json",
-        "problemMatcher": [
-            "$tsc"
-        ],
-        "group": {
-            "kind": "build",
-            "isDefault": true
-        },
-        "label": "tsc: build - tsconfig.json"
+      "label": "build",
+      "dependsOn": ["node-gyp - build", "tsc: build - tsconfig.json"],
+      "dependsOrder": "sequence",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
     }
-]
+  ]
 }

@@ -134,6 +134,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "let_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "form_statement"
                 }
               ]
             },
@@ -148,6 +152,167 @@
                   "type": "BLANK"
                 }
               ]
+            }
+          ]
+        }
+      ]
+    },
+    "form_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[fF][oO][rR][mM]"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "formspec"
+        }
+      ]
+    },
+    "form_multiplier": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "multiplier"
+          },
+          "named": true,
+          "value": "numberreference"
+        },
+        {
+          "type": "STRING",
+          "value": "*"
+        }
+      ]
+    },
+    "formspec": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "form_multiplier"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[bB][lL]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[bB][hH]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[bB]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[cC][cC]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[cC][rR]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[cC]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[dD][hH]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[dD][lL]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[dD][tT]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[dD]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[gG][fF]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[gG][zZ]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[gG]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[lL]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[nN][zZ]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[nN]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[pP][oO][sS]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[pP][dD]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[pP]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[sS][kK][iI][pP]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[sS]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[vV]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[xX]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[zZ][dD]"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "number"
+            },
+            {
+              "type": "BLANK"
             }
           ]
         }
@@ -2836,35 +3001,8 @@
       "value": "[mM][aA][tT][ \\t]"
     },
     "identifier": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "PATTERN",
-            "value": "[a-zA-Z_]\\w*"
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "FIELD",
-                "name": "isString",
-                "content": {
-                  "type": "IMMEDIATE_TOKEN",
-                  "content": {
-                    "type": "STRING",
-                    "value": "$"
-                  }
-                }
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
-        ]
-      }
+      "type": "PATTERN",
+      "value": "\\w+\\$?"
     },
     "number": {
       "type": "SEQ",
@@ -2966,6 +3104,10 @@
     {
       "type": "SYMBOL",
       "name": "comment"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "multiplier"
     }
   ],
   "inline": [],

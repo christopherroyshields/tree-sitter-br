@@ -2,4 +2,5 @@ found var
 start consume
 finished varfound var
 start consume
-finished var
+finished varfound var
+start consume

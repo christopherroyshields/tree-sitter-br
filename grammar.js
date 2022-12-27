@@ -272,10 +272,19 @@ module.exports = grammar({
 
     int: $ => /\d+/,
 
+    _pic: $ => /[pP][iI][cC]\([^)\n]*\)/,
+
+    spec: $ => choice(...FORMAT_SPECS),
+
     formspec: $ => seq(
       optional($.form_multiplier),
-      choice(...FORMAT_SPECS),
-      field("size", optional($.number))
+      choice(
+        field("spec", $._pic),
+        seq(
+          field("spec", $.spec),
+          field("size", optional($.number))
+        )
+      )
     ),
 
     let_statement: $ => seq(

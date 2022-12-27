@@ -107,6 +107,16 @@
             "named": true
           }
         ]
+      },
+      "spec": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "spec",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
@@ -814,6 +824,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "spec",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "statement",

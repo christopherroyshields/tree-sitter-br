@@ -1,0 +1,24 @@
+============================================
+Form Statement
+============================================
+FORM 2*(C 3, 2*C 10),BH 2.1,PIC(###.##)
+---
+    (source_file
+      (line
+        (statement
+          (form_statement
+            (form_multiplier
+              (int))
+            (formspec
+              (spec)
+              (number))
+            (formspec
+              (form_multiplier
+                (int))
+              (spec)
+              (number))
+            (formspec
+              (spec)
+              (number))
+            (formspec)))
+        (eol)))

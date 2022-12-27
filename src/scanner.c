@@ -108,6 +108,9 @@ bool tree_sitter_br_external_scanner_scan(
   for (;;) {
     if (valid_symbols[EOL]){
       if (lexer->lookahead == 0 || lexer->lookahead == NEWLINE){
+        if (lexer->lookahead == NEWLINE){
+          lexer->advance(lexer, true);
+        }
         lexer->result_symbol = EOL;
         return true;
       }

@@ -1,1 +1,2 @@
-FORM 2*(C 3, 2*C 10),BH 2.1,PIC(###.##)
+print test
+print test

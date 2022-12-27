@@ -84,11 +84,11 @@
       "required": true,
       "types": [
         {
-          "type": "formspec",
+          "type": "form_multiplier",
           "named": true
         },
         {
-          "type": "multiplier",
+          "type": "formspec",
           "named": true
         }
       ]
@@ -1409,10 +1409,6 @@
   },
   {
     "type": "line_number",
-    "named": true
-  },
-  {
-    "type": "multiplier",
     "named": true
   },
   {

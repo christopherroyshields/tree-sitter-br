@@ -179,11 +179,7 @@
                   "members": [
                     {
                       "type": "SYMBOL",
-                      "name": "multiplier"
-                    },
-                    {
-                      "type": "STRING",
-                      "value": "*"
+                      "name": "form_multiplier"
                     },
                     {
                       "type": "STRING",
@@ -243,11 +239,7 @@
                         "members": [
                           {
                             "type": "SYMBOL",
-                            "name": "multiplier"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "*"
+                            "name": "form_multiplier"
                           },
                           {
                             "type": "STRING",

@@ -253,8 +253,7 @@ module.exports = grammar({
         choice(
           $.formspec,
           seq(
-            $.multiplier,
-            "*",
+            $.form_multiplier,
             "(",
             commaSep1($.formspec),
             ")"

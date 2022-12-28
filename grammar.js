@@ -132,7 +132,8 @@ const STATEMENTS = {
   form: /[fF][oO][rR][mM]/,
   continue: /[cC][oO][nN][tT][iI][nN][uU][eE]/,
   data: /[dD][aA][tT][aA]/,
-  delete: /[dD][eE][lL][eE][tT][eE]/
+  delete: /[dD][eE][lL][eE][tT][eE]/,
+  dim: /[dD][iI][mM]/
 }
 
 const KEYWORD = {
@@ -273,6 +274,7 @@ module.exports = grammar({
           $.continue_statement,
           $.data_statement,
           $.delete_statement,
+          $.dim_statement,
           $.mat_statement,
           $.print_statement,
           $.let_statement,
@@ -340,6 +342,52 @@ module.exports = grammar({
       ),
       ":",
       $.error_condition
+    ),
+
+    dim_statement: $ => seq(
+      STATEMENTS.dim,
+      commaSep1(
+        choice(
+          $.number_name,
+          seq(
+            alias($.number_name, $.number_array_name),
+            "(",
+            commaSep1(/\d+/),
+            ")",
+          ),
+          seq(
+            $.string_name,
+            optional(
+              seq(
+                "*",
+                /\d+/
+              )
+            )
+          ),
+          seq(
+            alias($.stringidentifier,$.string_array_name),
+            "(",
+            commaSep1(/\d+/),
+            ")",
+            optional(
+              seq(
+                "*",
+                /\d+/
+              )
+            )
+          )
+        )
+      )
+      // commaSep1(
+      //   choice(
+      //     seq(
+      //       alias($.stringidentifier, $.string_array_name),
+      //       "(",
+      //       commaSep1(/\d+/),
+      //       ")"
+      //     )
+      //   )
+      // )
     ),
 
     error_condition: $ => seq(

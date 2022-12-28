@@ -125,3 +125,28 @@ DELETE
               (number))
             (formspec)))
         (eol)))
+
+============================================
+DIM
+============================================
+dim a,b,c,d$,e$*20,e$(1)*20,e(1)
+---
+    (source_file
+      (line
+        (statement
+          (form_statement
+            (form_multiplier
+              (int))
+            (formspec
+              (spec)
+              (number))
+            (formspec
+              (form_multiplier
+                (int))
+              (spec)
+              (number))
+            (formspec
+              (spec)
+              (number))
+            (formspec)))
+        (eol)))

@@ -1,1 +1,1 @@
-00530 Delete #1,Key=badrec$: Nokey KeyNotFoundLine
+dim a,b,c,d$,e$*20,e$(1)*20,e(1)

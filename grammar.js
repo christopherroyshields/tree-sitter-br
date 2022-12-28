@@ -129,7 +129,8 @@ const FORCED_ASSIGNMENT_OPERATORS = [
 const STATEMENTS = {
   CLOSE: /[cC][lL][oO][sS][eE]/,
   FORM: /[fF][oO][rR][mM]/,
-  CONTINUE: /[cC][oO][nN][tT][iI][nN][uU][eE]/
+  CONTINUE: /[cC][oO][nN][tT][iI][nN][uU][eE]/,
+  DATA: /[dD][aA][tT][aA]/
 }
 
 const KEYWORD = {
@@ -217,7 +218,6 @@ module.exports = grammar({
   extras: $ => [
     /[ \t]/
   ],
-
   rules: {
     // TODO: add the actual grammar rules
     source_file: $ => repeat($.line),
@@ -264,6 +264,7 @@ module.exports = grammar({
           $.chain_statement,
           $.close_statement,
           $.continue_statement,
+          $.data_statement,
           $.mat_statement,
           $.print_statement,
           $.let_statement,
@@ -274,6 +275,14 @@ module.exports = grammar({
     ),
 
     continue_statement: $ => STATEMENTS.CONTINUE,
+    data_statement: $ => seq(
+      STATEMENTS.DATA,
+      commaSep1(choice(
+        $.unquoted_data,
+        $.string,
+        $.number
+      ))
+    ),
 
     bar: $ => token(prec.dynamic(10,/baz/)),
     foo: $ => token(prec.dynamic(2,/baz/)),
@@ -843,16 +852,34 @@ module.exports = grammar({
     _mat: $ => /[mM][aA][tT][ \t]/,
 
     identifier: $ => /\w+\$?/,
+    
+    number: $ => {
+      const decimal_digits = /\d+/
+      const signed_integer = seq(optional(choice('-', '+')), decimal_digits)
+      const exponent_part = seq(choice('e', 'E'), signed_integer)
 
-    number: $ => seq(
-      /\d+/,
-      optional(
-        seq(
-          ".",
-          /\d+/
-        )
+      const decimal_integer_literal = choice(
+        '0',
+        seq(optional('0'), /[1-9]/)
       )
-    )
+
+      const decimal_literal = choice(
+        seq(decimal_integer_literal, '.', optional(decimal_digits), optional(exponent_part)),
+        seq('.', decimal_digits, optional(exponent_part)),
+        seq(decimal_integer_literal, exponent_part),
+        seq(decimal_digits),
+      )
+
+      const mod = seq(choice("+","-"),decimal_literal)
+
+      return token(choice(
+        decimal_literal,
+        mod
+      ))
+    },
+
+    unquoted_data: $ => /[^"'\n][^,\n]*/,
+
   }
 });
 

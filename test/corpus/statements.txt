@@ -72,4 +72,31 @@ CONTINUE
               (spec)
               (number))
             (formspec)))
-        (eol)))      
+        (eol)))
+
+============================================
+DATA
+============================================
+data "First Name","Last Name","Address","City","State","Zip Code","Shipping","Item 1","Item 2","Item 3"
+data 10,10,10,10,4,9,3,3,3,3,1x32,
+DATA 5.2E3, -5.2e+2, +5e-4
+---
+    (source_file
+      (line
+        (statement
+          (form_statement
+            (form_multiplier
+              (int))
+            (formspec
+              (spec)
+              (number))
+            (formspec
+              (form_multiplier
+                (int))
+              (spec)
+              (number))
+            (formspec
+              (spec)
+              (number))
+            (formspec)))
+        (eol)))

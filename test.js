@@ -5,12 +5,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const tree_sitter_1 = __importDefault(require("tree-sitter"));
 const br = require('./');
-const fs_1 = __importDefault(require("fs"));
 const parser = new tree_sitter_1.default();
 parser.setLanguage(br);
-const tree = parser.parse(fs_1.default.readFileSync("./example.brs").toString());
-const refQuery = `(numberreference) @numberref
-(stringidentifier) @stringref`;
+const code = `print mat foo, mat bar
+print mat foo$, mat bar$, baz$(1)
+print a,b,c
+print a$,b$,c$`;
+const refQuery = `(number_array_name) @number_arrays
+(string_array_name) @string_arrays
+(number_name) @numeric
+(string_name) @string`;
+const tree = parser.parse(code);
 const query = new tree_sitter_1.default.Query(br, refQuery);
 const matches = query.matches(tree.rootNode);
 for (const match of matches) {
@@ -18,13 +23,13 @@ for (const match of matches) {
         console.log(capture.node.text + " (" + capture.name + ")");
     }
 }
-const errorQuery = new tree_sitter_1.default.Query(br, '(ERROR) @error');
-const errors = errorQuery.matches(tree.rootNode);
-for (const error of errors) {
-    for (const capture of error.captures) {
-        console.log(capture.node.text + " (" + capture.name + ")");
-    }
-}
+// const errorQuery = new Parser.Query(br,'(ERROR) @error')
+// const errors = errorQuery.matches(tree.rootNode);
+// for (const error of errors) {
+//   for (const capture of error.captures) {
+//     console.log(capture.node.text + " (" + capture.name + ")");
+//   }
+// }
 // const cursor = tree.walk()
 // cursor.gotoFirstChild()
 // do {

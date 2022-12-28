@@ -5,12 +5,21 @@ import fs from 'fs'
 const parser = new Parser()
 parser.setLanguage(br)
 
-const tree = parser.parse(fs.readFileSync("./example.brs").toString());
+const code = 
+`print mat foo, mat bar
+print mat foo$, mat bar$, baz$(1)
+print a,b,c
+print a$,b$,c$`
+;
 
-const refQuery = `(numberreference) @numberref
-(stringidentifier) @stringref`
+const refQuery = 
+`(number_array_name) @number_arrays
+(string_array_name) @string_arrays
+(number_name) @numeric
+(string_name) @string`
+;
 
-
+const tree = parser.parse(code);
 const query = new Parser.Query(br, refQuery)
 const matches = query.matches(tree.rootNode);
 
@@ -20,14 +29,14 @@ for (const match of matches) {
   }
 }
 
-const errorQuery = new Parser.Query(br,'(ERROR) @error')
-const errors = errorQuery.matches(tree.rootNode);
+// const errorQuery = new Parser.Query(br,'(ERROR) @error')
+// const errors = errorQuery.matches(tree.rootNode);
 
-for (const error of errors) {
-  for (const capture of error.captures) {
-    console.log(capture.node.text + " (" + capture.name + ")");
-  }
-}
+// for (const error of errors) {
+//   for (const capture of error.captures) {
+//     console.log(capture.node.text + " (" + capture.name + ")");
+//   }
+// }
 
 // const cursor = tree.walk()
 // cursor.gotoFirstChild()

@@ -238,12 +238,35 @@ module.exports = grammar({
       $.comment,
       seq(
         choice(
+          $.chain_statement,
           $.mat_statement,
           $.print_statement,
           $.let_statement,
           $.form_statement
         ),
         optional($.comment)
+      )
+    ),
+
+    bar: $ => token(prec.dynamic(10,/baz/)),
+    foo: $ => token(prec.dynamic(2,/baz/)),
+
+    chain_statement: $ => seq(
+      /[cC][hH][aA]?[iI]?[nN]?/,
+      $.string_expression,
+      optional(/,[ \t]*[fF][iI][lL][eE][sS]/),
+      optional(
+        seq(
+          ",",
+          commaSep1(
+            choice(
+              $.number_name,
+              $.string_name,
+              $.string_array_name,
+              $.number_array_name,
+            )
+          ),
+        )
       )
     ),
 
@@ -301,7 +324,7 @@ module.exports = grammar({
       $._mat,
       choice(
         seq(
-          $.stringidentifier,
+          alias($.stringidentifier, $.string_array_name),
           optional(
             seq(
               "(",
@@ -319,7 +342,7 @@ module.exports = grammar({
           )
         ),
         seq(
-          $.numberidentifier,
+          alias($._numberidentifier, $.number_array_name),
           optional(
             seq(
               "(",
@@ -674,7 +697,7 @@ module.exports = grammar({
     ),
 
     numberelement: $ => seq(
-      $.numberidentifier,
+      alias($._numberidentifier, $.number_array_name),
       seq(
         "(",
         commaSep1($.numeric_expression),
@@ -683,7 +706,7 @@ module.exports = grammar({
     ),
 
     stringelement: $ => seq(
-      $.stringidentifier,
+      alias($.stringidentifier, $.string_array_name),
       seq(
         "(",
         commaSep1($.numeric_expression),
@@ -698,9 +721,13 @@ module.exports = grammar({
       )
     ),
 
-    stringarray: $ => seq(
+    string_array_name: $ => seq(
       $._mat,
-      $.stringidentifier,
+      $.stringidentifier
+    ),
+    
+    stringarray: $ => seq(
+      $.string_array_name,
       repeat($.dimension)
     ),
 
@@ -712,8 +739,10 @@ module.exports = grammar({
       ")"
     ),
 
+    string_name: $ => $.stringidentifier,
+
     stringreference: $ => seq(
-      $.stringidentifier,
+      alias($.stringidentifier, $.string_name),
       repeat(
         seq(
           "(",
@@ -723,7 +752,9 @@ module.exports = grammar({
       )
     ),
 
-    numberreference: $ => $.numberidentifier,
+    number_name: $ => $._numberidentifier,
+
+    numberreference: $ => $.number_name,
 
     range: $ => seq(
       $.numeric_expression,
@@ -733,13 +764,17 @@ module.exports = grammar({
 
     stringidentifier: $ => /[a-zA-Z_]\w*\$/,
 
-    numberarray: $ => seq(
+    number_array_name: $ => seq(
       $._mat,
-      $.numberidentifier,
+      $._numberidentifier
+    ),
+
+    numberarray: $ => seq(
+      $.number_array_name,
       optional($.dimension)
     ),
 
-    numberidentifier: $ => /[a-zA-Z_]\w*/,
+    _numberidentifier: $ => /[a-zA-Z_]\w*/,
 
     _mat: $ => /[mM][aA][tT][ \t]/,
 

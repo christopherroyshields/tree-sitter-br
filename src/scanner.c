@@ -128,14 +128,14 @@ bool tree_sitter_br_external_scanner_scan(
       }
     }
 
-    if (valid_symbols[MULTIPLIER]){
-      if (lexer->lookahead == '_' || (lexer->lookahead >= 'a' && lexer->lookahead <= 'z') || (lexer->lookahead >= 'A' && lexer->lookahead <= 'Z')){
-        fprintf(fp, "found var\n");
-        bool found = false;
-        found = consume_var(lexer);
-        return found;
-      }
-    }
+    // if (valid_symbols[MULTIPLIER]){
+    //   if (lexer->lookahead == '_' || (lexer->lookahead >= 'a' && lexer->lookahead <= 'z') || (lexer->lookahead >= 'A' && lexer->lookahead <= 'Z')){
+    //     fprintf(fp, "found var\n");
+    //     bool found = false;
+    //     found = consume_var(lexer);
+    //     return found;
+    //   }
+    // }
 
     if (valid_symbols[EOL] || valid_symbols[COMMENT] || valid_symbols[MULTIPLIER]){
       if (!iswspace(lexer->lookahead)) return false;

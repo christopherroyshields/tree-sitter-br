@@ -127,7 +127,14 @@ const FORCED_ASSIGNMENT_OPERATORS = [
 ]
 
 const STATEMENTS = {
+  CLOSE: /[cC][lL][oO][sS][eE]/,
   FORM: /[fF][oO][rR][mM]/
+}
+
+const KEYWORD = {
+  free: /[fF][rR][eE][eE]/,
+  drop: /[dD][rR][oO][pP]/,
+  release: /[rR][eE][lL][eE][aA][sS][eE]/
 }
 
 const FORMAT_SPECS = [
@@ -156,6 +163,21 @@ const FORMAT_SPECS = [
   /[xX]/,
   /[zZ][dD]/
 ]
+
+const ERROR_CONDITION = [
+  /[aA][tT][tT][nN]/,
+  /[cC][oO][nN][vV]/,
+  /[eE][rR][rR][oO][rR]/,
+  /[hH][eE][lL][pP]/,
+  /[iI][oO][eE][rR][rR]/,
+  /[lL][oO][cC][kK][eE][dD]/,
+  /[oO][fF][lL][oO][wW]/,
+  /[pP][aA][gG][eE][oO][fF][lL][oO][wW]/,
+  /[sS][oO][fF][lL][oO][wW]/,
+  /[zZ][dD][iI][vV]/,
+]
+
+const FNKEY = /[fF][nN][kK][eE][yY]/
 
 module.exports = grammar({
   name: 'br',
@@ -239,6 +261,7 @@ module.exports = grammar({
       seq(
         choice(
           $.chain_statement,
+          $.close_statement,
           $.mat_statement,
           $.print_statement,
           $.let_statement,
@@ -250,6 +273,38 @@ module.exports = grammar({
 
     bar: $ => token(prec.dynamic(10,/baz/)),
     foo: $ => token(prec.dynamic(2,/baz/)),
+
+    close_statement: $ => seq(
+      STATEMENTS.CLOSE,
+      "#",
+      $.numeric_expression,
+      optional(seq(",",choice(
+        KEYWORD.free,
+        KEYWORD.drop
+      ))),
+      optional(seq(",",choice(
+        KEYWORD.release
+      ))),
+      ":",
+      optional(
+        commaSep1($.error_condition)
+      )
+    ),
+
+    error_condition: $ => seq(
+      choice(
+        seq(FNKEY, $.numeric_expression),
+        ...ERROR_CONDITION.map((cond) => cond)
+      ),
+      $.line_reference
+    ),
+
+    line_reference: $ => seq(
+      choice(
+        /\d{1,5}/,
+        $.label_reference
+      )
+    ),
 
     chain_statement: $ => seq(
       /[cC][hH][aA]?[iI]?[nN]?/,
@@ -369,7 +424,12 @@ module.exports = grammar({
 
     line_number: $ => /\d{1,5}[ \t]/,
     
-    label: $ => /[a-zA-Z_]\w*:\s/,
+    label_reference: $ => /[a-zA-Z_]\w*/,
+
+    label: $ => seq(
+      $.label_reference,
+      token.immediate(":")
+    ),
 
     function_definition: $ => seq(
       'def',

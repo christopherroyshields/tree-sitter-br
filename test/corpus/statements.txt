@@ -100,3 +100,28 @@ DATA 5.2E3, -5.2e+2, +5e-4
               (number))
             (formspec)))
         (eol)))
+
+============================================
+DELETE
+============================================
+00530 Delete #1,Key=badrec$: Nokey KeyNotFoundLine
+---
+    (source_file
+      (line
+        (statement
+          (form_statement
+            (form_multiplier
+              (int))
+            (formspec
+              (spec)
+              (number))
+            (formspec
+              (form_multiplier
+                (int))
+              (spec)
+              (number))
+            (formspec
+              (spec)
+              (number))
+            (formspec)))
+        (eol)))

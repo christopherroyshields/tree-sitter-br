@@ -127,16 +127,22 @@ const FORCED_ASSIGNMENT_OPERATORS = [
 ]
 
 const STATEMENTS = {
-  CLOSE: /[cC][lL][oO][sS][eE]/,
-  FORM: /[fF][oO][rR][mM]/,
-  CONTINUE: /[cC][oO][nN][tT][iI][nN][uU][eE]/,
-  DATA: /[dD][aA][tT][aA]/
+  chain: /[cC][hH][aA]?[iI]?[nN]?/,
+  close: /[cC][lL][oO][sS][eE]/,
+  form: /[fF][oO][rR][mM]/,
+  continue: /[cC][oO][nN][tT][iI][nN][uU][eE]/,
+  data: /[dD][aA][tT][aA]/,
+  delete: /[dD][eE][lL][eE][tT][eE]/
 }
 
 const KEYWORD = {
   free: /[fF][rR][eE][eE]/,
   drop: /[dD][rR][oO][pP]/,
-  release: /[rR][eE][lL][eE][aA][sS][eE]/
+  release: /[rR][eE][lL][eE][aA][sS][eE]/,
+  rec: /[rR][eE][cC]=/,
+  key: /[kK][eE][yY]=/,
+  release: /[rR][eE][lL][eE][aA][sS][eE]/,
+  reserve: /[rR][eE][sS][eE][rR][vV][eE]/
 }
 
 const FORMAT_SPECS = [
@@ -218,6 +224,7 @@ module.exports = grammar({
   extras: $ => [
     /[ \t]/
   ],
+
   rules: {
     // TODO: add the actual grammar rules
     source_file: $ => repeat($.line),
@@ -265,6 +272,7 @@ module.exports = grammar({
           $.close_statement,
           $.continue_statement,
           $.data_statement,
+          $.delete_statement,
           $.mat_statement,
           $.print_statement,
           $.let_statement,
@@ -274,21 +282,10 @@ module.exports = grammar({
       )
     ),
 
-    continue_statement: $ => STATEMENTS.CONTINUE,
-    data_statement: $ => seq(
-      STATEMENTS.DATA,
-      commaSep1(choice(
-        $.unquoted_data,
-        $.string,
-        $.number
-      ))
-    ),
-
-    bar: $ => token(prec.dynamic(10,/baz/)),
-    foo: $ => token(prec.dynamic(2,/baz/)),
+    continue_statement: $ => STATEMENTS.continue,
 
     close_statement: $ => seq(
-      STATEMENTS.CLOSE,
+      STATEMENTS.close,
       "#",
       $.numeric_expression,
       optional(seq(",",choice(
@@ -302,6 +299,47 @@ module.exports = grammar({
       optional(
         commaSep1($.error_condition)
       )
+    ),
+
+    data_statement: $ => seq(
+      STATEMENTS.data,
+      commaSep1(choice(
+        $.unquoted_data,
+        $.string,
+        $.number
+      ))
+    ),
+
+    delete_statement: $ => seq(
+      STATEMENTS.delete,
+      "#",
+      $.numeric_expression,
+      optional(
+        seq(
+          ",",
+          choice(
+            seq(
+              KEYWORD.rec,
+              $.numeric_expression
+            ),
+            seq(
+              KEYWORD.key,
+              $.string_expression
+            )
+          )
+        )
+      ),
+      optional(
+        seq(
+          ",",
+          choice(
+            KEYWORD.release,
+            KEYWORD.reserve
+          )
+        )
+      ),
+      ":",
+      $.error_condition
     ),
 
     error_condition: $ => seq(
@@ -320,7 +358,7 @@ module.exports = grammar({
     ),
 
     chain_statement: $ => seq(
-      /[cC][hH][aA]?[iI]?[nN]?/,
+      STATEMENTS.chain,
       $.string_expression,
       optional(/,[ \t]*[fF][iI][lL][eE][sS]/),
       optional(
@@ -339,7 +377,7 @@ module.exports = grammar({
     ),
 
     form_statement: $ => seq(
-      STATEMENTS.FORM,
+      STATEMENTS.form,
       commaSep1(
         choice(
           $.formspec,

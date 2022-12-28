@@ -965,6 +965,10 @@
           "named": true
         },
         {
+          "type": "continue",
+          "named": true
+        },
+        {
           "type": "form_statement",
           "named": true
         },
@@ -1556,6 +1560,10 @@
   },
   {
     "type": "continuation",
+    "named": true
+  },
+  {
+    "type": "continue",
     "named": true
   },
   {

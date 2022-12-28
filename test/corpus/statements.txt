@@ -22,3 +22,54 @@ FORM 2*(C 3, 2*C 10),BH 2.1,PIC(###.##)
               (number))
             (formspec)))
         (eol)))
+
+============================================
+CLOSE STATEMENT
+============================================
+00060 CLOSE #1,FREE,RELEASE:
+00060 CLOSE #foo,DROP: ERROR IGNORE, ERROR 10
+---
+    (source_file
+      (line
+        (statement
+          (form_statement
+            (form_multiplier
+              (int))
+            (formspec
+              (spec)
+              (number))
+            (formspec
+              (form_multiplier
+                (int))
+              (spec)
+              (number))
+            (formspec
+              (spec)
+              (number))
+            (formspec)))
+        (eol)))      
+
+============================================
+CONTINUE
+============================================
+00350 CONTINUE
+---
+    (source_file
+      (line
+        (statement
+          (form_statement
+            (form_multiplier
+              (int))
+            (formspec
+              (spec)
+              (number))
+            (formspec
+              (form_multiplier
+                (int))
+              (spec)
+              (number))
+            (formspec
+              (spec)
+              (number))
+            (formspec)))
+        (eol)))      

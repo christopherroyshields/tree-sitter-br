@@ -133,6 +133,10 @@
                 },
                 {
                   "type": "SYMBOL",
+                  "name": "continue"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "mat_statement"
                 },
                 {
@@ -164,6 +168,10 @@
           ]
         }
       ]
+    },
+    "continue": {
+      "type": "PATTERN",
+      "value": "[cC][oO][nN][tT][iI][nN][uU][eE]"
     },
     "bar": {
       "type": "TOKEN",

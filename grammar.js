@@ -128,7 +128,8 @@ const FORCED_ASSIGNMENT_OPERATORS = [
 
 const STATEMENTS = {
   CLOSE: /[cC][lL][oO][sS][eE]/,
-  FORM: /[fF][oO][rR][mM]/
+  FORM: /[fF][oO][rR][mM]/,
+  CONTINUE: /[cC][oO][nN][tT][iI][nN][uU][eE]/
 }
 
 const KEYWORD = {
@@ -262,6 +263,7 @@ module.exports = grammar({
         choice(
           $.chain_statement,
           $.close_statement,
+          $.continue_statement,
           $.mat_statement,
           $.print_statement,
           $.let_statement,
@@ -270,6 +272,8 @@ module.exports = grammar({
         optional($.comment)
       )
     ),
+
+    continue_statement: $ => STATEMENTS.CONTINUE,
 
     bar: $ => token(prec.dynamic(10,/baz/)),
     foo: $ => token(prec.dynamic(2,/baz/)),

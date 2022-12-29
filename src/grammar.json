@@ -1377,10 +1377,6 @@
             },
             {
               "type": "SYMBOL",
-              "name": "numeric_assignment_expression"
-            },
-            {
-              "type": "SYMBOL",
               "name": "numeric_expression"
             }
           ]
@@ -1837,6 +1833,10 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "numeric_conditional_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "string_conditional_expression"
         }
       ]
@@ -2051,6 +2051,64 @@
         {
           "type": "SYMBOL",
           "name": "numeric_primary_expression"
+        }
+      ]
+    },
+    "numeric_binary_comparison": {
+      "type": "PREC_LEFT",
+      "value": "binary_equality",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "left",
+            "content": {
+              "type": "SYMBOL",
+              "name": "numeric_expression"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "operator",
+            "content": {
+              "type": "STRING",
+              "value": "="
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "right",
+            "content": {
+              "type": "SYMBOL",
+              "name": "numeric_expression"
+            }
+          }
+        ]
+      }
+    },
+    "numeric_conditional_expression": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "numeric_conditional_forced_assignment_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "numeric_unary_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "numeric_binary_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "numeric_primary_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "numeric_binary_comparison"
         }
       ]
     },
@@ -3866,8 +3924,41 @@
               {
                 "type": "STRING",
                 "value": "/="
+              },
+              {
+                "type": "STRING",
+                "value": "="
               }
             ]
+          },
+          {
+            "type": "FIELD",
+            "name": "right",
+            "content": {
+              "type": "SYMBOL",
+              "name": "numeric_expression"
+            }
+          }
+        ]
+      }
+    },
+    "numeric_conditional_forced_assignment_expression": {
+      "type": "PREC_RIGHT",
+      "value": "assign",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "left",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_numeric_reference"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": ":="
           },
           {
             "type": "FIELD",

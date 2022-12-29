@@ -1,3 +1,1 @@
-print 1
-do
-let a
+do while 1==1 and 1

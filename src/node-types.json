@@ -78,6 +78,10 @@
       "required": true,
       "types": [
         {
+          "type": "numeric_conditional_expression",
+          "named": true
+        },
+        {
           "type": "string_conditional_expression",
           "named": true
         }
@@ -364,10 +368,6 @@
       "required": true,
       "types": [
         {
-          "type": "numeric_assignment_expression",
-          "named": true
-        },
-        {
           "type": "numeric_expression",
           "named": true
         },
@@ -634,6 +634,42 @@
     }
   },
   {
+    "type": "numeric_binary_comparison",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "numeric_expression",
+            "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "=",
+            "named": false
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "numeric_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "numeric_binary_expression",
     "named": true,
     "fields": {
@@ -758,6 +794,67 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "numeric_conditional_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "numeric_binary_comparison",
+          "named": true
+        },
+        {
+          "type": "numeric_binary_expression",
+          "named": true
+        },
+        {
+          "type": "numeric_conditional_forced_assignment_expression",
+          "named": true
+        },
+        {
+          "type": "numeric_primary_expression",
+          "named": true
+        },
+        {
+          "type": "numeric_unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "numeric_conditional_forced_assignment_expression",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "numberelement",
+            "named": true
+          },
+          {
+            "type": "numberreference",
+            "named": true
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "numeric_expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {

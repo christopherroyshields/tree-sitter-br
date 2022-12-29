@@ -124,6 +124,7 @@ const FORCED_ASSIGNMENT_OPERATORS = [
   "-=",
   "*=",
   "/=",
+  "="
 ]
 
 const STATEMENTS = {
@@ -474,7 +475,7 @@ module.exports = grammar({
       /[ \t]+/)),
       choice(
         $.string_assignment_expression,
-        $.numeric_assignment_expression,
+        // $.numeric_assignment_expression,
         $.numeric_expression
       )
     ),
@@ -604,6 +605,7 @@ module.exports = grammar({
 
     conditional_expression: $ => choice(
       // prec.right($.numeric_conditional_expression),
+      $.numeric_conditional_expression,
       $.string_conditional_expression
     ),
 
@@ -672,6 +674,20 @@ module.exports = grammar({
       $.numeric_unary_expression,
       $.numeric_binary_expression,
       $.numeric_primary_expression,
+    ),
+
+    numeric_binary_comparison: $ => prec.left('binary_equality', seq(
+      field('left', $.numeric_expression),
+      field('operator', "="),
+      field('right', $.numeric_expression)
+    )),
+
+    numeric_conditional_expression: $ => choice(
+      $.numeric_conditional_forced_assignment_expression,
+      $.numeric_unary_expression,
+      $.numeric_binary_expression,
+      $.numeric_primary_expression,
+      $.numeric_binary_comparison
     ),
 
     string_expression: $ => choice(
@@ -886,6 +902,12 @@ module.exports = grammar({
     numeric_forced_assignment_expression: $ => prec.right('assign', seq(
       field('left', $._numeric_reference),
       choice(...FORCED_ASSIGNMENT_OPERATORS),
+      field('right', $.numeric_expression)
+    )),
+
+    numeric_conditional_forced_assignment_expression: $ => prec.right('assign', seq(
+      field('left', $._numeric_reference),
+      ":=",
       field('right', $.numeric_expression)
     )),
 

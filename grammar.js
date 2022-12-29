@@ -133,7 +133,8 @@ const STATEMENTS = {
   continue: /[cC][oO][nN][tT][iI][nN][uU][eE]/,
   data: /[dD][aA][tT][aA]/,
   delete: /[dD][eE][lL][eE][tT][eE]/,
-  dim: /[dD][iI][mM]/
+  dim: /[dD][iI][mM]/,
+  do: /[dD][oO]/
 }
 
 const KEYWORD = {
@@ -143,7 +144,9 @@ const KEYWORD = {
   rec: /[rR][eE][cC]=/,
   key: /[kK][eE][yY]=/,
   release: /[rR][eE][lL][eE][aA][sS][eE]/,
-  reserve: /[rR][eE][sS][eE][rR][vV][eE]/
+  reserve: /[rR][eE][sS][eE][rR][vV][eE]/,
+  while: /[wW][hH][iI][lL][eE]/,
+  until: /[wW][hH][iI][lL][eE]/
 }
 
 const FORMAT_SPECS = [
@@ -275,6 +278,7 @@ module.exports = grammar({
           $.data_statement,
           $.delete_statement,
           $.dim_statement,
+          $.do_statement,
           $.mat_statement,
           $.print_statement,
           $.let_statement,
@@ -378,16 +382,17 @@ module.exports = grammar({
           )
         )
       )
-      // commaSep1(
-      //   choice(
-      //     seq(
-      //       alias($.stringidentifier, $.string_array_name),
-      //       "(",
-      //       commaSep1(/\d+/),
-      //       ")"
-      //     )
-      //   )
-      // )
+    ),
+
+    do_statement: $ => seq(
+      STATEMENTS.do,
+      optional(seq(
+        choice(
+          KEYWORD.while,
+          KEYWORD.until
+        ),
+        $.conditional_expression
+      ))
     ),
 
     error_condition: $ => seq(
@@ -525,10 +530,7 @@ module.exports = grammar({
     
     label_reference: $ => /[a-zA-Z_]\w*/,
 
-    label: $ => seq(
-      $.label_reference,
-      token.immediate(":")
-    ),
+    label: $ => /[a-zA-Z_]\w*:/,
 
     function_definition: $ => seq(
       'def',
@@ -598,6 +600,54 @@ module.exports = grammar({
           $.expression,
         )
       )
+    ),
+
+    conditional_expression: $ => choice(
+      // prec.right($.numeric_conditional_expression),
+      $.string_conditional_expression
+    ),
+
+    // numeric_conditional_expression: $ => choice(
+    //   seq($.numeric_expression,$.comparison_operator,$.numeric_expression)
+    // ),
+
+    string_conditional_expression: $ => choice(
+      prec.left(seq(
+        $.string_expression,$.comparison_operator,$.string_expression,
+        repeat(seq(
+          $.logical_operator,
+          $.string_conditional_expression
+        ))
+      )),
+      prec.left(seq(
+        "(",
+        $.string_conditional_expression,
+        ")",
+        repeat(seq(
+          $.logical_operator,
+          $.string_conditional_expression
+        ))
+      ))
+    ),
+
+    logical_operator: $ => choice(
+      /[aA][nN][dD]/,
+      /[oO][rR]/,
+      "&&",
+      "||"
+    ),
+
+    comparison_operator: $ => choice(
+      "<>",
+      "><",
+      "<=",
+      "=<",
+      ">=",
+      "=>",
+      "=",
+      "==",
+      ">",
+      "~="
     ),
 
     expression: $ => choice(
@@ -933,7 +983,7 @@ module.exports = grammar({
       optional($.dimension)
     ),
 
-    _numberidentifier: $ => /[a-zA-Z_]\w*/,
+    _numberidentifier: $ => token(prec(-1,/[a-zA-Z_]\w*/)),
 
     _mat: $ => /[mM][aA][tT][ \t]/,
 

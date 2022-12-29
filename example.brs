@@ -1,1 +1,3 @@
-dim a,b,c,d$,e$*20,e$(1)*20,e(1)
+print 1
+do
+let a

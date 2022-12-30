@@ -1,1 +1,2 @@
-end if
+00010 Execute "DIR"
+00020 Execute "*COPY OLDFILE NEWFILE"

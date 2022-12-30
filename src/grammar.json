@@ -182,6 +182,14 @@
                 {
                   "type": "SYMBOL",
                   "name": "end_if"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "end"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "execute"
                 }
               ]
             },
@@ -1221,6 +1229,23 @@
       "type": "PATTERN",
       "value": "[eE][nN][dD][ \\t]+[iI][fF]"
     },
+    "end": {
+      "type": "PATTERN",
+      "value": "[eE][nN][dD]"
+    },
+    "execute": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[eE][xX][eE][cC][uU][tT][eE][ \\t]"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_expression"
+        }
+      ]
+    },
     "if_statement": {
       "type": "SEQ",
       "members": [
@@ -1299,6 +1324,14 @@
                   {
                     "type": "SYMBOL",
                     "name": "end_if"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "end"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "execute"
                   }
                 ]
               },

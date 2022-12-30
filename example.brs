@@ -1,1 +1,1 @@
-if test then print x
+end if

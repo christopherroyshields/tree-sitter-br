@@ -137,7 +137,9 @@ const STATEMENTS = {
   dim: /[dD][iI][mM]/,
   do: /[dD][oO]/,
   else: /[eE][lL][sS][eE]/,
-  if: /[iI][fF]/
+  if: /[iI][fF]/,
+  end_def: /[eE][nN][dD][ \t]+[dD][eE][fF]/,
+  end_if: /[eE][nN][dD][ \t]+[iI][fF]/
 }
 
 const KEYWORD = {
@@ -203,10 +205,13 @@ const getStatements = $ => [
   $.delete_statement,
   $.dim_statement,
   $.do_statement,
+  $.end_def,
   $.mat_statement,
   $.print_statement,
   $.let_statement,
-  $.form_statement
+  $.form_statement,
+  $.end_def,
+  $.end_if,
 ]
 
 module.exports = grammar({
@@ -464,6 +469,9 @@ module.exports = grammar({
       STATEMENTS.else,
       optional($.statement)
     ),
+
+    end_def: $ => STATEMENTS.end_def,
+    end_if: $ =>  STATEMENTS.end_if,
 
     if_statement: $ => seq(
       STATEMENTS.if,

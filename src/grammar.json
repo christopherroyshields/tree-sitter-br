@@ -157,6 +157,10 @@
                 },
                 {
                   "type": "SYMBOL",
+                  "name": "end_def"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "mat_statement"
                 },
                 {
@@ -170,6 +174,14 @@
                 {
                   "type": "SYMBOL",
                   "name": "form_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "end_def"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "end_if"
                 }
               ]
             },
@@ -1201,6 +1213,14 @@
         }
       ]
     },
+    "end_def": {
+      "type": "PATTERN",
+      "value": "[eE][nN][dD][ \\t]+[dD][eE][fF]"
+    },
+    "end_if": {
+      "type": "PATTERN",
+      "value": "[eE][nN][dD][ \\t]+[iI][fF]"
+    },
     "if_statement": {
       "type": "SEQ",
       "members": [
@@ -1254,6 +1274,10 @@
                   },
                   {
                     "type": "SYMBOL",
+                    "name": "end_def"
+                  },
+                  {
+                    "type": "SYMBOL",
                     "name": "mat_statement"
                   },
                   {
@@ -1267,6 +1291,14 @@
                   {
                     "type": "SYMBOL",
                     "name": "form_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "end_def"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "end_if"
                   }
                 ]
               },
@@ -1277,55 +1309,6 @@
               "type": "BLANK"
             }
           ]
-        }
-      ]
-    },
-    "not_if": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "chain_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "close_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "continue_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "data_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "delete_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "dim_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "do_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "mat_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "print_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "let_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "form_statement"
         }
       ]
     },

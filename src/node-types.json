@@ -1267,6 +1267,14 @@
           "named": true
         },
         {
+          "type": "end_def",
+          "named": true
+        },
+        {
+          "type": "end_if",
+          "named": true
+        },
+        {
           "type": "error_condition",
           "named": true
         },
@@ -1943,6 +1951,14 @@
   {
     "type": "def",
     "named": false
+  },
+  {
+    "type": "end_def",
+    "named": true
+  },
+  {
+    "type": "end_if",
+    "named": true
   },
   {
     "type": "eol",

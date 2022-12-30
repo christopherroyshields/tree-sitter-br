@@ -125,6 +125,10 @@
               "members": [
                 {
                   "type": "SYMBOL",
+                  "name": "if_statement"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "chain_statement"
                 },
                 {
@@ -818,7 +822,7 @@
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[wW][hH][iI][lL][eE]"
+                      "value": "[uU][nN][tT][iI][lL]"
                     }
                   ]
                 },
@@ -1173,6 +1177,155 @@
         {
           "type": "STRING",
           "value": "*"
+        }
+      ]
+    },
+    "else": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[eE][lL][sS][eE]"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "statement"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "if_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[iI][fF]"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "conditional_expression"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[tT][hH][eE][nN]"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "chain_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "close_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "continue_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "data_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "delete_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "dim_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "do_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "mat_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "print_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "let_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "form_statement"
+                  }
+                ]
+              },
+              "named": true,
+              "value": "statement"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "not_if": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "chain_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "close_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "continue_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "data_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "delete_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "dim_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "do_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "mat_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "print_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "let_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "form_statement"
         }
       ]
     },

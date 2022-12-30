@@ -1,1 +1,1 @@
-do while 1=1 and "test"=="test"
+if test then print x

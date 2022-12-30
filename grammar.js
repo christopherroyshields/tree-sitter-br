@@ -135,7 +135,9 @@ const STATEMENTS = {
   data: /[dD][aA][tT][aA]/,
   delete: /[dD][eE][lL][eE][tT][eE]/,
   dim: /[dD][iI][mM]/,
-  do: /[dD][oO]/
+  do: /[dD][oO]/,
+  else: /[eE][lL][sS][eE]/,
+  if: /[iI][fF]/
 }
 
 const KEYWORD = {
@@ -147,7 +149,8 @@ const KEYWORD = {
   release: /[rR][eE][lL][eE][aA][sS][eE]/,
   reserve: /[rR][eE][sS][eE][rR][vV][eE]/,
   while: /[wW][hH][iI][lL][eE]/,
-  until: /[wW][hH][iI][lL][eE]/
+  until: /[uU][nN][tT][iI][lL]/,
+  then: /[tT][hH][eE][nN]/
 }
 
 const FORMAT_SPECS = [
@@ -192,6 +195,20 @@ const ERROR_CONDITION = [
 
 const FNKEY = /[fF][nN][kK][eE][yY]/
 
+const getStatements = $ => [
+  $.chain_statement,
+  $.close_statement,
+  $.continue_statement,
+  $.data_statement,
+  $.delete_statement,
+  $.dim_statement,
+  $.do_statement,
+  $.mat_statement,
+  $.print_statement,
+  $.let_statement,
+  $.form_statement
+]
+
 module.exports = grammar({
   name: 'br',
   word: $ => $.identifier,
@@ -220,6 +237,7 @@ module.exports = grammar({
     // ['declaration', 'literal'],
     // [$.numeric_primary_expression, $.statement_block, 'object'],
   ],
+
   externals: $ => [
     $.eol,
     $.comment,
@@ -261,8 +279,6 @@ module.exports = grammar({
           choice(
             $.continuation,
             $.statement_separator
-            // $.comment_continuation,
-            // $.comment_sep
           ),
           $.statement,
         )
@@ -273,17 +289,8 @@ module.exports = grammar({
       $.comment,
       seq(
         choice(
-          $.chain_statement,
-          $.close_statement,
-          $.continue_statement,
-          $.data_statement,
-          $.delete_statement,
-          $.dim_statement,
-          $.do_statement,
-          $.mat_statement,
-          $.print_statement,
-          $.let_statement,
-          $.form_statement
+          $.if_statement,
+          ...getStatements($)
         ),
         optional($.comment)
       )
@@ -451,6 +458,22 @@ module.exports = grammar({
         $.int
       ),
       "*"
+    ),
+
+    else: $ => seq(
+      STATEMENTS.else,
+      optional($.statement)
+    ),
+
+    if_statement: $ => seq(
+      STATEMENTS.if,
+      $.conditional_expression,
+      KEYWORD.then,
+      optional(
+        alias(choice(
+          ...getStatements($)
+        ), $.statement)
+      )
     ),
 
     int: $ => /\d+/,

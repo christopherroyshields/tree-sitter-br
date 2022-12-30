@@ -478,6 +478,25 @@
     }
   },
   {
+    "type": "if_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "conditional_expression",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "int",
     "named": true,
     "fields": {}
@@ -1209,7 +1228,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "chain_statement",
@@ -1221,6 +1240,10 @@
         },
         {
           "type": "comment",
+          "named": true
+        },
+        {
+          "type": "conditional_expression",
           "named": true
         },
         {
@@ -1244,7 +1267,27 @@
           "named": true
         },
         {
+          "type": "error_condition",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "form_multiplier",
+          "named": true
+        },
+        {
           "type": "form_statement",
+          "named": true
+        },
+        {
+          "type": "formspec",
+          "named": true
+        },
+        {
+          "type": "if_statement",
           "named": true
         },
         {
@@ -1256,7 +1299,47 @@
           "named": true
         },
         {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "number_array_name",
+          "named": true
+        },
+        {
+          "type": "number_name",
+          "named": true
+        },
+        {
+          "type": "numeric_expression",
+          "named": true
+        },
+        {
           "type": "print_statement",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "string_array_name",
+          "named": true
+        },
+        {
+          "type": "string_assignment_expression",
+          "named": true
+        },
+        {
+          "type": "string_expression",
+          "named": true
+        },
+        {
+          "type": "string_name",
+          "named": true
+        },
+        {
+          "type": "unquoted_data",
           "named": true
         }
       ]

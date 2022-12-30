@@ -603,35 +603,6 @@ module.exports = grammar({
       )
     ),
 
-    conditional_expression: $ => choice(
-      // prec.right($.numeric_conditional_expression),
-      $.numeric_conditional_expression,
-      $.string_conditional_expression
-    ),
-
-    // numeric_conditional_expression: $ => choice(
-    //   seq($.numeric_expression,$.comparison_operator,$.numeric_expression)
-    // ),
-
-    string_conditional_expression: $ => choice(
-      prec.left(seq(
-        $.string_expression,$.comparison_operator,$.string_expression,
-        repeat(seq(
-          $.logical_operator,
-          $.string_conditional_expression
-        ))
-      )),
-      prec.left(seq(
-        "(",
-        $.string_conditional_expression,
-        ")",
-        repeat(seq(
-          $.logical_operator,
-          $.string_conditional_expression
-        ))
-      ))
-    ),
-
     logical_operator: $ => choice(
       /[aA][nN][dD]/,
       /[oO][rR]/,
@@ -676,18 +647,11 @@ module.exports = grammar({
       $.numeric_primary_expression,
     ),
 
-    numeric_binary_comparison: $ => prec.left('binary_equality', seq(
-      field('left', $.numeric_expression),
-      field('operator', "="),
-      field('right', $.numeric_expression)
-    )),
-
-    numeric_conditional_expression: $ => choice(
+    conditional_expression: $ => choice(
       $.numeric_conditional_forced_assignment_expression,
       $.numeric_unary_expression,
-      $.numeric_binary_expression,
-      $.numeric_primary_expression,
-      $.numeric_binary_comparison
+      $.conditional_binary_expression,
+      $.numeric_primary_expression
     ),
 
     string_expression: $ => choice(
@@ -729,6 +693,68 @@ module.exports = grammar({
           field('operator', operator),
           field('right', $.numeric_expression)
         ))
+      ).concat(
+        [
+          ['<', 'binary_relation'],
+          ['<=', 'binary_relation'],
+          ['==', 'binary_equality'],
+          ['~=', 'binary_equality'],
+          ['>=', 'binary_relation'],
+          ['>', 'binary_relation'],
+        ].map(([operator, precedence, associativity]) =>
+          (associativity === 'right' ? prec.right : prec.left)(precedence, seq(
+            field('left', $.string_expression),
+            field('operator', operator),
+            field('right', $.string_expression)
+          ))
+        )
+      )
+    ),
+
+    conditional_binary_expression: $ => choice(
+      ...[
+        ['and', 'logical_and'],
+        ['&&', 'logical_and'],
+        ['or', 'logical_or'],
+        ['||', 'logical_or'],
+        ['>>', 'binary_shift'],
+        ['<<', 'binary_shift'],
+        ['&', 'bitwise_and'],
+        ['+', 'binary_plus'],
+        ['-', 'binary_plus'],
+        ['*', 'binary_times'],
+        ['/', 'binary_times'],
+        ['%', 'binary_times'],
+        ['**', 'binary_exp', 'right'],
+        ['<', 'binary_relation'],
+        ['<=', 'binary_relation'],
+        ['==', 'binary_equality'],
+        ['=', 'binary_equality'],
+        ['~=', 'binary_equality'],
+        ['>=', 'binary_relation'],
+        ['>', 'binary_relation'],
+      ].map(([operator, precedence, associativity]) =>
+        (associativity === 'right' ? prec.right : prec.left)(precedence, seq(
+          field('left', $.conditional_expression),
+          field('operator', operator),
+          field('right', $.conditional_expression)
+        ))
+      ).concat(
+        [
+          ['<', 'binary_relation'],
+          ['<=', 'binary_relation'],
+          ['==', 'binary_equality'],
+          ['=', 'binary_equality'],
+          ['~=', 'binary_equality'],
+          ['>=', 'binary_relation'],
+          ['>', 'binary_relation'],
+        ].map(([operator, precedence, associativity]) =>
+          (associativity === 'right' ? prec.right : prec.left)(precedence, seq(
+            field('left', $.string_expression),
+            field('operator', operator),
+            field('right', $.string_expression)
+          ))
+        )
       )
     ),
 
@@ -747,12 +773,13 @@ module.exports = grammar({
 
     numeric_primary_expression: $ => choice(
       $._numeric_reference,
-      $.parenthesized_expression,
+      $.parenthesized_numeric_expression,
       $.number,
       $.numeric_call_expression
     ),
 
     string_primary_expression: $ => choice(
+      $.parenthesized_string_expression,
       $._string_reference,
       $.string,
       $.template_string,
@@ -843,7 +870,13 @@ module.exports = grammar({
       )
     ),
 
-    parenthesized_expression: $ => seq(
+    parenthesized_string_expression: $ => seq(
+      '(',
+      $.string_expression,
+      ')'
+    ),
+
+    parenthesized_numeric_expression: $ => seq(
       '(',
       $.numeric_expression,
       ')'

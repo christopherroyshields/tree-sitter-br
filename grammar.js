@@ -141,7 +141,8 @@ const STATEMENTS = {
   end_def: /[eE][nN][dD][ \t]+[dD][eE][fF]/,
   end_if: /[eE][nN][dD][ \t]+[iI][fF]/,
   end: /[eE][nN][dD]/,
-  execute: /[eE][xX][eE][cC][uU][tT][eE][ \t]/
+  execute: /[eE][xX][eE][cC][uU][tT][eE][ \t]/,
+  exit_do: /[eE][xX][iI][tT][ \t]+[dD][oO]/
 }
 
 const KEYWORD = {
@@ -215,7 +216,8 @@ const getStatements = $ => [
   $.end_def,
   $.end_if,
   $.end,
-  $.execute
+  $.execute,
+  $.exit_do
 ]
 
 module.exports = grammar({
@@ -481,6 +483,7 @@ module.exports = grammar({
       STATEMENTS.execute,
       $.string_expression
     ),
+    exit_do: $ => STATEMENTS.exit_do,
 
     if_statement: $ => seq(
       STATEMENTS.if,

@@ -565,6 +565,25 @@
     }
   },
   {
+    "type": "goto_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "label_reference",
+          "named": true
+        },
+        {
+          "type": "line_reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "if_statement",
     "named": true,
     "fields": {},
@@ -1280,6 +1299,49 @@
     }
   },
   {
+    "type": "rinput_fields_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "numberarray",
+          "named": true
+        },
+        {
+          "type": "numberelement",
+          "named": true
+        },
+        {
+          "type": "numberreference",
+          "named": true
+        },
+        {
+          "type": "numeric_expression",
+          "named": true
+        },
+        {
+          "type": "string_expression",
+          "named": true
+        },
+        {
+          "type": "stringarray",
+          "named": true
+        },
+        {
+          "type": "stringelement",
+          "named": true
+        },
+        {
+          "type": "stringreference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -1400,6 +1462,10 @@
           "named": true
         },
         {
+          "type": "goto_statement",
+          "named": true
+        },
+        {
           "type": "if_statement",
           "named": true
         },
@@ -1432,11 +1498,27 @@
           "named": true
         },
         {
+          "type": "numberarray",
+          "named": true
+        },
+        {
+          "type": "numberelement",
+          "named": true
+        },
+        {
+          "type": "numberreference",
+          "named": true
+        },
+        {
           "type": "numeric_expression",
           "named": true
         },
         {
           "type": "print_statement",
+          "named": true
+        },
+        {
+          "type": "rinput_fields_statement",
           "named": true
         },
         {
@@ -1457,6 +1539,18 @@
         },
         {
           "type": "string_name",
+          "named": true
+        },
+        {
+          "type": "stringarray",
+          "named": true
+        },
+        {
+          "type": "stringelement",
+          "named": true
+        },
+        {
+          "type": "stringreference",
           "named": true
         },
         {

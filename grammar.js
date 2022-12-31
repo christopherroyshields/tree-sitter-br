@@ -146,7 +146,11 @@ const STATEMENTS = {
   exit: /[eE][xX][iI][tT]/,
   fnend: /[fF][nN][eE][nN][dD]/,
   for: /[fF][oO][rR]/,
-  gosub: /[gG][oO][sS][uU][bB]/
+  gosub: /[gG][oO][sS][uU][bB]/,
+  goto: /[gG][oO][tT][oO]/,
+  print_fields: /[pP][rR][iI][nN][tT] [fF][iI][eE][lL][dD][sS]/,
+  input_fields: /[iI][nN][pP][uU][tT] [fF][iI][eE][lL][dD][sS]/,
+  rinput_fields: /[rR][iI][nN][pP][uU][tT] [fF][iI][eE][lL][dD][sS]/
 }
 
 const KEYWORD = {
@@ -161,7 +165,9 @@ const KEYWORD = {
   until: /[uU][nN][tT][iI][lL]/,
   then: /[tT][hH][eE][nN]/,
   to: /[tT][oO]/,
-  step: /[sS][tT][eE][pP]/
+  step: /[sS][tT][eE][pP]/,
+  attr: /,[ \t]*[aA][tT][tT][rR][ \t]/,
+  help: /,[ \t]*[hH][eE][lL][pP][ \t]/,
 }
 
 const FORMAT_SPECS = [
@@ -228,7 +234,9 @@ const getStatements = $ => [
   $.fnend_statement,
   $.form_statement,
   $.for_statement,
-  $.gosub_statement
+  $.gosub_statement,
+  $.goto_statement,
+  $.rinput_fields_statement,
 ]
 
 module.exports = grammar({
@@ -553,6 +561,62 @@ module.exports = grammar({
         $.line_reference,
         $.label_reference
       )
+    ),
+
+    goto_statement: $ => seq(
+      STATEMENTS.goto,
+      choice(
+        $.line_reference,
+        $.label_reference
+      )
+    ),
+
+    rinput_fields_statement: $ => seq(
+      choice(
+        STATEMENTS.rinput_fields,
+        STATEMENTS.input_fields,
+        STATEMENTS.print_fields,
+      ),
+      optional(seq(
+        "#",
+        $.numeric_expression,
+        ",",
+      )),
+      choice(
+        $.stringarray,
+        $.string_expression
+      ),
+      optional(seq(
+        KEYWORD.attr,
+        choice(
+          $.string_expression,
+          $.stringarray,
+        )
+      )),
+      optional(seq(
+        KEYWORD.help,
+        choice(
+          $.string_expression,
+          $.stringarray
+        )
+      )),
+      ":",
+      commaSep1(choice(
+        $._numeric_reference,
+        $._string_reference,
+        $.numberarray,
+        $.stringarray,
+        seq(
+          "(",
+          commaSep1(
+            $._numeric_reference,
+            $._string_reference,
+            $.numberarray,
+            $.stringarray,
+          ),
+          ")"
+        )
+      ))
     ),
 
     let_statement: $ => seq(

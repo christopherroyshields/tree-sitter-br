@@ -410,6 +410,25 @@
     }
   },
   {
+    "type": "for_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "number_name",
+          "named": true
+        },
+        {
+          "type": "numeric_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "form_multiplier",
     "named": true,
     "fields": {},
@@ -524,6 +543,25 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "gosub_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "label_reference",
+          "named": true
+        },
+        {
+          "type": "line_reference",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1338,6 +1376,14 @@
           "named": true
         },
         {
+          "type": "fnend_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
           "type": "form_multiplier",
           "named": true
         },
@@ -1350,11 +1396,23 @@
           "named": true
         },
         {
+          "type": "gosub_statement",
+          "named": true
+        },
+        {
           "type": "if_statement",
           "named": true
         },
         {
+          "type": "label_reference",
+          "named": true
+        },
+        {
           "type": "let_statement",
+          "named": true
+        },
+        {
+          "type": "line_reference",
           "named": true
         },
         {
@@ -2030,6 +2088,10 @@
   {
     "type": "fnend",
     "named": false
+  },
+  {
+    "type": "fnend_statement",
+    "named": true
   },
   {
     "type": "identifier",

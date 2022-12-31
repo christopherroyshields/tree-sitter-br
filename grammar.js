@@ -143,7 +143,10 @@ const STATEMENTS = {
   end: /[eE][nN][dD]/,
   execute: /[eE][xX][eE][cC][uU][tT][eE][ \t]/,
   exit_do: /[eE][xX][iI][tT][ \t]+[dD][oO]/,
-  exit: /[eE][xX][iI][tT]/
+  exit: /[eE][xX][iI][tT]/,
+  fnend: /[fF][nN][eE][nN][dD]/,
+  for: /[fF][oO][rR]/,
+  gosub: /[gG][oO][sS][uU][bB]/
 }
 
 const KEYWORD = {
@@ -156,7 +159,9 @@ const KEYWORD = {
   reserve: /[rR][eE][sS][eE][rR][vV][eE]/,
   while: /[wW][hH][iI][lL][eE]/,
   until: /[uU][nN][tT][iI][lL]/,
-  then: /[tT][hH][eE][nN]/
+  then: /[tT][hH][eE][nN]/,
+  to: /[tT][oO]/,
+  step: /[sS][tT][eE][pP]/
 }
 
 const FORMAT_SPECS = [
@@ -220,6 +225,10 @@ const getStatements = $ => [
   $.print_statement,
   $.let_statement,
   $.form_statement,
+  $.fnend_statement,
+  $.form_statement,
+  $.for_statement,
+  $.gosub_statement
 ]
 
 module.exports = grammar({
@@ -520,6 +529,29 @@ module.exports = grammar({
           field("spec", $.spec),
           field("size", optional($.number))
         )
+      )
+    ),
+
+    for_statement: $ => seq(
+      STATEMENTS.for,
+      $.number_name,
+      "=",
+      $.numeric_expression,
+      KEYWORD.to,
+      $.numeric_expression,
+      optional(seq(
+        KEYWORD.step,
+        $.numeric_expression
+      ))
+    ),
+
+    fnend_statement: $ => STATEMENTS.fnend,
+
+    gosub_statement: $ => seq(
+      STATEMENTS.gosub,
+      choice(
+        $.line_reference,
+        $.label_reference
       )
     ),
 

@@ -1307,6 +1307,10 @@
       "required": true,
       "types": [
         {
+          "type": "error_condition_list",
+          "named": true
+        },
+        {
           "type": "numberarray",
           "named": true
         },

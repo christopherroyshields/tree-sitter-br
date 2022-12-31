@@ -993,6 +993,10 @@
         },
         {
           "type": "PATTERN",
+          "value": "[tT][iI][mM][eE][oO][uU][tT]"
+        },
+        {
+          "type": "PATTERN",
           "value": "[zZ][dD][iI][vV]"
         }
       ]
@@ -1840,6 +1844,31 @@
           ]
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "[wW][aA][iI][tT]="
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "numeric_expression"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "STRING",
           "value": ":"
         },
@@ -1975,6 +2004,18 @@
                   }
                 ]
               }
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "error_condition_list"
+            },
+            {
+              "type": "BLANK"
             }
           ]
         }

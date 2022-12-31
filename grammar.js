@@ -168,6 +168,7 @@ const KEYWORD = {
   step: /[sS][tT][eE][pP]/,
   attr: /,[ \t]*[aA][tT][tT][rR][ \t]/,
   help: /,[ \t]*[hH][eE][lL][pP][ \t]/,
+  wait: /[wW][aA][iI][tT]=/
 }
 
 const FORMAT_SPECS = [
@@ -208,6 +209,7 @@ const ERROR_CONDITION = [
   /[oO][fF][lL][oO][wW]/,
   /[pP][aA][gG][eE][oO][fF][lL][oO][wW]/,
   /[sS][oO][fF][lL][oO][wW]/,
+  /[tT][iI][mM][eE][oO][uU][tT]/,
   /[zZ][dD][iI][vV]/,
 ]
 
@@ -600,6 +602,11 @@ module.exports = grammar({
           $.stringarray
         )
       )),
+      optional(seq(
+        ",",
+        KEYWORD.wait,
+        $.numeric_expression
+      )),
       ":",
       commaSep1(choice(
         $._numeric_reference,
@@ -616,7 +623,8 @@ module.exports = grammar({
           ),
           ")"
         )
-      ))
+      )),
+      optional($.error_condition_list)
     ),
 
     let_statement: $ => seq(

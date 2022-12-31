@@ -142,7 +142,8 @@ const STATEMENTS = {
   end_if: /[eE][nN][dD][ \t]+[iI][fF]/,
   end: /[eE][nN][dD]/,
   execute: /[eE][xX][eE][cC][uU][tT][eE][ \t]/,
-  exit_do: /[eE][xX][iI][tT][ \t]+[dD][oO]/
+  exit_do: /[eE][xX][iI][tT][ \t]+[dD][oO]/,
+  exit: /[eE][xX][iI][tT]/
 }
 
 const KEYWORD = {
@@ -188,6 +189,7 @@ const FORMAT_SPECS = [
 const ERROR_CONDITION = [
   /[aA][tT][tT][nN]/,
   /[cC][oO][nN][vV]/,
+  /[eE][oO][fF]/,
   /[eE][rR][rR][oO][rR]/,
   /[hH][eE][lL][pP]/,
   /[iI][oO][eE][rR][rR]/,
@@ -208,16 +210,16 @@ const getStatements = $ => [
   $.delete_statement,
   $.dim_statement,
   $.do_statement,
-  $.end_def,
+  $.end_def_statement,
+  $.end_if_statement,
+  $.end_statement,
+  $.execute_statement,
+  $.exit_do_statement,
+  $.exit_statement,
   $.mat_statement,
   $.print_statement,
   $.let_statement,
   $.form_statement,
-  $.end_def,
-  $.end_if,
-  $.end,
-  $.execute,
-  $.exit_do
 ]
 
 module.exports = grammar({
@@ -322,7 +324,7 @@ module.exports = grammar({
       ))),
       ":",
       optional(
-        commaSep1($.error_condition)
+        $.error_condition_list
       )
     ),
 
@@ -364,7 +366,9 @@ module.exports = grammar({
         )
       ),
       ":",
-      $.error_condition
+      optional(
+        $.error_condition_list
+      )
     ),
 
     dim_statement: $ => seq(
@@ -414,20 +418,22 @@ module.exports = grammar({
       ))
     ),
 
-    error_condition: $ => seq(
-      choice(
-        seq(FNKEY, $.numeric_expression),
-        ...ERROR_CONDITION.map((cond) => cond)
-      ),
-      $.line_reference
-    ),
-
-    line_reference: $ => seq(
-      choice(
-        /\d{1,5}/,
-        $.label_reference
+    error_condition_list: $ => commaSep1(
+      seq(
+        $.error_condition,
+        choice(
+          $.line_reference,
+          $.label_reference
+        )
       )
     ),
+
+    error_condition: $ => choice(
+      seq(FNKEY, $.numeric_expression),
+      ...ERROR_CONDITION.map((cond) => cond)
+    ),
+
+    line_reference: $ => /\d+/,
 
     chain_statement: $ => seq(
       STATEMENTS.chain,
@@ -476,14 +482,18 @@ module.exports = grammar({
       optional($.statement)
     ),
 
-    end_def: $ => STATEMENTS.end_def,
-    end_if: $ =>  STATEMENTS.end_if,
-    end: $ => STATEMENTS.end,
-    execute: $ => seq(
+    end_def_statement: $ => STATEMENTS.end_def,
+    end_if_statement: $ =>  STATEMENTS.end_if,
+    end_statement: $ => STATEMENTS.end,
+    execute_statement: $ => seq(
       STATEMENTS.execute,
       $.string_expression
     ),
-    exit_do: $ => STATEMENTS.exit_do,
+    exit_do_statement: $ => STATEMENTS.exit_do,
+    exit_statement: $ => seq(
+      STATEMENTS.exit,
+      optional($.error_condition_list)
+    ),
 
     if_statement: $ => seq(
       STATEMENTS.if,

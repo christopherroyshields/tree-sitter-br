@@ -1219,7 +1219,7 @@
                 "name": "multiplier"
               },
               "named": true,
-              "value": "numberreference"
+              "value": "number_name"
             },
             {
               "type": "SYMBOL",

@@ -14,12 +14,12 @@ const char EXCLAM = '!';
 FILE *fp;
 
 void *tree_sitter_br_external_scanner_create() { 
-  fp = fopen("./log.txt", "w+");
+  // fp = fopen("./log.txt", "w+");
   return NULL; 
 }
 
 void tree_sitter_br_external_scanner_destroy(void *p) {
-  fclose(fp);
+  // fclose(fp);
 }
 
 void tree_sitter_br_external_scanner_reset(void *p) {}
@@ -60,7 +60,6 @@ bool valid_char(TSLexer *lexer){
 }
 
 bool consume_var(TSLexer *lexer){
-  fprintf(fp, "start consume\n");
   lexer->advance(lexer, false);
   lexer->mark_end(lexer);
   
@@ -78,7 +77,6 @@ bool consume_var(TSLexer *lexer){
       lexer->advance(lexer, false);
     }
   }
-  fprintf(fp, "finished var");
   for (;;){
     if (iswspace(lexer->lookahead)){
       lexer->advance(lexer, true);
@@ -98,7 +96,6 @@ bool tree_sitter_br_external_scanner_scan(
   TSLexer *lexer,
   const bool *valid_symbols
 ) {
-  // fprintf(fp, "scan start");
 
   if (!(valid_symbols[EOL] || valid_symbols[COMMENT] || valid_symbols[MULTIPLIER])) return false;
 
@@ -128,14 +125,13 @@ bool tree_sitter_br_external_scanner_scan(
       }
     }
 
-    // if (valid_symbols[MULTIPLIER]){
-    //   if (lexer->lookahead == '_' || (lexer->lookahead >= 'a' && lexer->lookahead <= 'z') || (lexer->lookahead >= 'A' && lexer->lookahead <= 'Z')){
-    //     fprintf(fp, "found var\n");
-    //     bool found = false;
-    //     found = consume_var(lexer);
-    //     return found;
-    //   }
-    // }
+    if (valid_symbols[MULTIPLIER]){
+      if (lexer->lookahead == '_' || (lexer->lookahead >= 'a' && lexer->lookahead <= 'z') || (lexer->lookahead >= 'A' && lexer->lookahead <= 'Z')){
+        bool found = false;
+        found = consume_var(lexer);
+        return found;
+      }
+    }
 
     if (valid_symbols[EOL] || valid_symbols[COMMENT] || valid_symbols[MULTIPLIER]){
       if (!iswspace(lexer->lookahead)) return false;

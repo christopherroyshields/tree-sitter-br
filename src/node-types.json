@@ -422,7 +422,7 @@
           "named": true
         },
         {
-          "type": "numberreference",
+          "type": "number_name",
           "named": true
         }
       ]
@@ -694,7 +694,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "number_name",

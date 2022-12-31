@@ -471,7 +471,7 @@ module.exports = grammar({
 
     form_multiplier: $ => seq(
       choice(
-        alias($.multiplier, $.numberreference),
+        alias($.multiplier, $.number_name),
         $.int
       ),
       "*"

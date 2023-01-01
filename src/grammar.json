@@ -246,6 +246,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "on_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "open_statement"
                 }
               ]
             },
@@ -1490,6 +1494,10 @@
                   {
                     "type": "SYMBOL",
                     "name": "on_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "open_statement"
                   }
                 ]
               },
@@ -2746,6 +2754,198 @@
                   ]
                 }
               ]
+            }
+          ]
+        }
+      ]
+    },
+    "open_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[oO][pP][eE][nN]"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "channel"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_expression"
+        },
+        {
+          "type": "STRING",
+          "value": ","
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "[dD][iI][sS][pP][lL][aA][yY]"
+                },
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "PATTERN",
+                      "value": "[iI][nN][pP][uU][tT]"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[oO][uU][tT][pP][uU][tT]"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "[eE][xX][tT][eE][rR][nN][aA][lL]"
+                },
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "PATTERN",
+                      "value": "[iI][nN][pP][uU][tT]"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[oO][uU][tT][pP][uU][tT]"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[oO][uU][tT][iI][nN]"
+                    }
+                  ]
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": ","
+                        },
+                        {
+                          "type": "CHOICE",
+                          "members": [
+                            {
+                              "type": "PATTERN",
+                              "value": "[sS][eE][qQ][uU][eE][nN][tT][iI][aA][lL]"
+                            },
+                            {
+                              "type": "PATTERN",
+                              "value": "[rR][eE][lL][aA][tT][iI][vV][eE]"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "[iI][nN][tT][eE][rR][nN][aA][lL]"
+                },
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "PATTERN",
+                      "value": "[iI][nN][pP][uU][tT]"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[oO][uU][tT][pP][uU][tT]"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[oO][uU][tT][iI][nN]"
+                    }
+                  ]
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": ","
+                        },
+                        {
+                          "type": "CHOICE",
+                          "members": [
+                            {
+                              "type": "PATTERN",
+                              "value": "[sS][eE][qQ][uU][eE][nN][tT][iI][aA][lL]"
+                            },
+                            {
+                              "type": "PATTERN",
+                              "value": "[rR][eE][lL][aA][tT][iI][vV][eE]"
+                            },
+                            {
+                              "type": "PATTERN",
+                              "value": "[kK][eE][yY][eE][dD]"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "error_condition_list"
+            },
+            {
+              "type": "BLANK"
             }
           ]
         }

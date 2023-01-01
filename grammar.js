@@ -1,3 +1,5 @@
+const { relative } = require("path")
+
 const NUMERIC_SYSTEM_FUNCTIONS = [
   /[aA][bB][sS]/,
   /[aA][iI][dD][xX]/,
@@ -155,7 +157,8 @@ const STATEMENTS = {
   linput: /[lL][iI][nN][pP][uU][tT]/,
   loop: /[lL][oO][oO][pP]/,
   next: /[nN][eE][xX][tT]/,
-  on: /[oO][nN]/
+  on: /[oO][nN]/,
+  open: /[oO][pP][eE][nN]/
 }
 
 const KEYWORD = {
@@ -178,6 +181,15 @@ const KEYWORD = {
   ignore: /[iI][gG][nN][oO][rR][eE]/,
   system: /[sS][yY][sS][tT][eE][mM]/,
   none: /[nN][oO][nN][eE]/,
+  internal: /[iI][nN][tT][eE][rR][nN][aA][lL]/,
+  external: /[eE][xX][tT][eE][rR][nN][aA][lL]/,
+  display: /[dD][iI][sS][pP][lL][aA][yY]/,
+  input: /[iI][nN][pP][uU][tT]/,
+  output: /[oO][uU][tT][pP][uU][tT]/,
+  outin: /[oO][uU][tT][iI][nN]/,
+  sequential: /[sS][eE][qQ][uU][eE][nN][tT][iI][aA][lL]/,
+  keyed: /[kK][eE][yY][eE][dD]/,
+  relative: /[rR][eE][lL][aA][tT][iI][vV][eE]/,
 }
 
 const FORMAT_SPECS = [
@@ -252,6 +264,7 @@ const getStatements = $ => [
   $.loop_statement,
   $.next_statement,
   $.on_statement,
+  $.open_statement,
 ]
 
 module.exports = grammar({
@@ -815,6 +828,58 @@ module.exports = grammar({
           optional($.error_condition_list)
         )
       ),
+    ),
+
+    open_statement: $ => seq(
+      STATEMENTS.open,
+      $.channel,
+      ":",
+      $.string_expression,
+      ",",
+      choice(
+        seq(
+          KEYWORD.display,
+          ",",
+          choice(
+            KEYWORD.input,
+            KEYWORD.output,
+          )
+        ),
+        seq(
+          KEYWORD.external,
+          ",",
+          choice(
+            KEYWORD.input,
+            KEYWORD.output,
+            KEYWORD.outin,
+          ),
+          optional(seq(
+            ",",
+            choice(
+              KEYWORD.sequential,
+              KEYWORD.relative
+            )
+          ))
+        ),
+        seq(
+          KEYWORD.internal,
+          ",",
+          choice(
+            KEYWORD.input,
+            KEYWORD.output,
+            KEYWORD.outin,
+          ),
+          optional(seq(
+            ",",
+            choice(
+              KEYWORD.sequential,
+              KEYWORD.relative,
+              KEYWORD.keyed,
+            )
+          ))
+        )
+      ),
+      optional($.error_condition_list)
     ),
 
     _definition: $ => choice(

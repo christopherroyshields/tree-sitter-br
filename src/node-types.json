@@ -1366,6 +1366,29 @@
     }
   },
   {
+    "type": "open_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "channel",
+          "named": true
+        },
+        {
+          "type": "error_condition_list",
+          "named": true
+        },
+        {
+          "type": "string_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "parameter",
     "named": true,
     "fields": {},
@@ -1656,6 +1679,10 @@
         },
         {
           "type": "on_statement",
+          "named": true
+        },
+        {
+          "type": "open_statement",
           "named": true
         },
         {

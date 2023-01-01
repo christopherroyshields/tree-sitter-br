@@ -1729,12 +1729,25 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "PATTERN",
-          "value": "[iI][nN][pP][uU][tT]"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[iI][nN][pP][uU][tT]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[rR][iI][nN][pP][uU][tT]"
+            }
+          ]
         },
         {
           "type": "CHOICE",
           "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_fields_seq"
+            },
             {
               "type": "SEQ",
               "members": [
@@ -1757,8 +1770,16 @@
                           "name": "variable_list"
                         },
                         {
-                          "type": "SYMBOL",
-                          "name": "error_condition_list"
+                          "type": "CHOICE",
+                          "members": [
+                            {
+                              "type": "SYMBOL",
+                              "name": "error_condition_list"
+                            },
+                            {
+                              "type": "BLANK"
+                            }
+                          ]
                         }
                       ]
                     },
@@ -1770,24 +1791,46 @@
                           "value": ","
                         },
                         {
-                          "type": "PATTERN",
-                          "value": "[wW][aA][iI][tT]="
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "numeric_expression"
-                        },
-                        {
-                          "type": "STRING",
-                          "value": ":"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "variable_list"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "error_condition_list"
+                          "type": "CHOICE",
+                          "members": [
+                            {
+                              "type": "SEQ",
+                              "members": [
+                                {
+                                  "type": "PATTERN",
+                                  "value": "[wW][aA][iI][tT]="
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "numeric_expression"
+                                },
+                                {
+                                  "type": "STRING",
+                                  "value": ":"
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "variable_list"
+                                },
+                                {
+                                  "type": "CHOICE",
+                                  "members": [
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "error_condition_list"
+                                    },
+                                    {
+                                      "type": "BLANK"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "SYMBOL",
+                              "name": "_fields_seq"
+                            }
+                          ]
                         }
                       ]
                     }
@@ -1998,6 +2041,133 @@
         {
           "type": "SYMBOL",
           "name": "numeric_expression"
+        }
+      ]
+    },
+    "_fields_seq": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[fF][iI][eE][lL][dD][sS][ \\t]"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "stringarray"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "string_expression"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": ",[ \\t]*[aA][tT][tT][rR][ \\t]"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "string_expression"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "stringarray"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": ",[ \\t]*[hH][eE][lL][pP][ \\t]"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "string_expression"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "stringarray"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "[wW][aA][iI][tT]="
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "numeric_expression"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "variable_list"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "error_condition_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },

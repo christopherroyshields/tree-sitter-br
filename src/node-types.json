@@ -1699,6 +1699,10 @@
           "named": true
         },
         {
+          "type": "pause_statement",
+          "named": true
+        },
+        {
           "type": "print_statement",
           "named": true
         },
@@ -2438,6 +2442,10 @@
   {
     "type": "or",
     "named": false
+  },
+  {
+    "type": "pause_statement",
+    "named": true
   },
   {
     "type": "statement_linput",

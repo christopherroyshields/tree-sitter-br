@@ -160,6 +160,7 @@ const STATEMENTS = {
   on: /[oO][nN]/,
   open: /[oO][pP][eE][nN]/,
   option: /[oO][pP][tT][iI][oO][nN]/,
+  pause: /[pP][aA][uU][sS][eE]/,
 }
 
 const KEYWORD = {
@@ -271,6 +272,7 @@ const getStatements = $ => [
   $.next_statement,
   $.on_statement,
   $.open_statement,
+  $.pause_statement,
 ]
 
 module.exports = grammar({
@@ -911,6 +913,8 @@ module.exports = grammar({
         )
       )
     ),
+
+    pause_statement: $ => STATEMENTS.pause,
 
     _definition: $ => choice(
       $.function_definition,

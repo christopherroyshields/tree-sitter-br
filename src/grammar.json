@@ -242,6 +242,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "next_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "on_statement"
                 }
               ]
             },
@@ -1482,6 +1486,10 @@
                   {
                     "type": "SYMBOL",
                     "name": "next_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "on_statement"
                   }
                 ]
               },
@@ -2589,6 +2597,40 @@
         {
           "type": "SYMBOL",
           "name": "number_name"
+        }
+      ]
+    },
+    "on_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[oO][nN]"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "error_condition"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "goto_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "gosub_statement"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[iI][gG][nN][oO][rR][eE]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[sS][yY][sS][tT][eE][mM]"
+            }
+          ]
         }
       ]
     },

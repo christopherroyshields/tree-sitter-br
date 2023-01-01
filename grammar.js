@@ -154,7 +154,8 @@ const STATEMENTS = {
   let: /[lL][eE][tT]/,
   linput: /[lL][iI][nN][pP][uU][tT]/,
   loop: /[lL][oO][oO][pP]/,
-  next: /[nN][eE][xX][tT]/
+  next: /[nN][eE][xX][tT]/,
+  on: /[oO][nN]/
 }
 
 const KEYWORD = {
@@ -174,6 +175,8 @@ const KEYWORD = {
   help: /,[ \t]*[hH][eE][lL][pP][ \t]/,
   wait: /[wW][aA][iI][tT]=/,
   fields: /[fF][iI][eE][lL][dD][sS][ \t]/,
+  ignore: /[iI][gG][nN][oO][rR][eE]/,
+  system: /[sS][yY][sS][tT][eE][mM]/,
 }
 
 const FORMAT_SPECS = [
@@ -247,6 +250,7 @@ const getStatements = $ => [
   $.linput_statement,
   $.loop_statement,
   $.next_statement,
+  $.on_statement,
 ]
 
 module.exports = grammar({
@@ -774,6 +778,17 @@ module.exports = grammar({
     next_statement: $ => seq(
       STATEMENTS.next,
       $.number_name
+    ),
+
+    on_statement: $ => seq(
+      STATEMENTS.on,
+      $.error_condition,
+      choice(
+        $.goto_statement,
+        $.gosub_statement,
+        KEYWORD.ignore,
+        KEYWORD.system,
+      )
     ),
 
     _definition: $ => choice(

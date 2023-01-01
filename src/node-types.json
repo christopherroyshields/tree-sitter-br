@@ -1327,6 +1327,29 @@
     }
   },
   {
+    "type": "on_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "error_condition",
+          "named": true
+        },
+        {
+          "type": "gosub_statement",
+          "named": true
+        },
+        {
+          "type": "goto_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "parameter",
     "named": true,
     "fields": {},
@@ -1512,6 +1535,10 @@
           "named": true
         },
         {
+          "type": "error_condition",
+          "named": true
+        },
+        {
           "type": "error_condition_list",
           "named": true
         },
@@ -1609,6 +1636,10 @@
         },
         {
           "type": "numeric_expression",
+          "named": true
+        },
+        {
+          "type": "on_statement",
           "named": true
         },
         {

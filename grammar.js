@@ -152,7 +152,9 @@ const STATEMENTS = {
   input: /[iI][nN][pP][uU][tT]/,
   rinput: /[rR][iI][nN][pP][uU][tT]/,
   let: /[lL][eE][tT]/,
-  linput: /[lL][iI][nN][pP][uU][tT]/
+  linput: /[lL][iI][nN][pP][uU][tT]/,
+  loop: /[lL][oO][oO][pP]/,
+  next: /[nN][eE][xX][tT]/
 }
 
 const KEYWORD = {
@@ -171,7 +173,7 @@ const KEYWORD = {
   attr: /,[ \t]*[aA][tT][tT][rR][ \t]/,
   help: /,[ \t]*[hH][eE][lL][pP][ \t]/,
   wait: /[wW][aA][iI][tT]=/,
-  fields: /[fF][iI][eE][lL][dD][sS][ \t]/
+  fields: /[fF][iI][eE][lL][dD][sS][ \t]/,
 }
 
 const FORMAT_SPECS = [
@@ -243,6 +245,8 @@ const getStatements = $ => [
   $.goto_statement,
   $.input_statement,
   $.linput_statement,
+  $.loop_statement,
+  $.next_statement,
 ]
 
 module.exports = grammar({
@@ -285,7 +289,6 @@ module.exports = grammar({
   ],
 
   rules: {
-    // TODO: add the actual grammar rules
     source_file: $ => repeat($.line),
 
     line: $ => seq(
@@ -295,7 +298,7 @@ module.exports = grammar({
         $._single_line_statement,
         $._multi_line_statement
       ),
-      $.eol
+      seq($.eol,repeat($._line_end))
     ),
 
     _line_end: $ => /(\r?\n)/,
@@ -713,6 +716,19 @@ module.exports = grammar({
       optional($.error_condition_list)
     ),
 
+    loop_statement: $ => seq(
+      STATEMENTS.loop,
+      optional(
+        seq(
+          choice(
+            KEYWORD.while,
+            KEYWORD.until,
+          ),
+          $.conditional_expression
+        )        
+      )
+    ),
+
     mat_statement: $ => seq(
       $._mat,
       choice(
@@ -753,6 +769,11 @@ module.exports = grammar({
           )
         )
       )
+    ),
+
+    next_statement: $ => seq(
+      STATEMENTS.next,
+      $.number_name
     ),
 
     _definition: $ => choice(

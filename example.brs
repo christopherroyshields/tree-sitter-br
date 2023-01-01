@@ -9,3 +9,6 @@
 00110 LINPUT LINE3$
 00120 LINPUT WAIT=10:X$ error ignore
 00110 LINPUT LINE3$
+for i=1 to udim(array)
+  
+next i

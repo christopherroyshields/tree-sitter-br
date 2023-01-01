@@ -763,6 +763,21 @@
     }
   },
   {
+    "type": "loop_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "conditional_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "mat_statement",
     "named": true,
     "fields": {},
@@ -784,6 +799,21 @@
         },
         {
           "type": "string_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "next_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "number_name",
           "named": true
         }
       ]
@@ -1554,7 +1584,15 @@
           "named": true
         },
         {
+          "type": "loop_statement",
+          "named": true
+        },
+        {
           "type": "mat_statement",
+          "named": true
+        },
+        {
+          "type": "next_statement",
           "named": true
         },
         {

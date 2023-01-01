@@ -149,7 +149,7 @@ const STATEMENTS = {
   gosub: /[gG][oO][sS][uU][bB]/,
   goto: /[gG][oO][tT][oO]/,
   print_fields: /[pP][rR][iI][nN][tT] [fF][iI][eE][lL][dD][sS]/,
-  input_fields: /[iI][nN][pP][uU][tT] [fF][iI][eE][lL][dD][sS]/,
+  input: /[iI][nN][pP][uU][tT]/,
   rinput_fields: /[rR][iI][nN][pP][uU][tT] [fF][iI][eE][lL][dD][sS]/
 }
 
@@ -238,7 +238,8 @@ const getStatements = $ => [
   $.for_statement,
   $.gosub_statement,
   $.goto_statement,
-  $.rinput_fields_statement,
+  $.input_statement,
+  // $.rinput_fields_statement,
 ]
 
 module.exports = grammar({
@@ -573,59 +574,110 @@ module.exports = grammar({
       )
     ),
 
-    rinput_fields_statement: $ => seq(
+    input_statement: $ => seq(
+      STATEMENTS.input,
       choice(
-        STATEMENTS.rinput_fields,
-        STATEMENTS.input_fields,
-        STATEMENTS.print_fields,
-      ),
-      optional(seq(
-        "#",
-        $.numeric_expression,
-        ",",
-      )),
-      choice(
-        $.stringarray,
-        $.string_expression
-      ),
-      optional(seq(
-        KEYWORD.attr,
-        choice(
-          $.string_expression,
-          $.stringarray,
-        )
-      )),
-      optional(seq(
-        KEYWORD.help,
-        choice(
-          $.string_expression,
-          $.stringarray
-        )
-      )),
-      optional(seq(
-        ",",
-        KEYWORD.wait,
-        $.numeric_expression
-      )),
-      ":",
-      commaSep1(choice(
-        $._numeric_reference,
-        $._string_reference,
-        $.numberarray,
-        $.stringarray,
         seq(
-          "(",
-          commaSep1(
-            $._numeric_reference,
-            $._string_reference,
-            $.numberarray,
-            $.stringarray,
+          $.channel,
+          choice(
+            seq(
+              ":",
+              $.variable_list,
+              $.error_condition_list
+            ),
+            seq(
+              ",",
+              KEYWORD.wait,
+              $.numeric_expression,
+              ":",
+              $.variable_list,
+              $.error_condition_list
+            )
           ),
-          ")"
+        ),
+        seq(
+          KEYWORD.wait,
+          $.numeric_expression,
+          ":",
+          $.variable_list,
+          optional($.error_condition_list)
+        ),
+        seq(
+          $.variable_list,
+          optional($.error_condition_list)
         )
-      )),
-      optional($.error_condition_list)
+      )
     ),
+
+    variable_list: $ => commaSep1(choice(
+      $._numeric_reference,
+      $._string_reference,
+      $.numberarray,
+      $.stringarray,
+      seq(
+        "(",
+        commaSep1(
+          $._numeric_reference,
+          $._string_reference,
+          $.numberarray,
+          $.stringarray,
+        ),
+        ")"
+      )
+    )),
+
+    channel: $ => seq(
+      "#",
+      $.numeric_expression,
+    ),
+
+    // rinput_fields_statement: $ => seq(
+    //   choice(
+    //     STATEMENTS.rinput_fields,
+    //     STATEMENTS.input_fields,
+    //   ),
+    //   choice(
+    //     $.stringarray,
+    //     $.string_expression
+    //   ),
+    //   optional(seq(
+    //     KEYWORD.attr,
+    //     choice(
+    //       $.string_expression,
+    //       $.stringarray,
+    //     )
+    //   )),
+    //   optional(seq(
+    //     KEYWORD.help,
+    //     choice(
+    //       $.string_expression,
+    //       $.stringarray
+    //     )
+    //   )),
+    //   optional(seq(
+    //     ",",
+    //     KEYWORD.wait,
+    //     $.numeric_expression
+    //   )),
+    //   ":",
+    //   commaSep1(choice(
+    //     $._numeric_reference,
+    //     $._string_reference,
+    //     $.numberarray,
+    //     $.stringarray,
+    //     seq(
+    //       "(",
+    //       commaSep1(
+    //         $._numeric_reference,
+    //         $._string_reference,
+    //         $.numberarray,
+    //         $.stringarray,
+    //       ),
+    //       ")"
+    //     )
+    //   )),
+    //   optional($.error_condition_list)
+    // ),
 
     let_statement: $ => seq(
       optional(seq(/[lL][eE][tT]/,

@@ -46,6 +46,21 @@
     }
   },
   {
+    "type": "channel",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "numeric_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "close_statement",
     "named": true,
     "fields": {},
@@ -597,6 +612,33 @@
         },
         {
           "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "input_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "channel",
+          "named": true
+        },
+        {
+          "type": "error_condition_list",
+          "named": true
+        },
+        {
+          "type": "numeric_expression",
+          "named": true
+        },
+        {
+          "type": "variable_list",
           "named": true
         }
       ]
@@ -1299,53 +1341,6 @@
     }
   },
   {
-    "type": "rinput_fields_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "error_condition_list",
-          "named": true
-        },
-        {
-          "type": "numberarray",
-          "named": true
-        },
-        {
-          "type": "numberelement",
-          "named": true
-        },
-        {
-          "type": "numberreference",
-          "named": true
-        },
-        {
-          "type": "numeric_expression",
-          "named": true
-        },
-        {
-          "type": "string_expression",
-          "named": true
-        },
-        {
-          "type": "stringarray",
-          "named": true
-        },
-        {
-          "type": "stringelement",
-          "named": true
-        },
-        {
-          "type": "stringreference",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -1375,6 +1370,10 @@
       "types": [
         {
           "type": "chain_statement",
+          "named": true
+        },
+        {
+          "type": "channel",
           "named": true
         },
         {
@@ -1474,6 +1473,10 @@
           "named": true
         },
         {
+          "type": "input_statement",
+          "named": true
+        },
+        {
           "type": "label_reference",
           "named": true
         },
@@ -1502,27 +1505,11 @@
           "named": true
         },
         {
-          "type": "numberarray",
-          "named": true
-        },
-        {
-          "type": "numberelement",
-          "named": true
-        },
-        {
-          "type": "numberreference",
-          "named": true
-        },
-        {
           "type": "numeric_expression",
           "named": true
         },
         {
           "type": "print_statement",
-          "named": true
-        },
-        {
-          "type": "rinput_fields_statement",
           "named": true
         },
         {
@@ -1546,19 +1533,11 @@
           "named": true
         },
         {
-          "type": "stringarray",
-          "named": true
-        },
-        {
-          "type": "stringelement",
-          "named": true
-        },
-        {
-          "type": "stringreference",
-          "named": true
-        },
-        {
           "type": "unquoted_data",
+          "named": true
+        },
+        {
+          "type": "variable_list",
           "named": true
         }
       ]
@@ -1994,6 +1973,41 @@
       "types": [
         {
           "type": "string_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variable_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "numberarray",
+          "named": true
+        },
+        {
+          "type": "numberelement",
+          "named": true
+        },
+        {
+          "type": "numberreference",
+          "named": true
+        },
+        {
+          "type": "stringarray",
+          "named": true
+        },
+        {
+          "type": "stringelement",
+          "named": true
+        },
+        {
+          "type": "stringreference",
           "named": true
         }
       ]

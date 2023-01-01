@@ -40,7 +40,7 @@ void consume_comment(TSLexer *lexer){
         return;
       } else {
         if (iswspace(lexer->lookahead)){
-          lexer->advance(lexer, true);
+          lexer->advance(lexer, false);
         } else {
           lexer->advance(lexer, false);
           lexer->mark_end(lexer);
@@ -115,9 +115,10 @@ bool tree_sitter_br_external_scanner_scan(
 
     if (valid_symbols[COMMENT]){
       if (lexer->lookahead == EXCLAM){
+        // lexer->mark_end(lexer);
         lexer->advance(lexer, false);
         if (lexer->lookahead != COLON){
-          lexer->mark_end(lexer);
+          // lexer->mark_end(lexer);
           lexer->result_symbol = COMMENT;
           consume_comment(lexer);
           return true;

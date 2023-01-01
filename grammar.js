@@ -158,7 +158,8 @@ const STATEMENTS = {
   loop: /[lL][oO][oO][pP]/,
   next: /[nN][eE][xX][tT]/,
   on: /[oO][nN]/,
-  open: /[oO][pP][eE][nN]/
+  open: /[oO][pP][eE][nN]/,
+  option: /[oO][pP][tT][iI][oO][nN]/,
 }
 
 const KEYWORD = {
@@ -190,6 +191,11 @@ const KEYWORD = {
   sequential: /[sS][eE][qQ][uU][eE][nN][tT][iI][aA][lL]/,
   keyed: /[kK][eE][yY][eE][dD]/,
   relative: /[rR][eE][lL][aA][tT][iI][vV][eE]/,
+  base: /[bB][aA][sS][eE]/,
+  invp: /[iI][nN][vV][pP]/,
+  collate: /[cC][oO][lL][lL][aA][tT][eE]/,
+  native: /[nN][aA][tT][iI][vV][eE]/,
+  alternate: /[aA][lL][tT][eE][rR][nN][aA][tT][eE]/,
 }
 
 const FORMAT_SPECS = [
@@ -321,8 +327,12 @@ module.exports = grammar({
 
     _line_end: $ => /(\r?\n)/,
 
-    _single_line_statement: $ => choice(
-      $._definition
+    _single_line_statement: $ => seq(
+      choice(
+        $._definition,
+        $.option_statement
+      ),
+      optional($.comment)
     ),
 
     statement_separator: $ => ":",
@@ -880,6 +890,26 @@ module.exports = grammar({
         )
       ),
       optional($.error_condition_list)
+    ),
+
+    option_statement: $ => seq(
+      STATEMENTS.option,
+      commaSep1(
+        choice(
+          KEYWORD.invp,
+          seq(
+            KEYWORD.base,
+            choice("0","1")
+          ),
+          seq(
+            KEYWORD.collate,
+            choice(
+              KEYWORD.alternate,
+              KEYWORD.native,
+            )
+          )
+        )
+      )
     ),
 
     _definition: $ => choice(

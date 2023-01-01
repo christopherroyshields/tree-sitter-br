@@ -685,6 +685,10 @@
       "required": true,
       "types": [
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "continuation",
           "named": true
         },
@@ -702,6 +706,10 @@
         },
         {
           "type": "line_number",
+          "named": true
+        },
+        {
+          "type": "option_statement",
           "named": true
         },
         {
@@ -1387,6 +1395,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "option_statement",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "parameter",
@@ -2268,6 +2281,14 @@
   },
   {
     "type": "/=",
+    "named": false
+  },
+  {
+    "type": "0",
+    "named": false
+  },
+  {
+    "type": "1",
     "named": false
   },
   {

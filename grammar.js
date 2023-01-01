@@ -150,7 +150,9 @@ const STATEMENTS = {
   goto: /[gG][oO][tT][oO]/,
   print_fields: /[pP][rR][iI][nN][tT] [fF][iI][eE][lL][dD][sS]/,
   input: /[iI][nN][pP][uU][tT]/,
-  rinput: /[rR][iI][nN][pP][uU][tT]/
+  rinput: /[rR][iI][nN][pP][uU][tT]/,
+  let: /[lL][eE][tT]/,
+  linput: /[lL][iI][nN][pP][uU][tT]/
 }
 
 const KEYWORD = {
@@ -240,7 +242,7 @@ const getStatements = $ => [
   $.gosub_statement,
   $.goto_statement,
   $.input_statement,
-  // $.rinput_fields_statement,
+  $.linput_statement,
 ]
 
 module.exports = grammar({
@@ -672,13 +674,43 @@ module.exports = grammar({
     ),
 
     let_statement: $ => seq(
-      optional(seq(/[lL][eE][tT]/,
-      /[ \t]+/)),
+      optional(STATEMENTS.let),
       choice(
-        $.string_assignment_expression,
-        // $.numeric_assignment_expression,
+        $.string_expression,
         $.numeric_expression
       )
+    ),
+
+    statement_linput: $ => STATEMENTS.linput,
+
+    linput_statement: $ => seq(
+      field("statement", $.statement_linput),
+      choice(
+        $._string_reference,
+        seq(
+          KEYWORD.wait,
+          $.numeric_expression,
+          ":",
+          $._string_reference,
+        ),
+        seq(
+          $.channel,
+          choice(
+            seq(
+              ":",
+              $._string_reference,
+            ),
+            seq(
+              ",",
+              KEYWORD.wait,
+              $.numeric_expression,
+              ":",
+              $._string_reference,
+            )
+          )
+        )
+      ),
+      optional($.error_condition_list)
     ),
 
     mat_statement: $ => seq(

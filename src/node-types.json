@@ -670,7 +670,7 @@
           "named": true
         },
         {
-          "type": "string_assignment_expression",
+          "type": "string_expression",
           "named": true
         }
       ]
@@ -719,6 +719,48 @@
     "type": "line_reference",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "linput_statement",
+    "named": true,
+    "fields": {
+      "statement": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "statement_linput",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "channel",
+          "named": true
+        },
+        {
+          "type": "error_condition_list",
+          "named": true
+        },
+        {
+          "type": "numeric_expression",
+          "named": true
+        },
+        {
+          "type": "stringelement",
+          "named": true
+        },
+        {
+          "type": "stringreference",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "mat_statement",
@@ -1371,7 +1413,18 @@
   {
     "type": "statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "statement": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "statement_linput",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
@@ -1497,6 +1550,10 @@
           "named": true
         },
         {
+          "type": "linput_statement",
+          "named": true
+        },
+        {
           "type": "mat_statement",
           "named": true
         },
@@ -1529,10 +1586,6 @@
           "named": true
         },
         {
-          "type": "string_assignment_expression",
-          "named": true
-        },
-        {
           "type": "string_expression",
           "named": true
         },
@@ -1542,6 +1595,14 @@
         },
         {
           "type": "stringarray",
+          "named": true
+        },
+        {
+          "type": "stringelement",
+          "named": true
+        },
+        {
+          "type": "stringreference",
           "named": true
         },
         {
@@ -2244,6 +2305,10 @@
   {
     "type": "or",
     "named": false
+  },
+  {
+    "type": "statement_linput",
+    "named": true
   },
   {
     "type": "string_function_name",

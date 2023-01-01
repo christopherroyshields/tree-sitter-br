@@ -218,6 +218,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "input_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "linput_statement"
                 }
               ]
             },
@@ -1446,6 +1450,10 @@
                   {
                     "type": "SYMBOL",
                     "name": "input_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "linput_statement"
                   }
                 ]
               },
@@ -2178,17 +2186,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "PATTERN",
-                  "value": "[lL][eE][tT]"
-                },
-                {
-                  "type": "PATTERN",
-                  "value": "[ \\t]+"
-                }
-              ]
+              "type": "PATTERN",
+              "value": "[lL][eE][tT]"
             },
             {
               "type": "BLANK"
@@ -2200,11 +2199,122 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "string_assignment_expression"
+              "name": "string_expression"
             },
             {
               "type": "SYMBOL",
               "name": "numeric_expression"
+            }
+          ]
+        }
+      ]
+    },
+    "statement_linput": {
+      "type": "PATTERN",
+      "value": "[lL][iI][nN][pP][uU][tT]"
+    },
+    "linput_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "statement",
+          "content": {
+            "type": "SYMBOL",
+            "name": "statement_linput"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_string_reference"
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "[wW][aA][iI][tT]="
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "numeric_expression"
+                },
+                {
+                  "type": "STRING",
+                  "value": ":"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_string_reference"
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "channel"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": ":"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "_string_reference"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": ","
+                        },
+                        {
+                          "type": "PATTERN",
+                          "value": "[wW][aA][iI][tT]="
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "numeric_expression"
+                        },
+                        {
+                          "type": "STRING",
+                          "value": ":"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "_string_reference"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "error_condition_list"
+            },
+            {
+              "type": "BLANK"
             }
           ]
         }

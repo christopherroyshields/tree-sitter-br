@@ -1339,11 +1339,27 @@
           "named": true
         },
         {
+          "type": "error_condition_list",
+          "named": true
+        },
+        {
           "type": "gosub_statement",
           "named": true
         },
         {
           "type": "goto_statement",
+          "named": true
+        },
+        {
+          "type": "label_reference",
+          "named": true
+        },
+        {
+          "type": "line_reference",
+          "named": true
+        },
+        {
+          "type": "numeric_expression",
           "named": true
         }
       ]

@@ -177,6 +177,7 @@ const KEYWORD = {
   fields: /[fF][iI][eE][lL][dD][sS][ \t]/,
   ignore: /[iI][gG][nN][oO][rR][eE]/,
   system: /[sS][yY][sS][tT][eE][mM]/,
+  none: /[nN][oO][nN][eE]/,
 }
 
 const FORMAT_SPECS = [
@@ -782,13 +783,38 @@ module.exports = grammar({
 
     on_statement: $ => seq(
       STATEMENTS.on,
-      $.error_condition,
       choice(
-        $.goto_statement,
-        $.gosub_statement,
-        KEYWORD.ignore,
-        KEYWORD.system,
-      )
+        seq(
+          $.error_condition,
+          choice(
+            $.goto_statement,
+            $.gosub_statement,
+            KEYWORD.ignore,
+            KEYWORD.system,
+          )
+        ),
+        seq(
+          $.numeric_expression,
+          choice(
+            STATEMENTS.goto,
+            STATEMENTS.gosub,
+          ),
+          commaSep1(choice(
+            $.line_reference,
+            $.label_reference
+          )),
+          optional(
+            seq(
+              KEYWORD.none,
+              choice(
+                $.line_reference,
+                $.label_reference
+              )              
+            )
+          ),
+          optional($.error_condition_list)
+        )
+      ),
     ),
 
     _definition: $ => choice(

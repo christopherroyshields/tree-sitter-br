@@ -2608,27 +2608,144 @@
           "value": "[oO][nN]"
         },
         {
-          "type": "SYMBOL",
-          "name": "error_condition"
-        },
-        {
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "goto_statement"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "error_condition"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "goto_statement"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "gosub_statement"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[iI][gG][nN][oO][rR][eE]"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[sS][yY][sS][tT][eE][mM]"
+                    }
+                  ]
+                }
+              ]
             },
             {
-              "type": "SYMBOL",
-              "name": "gosub_statement"
-            },
-            {
-              "type": "PATTERN",
-              "value": "[iI][gG][nN][oO][rR][eE]"
-            },
-            {
-              "type": "PATTERN",
-              "value": "[sS][yY][sS][tT][eE][mM]"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "numeric_expression"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "PATTERN",
+                      "value": "[gG][oO][tT][oO]"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[gG][oO][sS][uU][bB]"
+                    }
+                  ]
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "line_reference"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "label_reference"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "REPEAT",
+                      "content": {
+                        "type": "SEQ",
+                        "members": [
+                          {
+                            "type": "STRING",
+                            "value": ","
+                          },
+                          {
+                            "type": "CHOICE",
+                            "members": [
+                              {
+                                "type": "SYMBOL",
+                                "name": "line_reference"
+                              },
+                              {
+                                "type": "SYMBOL",
+                                "name": "label_reference"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "PATTERN",
+                          "value": "[nN][oO][nN][eE]"
+                        },
+                        {
+                          "type": "CHOICE",
+                          "members": [
+                            {
+                              "type": "SYMBOL",
+                              "name": "line_reference"
+                            },
+                            {
+                              "type": "SYMBOL",
+                              "name": "label_reference"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "error_condition_list"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }

@@ -162,6 +162,8 @@ const STATEMENTS = {
   option: /[oO][pP][tT][iI][oO][nN]/,
   pause: /[pP][aA][uU][sS][eE]/,
   print: /[pP][rR][iI][nN][tT]/,
+  randomize: /[rR][aA][nN][dD][oO][mM][iI][zZ][eE]/,
+  read: /[rR][eE][aA][dD]/,
 }
 
 const KEYWORD = {
@@ -276,6 +278,8 @@ const getStatements = $ => [
   $.on_statement,
   $.open_statement,
   $.pause_statement,
+  $.randomize_statement,
+  $.read_statement,
 ]
 
 module.exports = grammar({
@@ -986,6 +990,25 @@ module.exports = grammar({
         )
       )
     ),
+
+    read_statement: $ => seq(
+      STATEMENTS.read,
+      choice(
+        $._read_variable_list,
+      ),
+      optional($.error_condition_list)
+    ),
+
+    _read_variable_list: $ => commaSep1(
+      choice(
+        $.stringarray,
+        $.numberarray,
+        $._string_reference,
+        $._numeric_reference,
+      )
+    ),
+
+    randomize_statement: $ => STATEMENTS.randomize,
 
     _definition: $ => choice(
       $.function_definition,

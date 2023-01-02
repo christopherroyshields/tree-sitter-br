@@ -1592,6 +1592,45 @@
     }
   },
   {
+    "type": "read_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "error_condition_list",
+          "named": true
+        },
+        {
+          "type": "numberarray",
+          "named": true
+        },
+        {
+          "type": "numberelement",
+          "named": true
+        },
+        {
+          "type": "numberreference",
+          "named": true
+        },
+        {
+          "type": "stringarray",
+          "named": true
+        },
+        {
+          "type": "stringelement",
+          "named": true
+        },
+        {
+          "type": "stringreference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -1779,6 +1818,18 @@
           "named": true
         },
         {
+          "type": "numberarray",
+          "named": true
+        },
+        {
+          "type": "numberelement",
+          "named": true
+        },
+        {
+          "type": "numberreference",
+          "named": true
+        },
+        {
           "type": "numeric_expression",
           "named": true
         },
@@ -1812,6 +1863,14 @@
         },
         {
           "type": "print_using",
+          "named": true
+        },
+        {
+          "type": "randomize_statement",
+          "named": true
+        },
+        {
+          "type": "read_statement",
           "named": true
         },
         {
@@ -2553,6 +2612,10 @@
   },
   {
     "type": "pause_statement",
+    "named": true
+  },
+  {
+    "type": "randomize_statement",
     "named": true
   },
   {

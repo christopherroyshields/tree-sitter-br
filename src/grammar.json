@@ -275,6 +275,14 @@
                 {
                   "type": "SYMBOL",
                   "name": "pause_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "randomize_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "read_statement"
                 }
               ]
             },
@@ -1527,6 +1535,14 @@
                   {
                     "type": "SYMBOL",
                     "name": "pause_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "randomize_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "read_statement"
                   }
                 ]
               },
@@ -3317,6 +3333,99 @@
           }
         }
       ]
+    },
+    "read_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[rR][eE][aA][dD]"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_read_variable_list"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "error_condition_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "_read_variable_list": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "stringarray"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "numberarray"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_string_reference"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_numeric_reference"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ","
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "stringarray"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "numberarray"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_string_reference"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_numeric_reference"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "randomize_statement": {
+      "type": "PATTERN",
+      "value": "[rR][aA][nN][dD][oO][mM][iI][zZ][eE]"
     },
     "_definition": {
       "type": "CHOICE",

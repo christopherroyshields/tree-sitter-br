@@ -170,8 +170,8 @@ const KEYWORD = {
   free: /[fF][rR][eE][eE]/,
   drop: /[dD][rR][oO][pP]/,
   release: /[rR][eE][lL][eE][aA][sS][eE]/,
-  rec: /[rR][eE][cC]=/,
-  key: /[kK][eE][yY]=/,
+  rec: /[rR][eE][cC]/,
+  key: /[kK][eE][yY]/,
   release: /[rR][eE][lL][eE][aA][sS][eE]/,
   reserve: /[rR][eE][sS][eE][rR][vV][eE]/,
   while: /[wW][hH][iI][lL][eE]/,
@@ -202,6 +202,14 @@ const KEYWORD = {
   alternate: /[aA][lL][tT][eE][rR][nN][aA][tT][eE]/,
   border: /[bB][oO][rR][dD][eE][rR][ \t]/,
   using: /[uU][sS][iI][nN][gG][ \t]/,
+  first: /[fF][iI][rR][sS][tT]/,
+  last: /[lL][aA][sS][tT]/,
+  prior: /[pP][rR][iI][oO][rR]/,
+  next: /[nN][eE][xX][tT]/,
+  same: /[sS][aA][mM][eE]/,
+  search: /[sS][eE][aA][rR][cC][hH]/,
+  pos: /[pP][oO][sS]/,
+  keyonly: /[kK][eE][yY][oO][nN][lL][yY]/,
 }
 
 const FORMAT_SPECS = [
@@ -410,10 +418,12 @@ module.exports = grammar({
           choice(
             seq(
               KEYWORD.rec,
+              token.immediate("="),
               $.numeric_expression
             ),
             seq(
               KEYWORD.key,
+              token.immediate("="),
               $.string_expression
             )
           )
@@ -422,10 +432,7 @@ module.exports = grammar({
       optional(
         seq(
           ",",
-          choice(
-            KEYWORD.release,
-            KEYWORD.reserve
-          )
+          $.record_locking_rule
         )
       ),
       ":",
@@ -995,8 +1002,99 @@ module.exports = grammar({
       STATEMENTS.read,
       choice(
         $._read_variable_list,
+        seq(
+          $.channel,
+          choice(
+            seq(":",$._read_variable_list),
+            seq(
+              ",",
+              choice(
+                $.record_locking_rule,
+                $._record_selection,
+                $.keyonly_seq,
+                $.using_seq,
+              ),
+              ":",
+              $._read_variable_list
+            )
+          )
+        )
       ),
+
       optional($.error_condition_list)
+    ),
+
+    using_seq: $ => seq(
+      KEYWORD.using,
+      choice(
+        $.string_expression,
+        $.line_reference,
+        $.label_reference
+      ),
+      optional(seq(
+        ",",
+        choice(
+          $.record_locking_rule,
+          $._record_selection,
+          $.keyonly_seq,
+        ),
+      ))
+    ),
+
+    _record_selection: $ => choice(
+      $.positional_parameter,
+      $.rec_pos_seq,
+      $.key_search_seq
+    ),
+
+    positional_parameter: $ => seq(
+      choice(
+        alias(KEYWORD.first,$.keyword),
+        KEYWORD.last,
+        KEYWORD.prior,
+        KEYWORD.next,
+        KEYWORD.same,
+      ),
+      optional(seq(
+        ",",
+        choice(
+          $.keyonly_seq,
+          $.record_locking_rule
+        )
+      ))
+    ),
+
+    keyonly_seq: $ => KEYWORD.keyonly,
+
+    rec_pos_seq: $ => seq(
+      choice(
+        KEYWORD.pos,
+        KEYWORD.rec
+      ),
+      token.immediate("="), 
+      $.numeric_expression,
+      optional(seq(
+        ",",
+        $.record_locking_rule,
+      ))
+    ),
+
+    key_search_seq: $ => seq(
+      choice(
+        KEYWORD.key,
+        KEYWORD.search
+      ),
+      choice("=",">="), 
+      $.string_expression,
+      optional(seq(
+        ",",
+        $.record_locking_rule,
+      ))
+    ),
+
+    record_locking_rule: $ => choice(
+      KEYWORD.release,
+      KEYWORD.reserve,
     ),
 
     _read_variable_list: $ => commaSep1(

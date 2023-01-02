@@ -266,6 +266,10 @@
           "named": true
         },
         {
+          "type": "record_locking_rule",
+          "named": true
+        },
+        {
           "type": "string_expression",
           "named": true
         }
@@ -656,6 +660,25 @@
     "type": "int",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "key_search_seq",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "record_locking_rule",
+          "named": true
+        },
+        {
+          "type": "string_expression",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "let_statement",
@@ -1466,6 +1489,29 @@
     }
   },
   {
+    "type": "positional_parameter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "keyonly_seq",
+          "named": true
+        },
+        {
+          "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "record_locking_rule",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "print_border",
     "named": true,
     "fields": {},
@@ -1600,7 +1646,19 @@
       "required": true,
       "types": [
         {
+          "type": "channel",
+          "named": true
+        },
+        {
           "type": "error_condition_list",
+          "named": true
+        },
+        {
+          "type": "key_search_seq",
+          "named": true
+        },
+        {
+          "type": "keyonly_seq",
           "named": true
         },
         {
@@ -1616,6 +1674,18 @@
           "named": true
         },
         {
+          "type": "positional_parameter",
+          "named": true
+        },
+        {
+          "type": "rec_pos_seq",
+          "named": true
+        },
+        {
+          "type": "record_locking_rule",
+          "named": true
+        },
+        {
           "type": "stringarray",
           "named": true
         },
@@ -1626,9 +1696,37 @@
         {
           "type": "stringreference",
           "named": true
+        },
+        {
+          "type": "using_seq",
+          "named": true
         }
       ]
     }
+  },
+  {
+    "type": "rec_pos_seq",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "numeric_expression",
+          "named": true
+        },
+        {
+          "type": "record_locking_rule",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "record_locking_rule",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "source_file",
@@ -1778,6 +1876,14 @@
           "named": true
         },
         {
+          "type": "key_search_seq",
+          "named": true
+        },
+        {
+          "type": "keyonly_seq",
+          "named": true
+        },
+        {
           "type": "label_reference",
           "named": true
         },
@@ -1846,6 +1952,10 @@
           "named": true
         },
         {
+          "type": "positional_parameter",
+          "named": true
+        },
+        {
           "type": "print_border",
           "named": true
         },
@@ -1871,6 +1981,14 @@
         },
         {
           "type": "read_statement",
+          "named": true
+        },
+        {
+          "type": "rec_pos_seq",
+          "named": true
+        },
+        {
+          "type": "record_locking_rule",
           "named": true
         },
         {
@@ -1903,6 +2021,10 @@
         },
         {
           "type": "unquoted_data",
+          "named": true
+        },
+        {
+          "type": "using_seq",
           "named": true
         },
         {
@@ -2348,6 +2470,49 @@
     }
   },
   {
+    "type": "using_seq",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "key_search_seq",
+          "named": true
+        },
+        {
+          "type": "keyonly_seq",
+          "named": true
+        },
+        {
+          "type": "label_reference",
+          "named": true
+        },
+        {
+          "type": "line_reference",
+          "named": true
+        },
+        {
+          "type": "positional_parameter",
+          "named": true
+        },
+        {
+          "type": "rec_pos_seq",
+          "named": true
+        },
+        {
+          "type": "record_locking_rule",
+          "named": true
+        },
+        {
+          "type": "string_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "variable_list",
     "named": true,
     "fields": {},
@@ -2584,6 +2749,14 @@
   },
   {
     "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "keyonly_seq",
+    "named": true
+  },
+  {
+    "type": "keyword",
     "named": true
   },
   {

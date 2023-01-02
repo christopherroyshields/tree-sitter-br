@@ -164,6 +164,7 @@ const STATEMENTS = {
   print: /[pP][rR][iI][nN][tT]/,
   randomize: /[rR][aA][nN][dD][oO][mM][iI][zZ][eE]/,
   read: /[rR][eE][aA][dD]/,
+  rem: /[rR][eE][mM]/
 }
 
 const KEYWORD = {
@@ -288,6 +289,7 @@ const getStatements = $ => [
   $.pause_statement,
   $.randomize_statement,
   $.read_statement,
+  $.rem_statement,
 ]
 
 module.exports = grammar({
@@ -1020,7 +1022,6 @@ module.exports = grammar({
           )
         )
       ),
-
       optional($.error_condition_list)
     ),
 
@@ -1049,7 +1050,7 @@ module.exports = grammar({
 
     positional_parameter: $ => seq(
       choice(
-        alias(KEYWORD.first,$.keyword),
+        KEYWORD.first,
         KEYWORD.last,
         KEYWORD.prior,
         KEYWORD.next,
@@ -1107,6 +1108,11 @@ module.exports = grammar({
     ),
 
     randomize_statement: $ => STATEMENTS.randomize,
+
+    rem_statement: $ => seq(
+      STATEMENTS.rem,
+      /.*/
+    ),
 
     _definition: $ => choice(
       $.function_definition,

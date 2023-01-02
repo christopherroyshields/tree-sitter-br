@@ -283,6 +283,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "read_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "rem_statement"
                 }
               ]
             },
@@ -1548,6 +1552,10 @@
                   {
                     "type": "SYMBOL",
                     "name": "read_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "rem_statement"
                   }
                 ]
               },
@@ -3518,13 +3526,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "PATTERN",
-                "value": "[fF][iI][rR][sS][tT]"
-              },
-              "named": true,
-              "value": "keyword"
+              "type": "PATTERN",
+              "value": "[fF][iI][rR][sS][tT]"
             },
             {
               "type": "PATTERN",
@@ -3761,6 +3764,19 @@
     "randomize_statement": {
       "type": "PATTERN",
       "value": "[rR][aA][nN][dD][oO][mM][iI][zZ][eE]"
+    },
+    "rem_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[rR][eE][mM]"
+        },
+        {
+          "type": "PATTERN",
+          "value": ".*"
+        }
+      ]
     },
     "_definition": {
       "type": "CHOICE",

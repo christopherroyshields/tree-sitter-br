@@ -1493,15 +1493,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
           "type": "keyonly_seq",
-          "named": true
-        },
-        {
-          "type": "keyword",
           "named": true
         },
         {
@@ -1725,6 +1721,11 @@
   },
   {
     "type": "record_locking_rule",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "rem_statement",
     "named": true,
     "fields": {}
   },
@@ -1989,6 +1990,10 @@
         },
         {
           "type": "record_locking_rule",
+          "named": true
+        },
+        {
+          "type": "rem_statement",
           "named": true
         },
         {
@@ -2753,10 +2758,6 @@
   },
   {
     "type": "keyonly_seq",
-    "named": true
-  },
-  {
-    "type": "keyword",
     "named": true
   },
   {

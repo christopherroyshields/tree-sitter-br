@@ -1,5 +1,6 @@
 #include <tree_sitter/parser.h>
 #include <stdio.h>
+#include <wctype.h>
 
 enum TokenType {
   EOL,
@@ -51,9 +52,8 @@ void consume_comment(TSLexer *lexer){
 }
 
 bool valid_char(TSLexer *lexer){
-  const a = lexer->lookahead;
   bool isValid = false;
-  if ((a >= 'a' && a <= 'z') || (a >= 'A' && a <= 'Z') || (a >= '0' && a <= '9') || a == '_'){
+  if ((lexer->lookahead >= 'a' && lexer->lookahead <= 'z') || (lexer->lookahead >= 'A' && lexer->lookahead <= 'Z') || (lexer->lookahead >= '0' && lexer->lookahead <= '9') || lexer->lookahead == '_'){
     isValid = true;
   }
   return isValid;

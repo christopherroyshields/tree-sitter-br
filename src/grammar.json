@@ -3116,6 +3116,208 @@
       "type": "PATTERN",
       "value": "[pP][aA][uU][sS][eE]"
     },
+    "print_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[pP][rR][iI][nN][tT]"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "print_output"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "print_fields"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "print_border"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "print_using"
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "channel"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": ":"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "print_output"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": ","
+                        },
+                        {
+                          "type": "CHOICE",
+                          "members": [
+                            {
+                              "type": "SYMBOL",
+                              "name": "print_fields"
+                            },
+                            {
+                              "type": "SYMBOL",
+                              "name": "print_border"
+                            },
+                            {
+                              "type": "SYMBOL",
+                              "name": "print_using"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "print_using": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[uU][sS][iI][nN][gG][ \\t]"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "string_expression"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "line_reference"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "label_reference"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "print_output"
+        }
+      ]
+    },
+    "print_border": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[bB][oO][rR][dD][eE][rR][ \\t]"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_expression"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_expression"
+        }
+      ]
+    },
+    "print_fields": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[fF][iI][eE][lL][dD][sS][ \\t]"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "stringarray"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "string_expression"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "print_output"
+        }
+      ]
+    },
+    "print_output": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "expression"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": ","
+                  },
+                  {
+                    "type": "STRING",
+                    "value": ";"
+                  }
+                ]
+              },
+              {
+                "type": "SYMBOL",
+                "name": "expression"
+              }
+            ]
+          }
+        }
+      ]
+    },
     "_definition": {
       "type": "CHOICE",
       "members": [
@@ -3324,48 +3526,6 @@
         {
           "type": "STRING",
           "value": "bool"
-        }
-      ]
-    },
-    "print_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "[pP][rR][iI][nN][tT]"
-        },
-        {
-          "type": "PATTERN",
-          "value": "[ \\t]+"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "expression"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": ","
-                  },
-                  {
-                    "type": "STRING",
-                    "value": ";"
-                  }
-                ]
-              },
-              {
-                "type": "SYMBOL",
-                "name": "expression"
-              }
-            ]
-          }
         }
       ]
     },

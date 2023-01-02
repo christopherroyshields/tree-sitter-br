@@ -1466,7 +1466,45 @@
     }
   },
   {
-    "type": "print_statement",
+    "type": "print_border",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "string_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "print_fields",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "print_output",
+          "named": true
+        },
+        {
+          "type": "string_expression",
+          "named": true
+        },
+        {
+          "type": "stringarray",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "print_output",
     "named": true,
     "fields": {},
     "children": {
@@ -1475,6 +1513,64 @@
       "types": [
         {
           "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "print_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "channel",
+          "named": true
+        },
+        {
+          "type": "print_border",
+          "named": true
+        },
+        {
+          "type": "print_fields",
+          "named": true
+        },
+        {
+          "type": "print_output",
+          "named": true
+        },
+        {
+          "type": "print_using",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "print_using",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "label_reference",
+          "named": true
+        },
+        {
+          "type": "line_reference",
+          "named": true
+        },
+        {
+          "type": "print_output",
+          "named": true
+        },
+        {
+          "type": "string_expression",
           "named": true
         }
       ]
@@ -1607,10 +1703,6 @@
           "named": true
         },
         {
-          "type": "expression",
-          "named": true
-        },
-        {
           "type": "fnend_statement",
           "named": true
         },
@@ -1703,7 +1795,23 @@
           "named": true
         },
         {
+          "type": "print_border",
+          "named": true
+        },
+        {
+          "type": "print_fields",
+          "named": true
+        },
+        {
+          "type": "print_output",
+          "named": true
+        },
+        {
           "type": "print_statement",
+          "named": true
+        },
+        {
+          "type": "print_using",
           "named": true
         },
         {

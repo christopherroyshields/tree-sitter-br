@@ -161,6 +161,7 @@ const STATEMENTS = {
   open: /[oO][pP][eE][nN]/,
   option: /[oO][pP][tT][iI][oO][nN]/,
   pause: /[pP][aA][uU][sS][eE]/,
+  print: /[pP][rR][iI][nN][tT]/,
 }
 
 const KEYWORD = {
@@ -197,6 +198,8 @@ const KEYWORD = {
   collate: /[cC][oO][lL][lL][aA][tT][eE]/,
   native: /[nN][aA][tT][iI][vV][eE]/,
   alternate: /[aA][lL][tT][eE][rR][nN][aA][tT][eE]/,
+  border: /[bB][oO][rR][dD][eE][rR][ \t]/,
+  using: /[uU][sS][iI][nN][gG][ \t]/,
 }
 
 const FORMAT_SPECS = [
@@ -916,6 +919,74 @@ module.exports = grammar({
 
     pause_statement: $ => STATEMENTS.pause,
 
+    print_statement: $ => seq(
+      STATEMENTS.print,
+      choice(
+        $.print_output,
+        $.print_fields,
+        $.print_border,
+        $.print_using,
+        seq(
+          $.channel,
+          choice(
+            seq(
+              ":",
+              $.print_output
+            ),
+            seq(
+              ",",
+              choice(
+                $.print_fields,
+                $.print_border,
+                $.print_using,
+              )
+            )
+          )
+        )
+      ),
+    ),
+
+    print_using: $ => seq(
+      KEYWORD.using,
+      choice(
+        $.string_expression,
+        $.line_reference,
+        $.label_reference
+      ),
+      ":",
+      $.print_output
+    ),
+
+    print_border: $ => seq(
+      KEYWORD.border,
+      $.string_expression,
+      ":",
+      $.string_expression
+    ),
+
+    print_fields: $ => seq(
+      KEYWORD.fields,
+      choice(
+        $.stringarray,
+        $.string_expression
+      ),
+      ":",
+      $.print_output
+    ),
+
+    print_output: $ => seq(
+      $.expression,
+      repeat(
+        seq(
+          choice(
+            ",",
+            ";"
+          ),
+          $.expression,
+        )
+      )
+    ),
+
     _definition: $ => choice(
       $.function_definition,
       // other types of definitions
@@ -980,21 +1051,6 @@ module.exports = grammar({
     _type: $ => choice(
       'bool'
       // TODO: other kinds of types
-    ),
-
-    print_statement: $ => seq(
-      /[pP][rR][iI][nN][tT]/,
-      /[ \t]+/,
-      $.expression,
-      repeat(
-        seq(
-          choice(
-            ",",
-            ";"
-          ),
-          $.expression,
-        )
-      )
     ),
 
     logical_operator: $ => choice(

@@ -1730,6 +1730,84 @@
     "fields": {}
   },
   {
+    "type": "reread_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "channel",
+          "named": true
+        },
+        {
+          "type": "error_condition_list",
+          "named": true
+        },
+        {
+          "type": "numberarray",
+          "named": true
+        },
+        {
+          "type": "numberelement",
+          "named": true
+        },
+        {
+          "type": "numberreference",
+          "named": true
+        },
+        {
+          "type": "record_locking_rule",
+          "named": true
+        },
+        {
+          "type": "reread_using",
+          "named": true
+        },
+        {
+          "type": "stringarray",
+          "named": true
+        },
+        {
+          "type": "stringelement",
+          "named": true
+        },
+        {
+          "type": "stringreference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "reread_using",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "label_reference",
+          "named": true
+        },
+        {
+          "type": "line_reference",
+          "named": true
+        },
+        {
+          "type": "record_locking_rule",
+          "named": true
+        },
+        {
+          "type": "string_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -1994,6 +2072,14 @@
         },
         {
           "type": "rem_statement",
+          "named": true
+        },
+        {
+          "type": "reread_statement",
+          "named": true
+        },
+        {
+          "type": "reread_using",
           "named": true
         },
         {

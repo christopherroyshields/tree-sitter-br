@@ -1,3 +1,4 @@
+const { channel } = require("diagnostics_channel")
 const { relative } = require("path")
 
 const NUMERIC_SYSTEM_FUNCTIONS = [
@@ -164,7 +165,8 @@ const STATEMENTS = {
   print: /[pP][rR][iI][nN][tT]/,
   randomize: /[rR][aA][nN][dD][oO][mM][iI][zZ][eE]/,
   read: /[rR][eE][aA][dD]/,
-  rem: /[rR][eE][mM]/
+  rem: /[rR][eE][mM]/,
+  reread: /[rR][eE][rR][eE][aA][dD]/,
 }
 
 const KEYWORD = {
@@ -290,6 +292,7 @@ const getStatements = $ => [
   $.randomize_statement,
   $.read_statement,
   $.rem_statement,
+  $.reread_statement,
 ]
 
 module.exports = grammar({
@@ -1112,6 +1115,36 @@ module.exports = grammar({
     rem_statement: $ => seq(
       STATEMENTS.rem,
       /.*/
+    ),
+
+    reread_statement: $ => seq(
+      STATEMENTS.reread,
+      $.channel,
+      choice(
+        seq(
+          ",",
+          choice(
+            $.record_locking_rule,
+            $.reread_using,
+          )
+        )
+      ),
+      ":",
+      $._read_variable_list,
+      optional($.error_condition_list)
+    ),
+
+    reread_using: $ => seq(
+      KEYWORD.using,
+      choice(
+        $.string_expression,
+        $.line_reference,
+        $.label_reference
+      ),
+      optional(seq(
+        ",",
+        $.record_locking_rule
+      ))
     ),
 
     _definition: $ => choice(

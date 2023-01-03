@@ -167,6 +167,7 @@ const STATEMENTS = {
   read: /[rR][eE][aA][dD]/,
   rem: /[rR][eE][mM]/,
   reread: /[rR][eE][rR][eE][aA][dD]/,
+  restore: /[rR][eE][sS][tT][oO][rR][eE]/,
 }
 
 const KEYWORD = {
@@ -255,6 +256,8 @@ const ERROR_CONDITION = [
   /[sS][oO][fF][lL][oO][wW]/,
   /[tT][iI][mM][eE][oO][uU][tT]/,
   /[zZ][dD][iI][vV]/,
+  /[nN][oO][rR][eE][cC]/,
+  /[nN][oO][kK][eE][yY]/
 ]
 
 const FNKEY = /[fF][nN][kK][eE][yY]/
@@ -293,6 +296,7 @@ const getStatements = $ => [
   $.read_statement,
   $.rem_statement,
   $.reread_statement,
+  $.restore_statement,
 ]
 
 module.exports = grammar({
@@ -1144,6 +1148,54 @@ module.exports = grammar({
       optional(seq(
         ",",
         $.record_locking_rule
+      ))
+    ),
+
+    restore_statement: $ => seq(
+      STATEMENTS.restore,
+      choice(
+        $.restore_data,
+        $.restore_file,
+      )
+    ),
+
+    restore_data: $ => choice(
+      $.line_reference,
+      $.label_reference,
+    ),
+
+    restore_file: $ => seq(
+      $.channel,
+      optional(seq(
+        ",",
+        choice(
+          $._restore_record_selection,
+          $.record_locking_rule
+        ),
+      )),
+      ":",
+      optional($.error_condition_list)
+    ),
+
+    _restore_record_selection: $ => choice(
+      $.restore_positional_parameter,
+      $.rec_pos_seq,
+      $.key_search_seq
+    ),
+
+    restore_positional_parameter: $ => seq(
+      choice(
+        KEYWORD.first,
+        KEYWORD.last,
+        KEYWORD.prior,
+        KEYWORD.next,
+        KEYWORD.same,
+      ),
+      optional(seq(
+        ",",
+        choice(
+          $.record_locking_rule
+        )
       ))
     ),
 

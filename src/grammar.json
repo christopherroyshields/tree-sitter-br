@@ -291,6 +291,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "reread_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "restore_statement"
                 }
               ]
             },
@@ -1076,6 +1080,14 @@
         {
           "type": "PATTERN",
           "value": "[zZ][dD][iI][vV]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[nN][oO][rR][eE][cC]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[nN][oO][kK][eE][yY]"
         }
       ]
     },
@@ -1564,6 +1576,10 @@
                   {
                     "type": "SYMBOL",
                     "name": "reread_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "restore_statement"
                   }
                 ]
               },
@@ -3883,6 +3899,169 @@
                 {
                   "type": "SYMBOL",
                   "name": "record_locking_rule"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "restore_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[rR][eE][sS][tT][oO][rR][eE]"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "restore_data"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "restore_file"
+            }
+          ]
+        }
+      ]
+    },
+    "restore_data": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "line_reference"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "label_reference"
+        }
+      ]
+    },
+    "restore_file": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "channel"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_restore_record_selection"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "record_locking_rule"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "error_condition_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "_restore_record_selection": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "restore_positional_parameter"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "rec_pos_seq"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "key_search_seq"
+        }
+      ]
+    },
+    "restore_positional_parameter": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[fF][iI][rR][sS][tT]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[lL][aA][sS][tT]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[pP][rR][iI][oO][rR]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[nN][eE][xX][tT]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[sS][aA][mM][eE]"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "record_locking_rule"
+                    }
+                  ]
                 }
               ]
             },

@@ -133,6 +133,7 @@ const STATEMENTS = {
   form: /[fF][oO][rR][mM]/,
   continue: /[cC][oO][nN][tT][iI][nN][uU][eE]/,
   data: /[dD][aA][tT][aA]/,
+  def: /[dD][eE][fF]/,
   delete: /[dD][eE][lL][eE][tT][eE]/,
   dim: /[dD][iI][mM]/,
   do: /[dD][oO]/,
@@ -223,6 +224,7 @@ const KEYWORD = {
   off: /[oO][fF][fF]/,
   print: /[pP][rR][iI][nN][tT]/,
   files: /[fF][iI][lL][eE][sS]/,
+  library: /[lL][iI][bB][rR][aA][rR][yY]/,
 }
 
 const FORMAT_SPECS = [
@@ -421,6 +423,88 @@ module.exports = grammar({
         $.number
       ))
     ),
+
+    def_statement: $ => seq(
+      STATEMENTS.def,
+      optional($.library_keyword),      
+      choice(
+        $.string_function_definition,
+        $.numeric_function_definition,
+      )
+    ),
+
+    library_keyword: $ => KEYWORD.library,
+
+    string_function_definition: $ => seq(
+      $.string_function_name,
+      optional($.function_length),
+      optional($.parameter_list),
+      optional(seq(
+        "=",
+        $.string_expression
+      ))
+    ),
+
+    numeric_function_definition: $ => seq(
+      $.numeric_function_name,
+      optional($.parameter_list),
+      optional(seq(
+        "=",
+        $.numeric_expression
+      ))
+    ),
+
+    function_length: $ => seq(
+      '*',
+      field('length', $.int)
+    ),
+
+    string_function_name: $ => /fn\w+\$/i,
+    numeric_function_name: $ => /fn\w+/i,
+    
+    parameter_list: $ => seq(
+      '(',
+      choice(
+        seq(
+          ";",
+          commaSep1($.optional_parameter)
+        ),
+        seq(
+          commaSep1($.required_paramter),
+          optional(seq(
+            ";",
+            commaSep1($.optional_parameter)
+          ))
+        )
+      ),
+      ')'
+    ),
+
+    optional_parameter: $ => $.parameter,
+    required_paramter: $ => $.parameter,
+
+    parameter: $ => seq(
+      optional('&'),
+      choice(
+        $.string_parameter,
+        $.numeric_parameter,
+        $.string_array_paramter,
+        $.number_array_parameter,
+      ),
+    ),
+
+    string_array_paramter: $ => $.string_array_name,
+    number_array_parameter: $ => $.number_array_name,
+
+    numeric_parameter: $ => $.number_name,
+
+    string_parameter: $ => seq(
+      $.string_name,
+      optional(seq(
+        '*',
+        $.int
+      )
+    )),
 
     delete_statement: $ => seq(
       STATEMENTS.delete,
@@ -1310,61 +1394,6 @@ module.exports = grammar({
     label_reference: $ => /[a-zA-Z_]\w*/,
 
     label: $ => /[a-zA-Z_]\w*:/,
-
-    def_statement: $ => seq(
-      'def',
-      choice(
-        $.string_function_definition,
-        $.numeric_function_definition
-      ),
-      choice(
-        seq(
-          "=",
-          $.numeric_expression
-        ),
-        seq(
-          repeat($.line),
-          'fnend'
-        )
-      )
-    ),
-
-    string_function_definition: $ => seq(
-      $.string_function_name,
-      optional($.function_length),
-      $.parameter_list,
-    ),
-
-    numeric_function_definition: $ => seq(
-      $.numeric_function_name,
-      $.parameter_list
-    ),
-
-    function_length: $ => seq(
-      '*',
-      field('length', $.number)
-    ),
-
-    string_function_name: $ => /fn\w+\$/i,
-    numeric_function_name: $ => /fn\w+/i,
-    
-    parameter_list: $ => seq(
-      '(',
-      $.parameter,
-      ')'
-    ),
-
-    parameter: $ => seq(
-      optional('&'),
-      $.identifier,
-      optional('*'),
-      optional($.number)
-    ),
-
-    _type: $ => choice(
-      'bool'
-      // TODO: other kinds of types
-    ),
 
     logical_operator: $ => choice(
       /[aA][nN][dD]/,

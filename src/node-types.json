@@ -262,11 +262,7 @@
       "required": true,
       "types": [
         {
-          "type": "line",
-          "named": true
-        },
-        {
-          "type": "numeric_expression",
+          "type": "library_keyword",
           "named": true
         },
         {
@@ -561,7 +557,7 @@
         "required": true,
         "types": [
           {
-            "type": "number",
+            "type": "int",
             "named": true
           }
         ]
@@ -877,6 +873,21 @@
     "type": "number_array_name",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "number_array_parameter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "number_array_name",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "number_name",
@@ -1273,11 +1284,30 @@
       "required": true,
       "types": [
         {
+          "type": "numeric_expression",
+          "named": true
+        },
+        {
           "type": "numeric_function_name",
           "named": true
         },
         {
           "type": "parameter_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "numeric_parameter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "number_name",
           "named": true
         }
       ]
@@ -1448,19 +1478,42 @@
     "fields": {}
   },
   {
+    "type": "optional_parameter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "parameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "parameter",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "number_array_parameter",
           "named": true
         },
         {
-          "type": "number",
+          "type": "numeric_parameter",
+          "named": true
+        },
+        {
+          "type": "string_array_paramter",
+          "named": true
+        },
+        {
+          "type": "string_parameter",
           "named": true
         }
       ]
@@ -1471,11 +1524,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "parameter",
+          "type": "optional_parameter",
+          "named": true
+        },
+        {
+          "type": "required_paramter",
           "named": true
         }
       ]
@@ -1755,6 +1812,21 @@
     "type": "rem_statement",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "required_paramter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "parameter",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "reread_statement",
@@ -2121,7 +2193,7 @@
           "named": true
         },
         {
-          "type": "line",
+          "type": "library_keyword",
           "named": true
         },
         {
@@ -2433,6 +2505,21 @@
     }
   },
   {
+    "type": "string_array_paramter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string_array_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "string_array_primary_expression",
     "named": true,
     "fields": {},
@@ -2606,6 +2693,10 @@
           "named": true
         },
         {
+          "type": "string_expression",
+          "named": true
+        },
+        {
           "type": "string_function_name",
           "named": true
         }
@@ -2622,6 +2713,25 @@
       "types": [
         {
           "type": "stringidentifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string_parameter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "string_name",
           "named": true
         }
       ]
@@ -3110,10 +3220,6 @@
     "named": false
   },
   {
-    "type": "bool",
-    "named": false
-  },
-  {
     "type": "chain_files",
     "named": true
   },
@@ -3128,10 +3234,6 @@
   {
     "type": "continue_statement",
     "named": true
-  },
-  {
-    "type": "def",
-    "named": false
   },
   {
     "type": "end_def_statement",
@@ -3154,15 +3256,7 @@
     "named": true
   },
   {
-    "type": "fnend",
-    "named": false
-  },
-  {
     "type": "fnend_statement",
-    "named": true
-  },
-  {
-    "type": "identifier",
     "named": true
   },
   {
@@ -3175,6 +3269,10 @@
   },
   {
     "type": "label_reference",
+    "named": true
+  },
+  {
+    "type": "library_keyword",
     "named": true
   },
   {

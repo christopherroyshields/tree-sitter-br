@@ -732,6 +732,10 @@
           "named": true
         },
         {
+          "type": "multiline_comment",
+          "named": true
+        },
+        {
           "type": "option_statement",
           "named": true
         },
@@ -853,6 +857,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "multiline_comment",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "next_statement",
@@ -1493,6 +1502,11 @@
     }
   },
   {
+    "type": "param_substitution",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "parameter",
     "named": true,
     "fields": {},
@@ -1506,6 +1520,10 @@
         },
         {
           "type": "numeric_parameter",
+          "named": true
+        },
+        {
+          "type": "param_substitution",
           "named": true
         },
         {
@@ -3136,6 +3154,10 @@
     "named": false
   },
   {
+    "type": "/*",
+    "named": false
+  },
+  {
     "type": "/=",
     "named": false
   },
@@ -3205,6 +3227,14 @@
   },
   {
     "type": ">>",
+    "named": false
+  },
+  {
+    "type": "[[",
+    "named": false
+  },
+  {
+    "type": "]]",
     "named": false
   },
   {

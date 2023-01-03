@@ -1,1 +1,6 @@
-def library fna$(foo,bar$*200,mat foo;&mat bar$)=test$
+def library fna$(foo,bar$*200,[[test]],mat foo; !_
+&mat bar$)=test$
+
+/*
+here is some info about a function
+*/

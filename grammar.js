@@ -342,7 +342,8 @@ module.exports = grammar({
   ],
 
   extras: $ => [
-    /[ \t]/
+    /[ \t]/,
+    /!_.*\n/
   ],
 
   rules: {
@@ -353,9 +354,16 @@ module.exports = grammar({
       optional($.label),
       choice(
         $._single_line_statement,
-        $._multi_line_statement
+        $._multi_line_statement,
+        $.multiline_comment
       ),
       seq($.eol,repeat($._line_end))
+    ),
+
+    multiline_comment: $ => seq(
+      '/*',
+      /[^*]*\*+([^/*][^*]*\*+)*/,
+      '/'
     ),
 
     _line_end: $ => /(\r?\n)/,
@@ -490,7 +498,14 @@ module.exports = grammar({
         $.numeric_parameter,
         $.string_array_paramter,
         $.number_array_parameter,
+        $.param_substitution,
       ),
+    ),
+
+    param_substitution: $ => seq(
+      "[[",
+      /[ \t]*\w+[ \t]*/,
+      "]]"
     ),
 
     string_array_paramter: $ => $.string_array_name,

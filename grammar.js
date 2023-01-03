@@ -219,6 +219,9 @@ const KEYWORD = {
   pos: /[pP][oO][sS]/,
   keyonly: /[kK][eE][yY][oO][nN][lL][yY]/,
   link: /[lL][iI][nN][kK]/,
+  on: /[oO][nN]/,
+  off: /[oO][fF][fF]/,
+  print: /[pP][rR][iI][nN][tT]/,
 }
 
 const FORMAT_SPECS = [
@@ -305,7 +308,9 @@ const getStatements = $ => [
   $.retry_statement,
   $.return_statement,
   $.rewrite_statement,
+  $.stop_statement,
   $.write_statement,
+  $.trace_statement,
 ]
 
 module.exports = grammar({
@@ -1266,6 +1271,20 @@ module.exports = grammar({
       ":",
       commaSep1($.expression),
       optional($.error_condition_list)
+    ),
+
+    stop_statement: $ => seq(
+      STATEMENTS.stop,
+      $.numeric_expression,
+    ),
+
+    trace_statement: $ => seq(
+      STATEMENTS.trace,
+      choice(
+        KEYWORD.on,
+        KEYWORD.off,
+        KEYWORD.print
+      )
     ),
 
     _definition: $ => choice(

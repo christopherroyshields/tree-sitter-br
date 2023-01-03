@@ -1,1 +1,3 @@
-rewrite #1, using RECFORM, rec=Therecordnumber: Firstname$(Index), Lastname$(Index), Address$(Index), City$(Index), State$(Index), Zipcodes$(Index), Shipmethod$(Index), Item1(Index), Item2(Index), Item3(Index)
+trace on
+trace off
+trace print

@@ -310,7 +310,15 @@
                 },
                 {
                   "type": "SYMBOL",
+                  "name": "stop_statement"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "write_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "trace_statement"
                 }
               ]
             },
@@ -1611,7 +1619,15 @@
                   },
                   {
                     "type": "SYMBOL",
+                    "name": "stop_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
                     "name": "write_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "trace_statement"
                   }
                 ]
               },
@@ -4385,6 +4401,45 @@
             },
             {
               "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "stop_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[sS][tT][oO][pP]"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "numeric_expression"
+        }
+      ]
+    },
+    "trace_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[tT][rR][aA][cC][eE]"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[oO][nN]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[oO][fF][fF]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[pP][rR][iI][nN][tT]"
             }
           ]
         }

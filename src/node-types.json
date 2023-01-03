@@ -2253,6 +2253,10 @@
           "named": true
         },
         {
+          "type": "stop_statement",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -2278,6 +2282,10 @@
         },
         {
           "type": "stringreference",
+          "named": true
+        },
+        {
+          "type": "trace_statement",
           "named": true
         },
         {
@@ -2311,6 +2319,21 @@
     "type": "statement_separator",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "stop_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "numeric_expression",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "string",
@@ -2741,6 +2764,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "trace_statement",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "using_seq",

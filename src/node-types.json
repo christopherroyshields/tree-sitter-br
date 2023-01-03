@@ -2210,6 +2210,14 @@
           "named": true
         },
         {
+          "type": "retry_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -2247,6 +2255,14 @@
         },
         {
           "type": "variable_list",
+          "named": true
+        },
+        {
+          "type": "write_statement",
+          "named": true
+        },
+        {
+          "type": "write_using_seq",
           "named": true
         }
       ]
@@ -2770,6 +2786,72 @@
     }
   },
   {
+    "type": "write_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "channel",
+          "named": true
+        },
+        {
+          "type": "rec_pos_seq",
+          "named": true
+        },
+        {
+          "type": "record_locking_rule",
+          "named": true
+        },
+        {
+          "type": "write_using_seq",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "write_using_seq",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "error_condition_list",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "label_reference",
+          "named": true
+        },
+        {
+          "type": "line_reference",
+          "named": true
+        },
+        {
+          "type": "rec_pos_seq",
+          "named": true
+        },
+        {
+          "type": "record_locking_rule",
+          "named": true
+        },
+        {
+          "type": "string_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "\"",
     "named": false
   },
@@ -3007,6 +3089,14 @@
   },
   {
     "type": "randomize_statement",
+    "named": true
+  },
+  {
+    "type": "retry_statement",
+    "named": true
+  },
+  {
+    "type": "return_statement",
     "named": true
   },
   {

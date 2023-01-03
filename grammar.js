@@ -168,6 +168,13 @@ const STATEMENTS = {
   rem: /[rR][eE][mM]/,
   reread: /[rR][eE][rR][eE][aA][dD]/,
   restore: /[rR][eE][sS][tT][oO][rR][eE]/,
+  retry: /[rR][eE][tT][rR][yY]/,
+  return: /[rR][eE][tT][uU][rR][nN]/,
+  rewrite: /[rR][eE][wW][rR][iI][tT][eE]/,
+  stop: /[sS][tT][oO][pP]/,
+  trace: /[tT][rR][aA][cC][eE]/,
+  while: /[wW][hH][iI][lL][eE]/,
+  write: /[wW][rR][iI][tT][eE]/,
 }
 
 const KEYWORD = {
@@ -298,6 +305,9 @@ const getStatements = $ => [
   $.rem_statement,
   $.reread_statement,
   $.restore_statement,
+  $.retry_statement,
+  $.return_statement,
+  $.write_statement,
 ]
 
 module.exports = grammar({
@@ -1211,9 +1221,43 @@ module.exports = grammar({
       ))
     ),
 
+    retry_statement: $ => STATEMENTS.retry,
+    return_statement: $ => STATEMENTS.return,
+
+    write_statement: $ => seq(
+      STATEMENTS.write,
+      $.channel,
+      optional(seq(
+        ",",
+        choice(
+          $.write_using_seq,
+          $.rec_pos_seq,
+          $.record_locking_rule
+        )
+      ))
+    ),
+
+    write_using_seq: $ => seq(
+      KEYWORD.using,
+      choice(
+        $.string_expression,
+        $.line_reference,
+        $.label_reference,
+      ),
+      optional(seq(
+        ",",
+        choice(
+          $.rec_pos_seq,
+          $.record_locking_rule
+        )
+      )),
+      ":",
+      commaSep1($.expression),
+      optional($.error_condition_list)
+    ),
+
     _definition: $ => choice(
       $.function_definition,
-      // other types of definitions
     ),
 
     line_number: $ => /\d{1,5}[ \t]/,

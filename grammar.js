@@ -222,6 +222,7 @@ const KEYWORD = {
   on: /[oO][nN]/,
   off: /[oO][fF][fF]/,
   print: /[pP][rR][iI][nN][tT]/,
+  files: /[fF][iI][lL][eE][sS]/,
 }
 
 const FORMAT_SPECS = [
@@ -275,8 +276,8 @@ const getStatements = $ => [
   $.close_statement,
   $.continue_statement,
   $.data_statement,
+  $.def_statement,
   $.delete_statement,
-  $.dim_statement,
   $.do_statement,
   $.end_def_statement,
   $.end_if_statement,
@@ -309,8 +310,8 @@ const getStatements = $ => [
   $.return_statement,
   $.rewrite_statement,
   $.stop_statement,
-  $.write_statement,
   $.trace_statement,
+  $.write_statement,
 ]
 
 module.exports = grammar({
@@ -359,8 +360,8 @@ module.exports = grammar({
 
     _single_line_statement: $ => seq(
       choice(
-        $._definition,
-        $.option_statement
+        $.dim_statement,
+        $.option_statement,
       ),
       optional($.comment)
     ),
@@ -521,21 +522,38 @@ module.exports = grammar({
     chain_statement: $ => seq(
       STATEMENTS.chain,
       $.string_expression,
-      optional(/,[ \t]*[fF][iI][lL][eE][sS]/),
       optional(
         seq(
           ",",
-          commaSep1(
-            choice(
-              $.number_name,
-              $.string_name,
-              $.string_array_name,
-              $.number_array_name,
-            )
+          choice(
+            seq(
+              $.chain_files,
+              optional(seq(
+                ",",
+                commaSep1(
+                  choice(
+                    $.number_name,
+                    $.string_name,
+                    $.string_array_name,
+                    $.number_array_name,
+                  )
+                ),
+              ))
+            ),
+            commaSep1(
+              choice(
+                $.number_name,
+                $.string_name,
+                $.string_array_name,
+                $.number_array_name,
+              )
+            ),
           ),
         )
       )
     ),
+
+    chain_files: $ => token(prec(1,KEYWORD.files)),
 
     form_statement: $ => seq(
       STATEMENTS.form,
@@ -1287,17 +1305,13 @@ module.exports = grammar({
       )
     ),
 
-    _definition: $ => choice(
-      $.function_definition,
-    ),
-
     line_number: $ => /\d{1,5}[ \t]/,
     
     label_reference: $ => /[a-zA-Z_]\w*/,
 
     label: $ => /[a-zA-Z_]\w*:/,
 
-    function_definition: $ => seq(
+    def_statement: $ => seq(
       'def',
       choice(
         $.string_function_definition,

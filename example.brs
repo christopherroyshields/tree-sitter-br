@@ -1,3 +1,1 @@
-trace on
-trace off
-trace print
+chain "test",a,b,c

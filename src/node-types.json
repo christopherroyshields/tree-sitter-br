@@ -23,6 +23,10 @@
       "required": true,
       "types": [
         {
+          "type": "chain_files",
+          "named": true
+        },
+        {
           "type": "number_array_name",
           "named": true
         },
@@ -244,6 +248,33 @@
         },
         {
           "type": "unquoted_data",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "def_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "line",
+          "named": true
+        },
+        {
+          "type": "numeric_expression",
+          "named": true
+        },
+        {
+          "type": "numeric_function_definition",
+          "named": true
+        },
+        {
+          "type": "string_function_definition",
           "named": true
         }
       ]
@@ -522,33 +553,6 @@
     }
   },
   {
-    "type": "function_definition",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "line",
-          "named": true
-        },
-        {
-          "type": "numeric_expression",
-          "named": true
-        },
-        {
-          "type": "numeric_function_definition",
-          "named": true
-        },
-        {
-          "type": "string_function_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "function_length",
     "named": true,
     "fields": {
@@ -716,11 +720,11 @@
           "named": true
         },
         {
-          "type": "eol",
+          "type": "dim_statement",
           "named": true
         },
         {
-          "type": "function_definition",
+          "type": "eol",
           "named": true
         },
         {
@@ -1989,6 +1993,10 @@
       "required": false,
       "types": [
         {
+          "type": "chain_files",
+          "named": true
+        },
+        {
           "type": "chain_statement",
           "named": true
         },
@@ -2017,11 +2025,11 @@
           "named": true
         },
         {
-          "type": "delete_statement",
+          "type": "def_statement",
           "named": true
         },
         {
-          "type": "dim_statement",
+          "type": "delete_statement",
           "named": true
         },
         {
@@ -2113,6 +2121,10 @@
           "named": true
         },
         {
+          "type": "line",
+          "named": true
+        },
+        {
           "type": "line_reference",
           "named": true
         },
@@ -2162,6 +2174,10 @@
         },
         {
           "type": "numeric_expression",
+          "named": true
+        },
+        {
+          "type": "numeric_function_definition",
           "named": true
         },
         {
@@ -2266,6 +2282,10 @@
         },
         {
           "type": "string_expression",
+          "named": true
+        },
+        {
+          "type": "string_function_definition",
           "named": true
         },
         {
@@ -3092,6 +3112,10 @@
   {
     "type": "bool",
     "named": false
+  },
+  {
+    "type": "chain_files",
+    "named": true
   },
   {
     "type": "comment",

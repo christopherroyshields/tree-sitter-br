@@ -1,6 +1,3 @@
-const { channel } = require("diagnostics_channel")
-const { relative } = require("path")
-
 const NUMERIC_SYSTEM_FUNCTIONS = [
   /[aA][bB][sS]/,
   /[aA][iI][dD][xX]/,
@@ -307,6 +304,7 @@ const getStatements = $ => [
   $.restore_statement,
   $.retry_statement,
   $.return_statement,
+  $.rewrite_statement,
   $.write_statement,
 ]
 
@@ -315,28 +313,18 @@ module.exports = grammar({
   word: $ => $.identifier,
   precedences: $ => [
     [
-    //   'call',
-    //   $.update_expression,
-    //   'unary_not',
       'unary_void',
       'binary_exp',
       'binary_times',
       'binary_plus',
       'binary_shift',
-      // 'binary_compare',
       'binary_relation',
       'binary_equality',
       'bitwise_and',
-      // 'bitwise_xor',
-      // 'bitwise_or',
       'logical_and',
       'logical_or',
     ],
-    // [$.rest_pattern, 'assign'],
     ['assign', $.numeric_primary_expression],
-    // ['member', 'new', 'call', $.expression],
-    // ['declaration', 'literal'],
-    // [$.numeric_primary_expression, $.statement_block, 'object'],
   ],
 
   externals: $ => [
@@ -1223,6 +1211,30 @@ module.exports = grammar({
 
     retry_statement: $ => STATEMENTS.retry,
     return_statement: $ => STATEMENTS.return,
+
+    rewrite_statement: $ => seq(
+      STATEMENTS.rewrite,
+      $.channel,
+      optional(seq(
+        ",",
+        choice(
+          $.write_using_seq,
+          $.rec_pos_seq,
+          $.write_key_seq,
+          $.record_locking_rule
+        )
+      ))
+    ),
+
+    write_key_seq: $ => seq(
+      KEYWORD.key,
+      "=", 
+      $.string_expression,
+      optional(seq(
+        ",",
+        $.record_locking_rule,
+      ))
+    ),
 
     write_statement: $ => seq(
       STATEMENTS.write,

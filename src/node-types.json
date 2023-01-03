@@ -1919,6 +1919,37 @@
     }
   },
   {
+    "type": "rewrite_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "channel",
+          "named": true
+        },
+        {
+          "type": "rec_pos_seq",
+          "named": true
+        },
+        {
+          "type": "record_locking_rule",
+          "named": true
+        },
+        {
+          "type": "write_key_seq",
+          "named": true
+        },
+        {
+          "type": "write_using_seq",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -2218,6 +2249,10 @@
           "named": true
         },
         {
+          "type": "rewrite_statement",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -2255,6 +2290,10 @@
         },
         {
           "type": "variable_list",
+          "named": true
+        },
+        {
+          "type": "write_key_seq",
           "named": true
         },
         {
@@ -2780,6 +2819,25 @@
         },
         {
           "type": "stringreference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "write_key_seq",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "record_locking_rule",
+          "named": true
+        },
+        {
+          "type": "string_expression",
           "named": true
         }
       ]

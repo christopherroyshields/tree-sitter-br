@@ -1,4 +1,1 @@
-retry
-return
-03950 WRITE #5,USING 3960: COMPANY$, AMT
-02000 WRITE #1, USING "FORM X 8,C 18":"NEW LINKED LIST"
+rewrite #1, using RECFORM, rec=Therecordnumber: Firstname$(Index), Lastname$(Index), Address$(Index), City$(Index), State$(Index), Zipcodes$(Index), Shipmethod$(Index), Item1(Index), Item2(Index), Item3(Index)

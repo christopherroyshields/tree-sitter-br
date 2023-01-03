@@ -306,6 +306,10 @@
                 },
                 {
                   "type": "SYMBOL",
+                  "name": "rewrite_statement"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "write_statement"
                 }
               ]
@@ -1600,6 +1604,10 @@
                   {
                     "type": "SYMBOL",
                     "name": "return_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "rewrite_statement"
                   },
                   {
                     "type": "SYMBOL",
@@ -4148,6 +4156,95 @@
     "return_statement": {
       "type": "PATTERN",
       "value": "[rR][eE][tT][uU][rR][nN]"
+    },
+    "rewrite_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[rR][eE][wW][rR][iI][tT][eE]"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "channel"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "write_using_seq"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "rec_pos_seq"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "write_key_seq"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "record_locking_rule"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "write_key_seq": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[kK][eE][yY]"
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_expression"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "record_locking_rule"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
     },
     "write_statement": {
       "type": "SEQ",

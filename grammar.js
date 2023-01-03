@@ -214,6 +214,7 @@ const KEYWORD = {
   search: /[sS][eE][aA][rR][cC][hH]/,
   pos: /[pP][oO][sS]/,
   keyonly: /[kK][eE][yY][oO][nN][lL][yY]/,
+  link: /[lL][iI][nN][kK]/,
 }
 
 const FORMAT_SPECS = [
@@ -1052,7 +1053,18 @@ module.exports = grammar({
     _record_selection: $ => choice(
       $.positional_parameter,
       $.rec_pos_seq,
-      $.key_search_seq
+      $.key_search_seq,
+      $.link_seq,
+    ),
+
+    link_seq: $ => seq(
+      KEYWORD.link,
+      token.immediate("="),
+      $.string_expression,
+      optional(seq(
+        ",",
+        $.positional_parameter,
+      ))
     ),
 
     positional_parameter: $ => seq(

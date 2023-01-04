@@ -1464,13 +1464,32 @@ module.exports = grammar({
     string_expression: $ => choice(
       $.string_forced_assignment_expression,
       $.string_binary_expression,
+      $.string_assignment,
       $.string_primary_expression,
     ),
+
+    conditional_string_expression: $ => choice(
+      $.conditional_string_forced_assignment_expression,
+      $.conditional_string_binary_expression,
+      $.string_primary_expression,
+    ),
+
+    string_assignment: $ => prec.left(seq(
+      field('left', $.string_expression),
+      field('operator', "="),
+      field('right', $.string_expression)
+    )),
 
     string_binary_expression: $ => prec.left(seq(
       field('left', $.string_expression),
       field('operator', "&"),
       field('right', $.string_expression)
+    )),
+
+    conditional_string_binary_expression: $ => prec.left(seq(
+      field('left', $.conditional_string_expression),
+      field('operator', "&"),
+      field('right', $.conditional_string_expression)
     )),
 
     numeric_binary_expression: $ => choice(
@@ -1557,9 +1576,9 @@ module.exports = grammar({
           ['>', 'binary_relation'],
         ].map(([operator, precedence, associativity]) =>
           (associativity === 'right' ? prec.right : prec.left)(precedence, seq(
-            field('left', $.string_expression),
+            field('left', $.conditional_string_expression),
             field('operator', operator),
-            field('right', $.string_expression)
+            field('right', $.conditional_string_expression)
           ))
         )
       )
@@ -1755,6 +1774,12 @@ module.exports = grammar({
       field('left', $._string_reference),
       ":=",
       field('right', $.string_expression)
+    )),
+
+    conditional_string_forced_assignment_expression: $ => prec.right('assign', seq(
+      field('left', $._string_reference),
+      ":=",
+      field('right', $.conditional_string_expression)
     )),
 
     _numeric_reference: $ => choice(

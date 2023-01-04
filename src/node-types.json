@@ -96,7 +96,7 @@
             "named": true
           },
           {
-            "type": "string_expression",
+            "type": "conditional_string_expression",
             "named": true
           }
         ]
@@ -196,7 +196,7 @@
             "named": true
           },
           {
-            "type": "string_expression",
+            "type": "conditional_string_expression",
             "named": true
           }
         ]
@@ -228,6 +228,95 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "conditional_string_binary_expression",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "conditional_string_expression",
+            "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "&",
+            "named": false
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "conditional_string_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "conditional_string_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "conditional_string_binary_expression",
+          "named": true
+        },
+        {
+          "type": "conditional_string_forced_assignment_expression",
+          "named": true
+        },
+        {
+          "type": "string_primary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "conditional_string_forced_assignment_expression",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "stringelement",
+            "named": true
+          },
+          {
+            "type": "stringreference",
+            "named": true
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "conditional_string_expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2553,6 +2642,42 @@
     }
   },
   {
+    "type": "string_assignment",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_expression",
+            "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "=",
+            "named": false
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "string_assignment_expression",
     "named": true,
     "fields": {
@@ -2649,6 +2774,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "string_assignment",
+          "named": true
+        },
         {
           "type": "string_binary_expression",
           "named": true

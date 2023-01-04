@@ -5127,9 +5127,63 @@
         },
         {
           "type": "SYMBOL",
+          "name": "string_assignment"
+        },
+        {
+          "type": "SYMBOL",
           "name": "string_primary_expression"
         }
       ]
+    },
+    "conditional_string_expression": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "conditional_string_forced_assignment_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "conditional_string_binary_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_primary_expression"
+        }
+      ]
+    },
+    "string_assignment": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "left",
+            "content": {
+              "type": "SYMBOL",
+              "name": "string_expression"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "operator",
+            "content": {
+              "type": "STRING",
+              "value": "="
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "right",
+            "content": {
+              "type": "SYMBOL",
+              "name": "string_expression"
+            }
+          }
+        ]
+      }
     },
     "string_binary_expression": {
       "type": "PREC_LEFT",
@@ -5159,6 +5213,39 @@
             "content": {
               "type": "SYMBOL",
               "name": "string_expression"
+            }
+          }
+        ]
+      }
+    },
+    "conditional_string_binary_expression": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "left",
+            "content": {
+              "type": "SYMBOL",
+              "name": "conditional_string_expression"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "operator",
+            "content": {
+              "type": "STRING",
+              "value": "&"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "right",
+            "content": {
+              "type": "SYMBOL",
+              "name": "conditional_string_expression"
             }
           }
         ]
@@ -6668,7 +6755,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "string_expression"
+                  "name": "conditional_string_expression"
                 }
               },
               {
@@ -6684,7 +6771,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "string_expression"
+                  "name": "conditional_string_expression"
                 }
               }
             ]
@@ -6701,7 +6788,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "string_expression"
+                  "name": "conditional_string_expression"
                 }
               },
               {
@@ -6717,7 +6804,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "string_expression"
+                  "name": "conditional_string_expression"
                 }
               }
             ]
@@ -6734,7 +6821,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "string_expression"
+                  "name": "conditional_string_expression"
                 }
               },
               {
@@ -6750,7 +6837,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "string_expression"
+                  "name": "conditional_string_expression"
                 }
               }
             ]
@@ -6767,7 +6854,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "string_expression"
+                  "name": "conditional_string_expression"
                 }
               },
               {
@@ -6783,7 +6870,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "string_expression"
+                  "name": "conditional_string_expression"
                 }
               }
             ]
@@ -6800,7 +6887,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "string_expression"
+                  "name": "conditional_string_expression"
                 }
               },
               {
@@ -6816,7 +6903,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "string_expression"
+                  "name": "conditional_string_expression"
                 }
               }
             ]
@@ -6833,7 +6920,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "string_expression"
+                  "name": "conditional_string_expression"
                 }
               },
               {
@@ -6849,7 +6936,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "string_expression"
+                  "name": "conditional_string_expression"
                 }
               }
             ]
@@ -6866,7 +6953,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "string_expression"
+                  "name": "conditional_string_expression"
                 }
               },
               {
@@ -6882,7 +6969,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "string_expression"
+                  "name": "conditional_string_expression"
                 }
               }
             ]
@@ -8112,6 +8199,35 @@
             "content": {
               "type": "SYMBOL",
               "name": "string_expression"
+            }
+          }
+        ]
+      }
+    },
+    "conditional_string_forced_assignment_expression": {
+      "type": "PREC_RIGHT",
+      "value": "assign",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "left",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_string_reference"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": ":="
+          },
+          {
+            "type": "FIELD",
+            "name": "right",
+            "content": {
+              "type": "SYMBOL",
+              "name": "conditional_string_expression"
             }
           }
         ]

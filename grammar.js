@@ -467,8 +467,8 @@ module.exports = grammar({
       field('length', $.int)
     ),
 
-    string_function_name: $ => /fn\w+\$/i,
-    numeric_function_name: $ => /fn\w+/i,
+    string_function_name: $ => /[fF][nN]\w+\$/i,
+    numeric_function_name: $ => /[fF][nN]\w+/i,
     
     parameter_list: $ => seq(
       '(',

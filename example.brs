@@ -1,1 +1,1 @@
-let setting_FileIOPath$="fileio"
+def Fndefineinputmodes

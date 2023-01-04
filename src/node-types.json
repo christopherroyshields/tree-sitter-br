@@ -1397,6 +1397,11 @@
     }
   },
   {
+    "type": "numeric_function_name",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "numeric_parameter",
     "named": true,
     "fields": {},
@@ -2851,6 +2856,11 @@
     }
   },
   {
+    "type": "string_function_name",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "string_name",
     "named": true,
     "fields": {},
@@ -3443,10 +3453,6 @@
     "named": true
   },
   {
-    "type": "numeric_function_name",
-    "named": true
-  },
-  {
     "type": "or",
     "named": false
   },
@@ -3468,10 +3474,6 @@
   },
   {
     "type": "statement_linput",
-    "named": true
-  },
-  {
-    "type": "string_function_name",
     "named": true
   },
   {

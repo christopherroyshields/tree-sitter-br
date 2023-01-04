@@ -665,11 +665,11 @@
     },
     "string_function_name": {
       "type": "PATTERN",
-      "value": "fn\\w+\\$"
+      "value": "[fF][nN]\\w+\\$"
     },
     "numeric_function_name": {
       "type": "PATTERN",
-      "value": "fn\\w+"
+      "value": "[fF][nN]\\w+"
     },
     "parameter_list": {
       "type": "SEQ",

@@ -1,1 +1,1 @@
-def Fndefineinputmodes
+if (1=1) then let Mode=Inputattributesmode

@@ -5272,8 +5272,8 @@
                 "type": "FIELD",
                 "name": "operator",
                 "content": {
-                  "type": "STRING",
-                  "value": "and"
+                  "type": "PATTERN",
+                  "value": "[aA][nN][dD]"
                 }
               },
               {
@@ -5338,8 +5338,8 @@
                 "type": "FIELD",
                 "name": "operator",
                 "content": {
-                  "type": "STRING",
-                  "value": "or"
+                  "type": "PATTERN",
+                  "value": "[oO][rR]"
                 }
               },
               {
@@ -6102,8 +6102,8 @@
                 "type": "FIELD",
                 "name": "operator",
                 "content": {
-                  "type": "STRING",
-                  "value": "and"
+                  "type": "PATTERN",
+                  "value": "[aA][nN][dD]"
                 }
               },
               {
@@ -6168,8 +6168,8 @@
                 "type": "FIELD",
                 "name": "operator",
                 "content": {
-                  "type": "STRING",
-                  "value": "or"
+                  "type": "PATTERN",
+                  "value": "[oO][rR]"
                 }
               },
               {

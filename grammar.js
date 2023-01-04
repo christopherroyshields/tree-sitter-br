@@ -1494,9 +1494,9 @@ module.exports = grammar({
 
     numeric_binary_expression: $ => choice(
       ...[
-        ['and', 'logical_and'],
+        [/[aA][nN][dD]/, 'logical_and'],
         ['&&', 'logical_and'],
-        ['or', 'logical_or'],
+        [/[oO][rR]/, 'logical_or'],
         ['||', 'logical_or'],
         ['>>', 'binary_shift'],
         ['<<', 'binary_shift'],
@@ -1539,9 +1539,9 @@ module.exports = grammar({
 
     conditional_binary_expression: $ => choice(
       ...[
-        ['and', 'logical_and'],
+        [/[aA][nN][dD]/, 'logical_and'],
         ['&&', 'logical_and'],
-        ['or', 'logical_or'],
+        [/[oO][rR]/, 'logical_or'],
         ['||', 'logical_or'],
         ['>>', 'binary_shift'],
         ['<<', 'binary_shift'],

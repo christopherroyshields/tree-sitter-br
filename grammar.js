@@ -333,6 +333,7 @@ module.exports = grammar({
       'logical_or',
     ],
     ['assign', $.numeric_primary_expression],
+    [$.string_expression, $.conditional_string_expression]
   ],
 
   externals: $ => [
@@ -1458,7 +1459,7 @@ module.exports = grammar({
       $.numeric_conditional_forced_assignment_expression,
       $.numeric_unary_expression,
       $.conditional_binary_expression,
-      $.numeric_primary_expression
+      $.numeric_conditional_primary_expression
     ),
 
     string_expression: $ => choice(
@@ -1604,6 +1605,13 @@ module.exports = grammar({
       $.numeric_call_expression
     ),
 
+    numeric_conditional_primary_expression: $ => choice(
+      $._numeric_reference,
+      $.conditional_parenthesized_numeric_expression,
+      $.number,
+      $.numeric_call_expression
+    ),
+
     string_primary_expression: $ => choice(
       $.parenthesized_string_expression,
       $._string_reference,
@@ -1705,6 +1713,12 @@ module.exports = grammar({
     parenthesized_numeric_expression: $ => seq(
       '(',
       $.numeric_expression,
+      ')'
+    ),
+
+    conditional_parenthesized_numeric_expression: $ => seq(
+      '(',
+      $.conditional_expression,
       ')'
     ),
 

@@ -212,11 +212,26 @@
           "named": true
         },
         {
-          "type": "numeric_primary_expression",
+          "type": "numeric_conditional_primary_expression",
           "named": true
         },
         {
           "type": "numeric_unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "conditional_parenthesized_numeric_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "conditional_expression",
           "named": true
         }
       ]
@@ -1298,6 +1313,37 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "numeric_conditional_primary_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "conditional_parenthesized_numeric_expression",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "numberelement",
+          "named": true
+        },
+        {
+          "type": "numberreference",
+          "named": true
+        },
+        {
+          "type": "numeric_call_expression",
+          "named": true
+        }
+      ]
     }
   },
   {

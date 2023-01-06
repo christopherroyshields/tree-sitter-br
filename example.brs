@@ -1,1 +1,1 @@
-if (1=1) then let Mode=Inputattributesmode
+if (1)=1 then print x

@@ -1528,7 +1528,9 @@ module.exports = grammar({
         ['~=', 'binary_equality'],
         ['>=', 'binary_relation'],
         ['>', 'binary_relation'],
-      ].map(([operator, precedence, associativity]) =>
+        ['><', 'binary_relation'],
+        ['<>', 'binary_relation'],
+    ].map(([operator, precedence, associativity]) =>
         (associativity === 'right' ? prec.right : prec.left)(precedence, seq(
           field('left', $.numeric_expression),
           field('operator', operator),
@@ -1542,6 +1544,8 @@ module.exports = grammar({
           ['~=', 'binary_equality'],
           ['>=', 'binary_relation'],
           ['>', 'binary_relation'],
+          ['><', 'binary_relation'],
+          ['<>', 'binary_relation'],
         ].map(([operator, precedence, associativity]) =>
           (associativity === 'right' ? prec.right : prec.left)(precedence, seq(
             field('left', $.string_expression),
@@ -1574,7 +1578,9 @@ module.exports = grammar({
         ['~=', 'binary_equality'],
         ['>=', 'binary_relation'],
         ['>', 'binary_relation'],
-      ].map(([operator, precedence, associativity]) =>
+        ['><', 'binary_relation'],
+        ['<>', 'binary_relation'],
+    ].map(([operator, precedence, associativity]) =>
         (associativity === 'right' ? prec.right : prec.left)(precedence, seq(
           field('left', $.conditional_expression),
           field('operator', operator),
@@ -1589,6 +1595,8 @@ module.exports = grammar({
           ['~=', 'binary_equality'],
           ['>=', 'binary_relation'],
           ['>', 'binary_relation'],
+          ['><', 'binary_relation'],
+          ['<>', 'binary_relation'],
         ].map(([operator, precedence, associativity]) =>
           (associativity === 'right' ? prec.right : prec.left)(precedence, seq(
             field('left', $.conditional_string_expression),

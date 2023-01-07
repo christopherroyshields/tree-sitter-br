@@ -1,1 +1,1 @@
-mat a=(1)
+if Displayref_Screenio$(Si_Filelay)<>Screenio$(Si_Filelay) then

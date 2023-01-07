@@ -987,6 +987,7 @@ module.exports = grammar({
       ),
     ),
 
+    keyword_outin: $ => KEYWORD.outin,
     open_statement: $ => seq(
       STATEMENTS.open,
       $.channel,
@@ -1000,6 +1001,7 @@ module.exports = grammar({
           choice(
             KEYWORD.input,
             KEYWORD.output,
+            KEYWORD.outin,
           )
         ),
         seq(

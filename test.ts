@@ -5,38 +5,40 @@ import fs from 'fs'
 const parser = new Parser()
 parser.setLanguage(br)
 
-const code = 
-`print mat foo, mat bar
-print mat foo$, mat bar$, baz$(1)
-print a,b,c
-print a$,b$,c$`
-;
+// const code = 
+// `print mat foo, mat bar
+// print mat foo$, mat bar$, baz$(1)
+// print a,b,c
+// print a$,b$,c$`
+// ;
 
-const refQuery = 
-`(number_array_name) @number_arrays
-(string_array_name) @string_arrays
-(number_name) @numeric
-(string_name) @string`
-;
+// const refQuery = 
+// `(number_array_name) @number_arrays
+// (string_array_name) @string_arrays
+// (number_name) @numeric
+// (string_name) @string`
+// ;
 
-const tree = parser.parse(code);
-const query = new Parser.Query(br, refQuery)
-const matches = query.matches(tree.rootNode);
+const code = fs.readFileSync("./screenio.brs");
+const tree = parser.parse(code.toString());
 
-for (const match of matches) {
-  for (const capture of match.captures) {
-    console.log(capture.node.text + " (" + capture.name + ")");
-  }
-}
+// const query = new Parser.Query(br, refQuery)
+// const matches = query.matches(tree.rootNode);
 
-// const errorQuery = new Parser.Query(br,'(ERROR) @error')
-// const errors = errorQuery.matches(tree.rootNode);
-
-// for (const error of errors) {
-//   for (const capture of error.captures) {
+// for (const match of matches) {
+//   for (const capture of match.captures) {
 //     console.log(capture.node.text + " (" + capture.name + ")");
 //   }
 // }
+
+const errorQuery = new Parser.Query(br,'(line (ERROR) @error)')
+const errors = errorQuery.matches(tree.rootNode);
+
+for (const error of errors) {
+  for (const capture of error.captures) {
+    console.log(capture.node.text + " (" + capture.name + ")");
+  }
+}
 
 // const cursor = tree.walk()
 // cursor.gotoFirstChild()

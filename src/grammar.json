@@ -854,7 +854,7 @@
         },
         {
           "type": "PATTERN",
-          "value": "[ \\t]*\\w+[ \\t]*"
+          "value": "\\w+"
         },
         {
           "type": "STRING",
@@ -7733,8 +7733,17 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "expression"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "expression"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "param_substitution"
+                }
+              ]
             },
             {
               "type": "REPEAT",
@@ -7746,8 +7755,17 @@
                     "value": ","
                   },
                   {
-                    "type": "SYMBOL",
-                    "name": "expression"
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "expression"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "param_substitution"
+                      }
+                    ]
                   }
                 ]
               }

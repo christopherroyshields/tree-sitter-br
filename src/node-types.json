@@ -10,6 +10,10 @@
         {
           "type": "expression",
           "named": true
+        },
+        {
+          "type": "param_substitution",
+          "named": true
         }
       ]
     }

@@ -505,7 +505,7 @@ module.exports = grammar({
 
     param_substitution: $ => seq(
       "[[",
-      /[ \t]*\w+[ \t]*/,
+      /\w+/,
       "]]"
     ),
 
@@ -1662,7 +1662,10 @@ module.exports = grammar({
 
     arguments: $ => seq(
       "(",
-      commaSep1($.expression),
+      commaSep1(choice(
+        $.expression,
+        $.param_substitution,
+      )),
       ")"
     ),
 

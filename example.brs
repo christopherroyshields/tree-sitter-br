@@ -1,1 +1,1 @@
-open #(About:=Fngetfilenumber) : "srow=5,scol=20,rows=23,cols=60,Border=S/#FFFFFF:#000000", display,outin
+if Fnreadscreen(Screenname$, Mat Screenio$, Mat Screenio, [[Screencontrols]]) then !  Successful Read

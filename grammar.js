@@ -909,14 +909,16 @@ module.exports = grammar({
       choice(
         seq(
           alias($.stringidentifier, $.string_array_name),
+          optional($.mat_range),
           optional(
             seq(
-              "(",
-              commaSep1($.numeric_expression),
-              ")",
-              optional(
+              "=",
+              choice(
                 seq(
-                  "=",
+                  alias($.stringidentifier, $.string_array_name),
+                  optional($.mat_range),
+                ),
+                seq(                  
                   "(",
                   $.string_expression,
                   ")"
@@ -927,23 +929,33 @@ module.exports = grammar({
         ),
         seq(
           alias($._numberidentifier, $.number_array_name),
-          optional(
-            seq(
-              "(",
-              commaSep1($.numeric_expression),
-              ")",
-              optional(
-                seq(
-                  "=",
-                  "(",
-                  $.numeric_expression,
-                  ")"
-                )
+          optional($.mat_range),
+          optional(seq(
+            "=",
+            choice(
+              seq(
+                alias($._numberidentifier, $.number_array_name),
+                optional($.mat_range)
+              ),
+              seq(
+                "(",
+                $.numeric_expression,
+                ")"
               )
             )
-          )
+          ))
         )
       )
+    ),
+
+    mat_range: $ => seq(
+      "(",
+      $.numeric_expression,
+      optional(seq(
+        ":",
+        $.numeric_expression
+      )),
+      ")",
     ),
 
     next_statement: $ => seq(

@@ -1,1 +1,1 @@
-if Fnreadscreen(Screenname$, Mat Screenio$, Mat Screenio, [[Screencontrols]]) then !  Successful Read
+mat a=(1)

@@ -932,6 +932,21 @@
     }
   },
   {
+    "type": "mat_range",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "numeric_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "mat_statement",
     "named": true,
     "fields": {},
@@ -939,6 +954,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "mat_range",
+          "named": true
+        },
         {
           "type": "number_array_name",
           "named": true
@@ -2356,6 +2375,10 @@
         },
         {
           "type": "loop_statement",
+          "named": true
+        },
+        {
+          "type": "mat_range",
           "named": true
         },
         {

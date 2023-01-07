@@ -1,1 +1,2 @@
-if (1)=1 then print x
+ !  #Autonumber# 10,10
+ 

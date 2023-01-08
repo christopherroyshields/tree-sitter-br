@@ -19,6 +19,21 @@
     }
   },
   {
+    "type": "case_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "chain_statement",
     "named": true,
     "fields": {},
@@ -2207,6 +2222,25 @@
     }
   },
   {
+    "type": "select_case_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "case_statement",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -2245,6 +2279,14 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "case_else_statement",
+          "named": true
+        },
+        {
+          "type": "case_statement",
+          "named": true
+        },
         {
           "type": "chain_files",
           "named": true
@@ -2298,6 +2340,10 @@
           "named": true
         },
         {
+          "type": "end_select_statement",
+          "named": true
+        },
+        {
           "type": "end_statement",
           "named": true
         },
@@ -2319,6 +2365,10 @@
         },
         {
           "type": "exit_statement",
+          "named": true
+        },
+        {
+          "type": "expression",
           "named": true
         },
         {
@@ -2523,6 +2573,10 @@
         },
         {
           "type": "rewrite_statement",
+          "named": true
+        },
+        {
+          "type": "select_case_statement",
           "named": true
         },
         {
@@ -3458,6 +3512,10 @@
     "named": false
   },
   {
+    "type": "case_else_statement",
+    "named": true
+  },
+  {
     "type": "chain_files",
     "named": true
   },
@@ -3479,6 +3537,10 @@
   },
   {
     "type": "end_if_statement",
+    "named": true
+  },
+  {
+    "type": "end_select_statement",
     "named": true
   },
   {

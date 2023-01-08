@@ -173,6 +173,10 @@ const STATEMENTS = {
   trace: /[tT][rR][aA][cC][eE]/,
   while: /[wW][hH][iI][lL][eE]/,
   write: /[wW][rR][iI][tT][eE]/,
+  end_select: /#[eE][nN][dD][ \t]+[sS][eE][lL][eE][cC][tT]#/,
+  select: /#[sS][eE][lL][eE][cC][tT]#/,
+  case: /#[cC][aA][sS][eE]#/,
+  case_else: /#[cC][aA][sS][eE][ \t]+[eE][lL][sS][eE]#/,
 }
 
 const KEYWORD = {
@@ -314,6 +318,10 @@ const getStatements = $ => [
   $.stop_statement,
   $.trace_statement,
   $.write_statement,
+  $.case_statement,
+  $.case_else_statement,
+  $.select_case_statement,
+  $.end_select_statement,
 ]
 
 module.exports = grammar({
@@ -1418,6 +1426,24 @@ module.exports = grammar({
         KEYWORD.print
       )
     ),
+
+    select_case_statement: $ => seq(
+      STATEMENTS.select,
+      $.expression,
+      $.case_statement
+    ),
+
+    case_statement: $ => seq(
+      STATEMENTS.case,
+      $.expression,
+      repeat(seq(
+        "#",
+        $.expression
+      ))
+    ),
+
+    case_else_statement: $ => STATEMENTS.case_else,
+    end_select_statement: $ => STATEMENTS.end_select,
 
     line_number: $ => /\d{1,5}[ \t]/,
     

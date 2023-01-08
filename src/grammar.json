@@ -340,6 +340,22 @@
                 {
                   "type": "SYMBOL",
                   "name": "write_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "case_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "case_else_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "select_case_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "end_select_statement"
                 }
               ]
             },
@@ -2130,6 +2146,22 @@
                   {
                     "type": "SYMBOL",
                     "name": "write_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "case_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "case_else_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "select_case_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "end_select_statement"
                   }
                 ]
               },
@@ -4996,6 +5028,60 @@
           ]
         }
       ]
+    },
+    "select_case_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "#[sS][eE][lL][eE][cC][tT]#"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "case_statement"
+        }
+      ]
+    },
+    "case_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "#[cC][aA][sS][eE]#"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "expression"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "#"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "expression"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "case_else_statement": {
+      "type": "PATTERN",
+      "value": "#[cC][aA][sS][eE][ \\t]+[eE][lL][sS][eE]#"
+    },
+    "end_select_statement": {
+      "type": "PATTERN",
+      "value": "#[eE][nN][dD][ \\t]+[sS][eE][lL][eE][cC][tT]#"
     },
     "line_number": {
       "type": "PATTERN",

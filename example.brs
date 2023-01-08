@@ -1,1 +1,1 @@
-if Displayref_Screenio$(Si_Filelay)<>Screenio$(Si_Filelay) then
+#Case Else#

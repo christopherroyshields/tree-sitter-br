@@ -1543,7 +1543,7 @@ module.exports = grammar({
     conditional_string_expression: $ => choice(
       $.conditional_string_forced_assignment_expression,
       $.conditional_string_binary_expression,
-      $.string_primary_expression,
+      $.conditional_string_primary_expression,
     ),
 
     string_assignment: $ => prec.left(seq(
@@ -1704,6 +1704,14 @@ module.exports = grammar({
       $.string_call_expression
     ),
 
+    conditional_string_primary_expression: $ => choice(
+      $.conditional_parenthesized_string_expression,
+      $._string_reference,
+      $.string,
+      $.template_string,
+      $.string_call_expression
+    ),
+
     numeric_call_expression: $ => choice(
       $.numeric_system_function,
       $.numeric_user_function
@@ -1806,6 +1814,12 @@ module.exports = grammar({
     parenthesized_string_expression: $ => seq(
       '(',
       $.string_expression,
+      ')'
+    ),
+
+    conditional_parenthesized_string_expression: $ => seq(
+      '(',
+      $.conditional_string_expression,
       ')'
     ),
 

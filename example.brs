@@ -1,1 +1,1 @@
-print #Window, fields Inputonlyspec$(Curfld) : Clipboard$(1:255) soflow IGNORECLIPBOARD
+if (fieldtype$="frame") then print x

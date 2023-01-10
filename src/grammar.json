@@ -5527,7 +5527,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "string_primary_expression"
+          "name": "conditional_string_primary_expression"
         }
       ]
     },
@@ -7789,6 +7789,31 @@
         }
       ]
     },
+    "conditional_string_primary_expression": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "conditional_parenthesized_string_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_string_reference"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "template_string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_call_expression"
+        }
+      ]
+    },
     "numeric_call_expression": {
       "type": "CHOICE",
       "members": [
@@ -8662,6 +8687,23 @@
         {
           "type": "SYMBOL",
           "name": "string_expression"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "conditional_parenthesized_string_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "conditional_string_expression"
         },
         {
           "type": "STRING",

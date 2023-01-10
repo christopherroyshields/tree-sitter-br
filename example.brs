@@ -1,1 +1,1 @@
-fntest=1+1
+fntest$="teswt"&a$

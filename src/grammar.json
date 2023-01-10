@@ -5466,6 +5466,10 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "string_function_assignment"
+        },
+        {
+          "type": "SYMBOL",
           "name": "string_forced_assignment_expression"
         },
         {
@@ -7783,6 +7787,35 @@
         }
       ]
     },
+    "string_function_assignment": {
+      "type": "PREC_RIGHT",
+      "value": "assign",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "left",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_string_function_identifier"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "="
+          },
+          {
+            "type": "FIELD",
+            "name": "right",
+            "content": {
+              "type": "SYMBOL",
+              "name": "string_expression"
+            }
+          }
+        ]
+      }
+    },
     "numeric_system_function": {
       "type": "SEQ",
       "members": [
@@ -8367,38 +8400,42 @@
       }
     },
     "string_user_function": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "function",
-          "content": {
+      "type": "PREC_LEFT",
+      "value": "call",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "function",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_string_function_identifier"
+                }
+              ]
+            }
+          },
+          {
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "_string_function_identifier"
+                "type": "FIELD",
+                "name": "arguments",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "arguments"
+                }
+              },
+              {
+                "type": "BLANK"
               }
             ]
           }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "FIELD",
-              "name": "arguments",
-              "content": {
-                "type": "SYMBOL",
-                "name": "arguments"
-              }
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        }
-      ]
+        ]
+      }
     },
     "arguments": {
       "type": "SEQ",

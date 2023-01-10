@@ -1527,6 +1527,7 @@ module.exports = grammar({
     ),
 
     string_expression: $ => choice(
+      $.string_function_assignment,
       $.string_forced_assignment_expression,
       $.string_binary_expression,
       $.string_assignment,
@@ -1707,6 +1708,12 @@ module.exports = grammar({
       $.string_user_function
     ),
 
+    string_function_assignment: $ => prec.right('assign',seq(
+      field('left', $._string_function_identifier),
+      "=",
+      field('right', $.string_expression)
+    )),
+
     numeric_system_function: $ => seq(
       field('function', choice(
         ...NUMERIC_SYSTEM_FUNCTIONS
@@ -1734,12 +1741,12 @@ module.exports = grammar({
       optional(field('arguments', $.arguments))
     )),
 
-    string_user_function: $ => seq(
+    string_user_function: $ => prec.left('call', seq(
       field('function', choice(
         $._string_function_identifier,
       )),
       optional(field('arguments', $.arguments))
-    ),
+    )),
 
     arguments: $ => seq(
       "(",

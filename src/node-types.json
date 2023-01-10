@@ -3004,6 +3004,10 @@
           "named": true
         },
         {
+          "type": "string_function_assignment",
+          "named": true
+        },
+        {
           "type": "string_primary_expression",
           "named": true
         }
@@ -3028,6 +3032,22 @@
           }
         ]
       },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "string_function_assignment",
+    "named": true,
+    "fields": {
       "right": {
         "multiple": false,
         "required": true,

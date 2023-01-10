@@ -407,6 +407,7 @@ module.exports = grammar({
       seq(
         choice(
           $.if_statement,
+          $.else_statement,
           ...getStatements($)
         ),
         optional($.comment)
@@ -686,9 +687,14 @@ module.exports = grammar({
       "*"
     ),
 
-    else: $ => seq(
+    else_statement: $ => seq(
       STATEMENTS.else,
-      optional($.statement)
+      optional(
+        alias(choice(
+          ...getStatements($),
+          $.if_statement
+        ), $.statement)
+      )
     ),
 
     end_def_statement: $ => STATEMENTS.end_def,
@@ -709,9 +715,12 @@ module.exports = grammar({
       $.conditional_expression,
       KEYWORD.then,
       optional(
-        alias(choice(
-          ...getStatements($)
-        ), $.statement)
+        seq(
+          alias(choice(
+            ...getStatements($)
+          ), $.statement),
+          optional($.else_statement)
+        )
       )
     ),
 

@@ -1168,16 +1168,40 @@ module.exports = grammar({
     ),
 
     print_output: $ => seq(
-      $.expression,
+      choice(
+        $.expression,
+        $.array_group
+      ),
       repeat(
         seq(
           choice(
             ",",
             ";"
           ),
-          $.expression,
+          choice(
+            $.expression,
+            $.array_group
+          )
         )
       )
+    ),
+
+    array_group: $ => seq(
+      "(",
+      choice(
+        $.string_array_expression,
+        $.numeric_array_expression,
+      ),
+      repeat(
+        seq(
+          ",",
+          choice(
+            $.string_array_expression,
+            $.numeric_array_expression,
+          ),
+        )
+      ),
+      ")"
     ),
 
     read_statement: $ => seq(

@@ -1,1 +1,1 @@
-if (fieldtype$="frame") then print x
+print #Window, fields Spec$ : (0), (Mat Draw_Lv_Caption$)

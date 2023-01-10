@@ -1163,7 +1163,8 @@ module.exports = grammar({
         $.help_parameter
       ),
       ":",
-      $.print_output
+      $.print_output,
+      optional($.error_condition_list)
     ),
 
     print_output: $ => seq(

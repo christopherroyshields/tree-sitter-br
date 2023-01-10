@@ -4189,6 +4189,18 @@
         {
           "type": "SYMBOL",
           "name": "print_output"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "error_condition_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },

@@ -1,1 +1,1 @@
-else if x then print b
+fntest=1+1

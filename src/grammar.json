@@ -5420,6 +5420,10 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "numeric_function_assignment"
+        },
+        {
+          "type": "SYMBOL",
           "name": "numeric_forced_assignment_expression"
         },
         {
@@ -5445,7 +5449,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "numeric_unary_expression"
+          "name": "conditional_unary_expression"
         },
         {
           "type": "SYMBOL",
@@ -7626,6 +7630,48 @@
         ]
       }
     },
+    "conditional_unary_expression": {
+      "type": "PREC_LEFT",
+      "value": "unary_void",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "operator",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "~"
+                },
+                {
+                  "type": "STRING",
+                  "value": "-"
+                },
+                {
+                  "type": "STRING",
+                  "value": "+"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "[nN][oO][tT][ \\t]*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "argument",
+            "content": {
+              "type": "SYMBOL",
+              "name": "conditional_expression"
+            }
+          }
+        ]
+      }
+    },
     "numeric_array_primary_expression": {
       "type": "CHOICE",
       "members": [
@@ -8253,39 +8299,72 @@
         }
       ]
     },
+    "numeric_function_assignment": {
+      "type": "PREC_RIGHT",
+      "value": "assign",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "left",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_numeric_function_identifier"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "="
+          },
+          {
+            "type": "FIELD",
+            "name": "right",
+            "content": {
+              "type": "SYMBOL",
+              "name": "numeric_expression"
+            }
+          }
+        ]
+      }
+    },
     "numeric_user_function": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "function",
-          "content": {
+      "type": "PREC_LEFT",
+      "value": "call",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "function",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_numeric_function_identifier"
+                }
+              ]
+            }
+          },
+          {
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "_numeric_function_identifier"
+                "type": "FIELD",
+                "name": "arguments",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "arguments"
+                }
+              },
+              {
+                "type": "BLANK"
               }
             ]
           }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "FIELD",
-              "name": "arguments",
-              "content": {
-                "type": "SYMBOL",
-                "name": "arguments"
-              }
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        }
-      ]
+        ]
+      }
     },
     "string_user_function": {
       "type": "SEQ",
@@ -8607,8 +8686,17 @@
             "type": "FIELD",
             "name": "left",
             "content": {
-              "type": "SYMBOL",
-              "name": "_numeric_reference"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_numeric_reference"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "numeric_function_name"
+                }
+              ]
             }
           },
           {
@@ -9882,6 +9970,16 @@
       {
         "type": "SYMBOL",
         "name": "conditional_string_expression"
+      }
+    ],
+    [
+      {
+        "type": "STRING",
+        "value": "assign"
+      },
+      {
+        "type": "STRING",
+        "value": "call"
       }
     ]
   ],

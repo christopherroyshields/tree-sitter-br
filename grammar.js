@@ -341,7 +341,8 @@ module.exports = grammar({
       'logical_or',
     ],
     ['assign', $.numeric_primary_expression],
-    [$.string_expression, $.conditional_string_expression]
+    [$.string_expression, $.conditional_string_expression],
+    ['assign','call']
   ],
 
   externals: $ => [
@@ -357,6 +358,19 @@ module.exports = grammar({
 
   rules: {
     source_file: $ => repeat($.line),
+    // source_file: $ => choice($.foo,$.bar),
+
+    // fnname: $ => /fntest/,
+    
+    // foo: $ => seq(
+    //   $.fnname,
+    //   "=",
+    //   "1"
+    // ),
+
+    // bar: $ => seq(
+    //   $.fnname
+    // ),
 
     line: $ => seq(
       optional($.line_number),
@@ -1498,6 +1512,7 @@ module.exports = grammar({
     ),
 
     numeric_expression: $ => choice(
+      $.numeric_function_assignment,
       $.numeric_forced_assignment_expression,
       $.numeric_unary_expression,
       $.numeric_binary_expression,
@@ -1506,7 +1521,7 @@ module.exports = grammar({
 
     conditional_expression: $ => choice(
       $.numeric_conditional_forced_assignment_expression,
-      $.numeric_unary_expression,
+      $.conditional_unary_expression,
       $.conditional_binary_expression,
       $.numeric_conditional_primary_expression
     ),
@@ -1647,6 +1662,11 @@ module.exports = grammar({
       field('argument', $.numeric_expression)
     )),
 
+    conditional_unary_expression: $ => prec.left('unary_void', seq(
+      field('operator', choice('~', '-', '+', /[nN][oO][tT][ \t]*/)),
+      field('argument', $.conditional_expression)
+    )),
+
     numeric_array_primary_expression: $ => choice(
       $.numberarray
     ),
@@ -1701,12 +1721,18 @@ module.exports = grammar({
       optional(field('arguments', $.arguments))
     ),
 
-    numeric_user_function: $ => seq(
+    numeric_function_assignment: $ => prec.right('assign',seq(
+      field('left', $._numeric_function_identifier),
+      "=",
+      field('right', $.numeric_expression)
+    )),
+
+    numeric_user_function: $ => prec.left('call',seq(
       field('function', choice(
         $._numeric_function_identifier
       )),
       optional(field('arguments', $.arguments))
-    ),
+    )),
 
     string_user_function: $ => seq(
       field('function', choice(
@@ -1792,7 +1818,10 @@ module.exports = grammar({
     )),
 
     numeric_assignment_expression: $ => prec.right('assign', seq(
-      field('left', $._numeric_reference),
+      field('left', choice(
+        $._numeric_reference,
+        $.numeric_function_name,
+      )),
       '=',
       field('right', choice(
         $.numeric_expression,

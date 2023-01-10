@@ -1,1 +1,1 @@
-fntest$="teswt"&a$
+print #Window, fields Mat Inputspec$, help mat InputTTip$ : Mat Inputdata$

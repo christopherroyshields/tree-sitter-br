@@ -865,13 +865,7 @@ module.exports = grammar({
           $.stringarray,
         )
       )),
-      optional(seq(
-        KEYWORD.help,
-        choice(
-          $.string_expression,
-          $.stringarray
-        )
-      )),
+      optional($.help_parameter),
       optional(seq(
         ",",
         KEYWORD.wait,
@@ -880,6 +874,14 @@ module.exports = grammar({
       ":",
       $.variable_list,
       optional($.error_condition_list)
+    ),
+
+    help_parameter: $ => seq(
+      KEYWORD.help,
+      choice(
+        $.string_expression,
+        $.stringarray
+      )
     ),
 
     let_statement: $ => seq(
@@ -1156,6 +1158,9 @@ module.exports = grammar({
       choice(
         $.stringarray,
         $.string_expression
+      ),
+      optional(
+        $.help_parameter
       ),
       ":",
       $.print_output

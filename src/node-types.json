@@ -775,6 +775,25 @@
     }
   },
   {
+    "type": "help_parameter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string_expression",
+          "named": true
+        },
+        {
+          "type": "stringarray",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "if_statement",
     "named": true,
     "fields": {},
@@ -811,6 +830,10 @@
         },
         {
           "type": "error_condition_list",
+          "named": true
+        },
+        {
+          "type": "help_parameter",
           "named": true
         },
         {
@@ -1884,6 +1907,10 @@
       "required": true,
       "types": [
         {
+          "type": "help_parameter",
+          "named": true
+        },
+        {
           "type": "print_output",
           "named": true
         },
@@ -2478,6 +2505,10 @@
         },
         {
           "type": "goto_statement",
+          "named": true
+        },
+        {
+          "type": "help_parameter",
           "named": true
         },
         {

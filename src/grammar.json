@@ -3021,26 +3021,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "PATTERN",
-                  "value": ",[ \\t]*[hH][eE][lL][pP][ \\t]"
-                },
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "string_expression"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "stringarray"
-                    }
-                  ]
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "help_parameter"
             },
             {
               "type": "BLANK"
@@ -3089,6 +3071,28 @@
             },
             {
               "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "help_parameter": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": ",[ \\t]*[hH][eE][lL][pP][ \\t]"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "string_expression"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "stringarray"
             }
           ]
         }
@@ -4163,6 +4167,18 @@
             {
               "type": "SYMBOL",
               "name": "string_expression"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "help_parameter"
+            },
+            {
+              "type": "BLANK"
             }
           ]
         },

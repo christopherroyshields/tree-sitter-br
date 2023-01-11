@@ -1307,7 +1307,8 @@ module.exports = grammar({
             $.array_group
           )
         )
-      )
+      ),
+      optional(";")
     ),
 
     array_group: $ => seq(

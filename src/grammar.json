@@ -2864,8 +2864,17 @@
                   "type": "SEQ",
                   "members": [
                     {
-                      "type": "SYMBOL",
-                      "name": "_numeric_reference"
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "numberarray"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "stringarray"
+                        }
+                      ]
                     },
                     {
                       "type": "REPEAT",
@@ -2877,8 +2886,17 @@
                             "value": ","
                           },
                           {
-                            "type": "SYMBOL",
-                            "name": "_numeric_reference"
+                            "type": "CHOICE",
+                            "members": [
+                              {
+                                "type": "SYMBOL",
+                                "name": "numberarray"
+                              },
+                              {
+                                "type": "SYMBOL",
+                                "name": "stringarray"
+                              }
+                            ]
                           }
                         ]
                       }
@@ -2932,8 +2950,17 @@
                         "type": "SEQ",
                         "members": [
                           {
-                            "type": "SYMBOL",
-                            "name": "_numeric_reference"
+                            "type": "CHOICE",
+                            "members": [
+                              {
+                                "type": "SYMBOL",
+                                "name": "numberarray"
+                              },
+                              {
+                                "type": "SYMBOL",
+                                "name": "stringarray"
+                              }
+                            ]
                           },
                           {
                             "type": "REPEAT",
@@ -2945,8 +2972,17 @@
                                   "value": ","
                                 },
                                 {
-                                  "type": "SYMBOL",
-                                  "name": "_numeric_reference"
+                                  "type": "CHOICE",
+                                  "members": [
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "numberarray"
+                                    },
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "stringarray"
+                                    }
+                                  ]
                                 }
                               ]
                             }

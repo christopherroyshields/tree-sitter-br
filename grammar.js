@@ -846,10 +846,10 @@ module.exports = grammar({
       seq(
         "(",
         commaSep1(
-          $._numeric_reference,
-          $._string_reference,
-          $.numberarray,
-          $.stringarray,
+          choice(
+            $.numberarray,
+            $.stringarray,
+          )
         ),
         ")"
       )

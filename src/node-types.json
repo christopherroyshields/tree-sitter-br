@@ -3715,6 +3715,10 @@
         {
           "type": "string_expression",
           "named": true
+        },
+        {
+          "type": "write_key_seq",
+          "named": true
         }
       ]
     }

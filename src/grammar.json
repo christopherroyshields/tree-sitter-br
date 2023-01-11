@@ -5469,6 +5469,10 @@
                     },
                     {
                       "type": "SYMBOL",
+                      "name": "write_key_seq"
+                    },
+                    {
+                      "type": "SYMBOL",
                       "name": "record_locking_rule"
                     }
                   ]

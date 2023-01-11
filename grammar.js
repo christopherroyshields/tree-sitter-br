@@ -1516,6 +1516,7 @@ module.exports = grammar({
         ",",
         choice(
           $.rec_pos_seq,
+          $.write_key_seq,
           $.record_locking_rule
         )
       )),

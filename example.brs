@@ -1,1 +1,1 @@
-print #Window, fields Spec$ : (0), (Mat Draw_Lv_Caption$)
+mat Sort(1:2)=didx(Animation$)

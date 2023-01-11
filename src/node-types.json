@@ -1100,7 +1100,76 @@
     }
   },
   {
+    "type": "mat_assignment_numeric",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "mat_range",
+          "named": true
+        },
+        {
+          "type": "number_array_name",
+          "named": true
+        },
+        {
+          "type": "numeric_expression",
+          "named": true
+        },
+        {
+          "type": "string_array_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "mat_numeric_array_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "mat_assignment_numeric",
+          "named": true
+        },
+        {
+          "type": "mat_range",
+          "named": true
+        },
+        {
+          "type": "mat_size",
+          "named": true
+        },
+        {
+          "type": "number_array_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "mat_range",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "numeric_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "mat_size",
     "named": true,
     "fields": {},
     "children": {
@@ -1119,6 +1188,25 @@
     "named": true,
     "fields": {},
     "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "mat_numeric_array_expression",
+          "named": true
+        },
+        {
+          "type": "mat_string_array_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "mat_string_array_expression",
+    "named": true,
+    "fields": {},
+    "children": {
       "multiple": true,
       "required": true,
       "types": [
@@ -1127,11 +1215,7 @@
           "named": true
         },
         {
-          "type": "number_array_name",
-          "named": true
-        },
-        {
-          "type": "numeric_expression",
+          "type": "mat_size",
           "named": true
         },
         {
@@ -2633,11 +2717,15 @@
           "named": true
         },
         {
-          "type": "mat_range",
+          "type": "mat_numeric_array_expression",
           "named": true
         },
         {
           "type": "mat_statement",
+          "named": true
+        },
+        {
+          "type": "mat_string_array_expression",
           "named": true
         },
         {

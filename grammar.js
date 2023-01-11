@@ -1,6 +1,5 @@
 const NUMERIC_SYSTEM_FUNCTIONS = [
   /[aA][bB][sS]/,
-  /[aA][iI][dD][xX]/,
   /[aA][tT][nN]/,
   /[bB][eE][lL][lL]/,
   /[cC][eE][iI][lL]/,
@@ -17,7 +16,6 @@ const NUMERIC_SYSTEM_FUNCTIONS = [
   /[dD][aA][tT][eE]/,
   /[dD][aA][yY][sS]/,
   /[dD][eE][bB][uU][gG]_[sS][tT][rR]/,
-  /[dD][iI][dD][xX]/,
   /[eE][rR][rR]/,
   /[eE][xX][iI][sS][tT][sS]/,
   /[eE][xX][pP]/,
@@ -116,6 +114,11 @@ const STRING_SYSTEM_FUNCTIONS = [
   /[wW][bB][vV][eE][rR][sS][iI][oO][nN]\$/,
   /[wW][sS][iI][dD]\$/,
   /[xX][lL][aA][tT][eE]\$/  
+]
+
+const NUMERIC_ARRAY_SYSTEM_FUNCTIONS = [
+  /[aA][iI][dD][xX]/,
+  /[dD][iI][dD][xX]/,
 ]
 
 const FORCED_ASSIGNMENT_OPERATORS = [
@@ -342,7 +345,8 @@ module.exports = grammar({
     ],
     ['assign', $.numeric_primary_expression],
     [$.string_expression, $.conditional_string_expression],
-    ['assign','call']
+    ['assign','call'],
+    [$.mat_size, $.mat_range]
   ],
 
   externals: $ => [
@@ -937,59 +941,108 @@ module.exports = grammar({
       )
     ),
 
-    mat_statement: $ => seq(
-      $._mat,
+    mat_numeric_array_expression: $ => seq(
+      alias($._numberidentifier, $.number_array_name),
+      optional(
+        seq(
+          "(",
+          choice(
+            $.mat_size,
+            $.mat_range
+          ),
+          ")"
+        )
+      ),
+      optional($.mat_assignment_numeric)
+    ),
+
+    mat_assignment_numeric: $ => seq(
+      "=",
       choice(
         seq(
-          alias($.stringidentifier, $.string_array_name),
-          optional($.mat_range),
-          optional(
-            seq(
-              "=",
-              choice(
-                seq(
-                  alias($.stringidentifier, $.string_array_name),
-                  optional($.mat_range),
-                ),
-                seq(                  
-                  "(",
-                  $.string_expression,
-                  ")"
-                )
-              )
-            )
-          )
+          alias($._numberidentifier, $.number_array_name),
+          optional(seq(
+            "(",
+            $.mat_range,
+            ")"
+          ))
         ),
         seq(
-          alias($._numberidentifier, $.number_array_name),
-          optional($.mat_range),
+          "(",
+          $.numeric_expression,
+          ")"
+        ),
+        seq(
+          choice(...NUMERIC_ARRAY_SYSTEM_FUNCTIONS),
+          "(",
+          choice(
+            alias($._numberidentifier, $.number_array_name),
+            alias($.stringidentifier, $.string_array_name),
+          ),
           optional(seq(
-            "=",
-            choice(
-              seq(
-                alias($._numberidentifier, $.number_array_name),
-                optional($.mat_range)
-              ),
-              seq(
-                "(",
-                $.numeric_expression,
-                ")"
-              )
-            )
-          ))
+            "(",
+            $.mat_range,
+            ")"
+          )),
+          ")"
         )
       )
     ),
 
-    mat_range: $ => seq(
-      "(",
+    mat_size: $ => seq(
+      commaSep1($.numeric_expression),
+    ),
+
+    // mat_range: $ => prec.right(seq(
+    //   $.numeric_expression,
+    //   ":",
+    //   $.numeric_expression      
+    // )),
+
+    mat_string_array_expression: $ => seq(
+      alias($.stringidentifier, $.string_array_name),
+      optional(
+        seq(
+          "(",
+          choice(
+            $.mat_size,
+            $.mat_range
+          ),
+          ")"
+        )
+      ),
+      optional(
+        seq(
+          "=",
+          choice(
+            seq(
+              alias($.stringidentifier, $.string_array_name),
+              optional($.mat_range),
+            ),
+            seq(                  
+              "(",
+              $.string_expression,
+              ")"
+            )
+          )
+        )
+      )
+    ),
+
+    mat_statement: $ => seq(
+      $._mat,
+      choice(
+        $.mat_string_array_expression,
+        $.mat_numeric_array_expression,
+      )
+    ),
+
+    mat_range: $ => prec.right(seq(
       $.numeric_expression,
       optional(seq(
         ":",
-        $.numeric_expression
-      )),
-      ")",
-    ),
+      $.numeric_expression)),
+    )),
 
     next_statement: $ => seq(
       STATEMENTS.next,

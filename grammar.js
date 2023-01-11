@@ -495,7 +495,8 @@ module.exports = grammar({
             $.numeric_function_name,
           )
         )
-      )
+      ),
+      optional($.error_condition_list)
     ),
 
     string_function_definition: $ => seq(
@@ -656,7 +657,7 @@ module.exports = grammar({
       ))
     ),
 
-    error_condition_list: $ => commaSep1(
+    error_condition_list: $ => repeat1(
       seq(
         $.error_condition,
         choice(

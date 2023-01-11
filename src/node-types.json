@@ -997,6 +997,10 @@
       "required": false,
       "types": [
         {
+          "type": "error_condition_list",
+          "named": true
+        },
+        {
           "type": "numeric_function_name",
           "named": true
         },

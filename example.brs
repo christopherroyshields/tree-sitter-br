@@ -1,1 +1,1 @@
-mat Sort(1:2)=didx(Animation$)
+mat Sort(Udim(Animation$))=Aidx(Animation$)

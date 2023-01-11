@@ -3125,6 +3125,18 @@
               "name": "numeric_expression"
             }
           ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "error_condition_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -8062,6 +8074,50 @@
         {
           "type": "SYMBOL",
           "name": "numeric_user_function"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "udim"
+        }
+      ]
+    },
+    "udim": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[uU][dD][iI][mM]"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "stringidentifier"
+              },
+              "named": true,
+              "value": "string_array_name"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_numberidentifier"
+              },
+              "named": true,
+              "value": "number_array_name"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
         }
       ]
     },
@@ -10327,6 +10383,20 @@
       {
         "type": "SYMBOL",
         "name": "mat_range"
+      }
+    ],
+    [
+      {
+        "type": "SYMBOL",
+        "name": "udim"
+      },
+      {
+        "type": "SYMBOL",
+        "name": "stringreference"
+      },
+      {
+        "type": "SYMBOL",
+        "name": "number_name"
       }
     ]
   ],

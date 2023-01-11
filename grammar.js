@@ -74,6 +74,8 @@ const NUMERIC_SYSTEM_FUNCTIONS = [
   /[vV][eE][rR][sS][iI][oO][nN]/
 ]
 
+const UDIM = /[uU][dD][iI][mM]/;
+
 const STRING_SYSTEM_FUNCTIONS = [
   /[bB][rR]_[fF][iI][lL][eE][nN][aA][mM][eE]\$/,
   /[bB][rR][eE][rR][rR]\$/,
@@ -346,7 +348,8 @@ module.exports = grammar({
     ['assign', $.numeric_primary_expression],
     [$.string_expression, $.conditional_string_expression],
     ['assign','call'],
-    [$.mat_size, $.mat_range]
+    [$.mat_size, $.mat_range],
+    [$.udim, $.stringreference, $.number_name],
   ],
 
   externals: $ => [
@@ -893,7 +896,8 @@ module.exports = grammar({
       choice(
         $.string_expression,
         $.numeric_expression
-      )
+      ),
+      optional($.error_condition_list)
     ),
 
     statement_linput: $ => STATEMENTS.linput,
@@ -1791,7 +1795,18 @@ module.exports = grammar({
 
     numeric_call_expression: $ => choice(
       $.numeric_system_function,
-      $.numeric_user_function
+      $.numeric_user_function,
+      $.udim,
+    ),
+
+    udim: $ => seq(
+      UDIM,
+      "(",
+      choice(
+        alias($.stringidentifier, $.string_array_name),
+        alias($._numberidentifier, $.number_array_name),
+      ),
+      ")",
     ),
 
     string_call_expression: $ => choice(

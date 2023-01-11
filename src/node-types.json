@@ -3379,6 +3379,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "range",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -3395,6 +3405,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "range",
+          "named": true
+        }
+      ]
     }
   },
   {

@@ -1,1 +1,1 @@
-print a$(1:2)
+if trim$(1:2)<>"test" then

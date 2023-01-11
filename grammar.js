@@ -1831,7 +1831,14 @@ module.exports = grammar({
       field('function', choice(
         ...STRING_SYSTEM_FUNCTIONS
       )),
-      optional(field('arguments', $.arguments))
+      optional(field('arguments', $.arguments)),
+      repeat(
+        seq(
+          "(",
+          $.range,
+          ")"
+        )
+      )
     ),
 
     numeric_function_assignment: $ => prec.right('assign',seq(
@@ -1851,7 +1858,14 @@ module.exports = grammar({
       field('function', choice(
         $._string_function_identifier,
       )),
-      optional(field('arguments', $.arguments))
+      optional(field('arguments', $.arguments)),
+      repeat(
+        seq(
+          "(",
+          $.range,
+          ")"
+        )
+      )
     )),
 
     arguments: $ => seq(

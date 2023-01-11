@@ -1,1 +1,1 @@
-def fn42=(Val(Wbversion$(1:3))>=4.2)
+if Fn42 And Trim$(Lwrc$(Convert$))(1:3)<>"pic" And Trim$(Lwrc$(Convert$))(1:3)<>"fmt" then

@@ -1847,19 +1847,8 @@ module.exports = grammar({
       field('function', choice(
         ...STRING_SYSTEM_FUNCTIONS
       )),
-      optional(seq(
-        "(",
-        choice(
-          field('arguments', $.string_arguments),
-          $.range
-        ),
-        ")"
-      ))
+      optional(field('arguments', $.arguments))
     )),
-
-    string_arguments: $ => seq(
-      commaSep1($.expression)
-    ),
 
     numeric_function_assignment: $ => prec.right('assign',seq(
       field('left', $._numeric_function_identifier),
@@ -1874,18 +1863,11 @@ module.exports = grammar({
       optional(field('arguments', $.arguments))
     )),
 
-    string_user_function: $ => prec.right('call', seq(
+    string_user_function: $ => prec.left('call', seq(
       field('function', choice(
         $._string_function_identifier,
       )),
-      optional(seq(
-        "(",
-        choice(
-          field('arguments', $.string_arguments),
-          $.range
-        ),
-        ")"
-      ))
+      optional(field('arguments', $.arguments))
     )),
 
     arguments: $ => seq(

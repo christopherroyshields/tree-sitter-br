@@ -2984,21 +2984,6 @@
     "fields": {}
   },
   {
-    "type": "string_arguments",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "string_array_expression",
     "named": true,
     "fields": {},
@@ -3435,21 +3420,11 @@
         "required": false,
         "types": [
           {
-            "type": "string_arguments",
+            "type": "arguments",
             "named": true
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "range",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -3461,21 +3436,11 @@
         "required": false,
         "types": [
           {
-            "type": "string_arguments",
+            "type": "arguments",
             "named": true
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "range",
-          "named": true
-        }
-      ]
     }
   },
   {

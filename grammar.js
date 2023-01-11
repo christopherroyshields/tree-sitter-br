@@ -1778,6 +1778,7 @@ module.exports = grammar({
     ),
 
     string_primary_expression: $ => choice(
+      $.string_range,
       $.parenthesized_string_expression,
       $._string_reference,
       $.string,
@@ -1785,7 +1786,22 @@ module.exports = grammar({
       $.string_call_expression
     ),
 
+    string_range: $ => prec.right(seq(
+      $.string_primary_expression,
+      "(",
+      $.range,
+      ")",
+    )),
+
+    conditional_string_range: $ => prec.right(seq(
+      $.conditional_string_primary_expression,
+      "(",
+      $.range,
+      ")",
+    )),
+
     conditional_string_primary_expression: $ => choice(
+      $.conditional_string_range,
       $.conditional_parenthesized_string_expression,
       $._string_reference,
       $.string,
@@ -1827,12 +1843,12 @@ module.exports = grammar({
       optional(field('arguments', $.arguments))
     ),
 
-    string_system_function: $ => seq(
+    string_system_function: $ => prec.right(seq(
       field('function', choice(
         ...STRING_SYSTEM_FUNCTIONS
       )),
       optional(field('arguments', $.arguments))
-    ),
+    )),
 
     numeric_function_assignment: $ => prec.right('assign',seq(
       field('left', $._numeric_function_identifier),
@@ -2029,13 +2045,6 @@ module.exports = grammar({
         "(",
         commaSep1($.numeric_expression),
         ")"
-      ),
-      repeat(
-        seq(
-          "(",
-          $.range,
-          ")"
-        )
       )
     ),
 
@@ -2059,16 +2068,9 @@ module.exports = grammar({
 
     string_name: $ => $.stringidentifier,
 
-    stringreference: $ => seq(
-      alias($.stringidentifier, $.string_name),
-      repeat(
-        seq(
-          "(",
-          $.range,
-          ")"
-        )
-      )
-    ),
+    stringreference: $ => prec.left(seq(
+      alias($.stringidentifier, $.string_name)
+    )),
 
     number_name: $ => $._numberidentifier,
 

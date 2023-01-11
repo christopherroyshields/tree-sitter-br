@@ -400,6 +400,10 @@
           "named": true
         },
         {
+          "type": "conditional_string_range",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -417,6 +421,25 @@
         },
         {
           "type": "template_string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "conditional_string_range",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "conditional_string_primary_expression",
+          "named": true
+        },
+        {
+          "type": "range",
           "named": true
         }
       ]
@@ -3351,6 +3374,10 @@
           "named": true
         },
         {
+          "type": "string_range",
+          "named": true
+        },
+        {
           "type": "stringelement",
           "named": true
         },
@@ -3360,6 +3387,25 @@
         },
         {
           "type": "template_string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string_range",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "range",
+          "named": true
+        },
+        {
+          "type": "string_primary_expression",
           "named": true
         }
       ]
@@ -3429,10 +3475,6 @@
           "named": true
         },
         {
-          "type": "range",
-          "named": true
-        },
-        {
           "type": "string_array_name",
           "named": true
         }
@@ -3444,13 +3486,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "range",
-          "named": true
-        },
         {
           "type": "string_name",
           "named": true

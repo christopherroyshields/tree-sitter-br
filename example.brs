@@ -1,1 +1,1 @@
-print Bell;
+do while (Index+=1)<=udim(mat Functions$)

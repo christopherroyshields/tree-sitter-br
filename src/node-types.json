@@ -46,7 +46,7 @@
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "conditional_expression",
           "named": true
         }
       ]
@@ -2578,7 +2578,7 @@
           "named": true
         },
         {
-          "type": "expression",
+          "type": "conditional_expression",
           "named": true
         }
       ]
@@ -2713,10 +2713,6 @@
         },
         {
           "type": "exit_statement",
-          "named": true
-        },
-        {
-          "type": "expression",
           "named": true
         },
         {

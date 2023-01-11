@@ -129,7 +129,6 @@ const FORCED_ASSIGNMENT_OPERATORS = [
   "-=",
   "*=",
   "/=",
-  "="
 ]
 
 const STATEMENTS = {
@@ -1608,16 +1607,16 @@ module.exports = grammar({
 
     select_case_statement: $ => seq(
       STATEMENTS.select,
-      $.expression,
+      $.conditional_expression,
       $.case_statement
     ),
 
     case_statement: $ => seq(
       STATEMENTS.case,
-      $.expression,
+      $.conditional_expression,
       repeat(seq(
         "#",
-        $.expression
+        $.conditional_expression
       ))
     ),
 
@@ -2074,14 +2073,14 @@ module.exports = grammar({
 
     numeric_forced_assignment_expression: $ => prec.right('assign', seq(
       field('left', $._numeric_reference),
-      choice(...FORCED_ASSIGNMENT_OPERATORS),
+      choice(...FORCED_ASSIGNMENT_OPERATORS, "="),
       field('right', $.numeric_expression)
     )),
 
     numeric_conditional_forced_assignment_expression: $ => prec.right('assign', seq(
       field('left', $._numeric_reference),
-      ":=",
-      field('right', $.numeric_expression)
+      choice(...FORCED_ASSIGNMENT_OPERATORS),
+      field('right', $.numeric_expression),
     )),
 
     string_forced_assignment_expression: $ => prec.right('assign', seq(

@@ -1,1 +1,1 @@
-input test$
+mat SupporterOut$(8-NameIndex+1:8)=SupporterName$(1:1)

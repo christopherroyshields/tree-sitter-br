@@ -1084,7 +1084,11 @@ module.exports = grammar({
           choice(
             seq(
               alias($.stringidentifier, $.string_array_name),
-              optional($.mat_range),
+              optional(seq(
+                "(",
+                $.mat_range,
+                ")",
+              )),
             ),
             seq(                  
               "(",

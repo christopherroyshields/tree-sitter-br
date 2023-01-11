@@ -182,6 +182,7 @@ const STATEMENTS = {
   select: /#[sS][eE][lL][eE][cC][tT]#/,
   case: /#[cC][aA][sS][eE]#/,
   case_else: /#[cC][aA][sS][eE][ \t]+[eE][lL][sS][eE]#/,
+  library: /[lL][iI][bB][rR][aA][rR][yY]/,
 }
 
 const KEYWORD = {
@@ -327,6 +328,7 @@ const getStatements = $ => [
   $.case_else_statement,
   $.select_case_statement,
   $.end_select_statement,
+  $.library_statement,
 ]
 
 module.exports = grammar({
@@ -473,6 +475,28 @@ module.exports = grammar({
     ),
 
     library_keyword: $ => KEYWORD.library,
+
+    library_statement: $ => seq(
+      STATEMENTS.library,
+      optional(
+        seq(
+          optional(seq(
+            KEYWORD.release,
+            ","
+          )),
+          $.string_expression
+        )
+      ),
+      ":",
+      optional(
+        commaSep1(
+          choice(
+            $.string_function_name,
+            $.numeric_function_name,
+          )
+        )
+      )
+    ),
 
     string_function_definition: $ => seq(
       $.string_function_name,

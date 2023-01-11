@@ -360,6 +360,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "end_select_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "library_statement"
                 }
               ]
             },
@@ -569,6 +573,108 @@
     "library_keyword": {
       "type": "PATTERN",
       "value": "[lL][iI][bB][rR][aA][rR][yY]"
+    },
+    "library_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[lL][iI][bB][rR][aA][rR][yY]"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "PATTERN",
+                          "value": "[rR][eE][lL][eE][aA][sS][eE]"
+                        },
+                        {
+                          "type": "STRING",
+                          "value": ","
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "string_expression"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "string_function_name"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "numeric_function_name"
+                    }
+                  ]
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "string_function_name"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "numeric_function_name"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
     },
     "string_function_definition": {
       "type": "SEQ",
@@ -2090,6 +2196,10 @@
                   },
                   {
                     "type": "SYMBOL",
+                    "name": "library_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
                     "name": "if_statement"
                   }
                 ]
@@ -2367,6 +2477,10 @@
                       {
                         "type": "SYMBOL",
                         "name": "end_select_statement"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "library_statement"
                       }
                     ]
                   },

@@ -1,1 +1,1 @@
-rewrite #Fscreenio, using Form$(Fscreenio),key=Fnkey$(Fscreenio,Screenio$(Si_Screencode)) : Mat Screenio$, Mat Screenio
+00210 LIBRARY "CURLIB":

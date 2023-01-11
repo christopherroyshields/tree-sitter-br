@@ -984,6 +984,34 @@
     }
   },
   {
+    "type": "library_keyword",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "library_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "numeric_function_name",
+          "named": true
+        },
+        {
+          "type": "string_expression",
+          "named": true
+        },
+        {
+          "type": "string_function_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "line",
     "named": true,
     "fields": {},
@@ -2729,6 +2757,10 @@
           "named": true
         },
         {
+          "type": "library_statement",
+          "named": true
+        },
+        {
           "type": "line_reference",
           "named": true
         },
@@ -2790,6 +2822,10 @@
         },
         {
           "type": "numeric_function_definition",
+          "named": true
+        },
+        {
+          "type": "numeric_function_name",
           "named": true
         },
         {
@@ -2906,6 +2942,10 @@
         },
         {
           "type": "string_function_definition",
+          "named": true
+        },
+        {
+          "type": "string_function_name",
           "named": true
         },
         {
@@ -3941,10 +3981,6 @@
   },
   {
     "type": "label_reference",
-    "named": true
-  },
-  {
-    "type": "library_keyword",
     "named": true
   },
   {

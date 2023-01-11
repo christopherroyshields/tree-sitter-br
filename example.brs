@@ -1,1 +1,1 @@
-00210 LIBRARY "CURLIB": eof ignore error ignore
+input test$

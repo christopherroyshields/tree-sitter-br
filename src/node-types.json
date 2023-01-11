@@ -898,6 +898,25 @@
     }
   },
   {
+    "type": "input_menu_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "channel",
+          "named": true
+        },
+        {
+          "type": "string_array_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "input_statement",
     "named": true,
     "fields": {},
@@ -2737,6 +2756,10 @@
           "named": true
         },
         {
+          "type": "input_menu_statement",
+          "named": true
+        },
+        {
           "type": "input_statement",
           "named": true
         },
@@ -2934,6 +2957,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "string_array_expression",
           "named": true
         },
         {

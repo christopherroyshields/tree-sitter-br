@@ -1,1 +1,1 @@
-if Fn42 And Trim$(Lwrc$(Convert$))(1:3)<>"pic" And Trim$(Lwrc$(Convert$))(1:3)<>"fmt" then
+print a$(1:2)

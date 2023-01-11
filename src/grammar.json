@@ -2126,6 +2126,18 @@
         {
           "type": "SYMBOL",
           "name": "string_expression"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "error_condition_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },

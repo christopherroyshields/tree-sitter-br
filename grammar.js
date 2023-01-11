@@ -723,7 +723,8 @@ module.exports = grammar({
     end_statement: $ => STATEMENTS.end,
     execute_statement: $ => seq(
       STATEMENTS.execute,
-      $.string_expression
+      $.string_expression,
+      optional($.error_condition_list)
     ),
     exit_do_statement: $ => STATEMENTS.exit_do,
     exit_statement: $ => seq(

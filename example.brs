@@ -1,1 +1,1 @@
-if trim$(1:2)<>"test" then
+execute "free "&FileName$ error Ignore

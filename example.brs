@@ -1,1 +1,1 @@
-execute "free "&FileName$ error Ignore
+if Newselection=>Udim(Lvsf_Fnfl$) then let Currentfield=1 else let Newselection+=1

@@ -1318,6 +1318,7 @@ module.exports = grammar({
       choice(
         $.string_array_expression,
         $.numeric_array_expression,
+        $.param_substitution,
       ),
       repeat(
         seq(
@@ -1325,6 +1326,7 @@ module.exports = grammar({
           choice(
             $.string_array_expression,
             $.numeric_array_expression,
+            $.param_substitution,
           ),
         )
       ),

@@ -31,6 +31,10 @@
           "named": true
         },
         {
+          "type": "param_substitution",
+          "named": true
+        },
+        {
           "type": "string_array_expression",
           "named": true
         }

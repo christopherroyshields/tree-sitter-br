@@ -1,1 +1,1 @@
-print #0, border "test": Oldwindowcaption$
+print #PowerSearch, fields ListSpec$&",=" : ([[SearchResults]])

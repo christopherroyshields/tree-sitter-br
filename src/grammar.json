@@ -4753,6 +4753,10 @@
             {
               "type": "SYMBOL",
               "name": "numeric_array_expression"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "param_substitution"
             }
           ]
         },
@@ -4775,6 +4779,10 @@
                   {
                     "type": "SYMBOL",
                     "name": "numeric_array_expression"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "param_substitution"
                   }
                 ]
               }

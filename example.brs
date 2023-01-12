@@ -1,1 +1,1 @@
-print #PowerSearch, fields ListSpec$&",=" : ([[SearchResults]])
+let Screenfile=Fnopen("screenio",Mat _Screenio$,Mat _Screenio,Mat Form$,1)

@@ -934,12 +934,12 @@ module.exports = grammar({
           $.stringarray,
         )
       )),
-      optional($.help_parameter),
       optional(seq(
         ",",
         KEYWORD.wait,
         $.numeric_expression
       )),
+      optional($.help_parameter),
       ":",
       $.variable_list,
       optional($.error_condition_list)

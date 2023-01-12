@@ -1,1 +1,1 @@
-07130       read #BCODE,release: error Ignore
+let INIT$="SM"(DUMMY:DUMMY)

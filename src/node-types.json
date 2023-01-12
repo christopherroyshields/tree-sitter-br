@@ -780,6 +780,10 @@
           {
             "type": "number",
             "named": true
+          },
+          {
+            "type": "numberreference",
+            "named": true
           }
         ]
       },

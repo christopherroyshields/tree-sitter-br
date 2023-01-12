@@ -788,7 +788,10 @@ module.exports = grammar({
         field("spec", $._pic),
         seq(
           field("spec", $.spec),
-          field("size", optional($.number))
+          field("size", optional(choice(
+            $.number,
+            $.numberreference
+          )))
         )
       )
     ),
@@ -1999,7 +2002,7 @@ module.exports = grammar({
           "''"
         ))),
         "'"
-      )
+      ),
     ),
 
     parenthesized_string_expression: $ => seq(

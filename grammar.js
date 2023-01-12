@@ -1340,7 +1340,10 @@ module.exports = grammar({
         seq(
           $.channel,
           choice(
-            seq(":",$._read_variable_list),
+            seq(
+              ":",
+              optional($._read_variable_list)
+            ),
             seq(
               ",",
               choice(
@@ -1350,7 +1353,7 @@ module.exports = grammar({
                 $.using_seq,
               ),
               ":",
-              $._read_variable_list
+              optional($._read_variable_list)
             )
           )
         )

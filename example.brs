@@ -1,1 +1,1 @@
-let Screenfile=Fnopen("screenio",Mat _Screenio$,Mat _Screenio,Mat Form$,1)
+07130       read #BCODE,release: error Ignore

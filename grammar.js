@@ -1607,16 +1607,16 @@ module.exports = grammar({
 
     select_case_statement: $ => seq(
       STATEMENTS.select,
-      $.conditional_expression,
+      $.expression,
       $.case_statement
     ),
 
     case_statement: $ => seq(
       STATEMENTS.case,
-      $.conditional_expression,
+      $.expression,
       repeat(seq(
         "#",
-        $.conditional_expression
+        $.expression
       ))
     ),
 

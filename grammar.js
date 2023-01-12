@@ -189,7 +189,7 @@ const KEYWORD = {
   alternate: /[aA][lL][tT][eE][rR][nN][aA][tT][eE]/,
   attr: /,[ \t]*[aA][tT][tT][rR][ \t]/,
   base: /[bB][aA][sS][eE]/,
-  border: /[bB][oO][rR][dD][eE][rR][ \t]/,
+  border: /[bB][oO][rR][dD][eE][rR]/,
   collate: /[cC][oO][lL][lL][aA][tT][eE]/,
   data: /[dD][aA][tT][aA]/,
   display: /[dD][iI][sS][pP][lL][aA][yY]/,
@@ -1271,7 +1271,10 @@ module.exports = grammar({
 
     print_border: $ => seq(
       KEYWORD.border,
-      $.string_expression,
+      optional(seq(
+        /[ \t]/,
+        $.string_expression
+      )),
       ":",
       $.string_expression
     ),

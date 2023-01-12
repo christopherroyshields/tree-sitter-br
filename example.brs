@@ -1,1 +1,1 @@
-do while (Index+=1)<=udim(mat Functions$)
+print #0, border "test": Oldwindowcaption$

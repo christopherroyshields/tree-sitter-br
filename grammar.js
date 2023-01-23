@@ -1993,7 +1993,12 @@ module.exports = grammar({
           /[^"\r\n]/,
           "\"\""
         ))),
-        '"'
+        '"',
+        repeat(seq(
+          "(",
+          $.range,
+          ")"
+        ))
       ),
       seq(
         "'",
@@ -2001,20 +2006,35 @@ module.exports = grammar({
           /[^'\r\n]/,
           "''"
         ))),
-        "'"
+        "'",
+        repeat(seq(
+          "(",
+          $.range,
+          ")"
+        ))
       ),
     ),
 
     parenthesized_string_expression: $ => seq(
       '(',
       $.string_expression,
-      ')'
+      ')',
+      repeat(seq(
+        "(",
+        $.range,
+        ")"
+      ))
     ),
 
     conditional_parenthesized_string_expression: $ => seq(
       '(',
       $.conditional_string_expression,
-      ')'
+      ')',
+      repeat(seq(
+        "(",
+        $.range,
+        ")"
+      ))
     ),
 
     parenthesized_numeric_expression: $ => seq(
@@ -2180,6 +2200,12 @@ module.exports = grammar({
       $.numeric_expression,
       ':',
       $.numeric_expression
+    ),
+
+    conditional_range: $ => seq(
+      $.conditional_expression,
+      ':',
+      $.conditional_expression
     ),
 
     stringidentifier: $ => /[a-zA-Z_]\w*\$/,

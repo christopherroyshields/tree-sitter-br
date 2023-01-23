@@ -1,1 +1,1 @@
-let INIT$="SM"(DUMMY:DUMMY)
+if INIT$=fntest$(1) then

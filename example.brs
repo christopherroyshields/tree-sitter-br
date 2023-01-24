@@ -1,1 +1,1 @@
-if INIT$=fntest$(1) then
+99428          do WHILE x$ = y$ & z$

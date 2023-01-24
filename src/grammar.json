@@ -6156,7 +6156,7 @@
     },
     "string_binary_expression": {
       "type": "PREC_LEFT",
-      "value": 0,
+      "value": "binary_plus",
       "content": {
         "type": "SEQ",
         "members": [
@@ -6189,7 +6189,7 @@
     },
     "conditional_string_binary_expression": {
       "type": "PREC_LEFT",
-      "value": 0,
+      "value": "binary_plus",
       "content": {
         "type": "SEQ",
         "members": [

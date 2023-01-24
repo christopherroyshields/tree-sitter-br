@@ -1713,13 +1713,13 @@ module.exports = grammar({
       field('right', $.string_expression)
     )),
 
-    string_binary_expression: $ => prec.left(seq(
+    string_binary_expression: $ => prec.left('binary_plus', seq(
       field('left', $.string_expression),
       field('operator', "&"),
       field('right', $.string_expression)
     )),
 
-    conditional_string_binary_expression: $ => prec.left(seq(
+    conditional_string_binary_expression: $ => prec.left('binary_plus', seq(
       field('left', $.conditional_string_expression),
       field('operator', "&"),
       field('right', $.conditional_string_expression)

@@ -663,14 +663,20 @@ module.exports = grammar({
       ))
     ),
 
-    error_condition_list: $ => repeat1(
-      seq(
+    error_condition_list: $ => seq(
+      $.error_condition,
+      choice(
+        $.line_reference,
+        $.label_reference
+      ),
+      repeat(seq(
+        optional(","),
         $.error_condition,
         choice(
           $.line_reference,
           $.label_reference
-        )
-      )
+        ),
+      ))
     ),
 
     error_condition: $ => choice(

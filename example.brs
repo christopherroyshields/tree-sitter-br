@@ -1,1 +1,1 @@
-56710    reread #FILENO: KEY$,ROWS,COLUMNS,ROW,COLUMN,DUMMY,CONTEXTS,MAT A$,MAT B$,MAT WORK$,MAT WORK$,MAT C$
+read #FILENO,using WORK$,search>=DUMMY$,release: F$(_FIND_UNIQUE) nokey _Exit_Find_Unique eof _Exit_Find_Unique

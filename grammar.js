@@ -228,6 +228,7 @@ const KEYWORD = {
   reserve: /[rR][eE][sS][eE][rR][vV][eE]/,
   same: /[sS][aA][mM][eE]/,
   search: /[sS][eE][aA][rR][cC][hH]/,
+  select: /[sS][eE][lL][eE][cC][tT]/,
   sequential: /[sS][eE][qQ][uU][eE][nN][tT][iI][aA][lL]/,
   status: /[sS][tT][aA][tT][uU][sS]/,
   step: /[sS][tT][eE][pP]/,
@@ -925,7 +926,10 @@ module.exports = grammar({
     ),
 
     _fields_seq: $ => seq(
-      KEYWORD.fields,
+      choice(
+        KEYWORD.fields,
+        KEYWORD.select
+      ),
       choice(
         $.stringarray,
         $.string_expression

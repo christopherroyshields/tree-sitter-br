@@ -1,1 +1,1 @@
-26135    reread #COMPANY,release: error Ignore
+rinput #121, select MAT _FLD_SPEC$,attr "N/R:RGB": MAT _OPTION$ 

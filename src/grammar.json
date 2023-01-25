@@ -3245,8 +3245,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "PATTERN",
-          "value": "[fF][iI][eE][lL][dD][sS][ \\t]"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[fF][iI][eE][lL][dD][sS][ \\t]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[sS][eE][lL][eE][cC][tT]"
+            }
+          ]
         },
         {
           "type": "CHOICE",

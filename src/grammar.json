@@ -156,8 +156,16 @@
                 ]
               },
               {
-                "type": "SYMBOL",
-                "name": "statement"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "statement"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
               }
             ]
           }

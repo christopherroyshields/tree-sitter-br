@@ -425,7 +425,7 @@ module.exports = grammar({
             $.continuation,
             $.statement_separator
           ),
-          $.statement,
+          optional($.statement),
         )
       )
     ),

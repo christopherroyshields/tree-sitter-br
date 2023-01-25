@@ -5347,8 +5347,16 @@
           "value": ":"
         },
         {
-          "type": "SYMBOL",
-          "name": "_read_variable_list"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_read_variable_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "CHOICE",

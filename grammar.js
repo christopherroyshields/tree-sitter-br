@@ -1477,7 +1477,7 @@ module.exports = grammar({
         )
       ),
       ":",
-      $._read_variable_list,
+      optional($._read_variable_list),
       optional($.error_condition_list)
     ),
 

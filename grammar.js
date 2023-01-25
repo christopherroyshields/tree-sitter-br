@@ -1471,7 +1471,7 @@ module.exports = grammar({
     reread_statement: $ => seq(
       STATEMENTS.reread,
       $.channel,
-      choice(
+      optional(
         seq(
           ",",
           choice(

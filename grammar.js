@@ -2241,15 +2241,10 @@ module.exports = grammar({
       const signed_integer = seq(optional(choice('-', '+')), decimal_digits)
       const exponent_part = seq(choice('e', 'E'), signed_integer)
 
-      const decimal_integer_literal = choice(
-        '0',
-        seq(optional('0'), /[1-9]/)
-      )
-
       const decimal_literal = choice(
-        seq(decimal_integer_literal, '.', optional(decimal_digits), optional(exponent_part)),
+        seq(decimal_digits, '.', optional(decimal_digits), optional(exponent_part)),
         seq('.', decimal_digits, optional(exponent_part)),
-        seq(decimal_integer_literal, exponent_part),
+        seq(decimal_digits, exponent_part),
         seq(decimal_digits),
       )
 

@@ -356,6 +356,8 @@ module.exports = grammar({
     ['assign', $.numeric_primary_expression],
     [$.string_expression, $.conditional_string_expression],
     ['assign','call'],
+    ['assign','logical_and'],
+    ['assign','logical_or'],
     [$.mat_size, $.mat_range],
     [$.udim, $.stringreference, $.number_name],
   ],

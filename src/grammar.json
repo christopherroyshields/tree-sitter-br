@@ -11225,6 +11225,26 @@
     ],
     [
       {
+        "type": "STRING",
+        "value": "assign"
+      },
+      {
+        "type": "STRING",
+        "value": "logical_and"
+      }
+    ],
+    [
+      {
+        "type": "STRING",
+        "value": "assign"
+      },
+      {
+        "type": "STRING",
+        "value": "logical_or"
+      }
+    ],
+    [
+      {
         "type": "SYMBOL",
         "name": "mat_size"
       },

@@ -1,1 +1,1 @@
-mat F=x+F(1:2)                    !Absolute value
+if DUMMY2:=1 or x$="" then

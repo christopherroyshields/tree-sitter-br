@@ -1044,12 +1044,40 @@ module.exports = grammar({
             "(",
             $.mat_range,
             ")"
+          )),
+          optional(seq(
+            choice(
+              "+",
+              "-",
+            ),
+            alias($._numberidentifier, $.number_array_name),
+            optional(seq(
+              "(",
+              $.mat_range,
+              ")"
+            )),
           ))
         ),
         seq(
           "(",
           $.numeric_expression,
-          ")"
+          ")",
+          optional(
+            seq(
+              choice(
+                "+",
+                "-",
+                "*",
+                "/"
+              ),
+              alias($._numberidentifier, $.number_array_name),
+              optional(seq(
+                "(",
+                $.mat_range,
+                ")"
+              )),
+            )
+          )
         ),
         seq(
           choice(...NUMERIC_ARRAY_SYSTEM_FUNCTIONS),

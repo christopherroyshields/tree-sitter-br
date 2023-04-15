@@ -1,1 +1,1 @@
-13515       let FNADDENDA(SWITCH,10.1)      !Final addenda
+mat F=x+F(1:2)                    !Absolute value

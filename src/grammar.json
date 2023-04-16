@@ -6009,8 +6009,16 @@
           "value": "[sS][tT][oO][pP]"
         },
         {
-          "type": "SYMBOL",
-          "name": "numeric_expression"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "numeric_expression"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },

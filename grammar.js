@@ -1644,7 +1644,7 @@ module.exports = grammar({
 
     stop_statement: $ => seq(
       STATEMENTS.stop,
-      $.numeric_expression,
+      optional($.numeric_expression),
     ),
 
     trace_statement: $ => seq(

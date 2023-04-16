@@ -1727,7 +1727,8 @@ module.exports = grammar({
     ),
 
     conditional_expression: $ => choice(
-      $.numeric_conditional_forced_assignment_expression,
+      $.conditional_numeric_function_assignment,
+      $.conditional_numeric_forced_assignment_expression,
       $.conditional_unary_expression,
       $.conditional_binary_expression,
       $.numeric_conditional_primary_expression
@@ -1943,8 +1944,8 @@ module.exports = grammar({
     ),
 
     string_function_assignment: $ => prec.right('assign',seq(
-      field('left', $._string_function_identifier),
-      "=",
+      field('left', $.string_function_name),
+      choice("=",":="),
       field('right', $.string_expression)
     )),
 
@@ -1970,21 +1971,27 @@ module.exports = grammar({
     ),
 
     numeric_function_assignment: $ => prec.right('assign',seq(
-      field('left', $._numeric_function_identifier),
-      "=",
+      field('left', $.numeric_function_name),
+      choice("=",":="),
+      field('right', $.numeric_expression)
+    )),
+
+    conditional_numeric_function_assignment: $ => prec.right('assign',seq(
+      field('left', $.numeric_function_name),
+      ":=",
       field('right', $.numeric_expression)
     )),
 
     numeric_user_function: $ => prec.left('call',seq(
       field('function', choice(
-        $._numeric_function_identifier
+        $.numeric_function_name
       )),
       optional(field('arguments', $.arguments))
     )),
 
     string_user_function: $ => prec.left('call', seq(
       field('function', choice(
-        $._string_function_identifier,
+        $.string_function_name,
       )),
       optional(field('arguments', $.arguments)),
       repeat(
@@ -2004,9 +2011,6 @@ module.exports = grammar({
       )),
       ")"
     ),
-
-    _string_function_identifier: $ => /[fF][nN]\w+\$/,
-    _numeric_function_identifier: $ => /[fF][nN]\w+/,
 
     template_string: $ => seq(
       '`',
@@ -2148,7 +2152,7 @@ module.exports = grammar({
       field('right', $.numeric_expression)
     )),
 
-    numeric_conditional_forced_assignment_expression: $ => prec.right('assign', seq(
+    conditional_numeric_forced_assignment_expression: $ => prec.right('assign', seq(
       field('left', $._numeric_reference),
       choice(...FORCED_ASSIGNMENT_OPERATORS),
       field('right', $.numeric_expression),

@@ -1,1 +1,1 @@
-if DUMMY2:=1 or x$="" then
+28458       if (FNVERIFY_RC:=FNCHECK_FRGHT_COMMENTS(MAT RC_DETAIL$,MAT RC_DETAIL))<>0 then !:

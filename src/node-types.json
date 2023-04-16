@@ -266,11 +266,15 @@
           "named": true
         },
         {
-          "type": "conditional_unary_expression",
+          "type": "conditional_numeric_forced_assignment_expression",
           "named": true
         },
         {
-          "type": "numeric_conditional_forced_assignment_expression",
+          "type": "conditional_numeric_function_assignment",
+          "named": true
+        },
+        {
+          "type": "conditional_unary_expression",
           "named": true
         },
         {
@@ -278,6 +282,62 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "conditional_numeric_forced_assignment_expression",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "numberelement",
+            "named": true
+          },
+          {
+            "type": "numberreference",
+            "named": true
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "numeric_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "conditional_numeric_function_assignment",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "numeric_function_name",
+            "named": true
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "numeric_expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1664,36 +1724,6 @@
     }
   },
   {
-    "type": "numeric_conditional_forced_assignment_expression",
-    "named": true,
-    "fields": {
-      "left": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "numberelement",
-            "named": true
-          },
-          {
-            "type": "numberreference",
-            "named": true
-          }
-        ]
-      },
-      "right": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "numeric_expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "numeric_conditional_primary_expression",
     "named": true,
     "fields": {},
@@ -1789,6 +1819,16 @@
     "type": "numeric_function_assignment",
     "named": true,
     "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "numeric_function_name",
+            "named": true
+          }
+        ]
+      },
       "right": {
         "multiple": false,
         "required": true,
@@ -1823,11 +1863,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "numeric_function_name",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "numeric_parameter",
@@ -1935,6 +1970,16 @@
         "types": [
           {
             "type": "arguments",
+            "named": true
+          }
+        ]
+      },
+      "function": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "numeric_function_name",
             "named": true
           }
         ]
@@ -3369,6 +3414,16 @@
     "type": "string_function_assignment",
     "named": true,
     "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_function_name",
+            "named": true
+          }
+        ]
+      },
       "right": {
         "multiple": false,
         "required": true,
@@ -3407,11 +3462,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "string_function_name",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "string_name",
@@ -3518,6 +3568,16 @@
         "types": [
           {
             "type": "arguments",
+            "named": true
+          }
+        ]
+      },
+      "function": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_function_name",
             "named": true
           }
         ]
@@ -4049,6 +4109,10 @@
     "named": true
   },
   {
+    "type": "numeric_function_name",
+    "named": true
+  },
+  {
     "type": "pause_statement",
     "named": true
   },
@@ -4066,6 +4130,10 @@
   },
   {
     "type": "statement_linput",
+    "named": true
+  },
+  {
+    "type": "string_function_name",
     "named": true
   },
   {

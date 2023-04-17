@@ -2392,10 +2392,6 @@
       "required": true,
       "types": [
         {
-          "type": "error_condition_list",
-          "named": true
-        },
-        {
           "type": "help_parameter",
           "named": true
         },
@@ -2439,10 +2435,14 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "channel",
+          "named": true
+        },
+        {
+          "type": "error_condition_list",
           "named": true
         },
         {

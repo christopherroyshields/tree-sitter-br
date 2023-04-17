@@ -5031,65 +5031,78 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "print_output"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "print_fields"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "print_border"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "print_using"
-            },
-            {
-              "type": "SEQ",
+              "type": "CHOICE",
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "channel"
+                  "name": "print_output"
                 },
                 {
-                  "type": "CHOICE",
+                  "type": "SYMBOL",
+                  "name": "print_fields"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "print_border"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "print_using"
+                },
+                {
+                  "type": "SEQ",
                   "members": [
                     {
-                      "type": "SEQ",
-                      "members": [
-                        {
-                          "type": "STRING",
-                          "value": ":"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "print_output"
-                        }
-                      ]
+                      "type": "SYMBOL",
+                      "name": "channel"
                     },
                     {
-                      "type": "SEQ",
+                      "type": "CHOICE",
                       "members": [
                         {
-                          "type": "STRING",
-                          "value": ","
-                        },
-                        {
-                          "type": "CHOICE",
+                          "type": "SEQ",
                           "members": [
                             {
-                              "type": "SYMBOL",
-                              "name": "print_fields"
+                              "type": "STRING",
+                              "value": ":"
                             },
                             {
-                              "type": "SYMBOL",
-                              "name": "print_border"
+                              "type": "CHOICE",
+                              "members": [
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "print_output"
+                                },
+                                {
+                                  "type": "BLANK"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "SEQ",
+                          "members": [
+                            {
+                              "type": "STRING",
+                              "value": ","
                             },
                             {
-                              "type": "SYMBOL",
-                              "name": "print_using"
+                              "type": "CHOICE",
+                              "members": [
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "print_fields"
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "print_border"
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "print_using"
+                                }
+                              ]
                             }
                           ]
                         }
@@ -5098,6 +5111,21 @@
                   ]
                 }
               ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "error_condition_list"
+            },
+            {
+              "type": "BLANK"
             }
           ]
         }
@@ -5214,18 +5242,6 @@
         {
           "type": "SYMBOL",
           "name": "print_output"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "error_condition_list"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
         }
       ]
     },

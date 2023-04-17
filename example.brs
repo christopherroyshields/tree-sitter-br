@@ -1,1 +1,1 @@
-79160       form SKIP 1,DUMMY*C 132,SKIP 0,C 132,SKIP 2
+print #FILENO: error _End_Form_Skip

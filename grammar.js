@@ -1390,7 +1390,7 @@ module.exports = grammar({
 
     print_statement: $ => seq(
       STATEMENTS.print,
-      choice(
+      optional(choice(
         $.print_output,
         $.print_fields,
         $.print_border,
@@ -1400,7 +1400,7 @@ module.exports = grammar({
           choice(
             seq(
               ":",
-              $.print_output
+              optional($.print_output)
             ),
             seq(
               ",",
@@ -1412,7 +1412,8 @@ module.exports = grammar({
             )
           )
         )
-      ),
+      )),
+      optional($.error_condition_list)
     ),
 
     print_using: $ => seq(
@@ -1446,8 +1447,7 @@ module.exports = grammar({
         $.help_parameter
       ),
       ":",
-      $.print_output,
-      optional($.error_condition_list)
+      $.print_output
     ),
 
     print_output: $ => seq(

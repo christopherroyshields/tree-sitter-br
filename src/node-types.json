@@ -2602,6 +2602,21 @@
     "fields": {}
   },
   {
+    "type": "release_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "numeric_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "rem_statement",
     "named": true,
     "fields": {}
@@ -3191,6 +3206,10 @@
         },
         {
           "type": "record_locking_rule",
+          "named": true
+        },
+        {
+          "type": "release_statement",
           "named": true
         },
         {

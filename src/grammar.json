@@ -376,6 +376,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "input_menu_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "release_statement"
                 }
               ]
             },
@@ -2815,6 +2819,10 @@
                   },
                   {
                     "type": "SYMBOL",
+                    "name": "release_statement"
+                  },
+                  {
+                    "type": "SYMBOL",
                     "name": "if_statement"
                   }
                 ]
@@ -3100,6 +3108,10 @@
                       {
                         "type": "SYMBOL",
                         "name": "input_menu_statement"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "release_statement"
                       }
                     ]
                   },
@@ -5523,6 +5535,27 @@
               "type": "BLANK"
             }
           ]
+        }
+      ]
+    },
+    "release_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[Rr][Ee][Ll][Ee][Aa][Ss][Ee]"
+        },
+        {
+          "type": "STRING",
+          "value": "#"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "numeric_expression"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
         }
       ]
     },

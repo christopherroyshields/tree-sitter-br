@@ -168,6 +168,7 @@ const STATEMENTS = {
   print: /[pP][rR][iI][nN][tT]/,
   randomize: /[rR][aA][nN][dD][oO][mM][iI][zZ][eE]/,
   read: /[rR][eE][aA][dD]/,
+  release: /[Rr][Ee][Ll][Ee][Aa][Ss][Ee]/,
   rem: /[rR][eE][mM]/,
   reread: /[rR][eE][rR][eE][aA][dD]/,
   restore: /[rR][eE][sS][tT][oO][rR][eE]/,
@@ -308,6 +309,7 @@ const getStatements = $ => [
   $.end_select_statement,
   $.library_statement,
   $.input_menu_statement,
+  $.release_statement
 ]
 
 module.exports = grammar({
@@ -1530,6 +1532,13 @@ module.exports = grammar({
         )
       ),
       optional($.error_condition_list)
+    ),
+
+    release_statement: $ => seq(
+      STATEMENTS.release,
+      "#",
+      $.numeric_expression,
+      ":"
     ),
 
     using_seq: $ => seq(

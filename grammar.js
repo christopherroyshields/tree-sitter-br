@@ -213,6 +213,7 @@ const KEYWORD = {
   menu: /[mM][eE][nN][uU]/,
   native: /[nN][aA][tT][iI][vV][eE]/,
   next: /[nN][eE][xX][tT]/,
+  nofiles: /[Nn][Oo][Ff][Ii][Ll][Ee][Ss]/,
   none: /[nN][oO][nN][eE]/,
   off: /[oO][fF][fF]/,
   on: /[oO][nN]/,
@@ -223,7 +224,6 @@ const KEYWORD = {
   prior: /[pP][rR][iI][oO][rR]/,
   rec: /[rR][eE][cC]/,
   relative: /[rR][eE][lL][aA][tT][iI][vV][eE]/,
-  release: /[rR][eE][lL][eE][aA][sS][eE]/,
   release: /[rR][eE][lL][eE][aA][sS][eE]/,
   reserve: /[rR][eE][sS][eE][rR][vV][eE]/,
   same: /[sS][aA][mM][eE]/,
@@ -459,13 +459,26 @@ module.exports = grammar({
     library_statement: $ => seq(
       STATEMENTS.library,
       optional(
-        seq(
-          optional(seq(
+        choice(
+          seq(
             KEYWORD.release,
-            ","
-          )),
-          $.string_expression
-        )
+            ",",
+            optional(
+              seq(
+                KEYWORD.nofiles,
+                ","
+              )
+            ),
+            $.string_expression
+          ),
+          seq(
+            KEYWORD.nofiles,
+            optional(seq(
+              ",",
+              $.string_expression
+            ))
+          )
+        ),
       ),
       ":",
       optional(

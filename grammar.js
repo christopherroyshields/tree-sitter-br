@@ -2404,7 +2404,7 @@ module.exports = grammar({
       ))
     },
 
-    unquoted_data: $ => /[^"'\n][^,\n]*/,
+    unquoted_data: $ => /[^"'\n\s][^,\n]*/,
 
   }
 });

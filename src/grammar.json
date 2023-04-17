@@ -11572,7 +11572,7 @@
     },
     "unquoted_data": {
       "type": "PATTERN",
-      "value": "[^\"'\\n][^,\\n]*"
+      "value": "[^\"'\\n\\s][^,\\n]*"
     }
   },
   "extras": [

@@ -242,33 +242,6 @@ const KEYWORD = {
   while: /[wW][hH][iI][lL][eE]/,
 }
 
-const FORMAT_SPECS = [
-  /[bB][lL]/,
-  /[bB][hH]/,
-  /[bB]/,
-  /[cC][cC]/,
-  /[cC][rR]/,
-  /[cC]/,
-  /[dD][hH]/,
-  /[dD][lL]/,
-  /[dD][tT]/,
-  /[dD]/,
-  /[gG][fF]/,
-  /[gG][zZ]/,
-  /[gG]/,
-  /[lL]/,
-  /[nN][zZ]/,
-  /[nN]/,
-  /[pP][oO][sS]/,
-  /[pP][dD]/,
-  /[pP]/,
-  /[sS][kK][iI][pP]/,
-  /[sS]/,
-  /[vV]/,
-  /[xX]/,
-  /[zZ][dD]/
-]
-
 const ERROR_CONDITION = [
   /[aA][tT][tT][nN]/,
   /[cC][oO][nN][vV]/,
@@ -364,8 +337,7 @@ module.exports = grammar({
 
   externals: $ => [
     $.eol,
-    $.comment,
-    $.multiplier
+    $.comment
   ],
 
   extras: $ => [
@@ -724,24 +696,179 @@ module.exports = grammar({
 
     chain_files: $ => token(prec(1,KEYWORD.files)),
 
+    string_spec: $ => choice(
+      /[Cc]/,
+      /[Cc][Cc]/,
+      /[Cc][Rr]/,
+      /[Cc][Uu]/,
+      /[Vv]/,
+      /[Vv][Ll]/,
+      /[Vv][Uu]/
+    ),
+
+    internal_spec: $ => choice(
+      /[Bb]/,
+      /[Bb][Ll]/,
+      /[Bb][Hh]/,
+      /[Pp][Dd]/,
+      /[Zp][Dd]/
+    ),
+
+    numeric_spec: $ => choice(
+      /[Gg]/,
+      /[Gg][Zz]/,
+      /[Nn]/,
+      /[Nn][Zz]/,
+    ),
+
+    floating_point_spec: $ => choice(
+      /[Dd]/,
+      /[Ss]/,
+      /[Ll]/,
+    ),
+
+    string_form_spec: $ => seq(
+      optional($.multi_spec),
+      $.string_spec,
+      optional($.int)
+    ),
+
+    internal_form_spec: $ => seq(
+      optional($.multi_spec),
+      $.internal_spec,
+      optional(
+        seq(
+          $.field_length,
+          optional($.fractional_length)
+        )
+      ),
+    ),
+
+    numeric_form_spec: $ => seq(
+      optional($.multi_spec),
+      $.numeric_spec,
+      optional(
+        seq(
+          $.field_length,
+          optional($.fractional_length)
+        )
+      ),
+    ),
+
+    floating_point_form_spec: $ => seq(
+      $.floating_point_spec
+    ),
+
+    field_length: $ => choice(
+      /\d+/,
+      $.number_name
+    ),
+
+    fractional_length: $ => seq(
+      ".",
+      choice(
+        token.immediate(/\d+/),
+        $.number_name
+      )
+    ),
+
+    pos_spec: $ => /[Pp][Oo][Ss]/,
+    pos_form_spec: $ => seq(
+      $.pos_spec,
+      choice(
+        $.int,
+        $.number_name
+      )
+    ),
+
+    skip_spec: $ => /[Ss][Kk][Ii][Pp]/,
+    skip_form_spec: $ => seq(
+      $.skip_spec,
+      optional(
+        choice(
+          $.int,
+          $.number_name
+        )
+      )
+    ),
+
+    x_spec: $ => /[Xx]/,
+    x_form_spec: $ => seq(
+      $.x_spec,
+      optional(
+        choice(
+          $.int,
+          $.number_name
+        )
+      )
+    ),
+
+    pic_spec: $ => /[pP][iI][cC]\([^)\n]*\)/,
+    pic_form_spec: $ => seq(
+      optional($.multi_spec),
+      $.pic_spec
+    ),
+
+    multi_spec: $ => seq(
+      choice(
+        alias($.string_spec,$.number_name),
+        alias($.internal_spec,$.number_name),
+        alias($.numeric_spec,$.number_name),
+        alias($.floating_point_spec,$.number_name),
+        alias($.pos_spec,$.number_name),
+        alias($.skip_spec,$.number_name),
+        alias($.x_spec,$.number_name),
+        $.number_name,
+        $.int
+      ),
+      "*"
+    ),
+
+    spec_group: $ => seq(
+      optional($.multi_spec),
+      "(",
+      commaSep1(
+        $.form_spec
+      ),
+      ")"
+    ),
+
+    form_spec: $ => choice(
+      $.internal_form_spec,
+      $.string_form_spec,
+      $.numeric_form_spec,
+      $.floating_point_form_spec,
+      $.skip_form_spec,
+      $.pos_form_spec,
+      $.x_form_spec,
+      $.literal_string_form_spec,
+      $.pic_form_spec
+    ),
+
+    literal_string_spec: $ => choice(
+      /"[^"\n]*"/,
+      /'[^'\n]*'/,
+      /`[^`\n]*`/,
+    ),
+
+    literal_string_form_spec: $ => seq(
+      optional($.multi_spec),
+      $.literal_string_spec
+    ),
+
     form_statement: $ => seq(
       STATEMENTS.form,
       commaSep1(
         choice(
-          $.formspec,
-          seq(
-            $.form_multiplier,
-            "(",
-            commaSep1($.formspec),
-            ")"
-          )
+          $.form_spec,
+          $.spec_group
         )
       )
     ),
 
     form_multiplier: $ => seq(
       choice(
-        alias($.multiplier, $.number_name),
+        $.number_name,
         $.int
       ),
       "*"
@@ -786,24 +913,6 @@ module.exports = grammar({
     ),
 
     int: $ => /\d+/,
-
-    _pic: $ => /[pP][iI][cC]\([^)\n]*\)/,
-
-    spec: $ => choice(...FORMAT_SPECS),
-
-    formspec: $ => seq(
-      optional($.form_multiplier),
-      choice(
-        field("spec", $._pic),
-        seq(
-          field("spec", $.spec),
-          field("size", optional(choice(
-            $.number,
-            $.numberreference
-          )))
-        )
-      )
-    ),
 
     for_statement: $ => seq(
       STATEMENTS.for,

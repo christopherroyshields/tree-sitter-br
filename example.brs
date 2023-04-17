@@ -1,1 +1,1 @@
-10 stop 1
+10 form 3*(test*b g. 1),2 * c 1, POS 10, SKIP 1, X TEST, "test", 'test', 2*`test`,2*PIC(Z##.##)

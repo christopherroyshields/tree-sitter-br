@@ -1,1 +1,1 @@
-14240             library release,nofiles,"inp\import_i": FNIMPORT
+14240             library "inp\import_i": FNIMPORT

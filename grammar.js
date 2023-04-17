@@ -477,7 +477,8 @@ module.exports = grammar({
               ",",
               $.string_expression
             ))
-          )
+          ),
+          $.string_expression
         ),
       ),
       ":",

@@ -3651,6 +3651,10 @@
           "named": true
         },
         {
+          "type": "number_name",
+          "named": true
+        },
+        {
           "type": "string_spec",
           "named": true
         }

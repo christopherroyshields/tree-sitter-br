@@ -730,7 +730,12 @@ module.exports = grammar({
     string_form_spec: $ => seq(
       optional($.multi_spec),
       $.string_spec,
-      optional($.int)
+      optional(
+        choice(
+          $.int,
+          $.number_name
+        )
+      )
     ),
 
     internal_form_spec: $ => seq(

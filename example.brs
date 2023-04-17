@@ -1,1 +1,1 @@
-10 form 3*(test*b g. 1),2 * c 1, POS 10, SKIP 1, X TEST, "test", 'test', 2*`test`,2*PIC(Z##.##)
+03110 Window_: form G 8,G 1,2*G 8,G 80,6*BH 2,ROWS*C COLUMNS,_FIELDS*G 30,_FIELDS*G 5,_FIELDS*G 1,_FIELDS*G 30

@@ -1600,11 +1600,7 @@ module.exports = grammar({
         KEYWORD.rec
       ),
       token.immediate("="), 
-      $.numeric_expression,
-      optional(seq(
-        ",",
-        $.record_locking_rule,
-      ))
+      $.numeric_expression
     ),
 
     key_search_seq: $ => seq(
@@ -1614,10 +1610,6 @@ module.exports = grammar({
       ),
       choice("=",">="), 
       $.string_expression,
-      optional(seq(
-        ",",
-        $.record_locking_rule,
-      ))
     ),
 
     record_locking_rule: $ => choice(
@@ -1689,9 +1681,14 @@ module.exports = grammar({
       optional(seq(
         ",",
         choice(
-          $._restore_record_selection,
-          $.record_locking_rule
+          $.restore_positional_parameter,
+          $.rec_pos_seq,
+          $.key_search_seq
         ),
+      )),
+      optional(seq(
+        ",",
+        $.record_locking_rule
       )),
       ":",
       optional($.error_condition_list)
@@ -1703,7 +1700,7 @@ module.exports = grammar({
       $.key_search_seq
     ),
 
-    restore_positional_parameter: $ => seq(
+    restore_positional_parameter: $ => 
       choice(
         KEYWORD.first,
         KEYWORD.last,
@@ -1711,13 +1708,6 @@ module.exports = grammar({
         KEYWORD.next,
         KEYWORD.same,
       ),
-      optional(seq(
-        ",",
-        choice(
-          $.record_locking_rule
-        )
-      ))
-    ),
 
     retry_statement: $ => STATEMENTS.retry,
     return_statement: $ => STATEMENTS.return,
@@ -1727,23 +1717,28 @@ module.exports = grammar({
       $.channel,
       optional(seq(
         ",",
+        $.write_using_seq,
+      )),
+      optional(seq(
+        ",",
         choice(
-          $.write_using_seq,
           $.rec_pos_seq,
-          $.write_key_seq,
-          $.record_locking_rule
+          $.key_search_seq
         )
-      ))
+      )),
+      optional(seq(
+        ",",
+        $.record_locking_rule
+      )),
+      ":",
+      commaSep1($.expression),
+      optional($.error_condition_list)
     ),
 
     write_key_seq: $ => seq(
       KEYWORD.key,
       "=", 
-      $.string_expression,
-      optional(seq(
-        ",",
-        $.record_locking_rule,
-      ))
+      $.string_expression
     ),
 
     write_statement: $ => seq(
@@ -1751,12 +1746,19 @@ module.exports = grammar({
       $.channel,
       optional(seq(
         ",",
-        choice(
-          $.write_using_seq,
-          $.rec_pos_seq,
-          $.record_locking_rule
-        )
-      ))
+        $.write_using_seq,
+      )),
+      optional(seq(
+        ",",
+        $.rec_pos_seq,
+      )),
+      optional(seq(
+        ",",
+        $.record_locking_rule
+      )),
+      ":",
+      commaSep1($.expression),
+      optional($.error_condition_list)
     ),
 
     write_using_seq: $ => seq(
@@ -1765,18 +1767,7 @@ module.exports = grammar({
         $.string_expression,
         $.line_reference,
         $.label_reference,
-      ),
-      optional(seq(
-        ",",
-        choice(
-          $.rec_pos_seq,
-          $.write_key_seq,
-          $.record_locking_rule
-        )
-      )),
-      ":",
-      commaSep1($.expression),
-      optional($.error_condition_list)
+      )
     ),
 
     stop_statement: $ => seq(

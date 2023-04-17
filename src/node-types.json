@@ -1107,13 +1107,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "record_locking_rule",
-          "named": true
-        },
         {
           "type": "string_expression",
           "named": true
@@ -2582,15 +2578,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
           "type": "numeric_expression",
-          "named": true
-        },
-        {
-          "type": "record_locking_rule",
           "named": true
         }
       ]
@@ -2771,17 +2763,7 @@
   {
     "type": "restore_positional_parameter",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "record_locking_rule",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "restore_statement",
@@ -2815,15 +2797,23 @@
           "named": true
         },
         {
+          "type": "error_condition_list",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "key_search_seq",
+          "named": true
+        },
+        {
           "type": "rec_pos_seq",
           "named": true
         },
         {
           "type": "record_locking_rule",
-          "named": true
-        },
-        {
-          "type": "write_key_seq",
           "named": true
         },
         {
@@ -3318,10 +3308,6 @@
         },
         {
           "type": "variable_list",
-          "named": true
-        },
-        {
-          "type": "write_key_seq",
           "named": true
         },
         {
@@ -4072,25 +4058,6 @@
     }
   },
   {
-    "type": "write_key_seq",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "record_locking_rule",
-          "named": true
-        },
-        {
-          "type": "string_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "write_statement",
     "named": true,
     "fields": {},
@@ -4100,6 +4067,14 @@
       "types": [
         {
           "type": "channel",
+          "named": true
+        },
+        {
+          "type": "error_condition_list",
+          "named": true
+        },
+        {
+          "type": "expression",
           "named": true
         },
         {
@@ -4122,17 +4097,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "error_condition_list",
-          "named": true
-        },
-        {
-          "type": "expression",
-          "named": true
-        },
         {
           "type": "label_reference",
           "named": true
@@ -4142,19 +4109,7 @@
           "named": true
         },
         {
-          "type": "rec_pos_seq",
-          "named": true
-        },
-        {
-          "type": "record_locking_rule",
-          "named": true
-        },
-        {
           "type": "string_expression",
-          "named": true
-        },
-        {
-          "type": "write_key_seq",
           "named": true
         }
       ]

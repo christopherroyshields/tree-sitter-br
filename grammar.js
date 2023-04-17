@@ -823,7 +823,7 @@ module.exports = grammar({
         alias($.pos_spec,$.number_name),
         alias($.skip_spec,$.number_name),
         alias($.x_spec,$.number_name),
-        $.number_name,
+        alias(/[a-zA-Z_]\w*/,$.number_name),
         $.int
       ),
       "*"

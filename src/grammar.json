@@ -2344,8 +2344,13 @@
               "value": "number_name"
             },
             {
-              "type": "SYMBOL",
-              "name": "number_name"
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[a-zA-Z_]\\w*"
+              },
+              "named": true,
+              "value": "number_name"
             },
             {
               "type": "SYMBOL",

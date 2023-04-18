@@ -1558,30 +1558,6 @@ module.exports = grammar({
       ":"
     ),
 
-    using_seq: $ => seq(
-      KEYWORD.using,
-      choice(
-        $.string_expression,
-        $.line_reference,
-        $.label_reference
-      ),
-      optional(seq(
-        ",",
-        choice(
-          $.record_locking_rule,
-          $._record_selection,
-          $.keyonly_seq,
-        ),
-      ))
-    ),
-
-    _record_selection: $ => choice(
-      $.positional_parameter,
-      $.rec_pos_seq,
-      $.key_search_seq,
-      $.link_seq,
-    ),
-
     link_seq: $ => seq(
       KEYWORD.link,
       token.immediate("="),

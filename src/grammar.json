@@ -5456,22 +5456,22 @@
                       "members": [
                         {
                           "type": "STRING",
-                          "value": ":"
+                          "value": ","
                         },
                         {
-                          "type": "CHOICE",
-                          "members": [
-                            {
-                              "type": "SYMBOL",
-                              "name": "_read_variable_list"
-                            },
-                            {
-                              "type": "BLANK"
-                            }
-                          ]
+                          "type": "SYMBOL",
+                          "name": "write_using_seq"
                         }
                       ]
                     },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
                     {
                       "type": "SEQ",
                       "members": [
@@ -5484,39 +5484,116 @@
                           "members": [
                             {
                               "type": "SYMBOL",
-                              "name": "record_locking_rule"
-                            },
-                            {
-                              "type": "SYMBOL",
-                              "name": "_record_selection"
-                            },
-                            {
-                              "type": "SYMBOL",
                               "name": "keyonly_seq"
                             },
                             {
                               "type": "SYMBOL",
-                              "name": "using_seq"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "STRING",
-                          "value": ":"
-                        },
-                        {
-                          "type": "CHOICE",
-                          "members": [
-                            {
-                              "type": "SYMBOL",
-                              "name": "_read_variable_list"
+                              "name": "record_locking_rule"
                             },
                             {
-                              "type": "BLANK"
+                              "type": "SEQ",
+                              "members": [
+                                {
+                                  "type": "CHOICE",
+                                  "members": [
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "rec_seq"
+                                    },
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "positional_parameter"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "CHOICE",
+                                  "members": [
+                                    {
+                                      "type": "SEQ",
+                                      "members": [
+                                        {
+                                          "type": "STRING",
+                                          "value": ","
+                                        },
+                                        {
+                                          "type": "CHOICE",
+                                          "members": [
+                                            {
+                                              "type": "SYMBOL",
+                                              "name": "keyonly_seq"
+                                            },
+                                            {
+                                              "type": "SYMBOL",
+                                              "name": "record_locking_rule"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "BLANK"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "SYMBOL",
+                              "name": "link_seq"
+                            },
+                            {
+                              "type": "SEQ",
+                              "members": [
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "key_search_seq"
+                                },
+                                {
+                                  "type": "CHOICE",
+                                  "members": [
+                                    {
+                                      "type": "SEQ",
+                                      "members": [
+                                        {
+                                          "type": "STRING",
+                                          "value": ","
+                                        },
+                                        {
+                                          "type": "SYMBOL",
+                                          "name": "record_locking_rule"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "BLANK"
+                                    }
+                                  ]
+                                }
+                              ]
                             }
                           ]
                         }
                       ]
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "STRING",
+                  "value": ":"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_read_variable_list"
+                    },
+                    {
+                      "type": "BLANK"
                     }
                   ]
                 }
@@ -5678,36 +5755,6 @@
               "type": "BLANK"
             }
           ]
-        }
-      ]
-    },
-    "positional_parameter": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "PATTERN",
-              "value": "[fF][iI][rR][sS][tT]"
-            },
-            {
-              "type": "PATTERN",
-              "value": "[lL][aA][sS][tT]"
-            },
-            {
-              "type": "PATTERN",
-              "value": "[pP][rR][iI][oO][rR]"
-            },
-            {
-              "type": "PATTERN",
-              "value": "[nN][eE][xX][tT]"
-            },
-            {
-              "type": "PATTERN",
-              "value": "[sS][aA][mM][eE]"
-            }
-          ]
         },
         {
           "type": "CHOICE",
@@ -5720,17 +5767,8 @@
                   "value": ","
                 },
                 {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "keyonly_seq"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "record_locking_rule"
-                    }
-                  ]
+                  "type": "SYMBOL",
+                  "name": "record_locking_rule"
                 }
               ]
             },
@@ -5741,9 +5779,59 @@
         }
       ]
     },
+    "positional_parameter": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[fF][iI][rR][sS][tT]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[lL][aA][sS][tT]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[pP][rR][iI][oO][rR]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[nN][eE][xX][tT]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[sS][aA][mM][eE]"
+        }
+      ]
+    },
     "keyonly_seq": {
       "type": "PATTERN",
       "value": "[kK][eE][yY][oO][nN][lL][yY]"
+    },
+    "rec_seq": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[rR][eE][cC]"
+            }
+          ]
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "="
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "numeric_expression"
+        }
+      ]
     },
     "rec_pos_seq": {
       "type": "SEQ",

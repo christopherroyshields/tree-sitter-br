@@ -1512,23 +1512,40 @@ module.exports = grammar({
         $._read_variable_list,
         seq(
           $.channel,
-          choice(
-            seq(
-              ":",
-              optional($._read_variable_list)
-            ),
-            seq(
-              ",",
-              choice(
-                $.record_locking_rule,
-                $._record_selection,
-                $.keyonly_seq,
-                $.using_seq,
+          optional(seq(
+            ",",
+            $.write_using_seq
+          )),
+          optional(seq(
+            ",",
+            choice(
+              $.keyonly_seq,
+              $.record_locking_rule,
+              seq(
+                choice(
+                  $.rec_seq,
+                  $.positional_parameter,
+                ),
+                optional(seq(
+                  ",",
+                  choice(
+                    $.keyonly_seq,
+                    $.record_locking_rule,
+                  )
+                ))
               ),
-              ":",
-              optional($._read_variable_list)
+              $.link_seq,
+              seq(
+                $.key_search_seq,
+                optional(seq(
+                  ",",
+                  $.record_locking_rule
+                ))
+              )
             )
-          )
+          )),
+          ":",
+          optional($._read_variable_list)
         )
       ),
       optional($.error_condition_list)
@@ -1572,27 +1589,30 @@ module.exports = grammar({
       optional(seq(
         ",",
         $.positional_parameter,
+      )),
+      optional(seq(
+        ",",
+        $.record_locking_rule,
       ))
     ),
 
-    positional_parameter: $ => seq(
-      choice(
-        KEYWORD.first,
-        KEYWORD.last,
-        KEYWORD.prior,
-        KEYWORD.next,
-        KEYWORD.same,
-      ),
-      optional(seq(
-        ",",
-        choice(
-          $.keyonly_seq,
-          $.record_locking_rule
-        )
-      ))
+    positional_parameter: $ => choice(
+      KEYWORD.first,
+      KEYWORD.last,
+      KEYWORD.prior,
+      KEYWORD.next,
+      KEYWORD.same,
     ),
 
     keyonly_seq: $ => KEYWORD.keyonly,
+
+    rec_seq: $ => seq(
+      choice(
+        KEYWORD.rec
+      ),
+      token.immediate("="), 
+      $.numeric_expression
+    ),
 
     rec_pos_seq: $ => seq(
       choice(

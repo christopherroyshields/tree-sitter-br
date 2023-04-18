@@ -4,8 +4,7 @@
 
 enum TokenType {
   EOL,
-  COMMENT,
-  MULTIPLIER
+  COMMENT
 };
 
 const char NEWLINE = '\n';
@@ -59,45 +58,13 @@ bool valid_char(TSLexer *lexer){
   return isValid;
 }
 
-bool consume_var(TSLexer *lexer){
-  lexer->advance(lexer, false);
-  lexer->mark_end(lexer);
-  
-  if (lexer->lookahead == '*'){
-    lexer->result_symbol = MULTIPLIER;
-    return true;
-  }
-
-  for (;;){
-    if (iswspace(lexer->lookahead)) break;
-    if (!valid_char(lexer)){
-      return false;
-    } else {
-      lexer->mark_end(lexer);
-      lexer->advance(lexer, false);
-    }
-  }
-  for (;;){
-    if (iswspace(lexer->lookahead)){
-      lexer->advance(lexer, true);
-    } else {
-      if (lexer->lookahead == '*'){
-        lexer->result_symbol = MULTIPLIER;
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }
-}
-
 bool tree_sitter_br_external_scanner_scan(
   void *payload,
   TSLexer *lexer,
   const bool *valid_symbols
 ) {
 
-  if (!(valid_symbols[EOL] || valid_symbols[COMMENT] || valid_symbols[MULTIPLIER])) return false;
+  if (!(valid_symbols[EOL] || valid_symbols[COMMENT])) return false;
 
   bool var_found = false;
   bool var_done = false;
@@ -126,15 +93,7 @@ bool tree_sitter_br_external_scanner_scan(
       }
     }
 
-    if (valid_symbols[MULTIPLIER]){
-      if (lexer->lookahead == '_' || (lexer->lookahead >= 'a' && lexer->lookahead <= 'z') || (lexer->lookahead >= 'A' && lexer->lookahead <= 'Z')){
-        bool found = false;
-        found = consume_var(lexer);
-        return found;
-      }
-    }
-
-    if (valid_symbols[EOL] || valid_symbols[COMMENT] || valid_symbols[MULTIPLIER]){
+    if (valid_symbols[EOL] || valid_symbols[COMMENT]){
       if (!iswspace(lexer->lookahead)) return false;
       lexer->advance(lexer, true);
     }

@@ -227,6 +227,7 @@ const KEYWORD = {
   relative: /[rR][eE][lL][aA][tT][iI][vV][eE]/,
   release: /[rR][eE][lL][eE][aA][sS][eE]/,
   reserve: /[rR][eE][sS][eE][rR][vV][eE]/,
+  retain: /[Rr][Ee][Tt][Aa][Ii][Nn]/,
   same: /[sS][aA][mM][eE]/,
   search: /[sS][eE][aA][rR][cC][hH]/,
   select: /[sS][eE][lL][eE][cC][tT]/,
@@ -1397,7 +1398,8 @@ module.exports = grammar({
               KEYWORD.alternate,
               KEYWORD.native,
             )
-          )
+          ),
+          KEYWORD.retain
         )
       )
     ),

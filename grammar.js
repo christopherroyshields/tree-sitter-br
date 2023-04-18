@@ -884,7 +884,8 @@ module.exports = grammar({
           $.form_spec,
           $.spec_group
         )
-      )
+      ),
+      optional(",")
     ),
 
     form_multiplier: $ => seq(
@@ -1468,24 +1469,44 @@ module.exports = grammar({
     ),
 
     print_output: $ => seq(
-      choice(
-        $.expression,
-        $.array_group
-      ),
-      repeat(
-        seq(
-          choice(
-            ",",
-            ";"
-          ),
+        repeat(choice(
+          ";",
+          ","
+        )),
+        choice(
+          $.expression,
+          $.array_group
+        ),
+        repeat(prec.right(seq(
+          repeat1(choice(
+            ";",
+            ","
+          )),
+          optional(
           choice(
             $.expression,
             $.array_group
-          )
-        )
-      ),
-      optional(";")
-    ),
+          )),
+        )))
+      )
+    ,
+    // print_output: $ => seq(
+    //   repeat(choice(
+    //     ";",
+    //     ","
+    //   )),
+    //   repeat1(
+    //   seq(
+    //     choice(
+    //       ",",
+    //       ";"
+    //     ),
+    //     optional(choice(
+    //       $.expression,
+    //       $.array_group
+    //     ))
+    //   )
+    // )),
 
     array_group: $ => seq(
       "(",

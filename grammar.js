@@ -53,7 +53,6 @@ const NUMERIC_SYSTEM_FUNCTIONS = [
   /[pP][rR][iI][nN][tT][eE][rR]_[lL][iI][sS][tT]/,
   /[pP][rR][oO][cC][iI][nN]/,
   /[rR][eE][cC]/,
-  /[rR][eE][mM]/,
   /[rR][lL][nN]/,
   /[rR][nN][dD]/,
   /[rR][oO][uU][nN][dD]/,
@@ -1626,9 +1625,12 @@ module.exports = grammar({
 
     randomize_statement: $ => STATEMENTS.randomize,
 
-    rem_statement: $ => seq(
+    rem_statement: $ => choice(
       STATEMENTS.rem,
-      /.*/
+      seq(
+        STATEMENTS.rem,
+        /[^(].*/
+      )
     ),
 
     reread_statement: $ => seq(
@@ -2075,11 +2077,18 @@ module.exports = grammar({
       field('right', $.string_expression)
     )),
 
-    numeric_system_function: $ => seq(
-      field('function', choice(
-        ...NUMERIC_SYSTEM_FUNCTIONS
-      )),
-      optional(field('arguments', $.arguments))
+    numeric_system_function: $ => choice(
+      seq(
+        field('function', /[rR][eE][mM]/),
+        field('arguments', $.arguments)
+      ),
+      seq(
+        field('function', choice(
+          ...NUMERIC_SYSTEM_FUNCTIONS
+        )),
+        optional(field('arguments', $.arguments))
+      )
+
     ),
 
     string_system_function: $ => seq(

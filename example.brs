@@ -1,1 +1,1 @@
-00010 READ #1,search>="",RELEASE:
+00010 REM         

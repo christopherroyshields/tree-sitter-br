@@ -2829,6 +2829,25 @@
     }
   },
   {
+    "type": "rinput_array_group",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "numberarray",
+          "named": true
+        },
+        {
+          "type": "stringarray",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "rinput_statement",
     "named": true,
     "fields": {},
@@ -2854,6 +2873,10 @@
         },
         {
           "type": "numeric_expression",
+          "named": true
+        },
+        {
+          "type": "rinput_array_group",
           "named": true
         },
         {
@@ -3292,6 +3315,10 @@
         },
         {
           "type": "rewrite_statement",
+          "named": true
+        },
+        {
+          "type": "rinput_array_group",
           "named": true
         },
         {

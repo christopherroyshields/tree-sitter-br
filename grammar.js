@@ -1016,11 +1016,25 @@ module.exports = grammar({
           )),
           $._fields_seq,
           commaSep1(
-            $.expression
+            choice(
+              $.expression,
+              $.rinput_array_group
+            )
           )
         )
       ),
       optional($.error_condition_list)
+    ),
+
+    rinput_array_group: $ => seq(
+      "(",
+      commaSep1(
+        choice(
+          $.stringarray,
+          $.numberarray
+        ),
+      ),
+      ")"
     ),
 
     input_statement: $ => seq(

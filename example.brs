@@ -1,1 +1,1 @@
-81200          rinput #WINDOW,fields MAT SPECW$,attr "R",help MAT H$: MAT F(1:3),MAT F$,F(4) conv _Input_Error
+81380          rinput #WINDOW,fields MAT SPECW$,attr "[R]",help MAT WHLP$: (MAT RQTY,MAT RDATE,MAT RFTYPE$,MAT RTTYPE$),BLP(FAB_B),BLP(RAW_B),BLP(FAB_DATE_B),BLP(RAW_DATE_B) conv _Input_Error

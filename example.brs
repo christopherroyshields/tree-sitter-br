@@ -1,1 +1,1 @@
-26100          rinput select"21,32,C;21,43,C",attr "R": "Cancel","Proceed"
+81200          rinput #WINDOW,fields MAT SPECW$,attr "R",help MAT H$: MAT F(1:3),MAT F$,F(4) conv _Input_Error

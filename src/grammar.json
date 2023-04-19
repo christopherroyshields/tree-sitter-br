@@ -3424,6 +3424,10 @@
                         {
                           "type": "SYMBOL",
                           "name": "channel"
+                        },
+                        {
+                          "type": "STRING",
+                          "value": ","
                         }
                       ]
                     },

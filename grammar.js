@@ -1011,7 +1011,8 @@ module.exports = grammar({
         ),
         seq(
           optional(seq(
-            $.channel
+            $.channel,
+            ","
           )),
           $._fields_seq,
           commaSep1(

@@ -2556,7 +2556,7 @@
           "named": true
         },
         {
-          "type": "rec_seq",
+          "type": "rec_pos_seq",
           "named": true
         },
         {
@@ -2584,21 +2584,6 @@
   },
   {
     "type": "rec_pos_seq",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "numeric_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "rec_seq",
     "named": true,
     "fields": {},
     "children": {
@@ -3290,10 +3275,6 @@
         },
         {
           "type": "rec_pos_seq",
-          "named": true
-        },
-        {
-          "type": "rec_seq",
           "named": true
         },
         {

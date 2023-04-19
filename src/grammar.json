@@ -5705,7 +5705,7 @@
                                   "members": [
                                     {
                                       "type": "SYMBOL",
-                                      "name": "rec_seq"
+                                      "name": "rec_pos_seq"
                                     },
                                     {
                                       "type": "SYMBOL",

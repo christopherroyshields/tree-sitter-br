@@ -1,1 +1,1 @@
-10 data ,,,a,,x asd  asd,
+01110       read #99,using 1120,pos=12+KEYS*4: KEYPOS(Z),KEYLEN(Z)

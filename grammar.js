@@ -1584,7 +1584,7 @@ module.exports = grammar({
               $.record_locking_rule,
               seq(
                 choice(
-                  $.rec_seq,
+                  $.rec_pos_seq,
                   $.positional_parameter,
                 ),
                 optional(seq(

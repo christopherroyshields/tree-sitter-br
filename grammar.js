@@ -1037,45 +1037,40 @@ module.exports = grammar({
       ")"
     ),
 
+    input_wait_param: $=> seq(
+      KEYWORD.wait,
+      $.numeric_expression,
+    ),
+
     input_statement: $ => seq(
       STATEMENTS.input,
       choice(
-        $._fields_seq,
+        seq(
+          optional(seq(
+            $.input_wait_param,
+            ":"
+          )),
+          $.variable_list,
+        ),
         seq(
           $.channel,
-          choice(
-            seq(
-              ":",
-              $.variable_list,
-              optional($.error_condition_list)
-            ),
-            seq(
-              ",",
-              choice(
-                seq(
-                  KEYWORD.wait,
-                  $.numeric_expression,
-                  ":",
-                  $.variable_list,
-                  optional($.error_condition_list)
-                ),
-                $._fields_seq
-              )
-            )
-          ),
-        ),
-        seq(
-          KEYWORD.wait,
-          $.numeric_expression,
+          optional(seq(
+            ",",
+            $.input_wait_param,
+          )),
           ":",
           $.variable_list,
-          optional($.error_condition_list)
         ),
         seq(
+          optional(seq(
+            $.channel,
+            ","
+          )),
+          $._fields_seq,
           $.variable_list,
-          optional($.error_condition_list)
-        )
-      )
+        ),
+      ),
+      optional($.error_condition_list)
     ),
 
     variable_list: $ => commaSep1(choice(

@@ -187,7 +187,7 @@ const STATEMENTS = {
 
 const KEYWORD = {
   alternate: /[aA][lL][tT][eE][rR][nN][aA][tT][eE]/,
-  attr: /,[ \t]*[aA][tT][tT][rR][ \t]/,
+  attr: /[aA][tT][tT][rR][ \t]/,
   base: /[bB][aA][sS][eE]/,
   border: /[bB][oO][rR][dD][eE][rR]/,
   collate: /[cC][oO][lL][lL][aA][tT][eE]/,
@@ -309,7 +309,8 @@ const getStatements = $ => [
   $.end_select_statement,
   $.library_statement,
   $.input_menu_statement,
-  $.release_statement
+  $.release_statement,
+  $.rinput_statement
 ]
 
 module.exports = grammar({
@@ -998,11 +999,31 @@ module.exports = grammar({
       )
     ),
 
-    input_statement: $ => seq(
+    rinput_statement: $ => seq(
+      STATEMENTS.rinput,
       choice(
-        STATEMENTS.input,
-        STATEMENTS.rinput
+        seq(
+          optional(seq(
+            $.channel,
+            ":"
+          )),
+          $._string_reference
+        ),
+        seq(
+          optional(seq(
+            $.channel
+          )),
+          $._fields_seq,
+          commaSep1(
+            $.expression
+          )
+        )
       ),
+      optional($.error_condition_list)
+    ),
+
+    input_statement: $ => seq(
+      STATEMENTS.input,
       choice(
         $._fields_seq,
         seq(
@@ -1074,6 +1095,7 @@ module.exports = grammar({
         $.string_expression
       ),
       optional(seq(
+        ",",
         KEYWORD.attr,
         choice(
           $.string_expression,
@@ -1087,8 +1109,6 @@ module.exports = grammar({
       )),
       optional($.help_parameter),
       ":",
-      $.variable_list,
-      optional($.error_condition_list)
     ),
 
     help_parameter: $ => seq(

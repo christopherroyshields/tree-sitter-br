@@ -1,1 +1,1 @@
-26414       print test;;x;;,,,
+26100          rinput select"21,32,C;21,43,C",attr "R": "Cancel","Proceed"

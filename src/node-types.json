@@ -1165,11 +1165,6 @@
     }
   },
   {
-    "type": "library_keyword",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "library_statement",
     "named": true,
     "fields": {},
@@ -4396,6 +4391,10 @@
   },
   {
     "type": "label",
+    "named": true
+  },
+  {
+    "type": "library_keyword",
     "named": true
   },
   {

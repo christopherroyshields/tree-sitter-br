@@ -208,7 +208,7 @@ const KEYWORD = {
   keyed: /[kK][eE][yY][eE][dD]/,
   keyonly: /[kK][eE][yY][oO][nN][lL][yY]/,
   last: /[lL][aA][sS][tT]/,
-  library: /[lL][iI][bB][rR][aA][rR][yY]/,
+  library: /[lL][iI][bB]\w*/,
   link: /[lL][iI][nN][kK]/,
   menu: /[mM][eE][nN][uU]/,
   native: /[nN][aA][tT][iI][vV][eE]/,

@@ -605,7 +605,7 @@
     },
     "library_keyword": {
       "type": "PATTERN",
-      "value": "[lL][iI][bB][rR][aA][rR][yY]"
+      "value": "[lL][iI][bB]\\w*"
     },
     "library_statement": {
       "type": "SEQ",

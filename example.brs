@@ -1,1 +1,1 @@
-01520          input wait=10: DUMMY$
+10 data ,,,a,,x asd  asd,

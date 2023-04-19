@@ -441,11 +441,20 @@ module.exports = grammar({
 
     data_statement: $ => seq(
       STATEMENTS.data,
-      commaSep1(choice(
+      optional(choice(
         $.unquoted_data,
         $.string,
         $.number
-      ))
+      )),
+      repeat(seq(
+        repeat1(","),
+        choice(
+          $.unquoted_data,
+          $.string,
+          $.number
+        )
+      )),
+      repeat(",")
     ),
 
     def_statement: $ => seq(

@@ -1,1 +1,1 @@
-open #(CSVFile:=fnGetFileNumber): "name="&CSVPath$&",recl=32000,new",display,output,error Ignore
+10 if N1_BLOCK$(5,LOOP) > NULL$ then,

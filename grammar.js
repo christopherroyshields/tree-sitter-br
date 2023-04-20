@@ -934,6 +934,7 @@ module.exports = grammar({
       STATEMENTS.if,
       $.conditional_expression,
       KEYWORD.then,
+      optional(","),
       optional(
         seq(
           alias(choice(

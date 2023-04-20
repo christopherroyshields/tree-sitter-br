@@ -1,1 +1,1 @@
-85192          if 1 then !: print x else !: if a = b then !: print x
+98678          else !: pause !: print x !: print x

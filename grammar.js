@@ -911,6 +911,10 @@ module.exports = grammar({
       optional(
         choice(
           $.comment,
+          choice(
+            ...getStatements($),
+            $.if_statement
+          ),
           seq(
             repeat1(
               seq(

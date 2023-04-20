@@ -966,10 +966,10 @@ module.exports = grammar({
       optional(","),
       optional(choice(
         $.comment,
-        choice(
+        seq(choice(
           ...getStatements($),
           $.else_statement
-        ),
+        ),optional($.else_statement),optional($.comment)),
         $.single_line_if,
         // prec(2,seq($.continuation,$.statement))
       )),

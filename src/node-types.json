@@ -4027,6 +4027,10 @@
       "required": true,
       "types": [
         {
+          "type": "numeric_expression",
+          "named": true
+        },
+        {
           "type": "string_expression",
           "named": true
         }

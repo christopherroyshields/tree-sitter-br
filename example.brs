@@ -1,1 +1,1 @@
-def libarary fnGenerateLayout(test)
+open #(CSVFile:=fnGetFileNumber): "name="&CSVPath$&",recl=32000,new",display,output,error Ignore

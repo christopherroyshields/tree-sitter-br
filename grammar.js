@@ -1419,6 +1419,7 @@ module.exports = grammar({
           ))
         )
       ),
+      optional(","),
       optional($.error_condition_list)
     ),
 
@@ -2221,7 +2222,10 @@ module.exports = grammar({
 
     template_substitution: $ => seq(
       '{{',
-      $.string_expression,
+      choice(
+        $.string_expression,
+        $.numeric_expression,
+      ),
       '}}'
     ),
 

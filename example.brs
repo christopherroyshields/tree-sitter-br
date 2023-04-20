@@ -1,1 +1,1 @@
-10 if N1_BLOCK$(5,LOOP) > NULL$ then,
+85192          if 1 then !: print x else !: if a = b then !: print x

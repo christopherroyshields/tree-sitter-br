@@ -412,12 +412,12 @@ module.exports = grammar({
       $.comment,
       seq(
         choice(
-          $.if_statement,
-          $.else_statement,
           ...getStatements($)
         ),
         optional($.comment)
-      )
+      ),
+      $.else_statement,
+      $.if_statement
     ),
 
     continue_statement: $ => STATEMENTS.continue,
@@ -906,15 +906,26 @@ module.exports = grammar({
       "*"
     ),
 
-    else_statement: $ => seq(
+    else_statement: $ => prec.right(seq(
       STATEMENTS.else,
       optional(
-        alias(choice(
-          ...getStatements($),
-          $.if_statement
-        ), $.statement)
-      )
-    ),
+        choice(
+          $.comment,
+          seq(
+            repeat1(
+              seq(
+                $.continuation,
+                choice(
+                  ...getStatements($),
+                  $.if_statement
+                ),
+                optional($.comment)
+              )
+            )
+          )
+        )
+      ),
+    )),
 
     end_def_statement: $ => STATEMENTS.end_def,
     end_if_statement: $ =>  STATEMENTS.end_if,
@@ -930,20 +941,44 @@ module.exports = grammar({
       optional($.error_condition_list)
     ),
 
-    if_statement: $ => seq(
+    single_line_if: $ => prec.right(seq(
+      repeat1(
+        seq(
+          $.continuation,
+          choice(
+            ...getStatements($),
+            $.else_statement
+          ),
+          optional($.comment)
+        )
+      ),
+      optional($.else_statement),
+    )),
+
+    if_statement: $ => prec.right(seq(
       STATEMENTS.if,
       $.conditional_expression,
       KEYWORD.then,
       optional(","),
-      optional(
-        seq(
-          alias(choice(
-            ...getStatements($)
-          ), $.statement),
-          optional($.else_statement)
-        )
-      )
-    ),
+      optional(choice(
+        $.comment,
+        choice(
+          ...getStatements($),
+          $.else_statement
+        ),
+        $.single_line_if,
+        // prec(2,seq($.continuation,$.statement))
+      )),
+        // optional(
+      //   seq(
+      //     optional($.continuation),
+      //     alias(choice(
+      //       ...getStatements($)
+      //     ), $.statement),
+      //     optional($.else_statement)
+      //   )
+      // )
+      )),
 
     int: $ => /\d+/,
 

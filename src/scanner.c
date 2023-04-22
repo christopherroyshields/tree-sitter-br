@@ -41,7 +41,7 @@ void consume_comment(TSLexer *lexer){
       } else {
         if (iswspace(lexer->lookahead)){
           lexer->advance(lexer, false);
-          lexer->mark_end(lexer);
+          // lexer->mark_end(lexer);
         } else {
           lexer->advance(lexer, false);
           lexer->mark_end(lexer);
@@ -88,6 +88,7 @@ bool tree_sitter_br_external_scanner_scan(
         if (lexer->lookahead != COLON){
           // lexer->mark_end(lexer);
           lexer->result_symbol = COMMENT;
+          lexer->mark_end(lexer);
           consume_comment(lexer);
           return true;
         }

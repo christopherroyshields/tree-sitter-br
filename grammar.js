@@ -933,7 +933,7 @@ module.exports = grammar({
       optional(
         choice(
           $.comment,
-          ...getStatements($),
+          seq(choice(...getStatements($)),optional($.comment)),
           $.if_statement,
           $.single_line_else
         )

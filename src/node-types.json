@@ -3505,6 +3505,10 @@
           "named": true
         },
         {
+          "type": "statement_separator",
+          "named": true
+        },
+        {
           "type": "stop_statement",
           "named": true
         },
@@ -3736,6 +3740,10 @@
         },
         {
           "type": "single_line_if_trailing_else",
+          "named": true
+        },
+        {
+          "type": "statement_separator",
           "named": true
         },
         {

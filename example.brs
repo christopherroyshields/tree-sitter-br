@@ -1,5 +1,1 @@
-20040          if NOT FNCHECK_SEG(MAX(DUMMY,_DUMMY),CURRENT_SEG,_SEGMENTS) then !:
-                  !          Let fnmakenote(mat note$,"Segment out of order -> "&seg$) !:
-                  !         Let fncreate_997(ack_997,3,"2") !: 
-                  else !: 
-                  print y
+85572             ELSE LET FNMAKE_LINE$=RPAD$(F$(CUSTOMER_PART_B),27)&RPAD$(F$(DEST_B),10)&RPAD$(F$(CUSTOMER_B),9)&RPAD$(F$(ORDER_B),8)&CNVRT$("G 9.2",F(ORDERED_B))&CNVRT$("G 11.PRICE_",F(UNIT_PRICE_B)) ! Search by customer part

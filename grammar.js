@@ -367,6 +367,12 @@ module.exports = grammar({
     line: $ => seq(
       optional($.line_number),
       optional($.label),
+      repeat(
+        choice(
+          $.continuation,
+          $.statement_separator
+        ),
+      ),
       choice(
         $._single_line_statement,
         $._multi_line_statement,
@@ -909,7 +915,10 @@ module.exports = grammar({
     single_line_else: $ => prec.right(seq(
       repeat1(
         seq(
-          $.continuation,
+          choice(
+            $.continuation,
+            $.statement_separator
+          ),
           choice(
             ...getStatements($),
             $.if_statement
@@ -958,7 +967,10 @@ module.exports = grammar({
     single_line_if: $ => prec.right(seq(
       repeat1(
         seq(
-          $.continuation,
+          choice(
+            $.continuation,
+            $.statement_separator
+          ),
           choice(
             seq(
               choice(

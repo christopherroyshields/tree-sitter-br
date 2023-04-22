@@ -1,1 +1,4 @@
-98678     if X < 0 then let X = LEN(VAR$) +1 + X ! test
+13340                IF _FUNCTION=1 THEN !:
+                     ELSE !:
+                     LET 1 ! test !:
+                     if 1 then print x

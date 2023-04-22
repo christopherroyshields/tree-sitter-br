@@ -906,27 +906,27 @@ module.exports = grammar({
       "*"
     ),
 
+    single_line_else: $ => prec.right(seq(
+      repeat1(
+        seq(
+          $.continuation,
+          choice(
+            ...getStatements($),
+            $.if_statement
+          ),
+          optional($.comment)
+        )
+      )
+    )),
+
     else_statement: $ => prec.right(seq(
       STATEMENTS.else,
       optional(
         choice(
           $.comment,
-          choice(
-            ...getStatements($),
-            $.if_statement
-          ),
-          seq(
-            repeat1(
-              seq(
-                $.continuation,
-                choice(
-                  ...getStatements($),
-                  $.if_statement
-                ),
-                optional($.comment)
-              )
-            )
-          )
+          ...getStatements($),
+          $.if_statement,
+          $.single_line_else
         )
       ),
     )),
@@ -945,18 +945,30 @@ module.exports = grammar({
       optional($.error_condition_list)
     ),
 
+    single_line_if_trailing_else: $ => prec.right(seq(
+      $.else_statement,
+      optional($.comment)
+    )),
+
+    single_line_else_with_cont: $ => prec.right(seq(
+      $.continuation,
+      $.else_statement
+    )),
+
     single_line_if: $ => prec.right(seq(
       repeat1(
         seq(
           $.continuation,
           choice(
             ...getStatements($),
-            $.else_statement
           ),
           optional($.comment)
         )
       ),
-      optional($.else_statement),
+      optional(choice(
+        $.single_line_if_trailing_else,
+        $.single_line_else_with_cont
+      ))
     )),
 
     if_statement: $ => prec.right(seq(
@@ -966,23 +978,21 @@ module.exports = grammar({
       optional(","),
       optional(choice(
         $.comment,
-        seq(choice(
+        seq(
+          choice(
           ...getStatements($),
-          $.else_statement
-        ),optional($.else_statement),optional($.comment)),
+        ),optional($.comment),
+          optional(choice(
+            $.single_line_if,
+            $.single_line_if_trailing_else,
+            $.single_line_else_with_cont
+          ))
+        ),
         $.single_line_if,
-        // prec(2,seq($.continuation,$.statement))
+        $.single_line_if_trailing_else,
+        $.single_line_else_with_cont
       )),
-        // optional(
-      //   seq(
-      //     optional($.continuation),
-      //     alias(choice(
-      //       ...getStatements($)
-      //     ), $.statement),
-      //     optional($.else_statement)
-      //   )
-      // )
-      )),
+    )),
 
     int: $ => /\d+/,
 

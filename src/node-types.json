@@ -667,7 +667,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
@@ -688,10 +688,6 @@
         },
         {
           "type": "comment",
-          "named": true
-        },
-        {
-          "type": "continuation",
           "named": true
         },
         {
@@ -856,6 +852,10 @@
         },
         {
           "type": "select_case_statement",
+          "named": true
+        },
+        {
+          "type": "single_line_else",
           "named": true
         },
         {
@@ -1233,10 +1233,6 @@
           "named": true
         },
         {
-          "type": "else_statement",
-          "named": true
-        },
-        {
           "type": "end_def_statement",
           "named": true
         },
@@ -1377,7 +1373,15 @@
           "named": true
         },
         {
+          "type": "single_line_else_with_cont",
+          "named": true
+        },
+        {
           "type": "single_line_if",
+          "named": true
+        },
+        {
+          "type": "single_line_if_trailing_else",
           "named": true
         },
         {
@@ -3305,7 +3309,7 @@
     }
   },
   {
-    "type": "single_line_if",
+    "type": "single_line_else",
     "named": true,
     "fields": {},
     "children": {
@@ -3357,7 +3361,233 @@
           "named": true
         },
         {
+          "type": "end_def_statement",
+          "named": true
+        },
+        {
+          "type": "end_if_statement",
+          "named": true
+        },
+        {
+          "type": "end_select_statement",
+          "named": true
+        },
+        {
+          "type": "end_statement",
+          "named": true
+        },
+        {
+          "type": "execute_statement",
+          "named": true
+        },
+        {
+          "type": "exit_do_statement",
+          "named": true
+        },
+        {
+          "type": "exit_statement",
+          "named": true
+        },
+        {
+          "type": "fnend_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "form_statement",
+          "named": true
+        },
+        {
+          "type": "gosub_statement",
+          "named": true
+        },
+        {
+          "type": "goto_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "input_menu_statement",
+          "named": true
+        },
+        {
+          "type": "input_statement",
+          "named": true
+        },
+        {
+          "type": "let_statement",
+          "named": true
+        },
+        {
+          "type": "library_statement",
+          "named": true
+        },
+        {
+          "type": "linput_statement",
+          "named": true
+        },
+        {
+          "type": "loop_statement",
+          "named": true
+        },
+        {
+          "type": "mat_statement",
+          "named": true
+        },
+        {
+          "type": "next_statement",
+          "named": true
+        },
+        {
+          "type": "on_statement",
+          "named": true
+        },
+        {
+          "type": "open_statement",
+          "named": true
+        },
+        {
+          "type": "pause_statement",
+          "named": true
+        },
+        {
+          "type": "print_statement",
+          "named": true
+        },
+        {
+          "type": "randomize_statement",
+          "named": true
+        },
+        {
+          "type": "read_statement",
+          "named": true
+        },
+        {
+          "type": "release_statement",
+          "named": true
+        },
+        {
+          "type": "rem_statement",
+          "named": true
+        },
+        {
+          "type": "reread_statement",
+          "named": true
+        },
+        {
+          "type": "restore_statement",
+          "named": true
+        },
+        {
+          "type": "retry_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "rewrite_statement",
+          "named": true
+        },
+        {
+          "type": "rinput_statement",
+          "named": true
+        },
+        {
+          "type": "select_case_statement",
+          "named": true
+        },
+        {
+          "type": "stop_statement",
+          "named": true
+        },
+        {
+          "type": "trace_statement",
+          "named": true
+        },
+        {
+          "type": "write_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "single_line_else_with_cont",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "continuation",
+          "named": true
+        },
+        {
           "type": "else_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "single_line_if",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "case_else_statement",
+          "named": true
+        },
+        {
+          "type": "case_statement",
+          "named": true
+        },
+        {
+          "type": "chain_statement",
+          "named": true
+        },
+        {
+          "type": "close_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "continuation",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "data_statement",
+          "named": true
+        },
+        {
+          "type": "def_statement",
+          "named": true
+        },
+        {
+          "type": "delete_statement",
+          "named": true
+        },
+        {
+          "type": "do_statement",
           "named": true
         },
         {
@@ -3501,6 +3731,14 @@
           "named": true
         },
         {
+          "type": "single_line_else_with_cont",
+          "named": true
+        },
+        {
+          "type": "single_line_if_trailing_else",
+          "named": true
+        },
+        {
           "type": "stop_statement",
           "named": true
         },
@@ -3510,6 +3748,25 @@
         },
         {
           "type": "write_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "single_line_if_trailing_else",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "else_statement",
           "named": true
         }
       ]

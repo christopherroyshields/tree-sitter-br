@@ -960,9 +960,14 @@ module.exports = grammar({
         seq(
           $.continuation,
           choice(
-            ...getStatements($),
-          ),
-          optional($.comment)
+            seq(
+              choice(
+                ...getStatements($),
+              ),
+              optional($.comment)
+            ),
+            $.comment
+          )
         )
       ),
       optional(choice(

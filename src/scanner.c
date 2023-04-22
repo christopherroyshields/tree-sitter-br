@@ -41,6 +41,7 @@ void consume_comment(TSLexer *lexer){
       } else {
         if (iswspace(lexer->lookahead)){
           lexer->advance(lexer, false);
+          lexer->mark_end(lexer);
         } else {
           lexer->advance(lexer, false);
           lexer->mark_end(lexer);

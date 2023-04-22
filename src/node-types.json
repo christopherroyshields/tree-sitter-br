@@ -3538,6 +3538,10 @@
         {
           "type": "else_statement",
           "named": true
+        },
+        {
+          "type": "statement_separator",
+          "named": true
         }
       ]
     }

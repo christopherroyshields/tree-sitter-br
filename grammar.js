@@ -960,7 +960,10 @@ module.exports = grammar({
     )),
 
     single_line_else_with_cont: $ => prec.right(seq(
-      $.continuation,
+      choice(
+        $.continuation,
+        $.statement_separator
+      ),
       $.else_statement
     )),
 

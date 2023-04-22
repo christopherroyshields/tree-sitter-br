@@ -3252,8 +3252,17 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "continuation"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "continuation"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "statement_separator"
+              }
+            ]
           },
           {
             "type": "SYMBOL",

@@ -563,11 +563,14 @@ module.exports = grammar({
       choice(
         $.string_parameter,
         $.numeric_parameter,
-        $.string_array_paramter,
+        $.string_array_parameter,
         $.number_array_parameter,
         $.param_substitution,
       ),
     ),
+
+    string_array_parameter: $ => alias($.string_array_name_mat, $.stringarray),
+    number_array_parameter: $ => alias($.number_array_name_mat, $.numberarray),
 
     param_substitution: $ => seq(
       "[[",
@@ -575,17 +578,10 @@ module.exports = grammar({
       "]]"
     ),
 
-    string_array_paramter: $ => seq(
-      $._mat, 
-      $.string_array_name
-    ),
-    
-    number_array_parameter: $ => $.number_array_name,
-
-    numeric_parameter: $ => $.number_name,
+    numeric_parameter: $ => $.numberreference,
 
     string_parameter: $ => seq(
-      $.string_name,
+      alias($.string_name, $.stringreference),
       optional(seq(
         '*',
         $.int
@@ -716,26 +712,21 @@ module.exports = grammar({
               $.chain_files,
               optional(seq(
                 ",",
-                commaSep1(
-                  choice(
-                    $.number_name,
-                    alias($.string_name, $.stringreference),
-                    seq($._mat, $.string_array_name),
-                    $.number_array_name,
-                  )
-                ),
+                $.chain_var_list,
               ))
             ),
-            commaSep1(
-              choice(
-                $.number_name,
-                alias($.string_name, $.stringreference),
-                seq($._mat, $.string_array_name),
-                $.number_array_name,
-              )
-            ),
+            $.chain_var_list,
           ),
         )
+      )
+    ),
+
+    chain_var_list: $ => commaSep1(
+      choice(
+        $.numberreference,
+        alias($.number_array_name_mat, $.numberarray),
+        alias($.string_name, $.stringreference),
+        alias($.string_array_name_mat, $.stringarray),
       )
     ),
 
@@ -2468,6 +2459,18 @@ module.exports = grammar({
       $.stringreference,
     ),
 
+    range: $ => seq(
+      $.numeric_expression,
+      ':',
+      $.numeric_expression
+    ),
+
+    conditional_range: $ => seq(
+      $.conditional_expression,
+      ':',
+      $.conditional_expression
+    ),
+
     numberelement: $ => seq(
       alias($._numberidentifier, $.number_array_name),
       seq(
@@ -2509,8 +2512,6 @@ module.exports = grammar({
       ")"
     ),
 
-    string_name: $ => field("name", $.stringidentifier),
-
     stringreference: $ => seq(
       field("name", $.stringidentifier),
       repeat(
@@ -2522,30 +2523,27 @@ module.exports = grammar({
       )
     ),
 
+    string_array_name_mat: $ => seq(
+      $._mat,
+      field('name', $.stringidentifier),
+    ),
+    
+    number_array_name_mat: $ => seq(
+      $._mat,
+      field('name', $.numberidentifier),
+    ),
+
+    string_name: $ => field("name", $.stringidentifier),
     number_name: $ => $.numberidentifier,
 
-    numberreference: $ => field("name", $.number_name),
-
-    range: $ => seq(
-      $.numeric_expression,
-      ':',
-      $.numeric_expression
-    ),
-
-    conditional_range: $ => seq(
-      $.conditional_expression,
-      ':',
-      $.conditional_expression
-    ),
+    numberreference: $ => field("name", $.numberidentifier),
 
     stringidentifier: $ => /[a-zA-Z_]\w*\$/,
 
-    number_array_name: $ => seq(
-      $._mat,
-      $._numberidentifier
-    ),
+    number_array_name: $ => field("name", $.numberidentifier),
 
     numberarray: $ => seq(
+      $._mat,
       $.number_array_name,
       optional($.dimension)
     ),

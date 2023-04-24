@@ -1,1 +1,1 @@
-print udim(JURIS)
+def fntest(mat f$, mat f, f$, f)

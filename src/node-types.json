@@ -1930,7 +1930,17 @@
   {
     "type": "number_array_name",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "numberidentifier",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "number_array_parameter",
@@ -1950,7 +1960,17 @@
   {
     "type": "number_name",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "numberidentifier",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "numberarray",
@@ -2004,6 +2024,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "numberidentifier",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "numberreference",
@@ -2509,11 +2534,19 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
           "type": "number_array_name",
+          "named": true
+        },
+        {
+          "type": "numeric_array_expression",
+          "named": true
+        },
+        {
+          "type": "numeric_expression",
           "named": true
         },
         {
@@ -4653,7 +4686,7 @@
       },
       "name": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "stringidentifier",
@@ -4672,10 +4705,6 @@
         },
         {
           "type": "dimension",
-          "named": true
-        },
-        {
-          "type": "stringidentifier",
           "named": true
         }
       ]

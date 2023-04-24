@@ -1,1 +1,1 @@
-dim a
+print udim(JURIS)

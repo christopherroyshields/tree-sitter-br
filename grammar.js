@@ -2205,9 +2205,14 @@ module.exports = grammar({
       "(",
       choice(
         $.string_array_expression,
-        alias($.string_array_name, $.stringarray),
-        alias($._numberidentifier, $.number_array_name),
+        alias($.string_name, $.stringarray),
+        $.numeric_array_expression,
+        alias($.number_name, $.number_array_name),
       ),
+      optional(seq(
+        ",",
+        $.numeric_expression
+      )),
       ")",
     ),
 
@@ -2517,7 +2522,7 @@ module.exports = grammar({
       )
     ),
 
-    number_name: $ => $._numberidentifier,
+    number_name: $ => $.numberidentifier,
 
     numberreference: $ => field("name", $.number_name),
 
@@ -2546,6 +2551,7 @@ module.exports = grammar({
     ),
 
     _numberidentifier: $ => token(prec(-1,/[a-zA-Z_]\w*/)),
+    numberidentifier: $ => token(prec(-1,/[a-zA-Z_]\w*/)),
 
     _mat: $ => /[mM][aA][tT][ \t]/,
 

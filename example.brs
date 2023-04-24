@@ -1,1 +1,1 @@
-for i=1 to udim(array)
+print test$(1)

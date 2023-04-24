@@ -2451,7 +2451,7 @@ module.exports = grammar({
     ),
 
     _string_reference: $ => choice(
-      $.stringelement,
+      alias($.stringelement, $.stringarray),
       $.stringreference,
     ),
 
@@ -2467,22 +2467,20 @@ module.exports = grammar({
       $.conditional_expression
     ),
 
+    element_subscript: $ => seq(
+      "(",
+      commaSep1($.numeric_expression),
+      ")"
+    ),
+
     numberelement: $ => seq(
       alias($.numberreference, $.numberarray),
-      seq(
-        "(",
-        commaSep1($.numeric_expression),
-        ")"
-      )
+      $.element_subscript,
     ),
 
     stringelement: $ => seq(
       field("name", $.stringidentifier),
-      seq(
-        "(",
-        commaSep1($.numeric_expression),
-        ")"
-      ),
+      $.element_subscript,
       repeat(
         seq(
           "(",

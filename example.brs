@@ -1,1 +1,1 @@
-def fntest(mat f$, mat f, f$, f)
+for i=1 to udim(array)

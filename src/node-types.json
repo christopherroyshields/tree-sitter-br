@@ -1008,10 +1008,14 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "number_name",
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "numberreference",
           "named": true
         }
       ]
@@ -1046,7 +1050,7 @@
       "required": true,
       "types": [
         {
-          "type": "number_name",
+          "type": "numberreference",
           "named": true
         },
         {
@@ -1131,7 +1135,7 @@
       "required": false,
       "types": [
         {
-          "type": "number_name",
+          "type": "numberreference",
           "named": true
         }
       ]
@@ -1559,11 +1563,6 @@
     }
   },
   {
-    "type": "label_reference",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "let_statement",
     "named": true,
     "fields": {},
@@ -1786,7 +1785,7 @@
           "named": true
         },
         {
-          "type": "number_array_name",
+          "type": "numberarray",
           "named": true
         },
         {
@@ -1794,7 +1793,7 @@
           "named": true
         },
         {
-          "type": "string_array_name",
+          "type": "stringarray",
           "named": true
         }
       ]
@@ -1821,7 +1820,7 @@
           "named": true
         },
         {
-          "type": "number_array_name",
+          "type": "numberarray",
           "named": true
         }
       ]
@@ -1893,11 +1892,11 @@
           "named": true
         },
         {
-          "type": "string_array_name",
+          "type": "string_expression",
           "named": true
         },
         {
-          "type": "string_expression",
+          "type": "stringarray",
           "named": true
         }
       ]
@@ -1916,7 +1915,7 @@
           "named": true
         },
         {
-          "type": "number_name",
+          "type": "numberreference",
           "named": true
         }
       ]
@@ -1936,33 +1935,7 @@
       "required": true,
       "types": [
         {
-          "type": "number_name",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "number_array_name",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "numberidentifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "numberidentifier",
+          "type": "numberreference",
           "named": true
         }
       ]
@@ -1984,32 +1957,13 @@
     }
   },
   {
-    "type": "number_name",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "numberidentifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "numberarray",
     "named": true,
     "fields": {
       "name": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
-          {
-            "type": "number_name",
-            "named": true
-          },
           {
             "type": "numberidentifier",
             "named": true
@@ -2018,7 +1972,7 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
@@ -2027,10 +1981,6 @@
         },
         {
           "type": "dimension",
-          "named": true
-        },
-        {
-          "type": "number_array_name",
           "named": true
         }
       ]
@@ -2045,7 +1995,7 @@
       "required": true,
       "types": [
         {
-          "type": "number_array_name",
+          "type": "numberarray",
           "named": true
         },
         {
@@ -2068,10 +2018,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "number_name",
-            "named": true
-          },
           {
             "type": "numberidentifier",
             "named": true
@@ -2572,7 +2518,7 @@
       "required": false,
       "types": [
         {
-          "type": "number_array_name",
+          "type": "numberarray",
           "named": true
         },
         {
@@ -2857,7 +2803,7 @@
           "named": true
         },
         {
-          "type": "number_name",
+          "type": "numberreference",
           "named": true
         },
         {
@@ -3909,7 +3855,7 @@
           "named": true
         },
         {
-          "type": "number_name",
+          "type": "numberreference",
           "named": true
         },
         {
@@ -4489,7 +4435,7 @@
           "named": true
         },
         {
-          "type": "number_name",
+          "type": "numberreference",
           "named": true
         },
         {
@@ -4924,7 +4870,7 @@
           "named": true
         },
         {
-          "type": "number_name",
+          "type": "numberreference",
           "named": true
         },
         {
@@ -5155,6 +5101,10 @@
     "named": true
   },
   {
+    "type": "label_reference",
+    "named": true
+  },
+  {
     "type": "library_keyword",
     "named": true
   },
@@ -5200,10 +5150,6 @@
   },
   {
     "type": "statement_linput",
-    "named": true
-  },
-  {
-    "type": "string_array_name",
     "named": true
   },
   {

@@ -1382,7 +1382,7 @@
       "name": "name",
       "content": {
         "type": "SYMBOL",
-        "name": "number_name"
+        "name": "numberidentifier"
       }
     },
     "dim_numeric_array": {
@@ -1393,7 +1393,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "number_name"
+            "name": "numberidentifier"
           }
         },
         {
@@ -1992,7 +1992,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "number_name"
+                  "name": "numberreference"
                 }
               ]
             },
@@ -2116,12 +2116,12 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "PATTERN",
-          "value": "\\d+"
+          "type": "SYMBOL",
+          "name": "int"
         },
         {
           "type": "SYMBOL",
-          "name": "number_name"
+          "name": "numberreference"
         }
       ]
     },
@@ -2144,7 +2144,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "number_name"
+              "name": "numberreference"
             }
           ]
         }
@@ -2170,7 +2170,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "number_name"
+              "name": "numberreference"
             }
           ]
         }
@@ -2199,7 +2199,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "number_name"
+                  "name": "numberreference"
                 }
               ]
             },
@@ -2233,7 +2233,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "number_name"
+                  "name": "numberreference"
                 }
               ]
             },
@@ -2279,73 +2279,10 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "string_spec"
+                "name": "multi_spec_var_name"
               },
               "named": true,
-              "value": "number_name"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "internal_spec"
-              },
-              "named": true,
-              "value": "number_name"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "numeric_spec"
-              },
-              "named": true,
-              "value": "number_name"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "floating_point_spec"
-              },
-              "named": true,
-              "value": "number_name"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "pos_spec"
-              },
-              "named": true,
-              "value": "number_name"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "skip_spec"
-              },
-              "named": true,
-              "value": "number_name"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "x_spec"
-              },
-              "named": true,
-              "value": "number_name"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "PATTERN",
-                "value": "[a-zA-Z_]\\w*"
-              },
-              "named": true,
-              "value": "number_name"
+              "value": "numberreference"
             },
             {
               "type": "SYMBOL",
@@ -2358,6 +2295,82 @@
           "value": "*"
         }
       ]
+    },
+    "multi_spec_var_name": {
+      "type": "FIELD",
+      "name": "name",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "string_spec"
+            },
+            "named": true,
+            "value": "numberidentifier"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "internal_spec"
+            },
+            "named": true,
+            "value": "numberidentifier"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "numeric_spec"
+            },
+            "named": true,
+            "value": "numberidentifier"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "floating_point_spec"
+            },
+            "named": true,
+            "value": "numberidentifier"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "pos_spec"
+            },
+            "named": true,
+            "value": "numberidentifier"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "skip_spec"
+            },
+            "named": true,
+            "value": "numberidentifier"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "x_spec"
+            },
+            "named": true,
+            "value": "numberidentifier"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "numberidentifier"
+          }
+        ]
+      }
     },
     "spec_group": {
       "type": "SEQ",
@@ -2549,28 +2562,6 @@
               "type": "BLANK"
             }
           ]
-        }
-      ]
-    },
-    "form_multiplier": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "number_name"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "int"
-            }
-          ]
-        },
-        {
-          "type": "STRING",
-          "value": "*"
         }
       ]
     },
@@ -3770,7 +3761,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "number_name"
+          "name": "numberreference"
         },
         {
           "type": "STRING",
@@ -4803,10 +4794,10 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "_numberidentifier"
+            "name": "numberreference"
           },
           "named": true,
-          "value": "number_array_name"
+          "value": "numberarray"
         },
         {
           "type": "CHOICE",
@@ -4873,10 +4864,10 @@
                   "type": "ALIAS",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "_numberidentifier"
+                    "name": "numberreference"
                   },
                   "named": true,
-                  "value": "number_array_name"
+                  "value": "numberarray"
                 },
                 {
                   "type": "CHOICE",
@@ -4926,10 +4917,10 @@
                           "type": "ALIAS",
                           "content": {
                             "type": "SYMBOL",
-                            "name": "_numberidentifier"
+                            "name": "numberreference"
                           },
                           "named": true,
-                          "value": "number_array_name"
+                          "value": "numberarray"
                         },
                         {
                           "type": "CHOICE",
@@ -5011,10 +5002,10 @@
                           "type": "ALIAS",
                           "content": {
                             "type": "SYMBOL",
-                            "name": "_numberidentifier"
+                            "name": "numberreference"
                           },
                           "named": true,
-                          "value": "number_array_name"
+                          "value": "numberarray"
                         },
                         {
                           "type": "CHOICE",
@@ -5077,19 +5068,19 @@
                       "type": "ALIAS",
                       "content": {
                         "type": "SYMBOL",
-                        "name": "_numberidentifier"
+                        "name": "numberreference"
                       },
                       "named": true,
-                      "value": "number_array_name"
+                      "value": "numberarray"
                     },
                     {
                       "type": "ALIAS",
                       "content": {
                         "type": "SYMBOL",
-                        "name": "stringidentifier"
+                        "name": "string_name"
                       },
                       "named": true,
-                      "value": "string_array_name"
+                      "value": "stringarray"
                     }
                   ]
                 },
@@ -5165,10 +5156,10 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "stringidentifier"
+            "name": "string_name"
           },
           "named": true,
-          "value": "string_array_name"
+          "value": "stringarray"
         },
         {
           "type": "CHOICE",
@@ -5224,10 +5215,10 @@
                           "type": "ALIAS",
                           "content": {
                             "type": "SYMBOL",
-                            "name": "stringidentifier"
+                            "name": "string_name"
                           },
                           "named": true,
-                          "value": "string_array_name"
+                          "value": "stringarray"
                         },
                         {
                           "type": "CHOICE",
@@ -5349,7 +5340,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "number_name"
+          "name": "numberreference"
         }
       ]
     },
@@ -10209,10 +10200,10 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "number_name"
+                "name": "numberreference"
               },
               "named": true,
-              "value": "number_array_name"
+              "value": "numberarray"
             }
           ]
         },
@@ -11773,10 +11764,10 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "_numberidentifier"
+            "name": "numberreference"
           },
           "named": true,
-          "value": "number_array_name"
+          "value": "numberarray"
         },
         {
           "type": "SEQ",
@@ -11885,34 +11876,6 @@
                 "value": ")"
               }
             ]
-          }
-        }
-      ]
-    },
-    "string_array_name": {
-      "type": "SYMBOL",
-      "name": "stringidentifier"
-    },
-    "stringarray": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_mat"
-        },
-        {
-          "type": "FIELD",
-          "name": "name",
-          "content": {
-            "type": "SYMBOL",
-            "name": "stringidentifier"
-          }
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "dimension"
           }
         }
       ]
@@ -12030,10 +11993,6 @@
         "name": "stringidentifier"
       }
     },
-    "number_name": {
-      "type": "SYMBOL",
-      "name": "numberidentifier"
-    },
     "numberreference": {
       "type": "FIELD",
       "name": "name",
@@ -12046,13 +12005,29 @@
       "type": "PATTERN",
       "value": "[a-zA-Z_]\\w*\\$"
     },
-    "number_array_name": {
-      "type": "FIELD",
-      "name": "name",
-      "content": {
-        "type": "SYMBOL",
-        "name": "numberidentifier"
-      }
+    "stringarray": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_mat"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "stringidentifier"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "dimension"
+          }
+        }
+      ]
     },
     "numberarray": {
       "type": "SEQ",
@@ -12062,8 +12037,12 @@
           "name": "_mat"
         },
         {
-          "type": "SYMBOL",
-          "name": "number_array_name"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "numberidentifier"
+          }
         },
         {
           "type": "CHOICE",
@@ -12707,7 +12686,7 @@
       },
       {
         "type": "SYMBOL",
-        "name": "number_name"
+        "name": "numberreference"
       }
     ]
   ],

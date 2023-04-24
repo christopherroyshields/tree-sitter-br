@@ -85,7 +85,7 @@
           "named": true
         },
         {
-          "type": "string_name",
+          "type": "stringreference",
           "named": true
         }
       ]
@@ -606,6 +606,21 @@
     }
   },
   {
+    "type": "dim_array_size",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "int",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "dim_statement",
     "named": true,
     "fields": {},
@@ -614,19 +629,19 @@
       "required": true,
       "types": [
         {
-          "type": "number_array_name",
+          "type": "numberarray",
           "named": true
         },
         {
-          "type": "number_name",
+          "type": "numberreference",
           "named": true
         },
         {
-          "type": "string_array_name",
+          "type": "stringarray",
           "named": true
         },
         {
-          "type": "string_name",
+          "type": "stringreference",
           "named": true
         }
       ]
@@ -1940,11 +1955,26 @@
   {
     "type": "numberarray",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "number_name",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "dim_array_size",
+          "named": true
+        },
         {
           "type": "dimension",
           "named": true
@@ -1978,16 +2008,17 @@
   {
     "type": "numberreference",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "number_name",
-          "named": true
-        }
-      ]
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number_name",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2239,10 +2270,6 @@
         {
           "type": "numeric_user_function",
           "named": true
-        },
-        {
-          "type": "udim",
-          "named": true
         }
       ]
     }
@@ -2480,6 +2507,24 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "number_array_name",
+          "named": true
+        },
+        {
+          "type": "string_array_expression",
+          "named": true
+        },
+        {
+          "type": "stringarray",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -4458,16 +4503,17 @@
   {
     "type": "string_name",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "stringidentifier",
-          "named": true
-        }
-      ]
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "stringidentifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -4594,17 +4640,42 @@
   {
     "type": "stringarray",
     "named": true,
-    "fields": {},
+    "fields": {
+      "length": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "int",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "stringidentifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
+        {
+          "type": "dim_array_size",
+          "named": true
+        },
         {
           "type": "dimension",
           "named": true
         },
         {
-          "type": "string_array_name",
+          "type": "stringidentifier",
           "named": true
         }
       ]
@@ -4613,7 +4684,18 @@
   {
     "type": "stringelement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "stringidentifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -4625,10 +4707,6 @@
         {
           "type": "range",
           "named": true
-        },
-        {
-          "type": "string_array_name",
-          "named": true
         }
       ]
     }
@@ -4636,17 +4714,34 @@
   {
     "type": "stringreference",
     "named": true,
-    "fields": {},
+    "fields": {
+      "length": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "int",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "stringidentifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "range",
-          "named": true
-        },
-        {
-          "type": "string_name",
           "named": true
         }
       ]
@@ -4690,25 +4785,6 @@
     "type": "trace_statement",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "udim",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "number_array_name",
-          "named": true
-        },
-        {
-          "type": "string_array_name",
-          "named": true
-        }
-      ]
-    }
   },
   {
     "type": "variable_list",

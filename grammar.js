@@ -68,7 +68,6 @@ const NUMERIC_SYSTEM_FUNCTIONS = [
   /[tT][aA][bB]/,
   /[tT][aA][nN]/,
   /[tT][iI][mM][eE][rR]/,
-  /[uU][dD][iI][mM]/,
   /[vV][aA][lL]/,
   /[vV][eE][rR][sS][iI][oO][nN]/
 ]
@@ -576,7 +575,11 @@ module.exports = grammar({
       "]]"
     ),
 
-    string_array_paramter: $ => $.string_array_name,
+    string_array_paramter: $ => seq(
+      $._mat, 
+      $.string_array_name
+    ),
+    
     number_array_parameter: $ => $.number_array_name,
 
     numeric_parameter: $ => $.number_name,
@@ -626,36 +629,46 @@ module.exports = grammar({
       STATEMENTS.dim,
       commaSep1(
         choice(
-          $.number_name,
-          seq(
-            alias($.number_name, $.number_array_name),
-            "(",
-            commaSep1(/\d+/),
-            ")",
-          ),
-          seq(
-            $.string_name,
-            optional(
-              seq(
-                "*",
-                /\d+/
-              )
-            )
-          ),
-          seq(
-            alias($.stringidentifier,$.string_array_name),
-            "(",
-            commaSep1(/\d+/),
-            ")",
-            optional(
-              seq(
-                "*",
-                /\d+/
-              )
-            )
-          )
+          alias($.dim_number, $.numberreference),
+          alias($.dim_numeric_array, $.numberarray),
+          alias($.dim_string, $.stringreference),
+          alias($.dim_string_array, $.stringarray)
         )
       )
+    ),
+
+    dim_number: $ => field("name", $.number_name),
+
+    dim_numeric_array: $ => seq(
+      field("name", $.number_name),
+      $.dim_array_size
+    ),
+
+    dim_string: $ => seq(
+      field("name", $.stringidentifier),
+      optional(
+        seq(
+          "*",
+          field("length", $.int)
+        )
+      )
+    ),
+
+    dim_string_array: $ => seq(
+      field("name", $.stringidentifier),
+      $.dim_array_size,
+      optional(
+        seq(
+          "*",
+          field("length", $.int)
+        )
+      )
+    ),
+
+    dim_array_size: $ => seq(
+      "(",
+      commaSep1($.int),
+      ")",
     ),
 
     do_statement: $ => seq(
@@ -706,8 +719,8 @@ module.exports = grammar({
                 commaSep1(
                   choice(
                     $.number_name,
-                    $.string_name,
-                    $.string_array_name,
+                    alias($.string_name, $.stringreference),
+                    seq($._mat, $.string_array_name),
                     $.number_array_name,
                   )
                 ),
@@ -716,8 +729,8 @@ module.exports = grammar({
             commaSep1(
               choice(
                 $.number_name,
-                $.string_name,
-                $.string_array_name,
+                alias($.string_name, $.stringreference),
+                seq($._mat, $.string_array_name),
                 $.number_array_name,
               )
             ),
@@ -2184,14 +2197,15 @@ module.exports = grammar({
     numeric_call_expression: $ => choice(
       $.numeric_system_function,
       $.numeric_user_function,
-      $.udim,
+      alias($.udim, $.numeric_system_function),
     ),
 
     udim: $ => seq(
       UDIM,
       "(",
       choice(
-        alias($.stringidentifier, $.string_array_name),
+        $.string_array_expression,
+        alias($.string_array_name, $.stringarray),
         alias($._numberidentifier, $.number_array_name),
       ),
       ")",
@@ -2459,7 +2473,7 @@ module.exports = grammar({
     ),
 
     stringelement: $ => seq(
-      alias($.stringidentifier, $.string_array_name),
+      field("name", $.stringidentifier),
       seq(
         "(",
         commaSep1($.numeric_expression),
@@ -2474,13 +2488,11 @@ module.exports = grammar({
       )
     ),
 
-    string_array_name: $ => seq(
-      $._mat,
-      $.stringidentifier
-    ),
+    string_array_name: $ => $.stringidentifier,
     
     stringarray: $ => seq(
-      $.string_array_name,
+      $._mat,
+      field("name", $.stringidentifier),
       repeat($.dimension)
     ),
 
@@ -2492,10 +2504,10 @@ module.exports = grammar({
       ")"
     ),
 
-    string_name: $ => $.stringidentifier,
+    string_name: $ => field("name", $.stringidentifier),
 
     stringreference: $ => seq(
-      alias($.stringidentifier, $.string_name),
+      field("name", $.stringidentifier),
       repeat(
         seq(
           "(",
@@ -2507,7 +2519,7 @@ module.exports = grammar({
 
     number_name: $ => $._numberidentifier,
 
-    numberreference: $ => $.number_name,
+    numberreference: $ => field("name", $.number_name),
 
     range: $ => seq(
       $.numeric_expression,

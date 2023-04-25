@@ -12088,15 +12088,8 @@
       }
     },
     "numberidentifier": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": -1,
-        "content": {
-          "type": "PATTERN",
-          "value": "[a-zA-Z_]\\w*"
-        }
-      }
+      "type": "PATTERN",
+      "value": "[a-zA-Z_]\\w*"
     },
     "_mat": {
       "type": "PATTERN",

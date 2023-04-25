@@ -2529,7 +2529,7 @@ module.exports = grammar({
     ),
 
     _numberidentifier: $ => token(prec(-1,/[a-zA-Z_]\w*/)),
-    numberidentifier: $ => token(prec(-1,/[a-zA-Z_]\w*/)),
+    numberidentifier: $ => /[a-zA-Z_]\w*/,
 
     _mat: $ => /[mM][aA][tT][ \t]/,
 

@@ -1,1 +1,1 @@
-form d*d
+form d*c 1

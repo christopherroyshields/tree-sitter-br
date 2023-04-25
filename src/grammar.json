@@ -2398,8 +2398,13 @@
             "value": "numberidentifier"
           },
           {
-            "type": "SYMBOL",
-            "name": "numberidentifier"
+            "type": "ALIAS",
+            "content": {
+              "type": "PATTERN",
+              "value": "[a-zA-Z_]\\w*"
+            },
+            "named": true,
+            "value": "numberidentifier"
           }
         ]
       }

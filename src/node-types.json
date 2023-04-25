@@ -1582,6 +1582,11 @@
     }
   },
   {
+    "type": "label_reference",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "let_statement",
     "named": true,
     "fields": {},
@@ -5081,10 +5086,6 @@
   },
   {
     "type": "label",
-    "named": true
-  },
-  {
-    "type": "label_reference",
     "named": true
   },
   {

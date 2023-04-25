@@ -1,3 +1,6 @@
+STR_VAR = /[a-zA-Z_]\w*\$/
+NUM_VAR = /[a-zA-Z_]\w*/
+
 const NUMERIC_SYSTEM_FUNCTIONS = [
   /[aA][bB][sS]/,
   /[aA][tT][nN]/,
@@ -871,7 +874,7 @@ module.exports = grammar({
       alias($.pos_spec,$.numberidentifier),
       alias($.skip_spec,$.numberidentifier),
       alias($.x_spec,$.numberidentifier),
-      $.numberidentifier,
+      alias(NUM_VAR, $.numberidentifier),
     )),
 
     spec_group: $ => seq(

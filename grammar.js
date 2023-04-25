@@ -349,7 +349,11 @@ module.exports = grammar({
 
   rules: {
     source_file: $ => repeat($.line),
-    // source_file: $ => choice($.foo,$.bar),
+
+    // source_file: $ => choice($.bar, $.foo),
+
+    // bar: $ => /[aA][iI][dD][xX]/,
+    // foo: $ => /\w+/,
 
     // fnname: $ => /fntest/,
     
@@ -797,6 +801,7 @@ module.exports = grammar({
     ),
 
     floating_point_form_spec: $ => seq(
+      optional($.multi_spec),
       $.floating_point_spec
     ),
 

@@ -1,1 +1,1 @@
-mat DUMMY=aidx(f$)
+form d*d

@@ -501,17 +501,17 @@ module.exports = grammar({
       ":",
       optional(
         commaSep1(
-          choice(
+          alias(choice(
             $.string_function_name,
             $.numeric_function_name,
-          )
+          ), $.function_name)
         )
       ),
       optional($.error_condition_list)
     ),
 
     string_function_definition: $ => seq(
-      $.string_function_name,
+      alias($.string_function_name, $.function_name),
       optional($.function_length),
       optional($.parameter_list),
       optional(seq(
@@ -521,7 +521,7 @@ module.exports = grammar({
     ),
 
     numeric_function_definition: $ => seq(
-      $.numeric_function_name,
+      alias($.numeric_function_name, $.function_name),
       optional($.parameter_list),
       optional(seq(
         "=",
@@ -2188,7 +2188,7 @@ module.exports = grammar({
     ),
 
     udim: $ => seq(
-      UDIM,
+      alias(UDIM, $.function_name),
       "(",
       choice(
         $.string_array_expression,
@@ -2209,29 +2209,24 @@ module.exports = grammar({
     ),
 
     string_function_assignment: $ => prec.right('assign',seq(
-      field('left', $.string_function_name),
+      field('left', alias($.string_function_name, $.function_name)),
       choice("=",":="),
       field('right', $.string_expression)
     )),
 
     numeric_system_function: $ => choice(
       seq(
-        field('function', /[rR][eE][mM]/),
+        alias(/[rR][eE][mM]/, $.function_name),
         field('arguments', $.arguments)
       ),
       seq(
-        field('function', choice(
-          ...NUMERIC_SYSTEM_FUNCTIONS
-        )),
+        alias(choice(...NUMERIC_SYSTEM_FUNCTIONS), $.function_name),
         optional(field('arguments', $.arguments))
       )
-
     ),
 
     string_system_function: $ => seq(
-      field('function', choice(
-        ...STRING_SYSTEM_FUNCTIONS
-      )),
+      alias(choice(...STRING_SYSTEM_FUNCTIONS), $.function_name),
       optional(field('arguments', $.arguments)),
       repeat(
         seq(
@@ -2243,28 +2238,24 @@ module.exports = grammar({
     ),
 
     numeric_function_assignment: $ => prec.right('assign',seq(
-      field('left', $.numeric_function_name),
+      field('left', alias($.numeric_function_name, $.function_name)),
       choice("=",":="),
       field('right', $.numeric_expression)
     )),
 
     conditional_numeric_function_assignment: $ => prec.right('assign',seq(
-      field('left', $.numeric_function_name),
+      field('left', alias($.numeric_function_name, $.function_name)),
       ":=",
       field('right', $.numeric_expression)
     )),
 
     numeric_user_function: $ => prec.left('call',seq(
-      field('function', choice(
-        $.numeric_function_name
-      )),
+      alias($.numeric_function_name, $.function_name),
       optional(field('arguments', $.arguments))
     )),
 
     string_user_function: $ => prec.left('call', seq(
-      field('function', choice(
-        $.string_function_name,
-      )),
+      alias($.string_function_name, $.function_name),
       optional(field('arguments', $.arguments)),
       repeat(
         seq(
@@ -2379,8 +2370,7 @@ module.exports = grammar({
 
     numeric_assignment_expression: $ => prec.right('assign', seq(
       field('left', choice(
-        $._numeric_reference,
-        $.numeric_function_name,
+        $._numeric_reference
       )),
       '=',
       field('right', choice(

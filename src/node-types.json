@@ -338,7 +338,7 @@
         "required": true,
         "types": [
           {
-            "type": "numeric_function_name",
+            "type": "function_name",
             "named": true
           }
         ]
@@ -1613,15 +1613,11 @@
           "named": true
         },
         {
-          "type": "numeric_function_name",
+          "type": "function_name",
           "named": true
         },
         {
           "type": "string_expression",
-          "named": true
-        },
-        {
-          "type": "string_function_name",
           "named": true
         }
       ]
@@ -2128,10 +2124,6 @@
           {
             "type": "numberreference",
             "named": true
-          },
-          {
-            "type": "numeric_function_name",
-            "named": true
           }
         ]
       },
@@ -2422,7 +2414,7 @@
         "required": true,
         "types": [
           {
-            "type": "numeric_function_name",
+            "type": "function_name",
             "named": true
           }
         ]
@@ -2448,11 +2440,11 @@
       "required": true,
       "types": [
         {
-          "type": "numeric_expression",
+          "type": "function_name",
           "named": true
         },
         {
-          "type": "numeric_function_name",
+          "type": "numeric_expression",
           "named": true
         },
         {
@@ -2530,8 +2522,12 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "function_name",
+          "named": true
+        },
         {
           "type": "numberarray",
           "named": true
@@ -2602,17 +2598,17 @@
             "named": true
           }
         ]
-      },
-      "function": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "numeric_function_name",
-            "named": true
-          }
-        ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "function_name",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -4457,7 +4453,7 @@
         "required": true,
         "types": [
           {
-            "type": "string_function_name",
+            "type": "function_name",
             "named": true
           }
         ]
@@ -4487,15 +4483,15 @@
           "named": true
         },
         {
+          "type": "function_name",
+          "named": true
+        },
+        {
           "type": "parameter_list",
           "named": true
         },
         {
           "type": "string_expression",
-          "named": true
-        },
-        {
-          "type": "string_function_name",
           "named": true
         }
       ]
@@ -4577,8 +4573,12 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "function_name",
+          "named": true
+        },
         {
           "type": "range",
           "named": true
@@ -4599,22 +4599,16 @@
             "named": true
           }
         ]
-      },
-      "function": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "string_function_name",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "function_name",
+          "named": true
+        },
         {
           "type": "range",
           "named": true
@@ -5070,6 +5064,10 @@
     "named": true
   },
   {
+    "type": "function_name",
+    "named": true
+  },
+  {
     "type": "keyonly_seq",
     "named": true
   },
@@ -5091,10 +5089,6 @@
   },
   {
     "type": "number",
-    "named": true
-  },
-  {
-    "type": "numeric_function_name",
     "named": true
   },
   {
@@ -5127,10 +5121,6 @@
   },
   {
     "type": "statement_linput",
-    "named": true
-  },
-  {
-    "type": "string_function_name",
     "named": true
   },
   {

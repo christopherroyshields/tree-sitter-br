@@ -10387,8 +10387,8 @@
     "numeric_system_functions": {
       "type": "TOKEN",
       "content": {
-        "type": "PREC",
-        "value": 2,
+        "type": "PREC_DYNAMIC",
+        "value": 1,
         "content": {
           "type": "CHOICE",
           "members": [
@@ -10733,8 +10733,8 @@
     "string_system_functions": {
       "type": "TOKEN",
       "content": {
-        "type": "PREC",
-        "value": 2,
+        "type": "PREC_DYNAMIC",
+        "value": 1,
         "content": {
           "type": "CHOICE",
           "members": [

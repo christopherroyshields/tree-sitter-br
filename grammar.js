@@ -349,20 +349,12 @@ module.exports = grammar({
 
   rules: {
     source_file: $ => repeat($.line),
-    // source_file: $ => choice($.foo,$.bar),
 
+    // source_file: $ => choice($.foo,$.bar),
+    // foo: $ => token(prec.dynamic(1,/foo/)),
+    // bar: $ => /\w+/,
     // fnname: $ => /fntest/,
     
-    // foo: $ => seq(
-    //   $.fnname,
-    //   "=",
-    //   "1"
-    // ),
-
-    // bar: $ => seq(
-    //   $.fnname
-    // ),
-
     line: $ => seq(
       optional($.line_number),
       optional($.label),
@@ -2226,7 +2218,7 @@ module.exports = grammar({
       )
     ),
 
-    numeric_system_functions: $ => token(prec(2,choice(
+    numeric_system_functions: $ => token(prec.dynamic(1,choice(
       ...NUMERIC_SYSTEM_FUNCTIONS
     ))),
 
@@ -2242,7 +2234,7 @@ module.exports = grammar({
       )
     ),
 
-    string_system_functions: $ => token(prec(2,choice(
+    string_system_functions: $ => token(prec.dynamic(1,choice(
       ...STRING_SYSTEM_FUNCTIONS
     ))),
 

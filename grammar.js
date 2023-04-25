@@ -349,12 +349,20 @@ module.exports = grammar({
 
   rules: {
     source_file: $ => repeat($.line),
-
     // source_file: $ => choice($.foo,$.bar),
-    // foo: $ => token(prec.dynamic(1,/foo/)),
-    // bar: $ => /\w+/,
+
     // fnname: $ => /fntest/,
     
+    // foo: $ => seq(
+    //   $.fnname,
+    //   "=",
+    //   "1"
+    // ),
+
+    // bar: $ => seq(
+    //   $.fnname
+    // ),
+
     line: $ => seq(
       optional($.line_number),
       optional($.label),
@@ -789,7 +797,6 @@ module.exports = grammar({
     ),
 
     floating_point_form_spec: $ => seq(
-      optional($.multi_spec),
       $.floating_point_spec
     ),
 
@@ -1315,7 +1322,7 @@ module.exports = grammar({
           )
         ),
         seq(
-          choice(...NUMERIC_ARRAY_SYSTEM_FUNCTIONS),
+          alias(choice(...NUMERIC_ARRAY_SYSTEM_FUNCTIONS), $.function_name),
           "(",
           choice(
             alias($.numberreference, $.numberarray),
@@ -2213,17 +2220,13 @@ module.exports = grammar({
         field('arguments', $.arguments)
       ),
       seq(
-        alias($.numeric_system_functions, $.function_name),
+        alias(choice(...NUMERIC_SYSTEM_FUNCTIONS), $.function_name),
         optional(field('arguments', $.arguments))
       )
     ),
 
-    numeric_system_functions: $ => token(prec.dynamic(2,choice(
-      ...NUMERIC_SYSTEM_FUNCTIONS
-    ))),
-
     string_system_function: $ => seq(
-      alias($.string_system_functions, $.function_name),
+      alias(choice(...STRING_SYSTEM_FUNCTIONS), $.function_name),
       optional(field('arguments', $.arguments)),
       repeat(
         seq(
@@ -2233,10 +2236,6 @@ module.exports = grammar({
         )
       )
     ),
-
-    string_system_functions: $ => token(prec.dynamic(2,choice(
-      ...STRING_SYSTEM_FUNCTIONS
-    ))),
 
     numeric_function_assignment: $ => prec.right('assign',seq(
       field('left', alias($.numeric_function_name, $.function_name)),
@@ -2529,7 +2528,7 @@ module.exports = grammar({
     ),
 
     _numberidentifier: $ => token(prec(-1,/[a-zA-Z_]\w*/)),
-    numberidentifier: $ => token(prec.dynamic(1,/[a-zA-Z_]\w*/)),
+    numberidentifier: $ => token(prec(-1,/[a-zA-Z_]\w*/)),
 
     _mat: $ => /[mM][aA][tT][ \t]/,
 

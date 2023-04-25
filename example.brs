@@ -1,1 +1,1 @@
-let stra$(1) 
+mat DUMMY=aidx(f$)

@@ -1041,11 +1041,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "floating_point_spec",
+          "named": true
+        },
+        {
+          "type": "multi_spec",
           "named": true
         }
       ]

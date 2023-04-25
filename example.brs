@@ -1,1 +1,1 @@
-let fntest=1
+form d*d

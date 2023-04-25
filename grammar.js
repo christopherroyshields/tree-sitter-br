@@ -797,6 +797,7 @@ module.exports = grammar({
     ),
 
     floating_point_form_spec: $ => seq(
+      optional($.multi_spec),
       $.floating_point_spec
     ),
 

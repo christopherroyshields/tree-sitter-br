@@ -2218,7 +2218,7 @@ module.exports = grammar({
       )
     ),
 
-    numeric_system_functions: $ => token(prec.dynamic(1,choice(
+    numeric_system_functions: $ => token(prec.dynamic(2,choice(
       ...NUMERIC_SYSTEM_FUNCTIONS
     ))),
 
@@ -2234,7 +2234,7 @@ module.exports = grammar({
       )
     ),
 
-    string_system_functions: $ => token(prec.dynamic(1,choice(
+    string_system_functions: $ => token(prec.dynamic(2,choice(
       ...STRING_SYSTEM_FUNCTIONS
     ))),
 
@@ -2529,7 +2529,7 @@ module.exports = grammar({
     ),
 
     _numberidentifier: $ => token(prec(-1,/[a-zA-Z_]\w*/)),
-    numberidentifier: $ => /[a-zA-Z_]\w*/,
+    numberidentifier: $ => token(prec.dynamic(1,/[a-zA-Z_]\w*/)),
 
     _mat: $ => /[mM][aA][tT][ \t]/,
 

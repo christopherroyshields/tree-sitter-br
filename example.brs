@@ -1,1 +1,1 @@
-print str$(test)
+let stra$(1) 

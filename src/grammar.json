@@ -10388,7 +10388,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PREC_DYNAMIC",
-        "value": 1,
+        "value": 2,
         "content": {
           "type": "CHOICE",
           "members": [
@@ -10734,7 +10734,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PREC_DYNAMIC",
-        "value": 1,
+        "value": 2,
         "content": {
           "type": "CHOICE",
           "members": [
@@ -12110,8 +12110,15 @@
       }
     },
     "numberidentifier": {
-      "type": "PATTERN",
-      "value": "[a-zA-Z_]\\w*"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC_DYNAMIC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[a-zA-Z_]\\w*"
+        }
+      }
     },
     "_mat": {
       "type": "PATTERN",

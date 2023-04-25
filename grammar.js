@@ -2221,13 +2221,17 @@ module.exports = grammar({
         field('arguments', $.arguments)
       ),
       seq(
-        alias(choice(...NUMERIC_SYSTEM_FUNCTIONS), $.function_name),
+        alias($.numeric_system_functions, $.function_name),
         optional(field('arguments', $.arguments))
       )
     ),
 
+    numeric_system_functions: $ => token(prec(2,choice(
+      ...NUMERIC_SYSTEM_FUNCTIONS
+    ))),
+
     string_system_function: $ => seq(
-      alias(choice(...STRING_SYSTEM_FUNCTIONS), $.function_name),
+      alias($.string_system_functions, $.function_name),
       optional(field('arguments', $.arguments)),
       repeat(
         seq(
@@ -2237,6 +2241,10 @@ module.exports = grammar({
         )
       )
     ),
+
+    string_system_functions: $ => token(prec(2,choice(
+      ...STRING_SYSTEM_FUNCTIONS
+    ))),
 
     numeric_function_assignment: $ => prec.right('assign',seq(
       field('left', alias($.numeric_function_name, $.function_name)),

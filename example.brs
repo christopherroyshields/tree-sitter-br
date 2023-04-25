@@ -1,1 +1,1 @@
-form d*d
+print str$(1)

@@ -353,10 +353,8 @@ module.exports = grammar({
   rules: {
     source_file: $ => repeat($.line),
 
-    // source_file: $ => choice($.bar, $.foo),
-
-    // bar: $ => /[aA][iI][dD][xX]/,
-    // foo: $ => /\w+/,
+    // source_file: $ => choice($.foo),
+    // foo: $ => seq(optional(seq(/\w+/,"*")),/foo/),
 
     // fnname: $ => /fntest/,
     
@@ -549,7 +547,7 @@ module.exports = grammar({
           commaSep1($.optional_parameter)
         ),
         seq(
-          commaSep1($.required_paramter),
+          commaSep1($.required_parameter),
           optional(seq(
             ";",
             commaSep1($.optional_parameter)
@@ -560,7 +558,7 @@ module.exports = grammar({
     ),
 
     optional_parameter: $ => $.parameter,
-    required_paramter: $ => $.parameter,
+    required_parameter: $ => $.parameter,
 
     parameter: $ => seq(
       optional('&'),

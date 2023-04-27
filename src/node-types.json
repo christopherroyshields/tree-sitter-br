@@ -2755,7 +2755,7 @@
           "named": true
         },
         {
-          "type": "required_paramter",
+          "type": "required_parameter",
           "named": true
         }
       ]
@@ -3088,7 +3088,7 @@
     "fields": {}
   },
   {
-    "type": "required_paramter",
+    "type": "required_parameter",
     "named": true,
     "fields": {},
     "children": {

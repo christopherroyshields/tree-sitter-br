@@ -1,4 +1,4 @@
-((def_statement 
+(def_statement 
   (library_keyword)? @library
   [
   (numeric_function_definition
@@ -29,7 +29,7 @@
               (numberreference) @parameter)
 			]))])
   
-  )
+  (numeric_expression)? @expr)
   (string_function_definition
   	(function_name) @function_name
     (parameter_list
@@ -57,8 +57,7 @@
             (numeric_parameter
               (numberreference) @parameter)
 			]))])
-  )
+  (string_expression)? @expr)
   ]
 )
-(line)
-)
+(fnend_statement) @fnend

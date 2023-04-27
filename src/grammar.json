@@ -969,7 +969,7 @@
                   "members": [
                     {
                       "type": "SYMBOL",
-                      "name": "required_paramter"
+                      "name": "required_parameter"
                     },
                     {
                       "type": "REPEAT",
@@ -982,7 +982,7 @@
                           },
                           {
                             "type": "SYMBOL",
-                            "name": "required_paramter"
+                            "name": "required_parameter"
                           }
                         ]
                       }
@@ -1045,7 +1045,7 @@
       "type": "SYMBOL",
       "name": "parameter"
     },
-    "required_paramter": {
+    "required_parameter": {
       "type": "SYMBOL",
       "name": "parameter"
     },

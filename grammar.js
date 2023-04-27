@@ -541,9 +541,6 @@ module.exports = grammar({
       field('length', $.int)
     ),
 
-    string_function_name: $ => /[fF][nN]\w+\$/i,
-    numeric_function_name: $ => /[fF][nN]\w+/i,
-    
     parameter_list: $ => seq(
       '(',
       choice(
@@ -1038,6 +1035,8 @@ module.exports = grammar({
     ),
 
     fnend_statement: $ => STATEMENTS.fnend,
+    string_function_name: $ => /[fF][nN]\w+\$/i,
+    numeric_function_name: $ => /[fF][nN]\w+/i,
 
     gosub_statement: $ => seq(
       STATEMENTS.gosub,
@@ -1214,15 +1213,6 @@ module.exports = grammar({
         $.string_expression,
         $.stringarray
       )
-    ),
-
-    let_statement: $ => seq(
-      optional(STATEMENTS.let),
-      choice(
-        $.string_expression,
-        $.numeric_expression
-      ),
-      optional($.error_condition_list)
     ),
 
     statement_linput: $ => STATEMENTS.linput,
@@ -1940,6 +1930,15 @@ module.exports = grammar({
 
     case_else_statement: $ => STATEMENTS.case_else,
     end_select_statement: $ => STATEMENTS.end_select,
+
+    let_statement: $ => seq(
+      optional(STATEMENTS.let),
+      choice(
+        $.string_expression,
+        $.numeric_expression
+      ),
+      optional($.error_condition_list)
+    ),
 
     line_number: $ => /\d{1,5}[ \t]/,
     

@@ -917,14 +917,6 @@
         }
       ]
     },
-    "string_function_name": {
-      "type": "PATTERN",
-      "value": "[fF][nN]\\w+\\$"
-    },
-    "numeric_function_name": {
-      "type": "PATTERN",
-      "value": "[fF][nN]\\w+"
-    },
     "parameter_list": {
       "type": "SEQ",
       "members": [
@@ -3843,6 +3835,14 @@
       "type": "PATTERN",
       "value": "[fF][nN][eE][nN][dD]"
     },
+    "string_function_name": {
+      "type": "PATTERN",
+      "value": "[fF][nN]\\w+\\$"
+    },
+    "numeric_function_name": {
+      "type": "PATTERN",
+      "value": "[fF][nN]\\w+"
+    },
     "gosub_statement": {
       "type": "SEQ",
       "members": [
@@ -4627,48 +4627,6 @@
             {
               "type": "SYMBOL",
               "name": "stringarray"
-            }
-          ]
-        }
-      ]
-    },
-    "let_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "PATTERN",
-              "value": "[lL][eE][tT]"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "string_expression"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "numeric_expression"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "error_condition_list"
-            },
-            {
-              "type": "BLANK"
             }
           ]
         }
@@ -7416,6 +7374,48 @@
     "end_select_statement": {
       "type": "PATTERN",
       "value": "#[eE][nN][dD][ \\t]+[sS][eE][lL][eE][cC][tT]#"
+    },
+    "let_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[lL][eE][tT]"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "string_expression"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "numeric_expression"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "error_condition_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
     },
     "line_number": {
       "type": "PATTERN",

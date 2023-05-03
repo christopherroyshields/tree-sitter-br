@@ -380,9 +380,16 @@ module.exports = grammar({
       choice(
         $._single_line_statement,
         $._multi_line_statement,
-        $.multiline_comment
+        $.multiline_comment,
+        $.doc_comment
       ),
       seq($.eol,repeat($._line_end))
+    ),
+
+    doc_comment: $ => seq(
+      '/**',
+      /[^*]*\*+([^/*][^*]*\*+)*/,
+      '/'
     ),
 
     multiline_comment: $ => seq(
@@ -479,7 +486,7 @@ module.exports = grammar({
     library_keyword: $ => KEYWORD.library,
 
     library_statement: $ => seq(
-      STATEMENTS.library,
+      alias(STATEMENTS.library, $.is_library_statement),
       optional(
         choice(
           seq(

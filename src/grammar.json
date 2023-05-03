@@ -66,6 +66,10 @@
             {
               "type": "SYMBOL",
               "name": "multiline_comment"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "doc_comment"
             }
           ]
         },
@@ -84,6 +88,23 @@
               }
             }
           ]
+        }
+      ]
+    },
+    "doc_comment": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "/**"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[^*]*\\*+([^/*][^*]*\\*+)*"
+        },
+        {
+          "type": "STRING",
+          "value": "/"
         }
       ]
     },
@@ -627,8 +648,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "PATTERN",
-          "value": "[lL][iI][bB][rR][aA][rR][yY]"
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "[lL][iI][bB][rR][aA][rR][yY]"
+          },
+          "named": true,
+          "value": "is_library_statement"
         },
         {
           "type": "CHOICE",

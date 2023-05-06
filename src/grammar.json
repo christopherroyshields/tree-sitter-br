@@ -11077,6 +11077,19 @@
         ]
       }
     },
+    "argument": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "param_substitution"
+        }
+      ]
+    },
     "arguments": {
       "type": "SEQ",
       "members": [
@@ -11085,47 +11098,40 @@
           "value": "("
         },
         {
-          "type": "SEQ",
+          "type": "CHOICE",
           "members": [
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "expression"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "param_substitution"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "argument"
             },
             {
-              "type": "REPEAT",
-              "content": {
-                "type": "SEQ",
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ","
+              },
+              {
+                "type": "CHOICE",
                 "members": [
                   {
-                    "type": "STRING",
-                    "value": ","
+                    "type": "SYMBOL",
+                    "name": "argument"
                   },
                   {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "expression"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "param_substitution"
-                      }
-                    ]
+                    "type": "BLANK"
                   }
                 ]
               }
-            }
-          ]
+            ]
+          }
         },
         {
           "type": "STRING",

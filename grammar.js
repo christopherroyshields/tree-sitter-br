@@ -2278,11 +2278,17 @@ module.exports = grammar({
       )
     )),
 
+    argument: $ => choice(
+      $.expression,
+      $.param_substitution,
+    ),
+    
     arguments: $ => seq(
       "(",
-      commaSep1(choice(
-        $.expression,
-        $.param_substitution,
+      optional($.argument),
+      repeat(seq(
+        ",",
+        optional($.argument)        
       )),
       ")"
     ),

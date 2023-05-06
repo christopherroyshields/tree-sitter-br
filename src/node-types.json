@@ -1,10 +1,10 @@
 [
   {
-    "type": "arguments",
+    "type": "argument",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
@@ -13,6 +13,21 @@
         },
         {
           "type": "param_substitution",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "arguments",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "argument",
           "named": true
         }
       ]

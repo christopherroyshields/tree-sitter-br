@@ -1,1 +1,1 @@
-val(,b,,a,)
+library "test": fntest

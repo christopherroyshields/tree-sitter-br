@@ -486,7 +486,7 @@ module.exports = grammar({
     library_keyword: $ => KEYWORD.library,
 
     library_statement: $ => seq(
-      alias(STATEMENTS.library, $.is_library_statement),
+      STATEMENTS.library,
       optional(
         choice(
           seq(
@@ -498,16 +498,16 @@ module.exports = grammar({
                 ","
               )
             ),
-            $.string_expression
+            field("path", $.string_expression)
           ),
           seq(
             KEYWORD.nofiles,
             optional(seq(
               ",",
-              $.string_expression
+              field("path", $.string_expression)
             ))
           ),
-          $.string_expression
+          field("path", $.string_expression)
         ),
       ),
       ":",

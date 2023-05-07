@@ -648,13 +648,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "[lL][iI][bB][rR][aA][rR][yY]"
-          },
-          "named": true,
-          "value": "is_library_statement"
+          "type": "PATTERN",
+          "value": "[lL][iI][bB][rR][aA][rR][yY]"
         },
         {
           "type": "CHOICE",
@@ -695,8 +690,12 @@
                       ]
                     },
                     {
-                      "type": "SYMBOL",
-                      "name": "string_expression"
+                      "type": "FIELD",
+                      "name": "path",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "string_expression"
+                      }
                     }
                   ]
                 },
@@ -718,8 +717,12 @@
                               "value": ","
                             },
                             {
-                              "type": "SYMBOL",
-                              "name": "string_expression"
+                              "type": "FIELD",
+                              "name": "path",
+                              "content": {
+                                "type": "SYMBOL",
+                                "name": "string_expression"
+                              }
                             }
                           ]
                         },
@@ -731,8 +734,12 @@
                   ]
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "string_expression"
+                  "type": "FIELD",
+                  "name": "path",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "string_expression"
+                  }
                 }
               ]
             },

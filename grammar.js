@@ -510,6 +510,11 @@ module.exports = grammar({
           field("path", $.string_expression)
         ),
       ),
+      $.library_function_list,
+      optional($.error_condition_list)
+    ),
+
+    library_function_list: $ => seq(
       ":",
       optional(
         commaSep1(
@@ -518,8 +523,7 @@ module.exports = grammar({
             $.numeric_function_name,
           ), $.function_name)
         )
-      ),
-      optional($.error_condition_list)
+      )      
     ),
 
     string_function_definition: $ => seq(

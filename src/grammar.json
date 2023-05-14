@@ -749,6 +749,27 @@
           ]
         },
         {
+          "type": "SYMBOL",
+          "name": "library_function_list"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "error_condition_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "library_function_list": {
+      "type": "SEQ",
+      "members": [
+        {
           "type": "STRING",
           "value": ":"
         },
@@ -807,18 +828,6 @@
                   }
                 }
               ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "error_condition_list"
             },
             {
               "type": "BLANK"

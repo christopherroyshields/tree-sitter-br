@@ -1630,6 +1630,21 @@
     }
   },
   {
+    "type": "library_function_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "function_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "library_statement",
     "named": true,
     "fields": {
@@ -1646,14 +1661,14 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "error_condition_list",
           "named": true
         },
         {
-          "type": "function_name",
+          "type": "library_function_list",
           "named": true
         }
       ]

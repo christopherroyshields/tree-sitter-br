@@ -2169,40 +2169,6 @@
     }
   },
   {
-    "type": "numeric_assignment_expression",
-    "named": true,
-    "fields": {
-      "left": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "numberelement",
-            "named": true
-          },
-          {
-            "type": "numberreference",
-            "named": true
-          }
-        ]
-      },
-      "right": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "numeric_assignment_expression",
-            "named": true
-          },
-          {
-            "type": "numeric_expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "numeric_binary_expression",
     "named": true,
     "fields": {
@@ -3926,6 +3892,7 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -4318,40 +4285,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "string_expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "string_assignment_expression",
-    "named": true,
-    "fields": {
-      "left": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "stringarray",
-            "named": true
-          },
-          {
-            "type": "stringreference",
-            "named": true
-          }
-        ]
-      },
-      "right": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "string_assignment_expression",
-            "named": true
-          },
           {
             "type": "string_expression",
             "named": true

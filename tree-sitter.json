@@ -1,0 +1,40 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "br",
+      "camelcase": "Br",
+      "title": "Br",
+      "scope": "source.br",
+      "file-types": [
+        "brs",
+        "wbs"
+      ],
+      "injection-regex": "^br$",
+      "class-name": "TreeSitterBr"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Parser For Business Rules",
+    "authors": [
+      {
+        "name": "Christopher Shields",
+        "email": "christopherroyshields@gmail.com"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/christopherroyshields/tree-sitter-br"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}

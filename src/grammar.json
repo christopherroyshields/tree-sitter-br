@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "br",
   "word": "identifier",
   "rules": {
@@ -3879,11 +3880,13 @@
     },
     "string_function_name": {
       "type": "PATTERN",
-      "value": "[fF][nN]\\w+\\$"
+      "value": "[fF][nN]\\w+\\$",
+      "flags": "i"
     },
     "numeric_function_name": {
       "type": "PATTERN",
-      "value": "[fF][nN]\\w+"
+      "value": "[fF][nN]\\w+",
+      "flags": "i"
     },
     "gosub_statement": {
       "type": "SEQ",
@@ -12777,6 +12780,6 @@
     }
   ],
   "inline": [],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }
-

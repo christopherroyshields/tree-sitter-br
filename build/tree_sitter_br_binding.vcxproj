@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7CFC60B8-025F-2A56-FB6E-349D92CFD210}</ProjectGuid>
+    <ProjectGuid>{764FCAE0-7750-481A-CF4B-87E6E13B6124}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>tree_sitter_br_binding</RootNamespace>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
@@ -135,11 +135,11 @@
     <ClCompile Include="..\src\parser.c">
       <ObjectFileName>$(IntDir)\src\parser.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="C:\Users\chris\projects\tree-sitter\tree-sitter-br-new2\node_modules\node-gyp\src\win_delay_load_hook.cc"/>
+    <ClCompile Include="C:\Users\chris\projects\tree-sitter\tree-sitter-br\node_modules\node-gyp\src\win_delay_load_hook.cc"/>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="node_modules\node-addon-api\node_addon_api_except.vcxproj">
-      <Project>{C30943A8-CA26-29ED-F4C0-1CF16517EECF}</Project>
+      <Project>{1A4B1F36-2366-DB85-E6AD-B7F5EDEA9A55}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>

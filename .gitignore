@@ -2,8 +2,8 @@
 target/
 
 # Node artifacts
-build/
-prebuilds/
+# build/
+# prebuilds/
 node_modules/
 
 # Swift artifacts
@@ -37,9 +37,9 @@ zig-out/
 /examples/*/
 
 # Grammar volatiles
-*.wasm
-*.obj
-*.o
+# *.wasm
+# *.obj
+# *.o
 
 # Archives
 *.tar.gz

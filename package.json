@@ -1,8 +1,8 @@
 {
   "name": "tree-sitter-br",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tree-sitter parser for Business Rules! language.",
-  "main": "bindings/node",
+  "main": "index.js",
   "types": "bindings/node",
   "keywords": [
     "incremental",
@@ -13,24 +13,20 @@
   "author": "Christopher Shields",
   "license": "ISC",
   "files": [
-    "grammar.js",
-    "tree-sitter.json",
-    "binding.gyp",
-    "prebuilds/**",
-    "bindings/node/*",
-    "queries/*",
-    "src/**",
-    "*.wasm"
+    "build/Release/tree_sitter_br_binding.node",
+    "index.js",
+    "src/node-types.json"
   ],
   "dependencies": {
-    "node-addon-api": "^8.2.1",
-    "node-gyp-build": "^4.8.2"
   },
   "devDependencies": {
+    "node-addon-api": "^8.2.1",
+    "node-gyp-build": "^4.8.2",
+    "typescript": "^5.8.3",
     "electron-rebuild": "^3.2.9",
     "prebuildify": "^6.0.1",
     "tree-sitter": "^0.22.4",
-    "tree-sitter-cli": "^0.24.4"
+    "tree-sitter-cli": "^0.24.7"
   },
   "peerDependencies": {
     "tree-sitter": "^0.22.4"

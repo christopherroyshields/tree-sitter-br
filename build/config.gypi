@@ -363,7 +363,7 @@
     "globalconfig": "C:\\Program Files\\nodejs\\etc\\npmrc",
     "global_prefix": "C:\\Program Files\\nodejs",
     "init_module": "C:\\Users\\chris\\.npm-init.js",
-    "local_prefix": "C:\\Users\\chris\\projects\\tree-sitter\\tree-sitter-br-new2",
+    "local_prefix": "C:\\Users\\chris\\projects\\tree-sitter\\tree-sitter-br",
     "node_gyp": "C:\\Users\\chris\\AppData\\Roaming\\nvm\\v20.19.0\\node_modules\\npm\\node_modules\\node-gyp\\bin\\node-gyp.js",
     "npm_version": "10.8.2",
     "prefix": "C:\\Program Files\\nodejs",

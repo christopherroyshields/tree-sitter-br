@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{764FCAE0-7750-481A-CF4B-87E6E13B6124}</ProjectGuid>
+    <ProjectGuid>{7CFC60B8-025F-2A56-FB6E-349D92CFD210}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>tree_sitter_br_binding</RootNamespace>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
@@ -36,7 +36,6 @@
     <ExecutablePath>$(ExecutablePath);$(MSBuildProjectDirectory)\..\bin\;$(MSBuildProjectDirectory)\..\bin\</ExecutablePath>
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <IntDir>$(Configuration)\obj\$(ProjectName)\</IntDir>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.node</TargetExt>
@@ -48,54 +47,50 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\include\node;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\src;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\openssl\config;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\openssl\openssl\include;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\uv\include;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\zlib;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\v8\include;..\node_modules\nan;..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>/Zc:__cplusplus -std:c++17 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:\Users\chris\.electron-gyp\19.0.17\include\node;C:\Users\chris\.electron-gyp\19.0.17\src;C:\Users\chris\.electron-gyp\19.0.17\deps\openssl\config;C:\Users\chris\.electron-gyp\19.0.17\deps\openssl\openssl\include;C:\Users\chris\.electron-gyp\19.0.17\deps\uv\include;C:\Users\chris\.electron-gyp\19.0.17\deps\zlib;C:\Users\chris\.electron-gyp\19.0.17\deps\v8\include;..\src;..\node_modules\node-addon-api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <DisableSpecificWarnings>4351;4355;4800;4251;4275;4244;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <ExceptionHandling>false</ExceptionHandling>
+      <EnablePREfast>true</EnablePREfast>
+      <ExceptionHandling>Sync</ExceptionHandling>
       <MinimalRebuild>false</MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <OmitFramePointers>false</OmitFramePointers>
       <Optimization>Disabled</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=tree_sitter_br_binding;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;DEBUG;_DEBUG;V8_ENABLE_CHECKS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=tree_sitter_br_binding;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;V8_COMPRESS_POINTERS;V8_COMPRESS_POINTERS_IN_ISOLATE_CAGE;V8_31BIT_SMIS_ON_64BIT_ARCH;V8_REVERSE_JSARGS;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;OPENSSL_NO_ASM;NAPI_CPP_EXCEPTIONS;_HAS_EXCEPTIONS=1;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;DEBUG;_DEBUG;V8_ENABLE_CHECKS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <StringPooling>true</StringPooling>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TreatWarningAsError>false</TreatWarningAsError>
       <WarningLevel>Level3</WarningLevel>
-      <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
-    <Lib>
-      <AdditionalOptions>/LTCG:INCREMENTAL %(AdditionalOptions)</AdditionalOptions>
-    </Lib>
     <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;DelayImp.lib;&quot;C:\\Users\\chris\\AppData\\Local\\node-gyp\\Cache\\19.9.0\\x64\\node.lib&quot;</AdditionalDependencies>
-      <AdditionalOptions>/LTCG:INCREMENTAL /ignore:4199 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;DelayImp.lib;&quot;C:\\Users\\chris\\.electron-gyp\\19.0.17\\x64\\node.lib&quot;</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4199 %(AdditionalOptions)</AdditionalOptions>
       <DelayLoadDLLs>node.exe;%(DelayLoadDLLs)</DelayLoadDLLs>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OptimizeReferences>true</OptimizeReferences>
       <OutputFile>$(OutDir)$(ProjectName).node</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetExt>.node</TargetExt>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\include\node;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\src;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\openssl\config;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\openssl\openssl\include;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\uv\include;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\zlib;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\v8\include;..\node_modules\nan;..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=tree_sitter_br_binding;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;DEBUG;_DEBUG;V8_ENABLE_CHECKS;%(PreprocessorDefinitions);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\chris\.electron-gyp\19.0.17\include\node;C:\Users\chris\.electron-gyp\19.0.17\src;C:\Users\chris\.electron-gyp\19.0.17\deps\openssl\config;C:\Users\chris\.electron-gyp\19.0.17\deps\openssl\openssl\include;C:\Users\chris\.electron-gyp\19.0.17\deps\uv\include;C:\Users\chris\.electron-gyp\19.0.17\deps\zlib;C:\Users\chris\.electron-gyp\19.0.17\deps\v8\include;..\src;..\node_modules\node-addon-api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=tree_sitter_br_binding;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;V8_COMPRESS_POINTERS;V8_COMPRESS_POINTERS_IN_ISOLATE_CAGE;V8_31BIT_SMIS_ON_64BIT_ARCH;V8_REVERSE_JSARGS;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;OPENSSL_NO_ASM;NAPI_CPP_EXCEPTIONS;_HAS_EXCEPTIONS=1;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;DEBUG;_DEBUG;V8_ENABLE_CHECKS;%(PreprocessorDefinitions);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\include\node;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\src;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\openssl\config;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\openssl\openssl\include;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\uv\include;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\zlib;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\v8\include;..\node_modules\nan;..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>/Zc:__cplusplus -std:c++17 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:\Users\chris\.electron-gyp\19.0.17\include\node;C:\Users\chris\.electron-gyp\19.0.17\src;C:\Users\chris\.electron-gyp\19.0.17\deps\openssl\config;C:\Users\chris\.electron-gyp\19.0.17\deps\openssl\openssl\include;C:\Users\chris\.electron-gyp\19.0.17\deps\uv\include;C:\Users\chris\.electron-gyp\19.0.17\deps\zlib;C:\Users\chris\.electron-gyp\19.0.17\deps\v8\include;..\src;..\node_modules\node-addon-api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <DisableSpecificWarnings>4351;4355;4800;4251;4275;4244;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <ExceptionHandling>false</ExceptionHandling>
+      <EnablePREfast>true</EnablePREfast>
+      <ExceptionHandling>Sync</ExceptionHandling>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -104,49 +99,49 @@
       <OmitFramePointers>true</OmitFramePointers>
       <Optimization>Full</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=tree_sitter_br_binding;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=tree_sitter_br_binding;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;V8_COMPRESS_POINTERS;V8_COMPRESS_POINTERS_IN_ISOLATE_CAGE;V8_31BIT_SMIS_ON_64BIT_ARCH;V8_REVERSE_JSARGS;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;OPENSSL_NO_ASM;NAPI_CPP_EXCEPTIONS;_HAS_EXCEPTIONS=1;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <StringPooling>true</StringPooling>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TreatWarningAsError>false</TreatWarningAsError>
       <WarningLevel>Level3</WarningLevel>
-      <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
-    <Lib>
-      <AdditionalOptions>/LTCG:INCREMENTAL %(AdditionalOptions)</AdditionalOptions>
-    </Lib>
     <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;DelayImp.lib;&quot;C:\\Users\\chris\\AppData\\Local\\node-gyp\\Cache\\19.9.0\\x64\\node.lib&quot;</AdditionalDependencies>
-      <AdditionalOptions>/LTCG:INCREMENTAL /ignore:4199 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;DelayImp.lib;&quot;C:\\Users\\chris\\.electron-gyp\\19.0.17\\x64\\node.lib&quot;</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4199 %(AdditionalOptions)</AdditionalOptions>
       <DelayLoadDLLs>node.exe;%(DelayLoadDLLs)</DelayLoadDLLs>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OptimizeReferences>true</OptimizeReferences>
       <OutputFile>$(OutDir)$(ProjectName).node</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetExt>.node</TargetExt>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\include\node;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\src;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\openssl\config;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\openssl\openssl\include;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\uv\include;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\zlib;C:\Users\chris\AppData\Local\node-gyp\Cache\19.9.0\deps\v8\include;..\node_modules\nan;..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=tree_sitter_br_binding;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;%(PreprocessorDefinitions);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\chris\.electron-gyp\19.0.17\include\node;C:\Users\chris\.electron-gyp\19.0.17\src;C:\Users\chris\.electron-gyp\19.0.17\deps\openssl\config;C:\Users\chris\.electron-gyp\19.0.17\deps\openssl\openssl\include;C:\Users\chris\.electron-gyp\19.0.17\deps\uv\include;C:\Users\chris\.electron-gyp\19.0.17\deps\zlib;C:\Users\chris\.electron-gyp\19.0.17\deps\v8\include;..\src;..\node_modules\node-addon-api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=tree_sitter_br_binding;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;V8_COMPRESS_POINTERS;V8_COMPRESS_POINTERS_IN_ISOLATE_CAGE;V8_31BIT_SMIS_ON_64BIT_ARCH;V8_REVERSE_JSARGS;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;OPENSSL_NO_ASM;NAPI_CPP_EXCEPTIONS;_HAS_EXCEPTIONS=1;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;%(PreprocessorDefinitions);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="..\binding.gyp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\scanner.c">
+      <ObjectFileName>$(IntDir)\src\scanner.obj</ObjectFileName>
+    </ClCompile>
     <ClCompile Include="..\bindings\node\binding.cc">
       <ObjectFileName>$(IntDir)\bindings\node\binding.obj</ObjectFileName>
     </ClCompile>
     <ClCompile Include="..\src\parser.c">
       <ObjectFileName>$(IntDir)\src\parser.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="..\src\scanner.c">
-      <ObjectFileName>$(IntDir)\src\scanner.obj</ObjectFileName>
-    </ClCompile>
-    <ClCompile Include="C:\Users\chris\projects\tree-sitter\tree-sitter-br\node_modules\node-gyp\src\win_delay_load_hook.cc"/>
+    <ClCompile Include="C:\Users\chris\projects\tree-sitter\tree-sitter-br-new2\node_modules\node-gyp\src\win_delay_load_hook.cc"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="node_modules\node-addon-api\node_addon_api_except.vcxproj">
+      <Project>{C30943A8-CA26-29ED-F4C0-1CF16517EECF}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
   <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets"/>

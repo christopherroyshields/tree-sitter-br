@@ -2,7 +2,10 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\chris\projects\tree-sitter\tree-sitter-br\build\Release\tree_sitter_br_binding.node</FullPath>
+      <FullPath>C:\Users\chris\projects\tree-sitter\tree-sitter-br-new2\build\Release\node_addon_api_except</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>C:\Users\chris\projects\tree-sitter\tree-sitter-br-new2\build\Release\tree_sitter_br_binding.node</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

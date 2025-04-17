@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tree-sitter-br"
-description = "Parser For Business Rules"
+description = "Business Rules! Language Parser"
 version = "0.1.0"
 keywords = ["incremental", "parsing", "tree-sitter", "br"]
 classifiers = [
@@ -13,7 +13,7 @@ classifiers = [
   "Topic :: Text Processing :: Linguistic",
   "Typing :: Typed",
 ]
-authors = [{ name = "Christopher Shields", email = "christopherroyshields@gmail.com" }]
+authors = [{ name = "Chris Shields", email = "christopherroyshields@gmail.com" }]
 requires-python = ">=3.10"
 license.text = "MIT"
 readme = "README.md"

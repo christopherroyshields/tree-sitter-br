@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-br
         VERSION "0.1.0"
-        DESCRIPTION "Parser For Business Rules"
+        DESCRIPTION "Business Rules! Language Parser"
         HOMEPAGE_URL "https://github.com/christopherroyshields/tree-sitter-br"
         LANGUAGES C)
 

@@ -1,4 +1,4 @@
-"""Parser For Business Rules"""
+"""Business Rules! Language Parser"""
 
 from importlib.resources import files as _files
 

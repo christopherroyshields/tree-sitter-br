@@ -4,11 +4,12 @@
     {
       "name": "br",
       "camelcase": "Br",
-      "title": "Br",
+      "title": "Br Parser",
       "scope": "source.br",
       "file-types": [
         "brs",
-        "wbs"
+        "wbs",
+        "libs"
       ],
       "injection-regex": "^br$",
       "class-name": "TreeSitterBr"
@@ -17,10 +18,10 @@
   "metadata": {
     "version": "0.1.0",
     "license": "MIT",
-    "description": "Parser For Business Rules",
+    "description": "Business Rules! Language Parser",
     "authors": [
       {
-        "name": "Christopher Shields",
+        "name": "Chris Shields",
         "email": "christopherroyshields@gmail.com"
       }
     ],

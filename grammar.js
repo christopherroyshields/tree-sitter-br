@@ -1,5 +1,14 @@
-STR_VAR = /[a-zA-Z_]\w*\$/
-NUM_VAR = /[a-zA-Z_]\w*/
+/**
+ * @file Business Rules! Language Parser
+ * @author Christopher Shields <christopherroyshields@gmail.com>
+ * @license MIT
+ */
+
+/// <reference types="tree-sitter-cli/dsl" />
+/** // @ts-check */
+
+const STR_VAR = /[a-zA-Z_]\w*\$/
+const NUM_VAR = /[a-zA-Z_]\w*/
 
 const NUMERIC_SYSTEM_FUNCTIONS = [
   /[aA][bB][sS]/,

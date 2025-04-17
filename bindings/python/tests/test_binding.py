@@ -9,4 +9,4 @@ class TestLanguage(TestCase):
         try:
             tree_sitter.Language(tree_sitter_br.language())
         except Exception:
-            self.fail("Error loading Br grammar")
+            self.fail("Error loading Br Parser grammar")

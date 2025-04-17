@@ -10,6 +10,6 @@ import (
 func TestCanLoadGrammar(t *testing.T) {
 	language := tree_sitter.NewLanguage(tree_sitter_br.Language())
 	if language == nil {
-		t.Errorf("Error loading Br grammar")
+		t.Errorf("Error loading Br Parser grammar")
 	}
 }

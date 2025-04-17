@@ -1,6 +1,15 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tree_sitter_br_binding", "tree_sitter_br_binding.vcxproj", "{764FCAE0-7750-481A-CF4B-87E6E13B6124}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "node_addon_api_except", "node_modules\node-addon-api\node_addon_api_except.vcxproj", "{C30943A8-CA26-29ED-F4C0-1CF16517EECF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tree_sitter_br_binding", "tree_sitter_br_binding.vcxproj", "{7CFC60B8-025F-2A56-FB6E-349D92CFD210}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C30943A8-CA26-29ED-F4C0-1CF16517EECF} = {C30943A8-CA26-29ED-F4C0-1CF16517EECF}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(node_modules)", "..\node_modules", "{9D350B9E-06FB-960D-859F-B43C9597383A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(node-addon-api)", "..\node_modules\node-addon-api", "{AF891C37-E709-9CCC-0D50-0CCCC8CCC563}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,12 +17,20 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{764FCAE0-7750-481A-CF4B-87E6E13B6124}.Debug|x64.ActiveCfg = Debug|x64
-		{764FCAE0-7750-481A-CF4B-87E6E13B6124}.Debug|x64.Build.0 = Debug|x64
-		{764FCAE0-7750-481A-CF4B-87E6E13B6124}.Release|x64.ActiveCfg = Release|x64
-		{764FCAE0-7750-481A-CF4B-87E6E13B6124}.Release|x64.Build.0 = Release|x64
+		{7CFC60B8-025F-2A56-FB6E-349D92CFD210}.Debug|x64.ActiveCfg = Debug|x64
+		{7CFC60B8-025F-2A56-FB6E-349D92CFD210}.Debug|x64.Build.0 = Debug|x64
+		{7CFC60B8-025F-2A56-FB6E-349D92CFD210}.Release|x64.ActiveCfg = Release|x64
+		{7CFC60B8-025F-2A56-FB6E-349D92CFD210}.Release|x64.Build.0 = Release|x64
+		{C30943A8-CA26-29ED-F4C0-1CF16517EECF}.Debug|x64.ActiveCfg = Debug|x64
+		{C30943A8-CA26-29ED-F4C0-1CF16517EECF}.Debug|x64.Build.0 = Debug|x64
+		{C30943A8-CA26-29ED-F4C0-1CF16517EECF}.Release|x64.ActiveCfg = Release|x64
+		{C30943A8-CA26-29ED-F4C0-1CF16517EECF}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AF891C37-E709-9CCC-0D50-0CCCC8CCC563} = {9D350B9E-06FB-960D-859F-B43C9597383A}
+		{C30943A8-CA26-29ED-F4C0-1CF16517EECF} = {AF891C37-E709-9CCC-0D50-0CCCC8CCC563}
 	EndGlobalSection
 EndGlobal

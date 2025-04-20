@@ -501,13 +501,8 @@
                   "value": ","
                 },
                 {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "PATTERN",
-                      "value": "[rR][eE][lL][eE][aA][sS][eE]"
-                    }
-                  ]
+                  "type": "PATTERN",
+                  "value": "[rR][eE][lL][eE][aA][sS][eE]"
                 }
               ]
             },
@@ -12383,13 +12378,8 @@
                 ]
               },
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "PATTERN",
-                    "value": "\\d+"
-                  }
-                ]
+                "type": "PATTERN",
+                "value": "\\d+"
               }
             ]
           },
@@ -12620,13 +12610,8 @@
                     ]
                   },
                   {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "PATTERN",
-                        "value": "\\d+"
-                      }
-                    ]
+                    "type": "PATTERN",
+                    "value": "\\d+"
                   }
                 ]
               }

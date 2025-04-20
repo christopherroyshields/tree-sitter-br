@@ -456,9 +456,7 @@ module.exports = grammar({
         KEYWORD.free,
         KEYWORD.drop
       ))),
-      optional(seq(",",choice(
-        KEYWORD.release
-      ))),
+      optional(seq(",",KEYWORD.release)),
       ":",
       optional(
         $.error_condition_list
@@ -2574,7 +2572,7 @@ module.exports = grammar({
         seq(decimal_digits, '.', optional(decimal_digits), optional(exponent_part)),
         seq('.', decimal_digits, optional(exponent_part)),
         seq(decimal_digits, exponent_part),
-        seq(decimal_digits),
+        decimal_digits,
       )
 
       const mod = seq(choice("+","-"),decimal_literal)

@@ -7,7 +7,6 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-const STR_VAR = /[a-zA-Z_]\w*\$/
 const NUM_VAR = /[a-zA-Z_]\w*/
 
 const NUMERIC_SYSTEM_FUNCTIONS = [
@@ -359,6 +358,16 @@ module.exports = grammar({
     /!_.*\n/
   ],
 
+  inline: $ => [
+    $.int,
+    $.logical_operator,
+    $.comparison_operator,
+    $.multi_spec,
+    $.function_length,
+    $.field_length,
+    $.fractional_length,
+  ],
+
   rules: {
     source_file: $ => repeat($.line),
 
@@ -419,7 +428,7 @@ module.exports = grammar({
 
     statement_separator: $ => ":",
 
-    continuation: $=> /!:[\t ]*(\r?\n)?/,
+    continuation: $ => /!:[\t ]*(\r?\n)?/,
 
     _multi_line_statement: $ => seq(      
       $.statement,
@@ -446,10 +455,10 @@ module.exports = grammar({
       $.if_statement
     ),
 
-    continue_statement: $ => STATEMENTS.continue,
+    continue_statement: $ => token(STATEMENTS.continue),
 
     close_statement: $ => seq(
-      STATEMENTS.close,
+      token(STATEMENTS.close),
       "#",
       $.numeric_expression,
       optional(seq(",",choice(
@@ -464,7 +473,7 @@ module.exports = grammar({
     ),
 
     data_statement: $ => seq(
-      STATEMENTS.data,
+      token(STATEMENTS.data),
       optional(choice(
         $.unquoted_data,
         $.string,
@@ -482,7 +491,7 @@ module.exports = grammar({
     ),
 
     def_statement: $ => seq(
-      STATEMENTS.def,
+      token(STATEMENTS.def),
       optional($.library_keyword),      
       choice(
         $.string_function_definition,
@@ -493,7 +502,7 @@ module.exports = grammar({
     library_keyword: $ => KEYWORD.library,
 
     library_statement: $ => seq(
-      STATEMENTS.library,
+      token(STATEMENTS.library),
       optional(
         choice(
           seq(
@@ -609,7 +618,7 @@ module.exports = grammar({
     )),
 
     delete_statement: $ => seq(
-      STATEMENTS.delete,
+      token(STATEMENTS.delete),
       "#",
       $.numeric_expression,
       optional(
@@ -642,7 +651,7 @@ module.exports = grammar({
     ),
 
     dim_statement: $ => seq(
-      STATEMENTS.dim,
+      token(STATEMENTS.dim),
       commaSep1(
         choice(
           alias($.dim_number, $.numberreference),
@@ -688,7 +697,7 @@ module.exports = grammar({
     ),
 
     do_statement: $ => seq(
-      STATEMENTS.do,
+      token(STATEMENTS.do),
       optional(seq(
         choice(
           KEYWORD.while,
@@ -716,13 +725,13 @@ module.exports = grammar({
 
     error_condition: $ => choice(
       seq(FNKEY, $.numeric_expression),
-      ...ERROR_CONDITION.map((cond) => cond)
+      token(choice(...ERROR_CONDITION))
     ),
 
     line_reference: $ => /\d+/,
 
     chain_statement: $ => seq(
-      STATEMENTS.chain,
+      token(STATEMENTS.chain),
       $.string_expression,
       optional(
         seq(
@@ -834,7 +843,7 @@ module.exports = grammar({
       )
     ),
 
-    pos_spec: $ => /[Pp][Oo][Ss]/,
+    pos_spec: $ => token(/[Pp][Oo][Ss]/),
     pos_form_spec: $ => seq(
       $.pos_spec,
       choice(
@@ -843,7 +852,7 @@ module.exports = grammar({
       )
     ),
 
-    skip_spec: $ => /[Ss][Kk][Ii][Pp]/,
+    skip_spec: $ => token(/[Ss][Kk][Ii][Pp]/),
     skip_form_spec: $ => seq(
       $.skip_spec,
       optional(
@@ -854,7 +863,7 @@ module.exports = grammar({
       )
     ),
 
-    x_spec: $ => /[Xx]/,
+    x_spec: $ => token(/[Xx]/),
     x_form_spec: $ => seq(
       $.x_spec,
       optional(
@@ -865,7 +874,8 @@ module.exports = grammar({
       )
     ),
 
-    pic_spec: $ => /[pP][iI][cC]\([^)\n]*\)/,
+    pic_spec: $ => token(/[pP][iI][cC]\([^)\n]*\)/),
+
     pic_form_spec: $ => seq(
       optional($.multi_spec),
       $.pic_spec
@@ -911,11 +921,11 @@ module.exports = grammar({
       $.pic_form_spec
     ),
 
-    literal_string_spec: $ => choice(
+    literal_string_spec: $ => token(choice(
       /"[^"\n]*"/,
       /'[^'\n]*'/,
       /`[^`\n]*`/,
-    ),
+    )),
 
     literal_string_form_spec: $ => seq(
       optional($.multi_spec),
@@ -965,13 +975,13 @@ module.exports = grammar({
     end_if_statement: $ =>  STATEMENTS.end_if,
     end_statement: $ => STATEMENTS.end,
     execute_statement: $ => seq(
-      STATEMENTS.execute,
+      token(STATEMENTS.execute),
       $.string_expression,
       optional($.error_condition_list)
     ),
-    exit_do_statement: $ => STATEMENTS.exit_do,
+    exit_do_statement: $ => token(STATEMENTS.exit_do),
     exit_statement: $ => seq(
-      STATEMENTS.exit,
+      token(STATEMENTS.exit),
       optional($.error_condition_list)
     ),
 
@@ -1013,7 +1023,7 @@ module.exports = grammar({
     )),
 
     if_statement: $ => prec.right(seq(
-      STATEMENTS.if,
+      token(STATEMENTS.if),
       $.conditional_expression,
       KEYWORD.then,
       optional(","),
@@ -1038,7 +1048,7 @@ module.exports = grammar({
     int: $ => /\d+/,
 
     for_statement: $ => seq(
-      STATEMENTS.for,
+      token(STATEMENTS.for),
       $.numberreference,
       "=",
       $.numeric_expression,
@@ -1050,12 +1060,12 @@ module.exports = grammar({
       ))
     ),
 
-    fnend_statement: $ => STATEMENTS.fnend,
+    fnend_statement: $ => token(STATEMENTS.fnend),
     string_function_name: $ => /[fF][nN]\w+\$/i,
     numeric_function_name: $ => /[fF][nN]\w+/i,
 
     gosub_statement: $ => seq(
-      STATEMENTS.gosub,
+      token(STATEMENTS.gosub),
       choice(
         $.line_reference,
         $.label_reference
@@ -1063,7 +1073,7 @@ module.exports = grammar({
     ),
 
     goto_statement: $ => seq(
-      STATEMENTS.goto,
+      token(STATEMENTS.goto),
       choice(
         $.line_reference,
         $.label_reference
@@ -1071,10 +1081,10 @@ module.exports = grammar({
     ),
 
     input_menu_statement: $ => seq(
-      choice(
+      token(choice(
         STATEMENTS.input,
         STATEMENTS.display,
-      ),
+      )),
       optional(seq(
         $.channel,
         ","
@@ -1102,7 +1112,7 @@ module.exports = grammar({
     ),
 
     rinput_statement: $ => seq(
-      STATEMENTS.rinput,
+      token(STATEMENTS.rinput),
       choice(
         seq(
           optional(seq(
@@ -1145,7 +1155,7 @@ module.exports = grammar({
     ),
 
     input_statement: $ => seq(
-      STATEMENTS.input,
+      token(STATEMENTS.input),
       choice(
         seq(
           optional(seq(
@@ -1231,7 +1241,7 @@ module.exports = grammar({
       )
     ),
 
-    statement_linput: $ => STATEMENTS.linput,
+    statement_linput: $ => token(STATEMENTS.linput),
 
     linput_statement: $ => seq(
       field("statement", $.statement_linput),
@@ -1264,7 +1274,7 @@ module.exports = grammar({
     ),
 
     loop_statement: $ => seq(
-      STATEMENTS.loop,
+      token(STATEMENTS.loop),
       optional(
         seq(
           choice(
@@ -1412,12 +1422,12 @@ module.exports = grammar({
     )),
 
     next_statement: $ => seq(
-      STATEMENTS.next,
+      token(STATEMENTS.next),
       $.numberreference
     ),
 
     on_statement: $ => seq(
-      STATEMENTS.on,
+      token(STATEMENTS.on),
       choice(
         seq(
           $.error_condition,
@@ -1430,10 +1440,10 @@ module.exports = grammar({
         ),
         seq(
           $.numeric_expression,
-          choice(
+          token(choice(
             STATEMENTS.goto,
             STATEMENTS.gosub,
-          ),
+          )),
           commaSep1(choice(
             $.line_reference,
             $.label_reference
@@ -1454,7 +1464,7 @@ module.exports = grammar({
 
     keyword_outin: $ => KEYWORD.outin,
     open_statement: $ => seq(
-      STATEMENTS.open,
+      token(STATEMENTS.open),
       $.channel,
       ":",
       $.string_expression,
@@ -1508,7 +1518,7 @@ module.exports = grammar({
     ),
 
     option_statement: $ => seq(
-      STATEMENTS.option,
+      token(STATEMENTS.option),
       commaSep1(
         choice(
           KEYWORD.invp,
@@ -1528,10 +1538,10 @@ module.exports = grammar({
       )
     ),
 
-    pause_statement: $ => STATEMENTS.pause,
+    pause_statement: $ => token(STATEMENTS.pause),
 
     print_statement: $ => seq(
-      STATEMENTS.print,
+      token(STATEMENTS.print),
       optional(choice(
         $.print_output,
         $.print_fields,
@@ -1653,7 +1663,7 @@ module.exports = grammar({
     ),
 
     read_statement: $ => seq(
-      STATEMENTS.read,
+      token(STATEMENTS.read),
       choice(
         $._read_variable_list,
         seq(
@@ -1698,7 +1708,7 @@ module.exports = grammar({
     ),
 
     release_statement: $ => seq(
-      STATEMENTS.release,
+      token(STATEMENTS.release),
       "#",
       $.numeric_expression,
       ":"
@@ -1768,18 +1778,18 @@ module.exports = grammar({
       )
     ),
 
-    randomize_statement: $ => STATEMENTS.randomize,
+    randomize_statement: $ => token(STATEMENTS.randomize),
 
     rem_statement: $ => choice(
-      STATEMENTS.rem,
+      token(STATEMENTS.rem),
       seq(
-        STATEMENTS.rem,
+        token(STATEMENTS.rem),
         /[^(].*/
       )
     ),
 
     reread_statement: $ => seq(
-      STATEMENTS.reread,
+      token(STATEMENTS.reread),
       $.channel,
       optional(
         seq(
@@ -1809,7 +1819,7 @@ module.exports = grammar({
     ),
 
     restore_statement: $ => seq(
-      STATEMENTS.restore,
+      token(STATEMENTS.restore),
       choice(
         $.restore_data,
         $.restore_file,
@@ -1854,11 +1864,11 @@ module.exports = grammar({
         KEYWORD.same,
       ),
 
-    retry_statement: $ => STATEMENTS.retry,
-    return_statement: $ => STATEMENTS.return,
+    retry_statement: $ => token(STATEMENTS.retry),
+    return_statement: $ => token(STATEMENTS.return),
 
     rewrite_statement: $ => seq(
-      STATEMENTS.rewrite,
+      token(STATEMENTS.rewrite),
       $.channel,
       optional(seq(
         ",",
@@ -1887,7 +1897,7 @@ module.exports = grammar({
     ),
 
     write_statement: $ => seq(
-      STATEMENTS.write,
+      token(STATEMENTS.write),
       $.channel,
       optional(seq(
         ",",
@@ -1916,12 +1926,12 @@ module.exports = grammar({
     ),
 
     stop_statement: $ => seq(
-      STATEMENTS.stop,
+      token(STATEMENTS.stop),
       optional($.numeric_expression),
     ),
 
     trace_statement: $ => seq(
-      STATEMENTS.trace,
+      token(STATEMENTS.trace),
       choice(
         KEYWORD.on,
         KEYWORD.off,
@@ -1930,13 +1940,13 @@ module.exports = grammar({
     ),
 
     select_case_statement: $ => seq(
-      STATEMENTS.select,
+      token(STATEMENTS.select),
       $.expression,
       $.case_statement
     ),
 
     case_statement: $ => seq(
-      STATEMENTS.case,
+      token(STATEMENTS.case),
       $.expression,
       repeat(seq(
         "#",
@@ -1944,11 +1954,11 @@ module.exports = grammar({
       ))
     ),
 
-    case_else_statement: $ => STATEMENTS.case_else,
-    end_select_statement: $ => STATEMENTS.end_select,
+    case_else_statement: $ => token(STATEMENTS.case_else),
+    end_select_statement: $ => token(STATEMENTS.end_select),
 
     let_statement: $ => seq(
-      optional(STATEMENTS.let),
+      optional(token(STATEMENTS.let)),
       choice(
         $.string_expression,
         $.numeric_expression

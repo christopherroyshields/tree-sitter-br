@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-br",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Tree-sitter parser for Business Rules! language.",
   "main": "index.js",
   "types": "bindings/node",
@@ -17,8 +17,6 @@
     "index.js",
     "src/node-types.json"
   ],
-  "dependencies": {
-  },
   "devDependencies": {
     "node-addon-api": "^8.2.1",
     "node-gyp-build": "^4.8.2",
@@ -42,6 +40,6 @@
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
     "test": "node --test bindings/node/*_test.js",
-    "rebuild-module": "npx electron-rebuild -v 19.0.17 -f -w ."
+    "rebuild-module": "npx electron-rebuild -v 34.3.2 -f -w ."
   }
 }

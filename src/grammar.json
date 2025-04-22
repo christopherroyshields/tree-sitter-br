@@ -4020,20 +4020,23 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "TOKEN",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "TOKEN",
+              "content": {
                 "type": "PATTERN",
                 "value": "[iI][nN][pP][uU][tT]"
-              },
-              {
+              }
+            },
+            {
+              "type": "TOKEN",
+              "content": {
                 "type": "PATTERN",
                 "value": "[dD][iI][sS][pP][lL][aA][yY]"
               }
-            ]
-          }
+            }
+          ]
         },
         {
           "type": "CHOICE",
@@ -5545,20 +5548,23 @@
                   "name": "numeric_expression"
                 },
                 {
-                  "type": "TOKEN",
-                  "content": {
-                    "type": "CHOICE",
-                    "members": [
-                      {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "TOKEN",
+                      "content": {
                         "type": "PATTERN",
                         "value": "[gG][oO][tT][oO]"
-                      },
-                      {
+                      }
+                    },
+                    {
+                      "type": "TOKEN",
+                      "content": {
                         "type": "PATTERN",
                         "value": "[gG][oO][sS][uU][bB]"
                       }
-                    ]
-                  }
+                    }
+                  ]
                 },
                 {
                   "type": "SEQ",
@@ -8681,7 +8687,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "binary_eq_op"
+                  "name": "binary_cond_eq_op"
                 }
               },
               {

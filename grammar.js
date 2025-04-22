@@ -1081,10 +1081,10 @@ module.exports = grammar({
     ),
 
     input_menu_statement: $ => seq(
-      token(choice(
-        STATEMENTS.input,
-        STATEMENTS.display,
-      )),
+      choice(
+        token(STATEMENTS.input),
+        token(STATEMENTS.display),
+      ),
       optional(seq(
         $.channel,
         ","
@@ -1440,10 +1440,10 @@ module.exports = grammar({
         ),
         seq(
           $.numeric_expression,
-          token(choice(
-            STATEMENTS.goto,
-            STATEMENTS.gosub,
-          )),
+          choice(
+            token(STATEMENTS.goto),
+            token(STATEMENTS.gosub),
+          ),
           commaSep1(choice(
             $.line_reference,
             $.label_reference
@@ -2194,7 +2194,7 @@ module.exports = grammar({
       )),
       prec.left('binary_equality',seq(
         field('left', $.conditional_expression),
-        field('operator', $.binary_eq_op),
+        field('operator', $.binary_cond_eq_op),
         field('right', $.conditional_expression)
       )),
       prec.right('binary_exp',seq(

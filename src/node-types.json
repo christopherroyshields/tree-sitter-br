@@ -178,92 +178,40 @@
         "required": true,
         "types": [
           {
-            "type": "%",
-            "named": false
+            "type": "binary_cond_eq_op",
+            "named": true
           },
           {
-            "type": "&",
-            "named": false
+            "type": "binary_eq_op",
+            "named": true
           },
           {
-            "type": "&&",
-            "named": false
+            "type": "binary_exp_op",
+            "named": true
           },
           {
-            "type": "*",
-            "named": false
+            "type": "binary_plus_op",
+            "named": true
           },
           {
-            "type": "**",
-            "named": false
+            "type": "binary_relation_operator",
+            "named": true
           },
           {
-            "type": "+",
-            "named": false
+            "type": "binary_shift_op",
+            "named": true
           },
           {
-            "type": "-",
-            "named": false
+            "type": "binary_times_op",
+            "named": true
           },
           {
-            "type": "/",
-            "named": false
+            "type": "logical_and_op",
+            "named": true
           },
           {
-            "type": "<",
-            "named": false
-          },
-          {
-            "type": "<<",
-            "named": false
-          },
-          {
-            "type": "<=",
-            "named": false
-          },
-          {
-            "type": "<>",
-            "named": false
-          },
-          {
-            "type": "=",
-            "named": false
-          },
-          {
-            "type": "=<",
-            "named": false
-          },
-          {
-            "type": "==",
-            "named": false
-          },
-          {
-            "type": "=>",
-            "named": false
-          },
-          {
-            "type": ">",
-            "named": false
-          },
-          {
-            "type": "><",
-            "named": false
-          },
-          {
-            "type": ">=",
-            "named": false
-          },
-          {
-            "type": ">>",
-            "named": false
-          },
-          {
-            "type": "||",
-            "named": false
-          },
-          {
-            "type": "~=",
-            "named": false
+            "type": "logical_or_op",
+            "named": true
           }
         ]
       },
@@ -539,24 +487,6 @@
           {
             "type": "conditional_expression",
             "named": true
-          }
-        ]
-      },
-      "operator": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "+",
-            "named": false
-          },
-          {
-            "type": "-",
-            "named": false
-          },
-          {
-            "type": "~",
-            "named": false
           }
         ]
       }
@@ -1076,11 +1006,6 @@
     }
   },
   {
-    "type": "floating_point_spec",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "for_statement",
     "named": true,
     "fields": {},
@@ -1582,11 +1507,6 @@
     }
   },
   {
-    "type": "internal_spec",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "key_search_seq",
     "named": true,
     "fields": {},
@@ -2076,11 +1996,6 @@
     }
   },
   {
-    "type": "numberidentifier",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "numberreference",
     "named": true,
     "fields": {
@@ -2191,88 +2106,36 @@
         "required": true,
         "types": [
           {
-            "type": "%",
-            "named": false
+            "type": "binary_eq_op",
+            "named": true
           },
           {
-            "type": "&",
-            "named": false
+            "type": "binary_exp_op",
+            "named": true
           },
           {
-            "type": "&&",
-            "named": false
+            "type": "binary_plus_op",
+            "named": true
           },
           {
-            "type": "*",
-            "named": false
+            "type": "binary_relation_operator",
+            "named": true
           },
           {
-            "type": "**",
-            "named": false
+            "type": "binary_shift_op",
+            "named": true
           },
           {
-            "type": "+",
-            "named": false
+            "type": "binary_times_op",
+            "named": true
           },
           {
-            "type": "-",
-            "named": false
+            "type": "logical_and_op",
+            "named": true
           },
           {
-            "type": "/",
-            "named": false
-          },
-          {
-            "type": "<",
-            "named": false
-          },
-          {
-            "type": "<<",
-            "named": false
-          },
-          {
-            "type": "<=",
-            "named": false
-          },
-          {
-            "type": "<>",
-            "named": false
-          },
-          {
-            "type": "=<",
-            "named": false
-          },
-          {
-            "type": "==",
-            "named": false
-          },
-          {
-            "type": "=>",
-            "named": false
-          },
-          {
-            "type": ">",
-            "named": false
-          },
-          {
-            "type": "><",
-            "named": false
-          },
-          {
-            "type": ">=",
-            "named": false
-          },
-          {
-            "type": ">>",
-            "named": false
-          },
-          {
-            "type": "||",
-            "named": false
-          },
-          {
-            "type": "~=",
-            "named": false
+            "type": "logical_or_op",
+            "named": true
           }
         ]
       },
@@ -2526,11 +2389,6 @@
     }
   },
   {
-    "type": "numeric_spec",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "numeric_system_function",
     "named": true,
     "fields": {
@@ -2587,24 +2445,6 @@
           {
             "type": "numeric_expression",
             "named": true
-          }
-        ]
-      },
-      "operator": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "+",
-            "named": false
-          },
-          {
-            "type": "-",
-            "named": false
-          },
-          {
-            "type": "~",
-            "named": false
           }
         ]
       }
@@ -2717,11 +2557,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "param_substitution",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "parameter",
@@ -4544,11 +4379,6 @@
     }
   },
   {
-    "type": "string_spec",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "string_system_function",
     "named": true,
     "fields": {
@@ -4852,15 +4682,7 @@
     "named": false
   },
   {
-    "type": "%",
-    "named": false
-  },
-  {
     "type": "&",
-    "named": false
-  },
-  {
-    "type": "&&",
     "named": false
   },
   {
@@ -4880,19 +4702,7 @@
     "named": false
   },
   {
-    "type": "**",
-    "named": false
-  },
-  {
-    "type": "*=",
-    "named": false
-  },
-  {
     "type": "+",
-    "named": false
-  },
-  {
-    "type": "+=",
     "named": false
   },
   {
@@ -4901,10 +4711,6 @@
   },
   {
     "type": "-",
-    "named": false
-  },
-  {
-    "type": "-=",
     "named": false
   },
   {
@@ -4921,10 +4727,6 @@
   },
   {
     "type": "/**",
-    "named": false
-  },
-  {
-    "type": "/=",
     "named": false
   },
   {
@@ -4948,59 +4750,11 @@
     "named": false
   },
   {
-    "type": "<",
-    "named": false
-  },
-  {
-    "type": "<<",
-    "named": false
-  },
-  {
-    "type": "<=",
-    "named": false
-  },
-  {
-    "type": "<>",
-    "named": false
-  },
-  {
     "type": "=",
     "named": false
   },
   {
-    "type": "=<",
-    "named": false
-  },
-  {
-    "type": "==",
-    "named": false
-  },
-  {
-    "type": "=>",
-    "named": false
-  },
-  {
-    "type": ">",
-    "named": false
-  },
-  {
-    "type": "><",
-    "named": false
-  },
-  {
     "type": ">=",
-    "named": false
-  },
-  {
-    "type": ">>",
-    "named": false
-  },
-  {
-    "type": "[[",
-    "named": false
-  },
-  {
-    "type": "]]",
     "named": false
   },
   {
@@ -5010,6 +4764,34 @@
   {
     "type": "``",
     "named": false
+  },
+  {
+    "type": "binary_cond_eq_op",
+    "named": true
+  },
+  {
+    "type": "binary_eq_op",
+    "named": true
+  },
+  {
+    "type": "binary_exp_op",
+    "named": true
+  },
+  {
+    "type": "binary_plus_op",
+    "named": true
+  },
+  {
+    "type": "binary_relation_operator",
+    "named": true
+  },
+  {
+    "type": "binary_shift_op",
+    "named": true
+  },
+  {
+    "type": "binary_times_op",
+    "named": true
   },
   {
     "type": "case_else_statement",
@@ -5056,11 +4838,19 @@
     "named": true
   },
   {
+    "type": "floating_point_spec",
+    "named": true
+  },
+  {
     "type": "fnend_statement",
     "named": true
   },
   {
     "type": "function_name",
+    "named": true
+  },
+  {
+    "type": "internal_spec",
     "named": true
   },
   {
@@ -5080,7 +4870,27 @@
     "named": true
   },
   {
+    "type": "logical_and_op",
+    "named": true
+  },
+  {
+    "type": "logical_or_op",
+    "named": true
+  },
+  {
     "type": "number",
+    "named": true
+  },
+  {
+    "type": "numberidentifier",
+    "named": true
+  },
+  {
+    "type": "numeric_spec",
+    "named": true
+  },
+  {
+    "type": "param_substitution",
     "named": true
   },
   {
@@ -5116,6 +4926,10 @@
     "named": true
   },
   {
+    "type": "string_spec",
+    "named": true
+  },
+  {
     "type": "stringidentifier",
     "named": true
   },
@@ -5132,19 +4946,7 @@
     "named": false
   },
   {
-    "type": "||",
-    "named": false
-  },
-  {
     "type": "}}",
-    "named": false
-  },
-  {
-    "type": "~",
-    "named": false
-  },
-  {
-    "type": "~=",
     "named": false
   }
 ]

@@ -5,7 +5,7 @@
  */
 
 /// <reference types="tree-sitter-cli/dsl" />
-/** // @ts-check */
+// @ts-check
 
 const STR_VAR = /[a-zA-Z_]\w*\$/
 const NUM_VAR = /[a-zA-Z_]\w*/
@@ -592,11 +592,11 @@ module.exports = grammar({
     string_array_parameter: $ => alias($.string_array_name_mat, $.stringarray),
     number_array_parameter: $ => alias($.number_array_name_mat, $.numberarray),
 
-    param_substitution: $ => seq(
+    param_substitution: $ => token(seq(
       "[[",
       /\w+/,
       "]]"
-    ),
+    )),
 
     numeric_parameter: $ => $.numberreference,
 
@@ -752,7 +752,7 @@ module.exports = grammar({
 
     chain_files: $ => token(prec(1,KEYWORD.files)),
 
-    string_spec: $ => choice(
+    string_spec: $ => token(choice(
       /[Cc]/,
       /[Cc][Cc]/,
       /[Cc][Rr]/,
@@ -760,28 +760,28 @@ module.exports = grammar({
       /[Vv]/,
       /[Vv][Ll]/,
       /[Vv][Uu]/
-    ),
+    )),
 
-    internal_spec: $ => choice(
+    internal_spec: $ => token(choice(
       /[Bb]/,
       /[Bb][Ll]/,
       /[Bb][Hh]/,
       /[Pp][Dd]/,
       /[Zp][Dd]/
-    ),
+    )),
 
-    numeric_spec: $ => choice(
+    numeric_spec: $ => token(choice(
       /[Gg]/,
       /[Gg][Zz]/,
       /[Nn]/,
       /[Nn][Zz]/,
-    ),
+    )),
 
-    floating_point_spec: $ => choice(
+    floating_point_spec: $ => token(choice(
       /[Dd]/,
       /[Ss]/,
       /[Ll]/,
-    ),
+    )),
 
     string_form_spec: $ => seq(
       optional($.multi_spec),
@@ -1336,7 +1336,7 @@ module.exports = grammar({
           )
         ),
         seq(
-          alias(choice(...NUMERIC_ARRAY_SYSTEM_FUNCTIONS), $.function_name),
+          alias(token(choice(...NUMERIC_ARRAY_SYSTEM_FUNCTIONS)), $.function_name),
           "(",
           choice(
             alias($.numberreference, $.numberarray),
@@ -2048,121 +2048,169 @@ module.exports = grammar({
       field('right', $.conditional_string_expression)
     )),
 
+    binary_relation_operator: $ => token(choice(
+      '<',
+      '<=',
+      '=<',
+      '>=',
+      '=>',
+      '>',
+      '><',
+      '<>'
+    )),
+
+    logical_and_op: $ => token(choice(
+      /[aA][nN][dD][ \t]/,
+      '&&'
+      )),
+
+    logical_or_op: $ => token(choice(
+      /[oO][rR][ \t]/,
+      '||'
+      )),
+
+    binary_shift_op: $ => token(choice(
+      '>>',
+      '<<'
+      )),
+
+    binary_plus_op: $ => token(choice(
+      '+',
+      '-'
+      )),
+
+    binary_times_op: $ => token(choice(
+      '*',
+      '/',
+      '%'
+      )),
+
+    binary_eq_op: $ => token(choice(
+      '==',
+      '~=',
+      )),
+
+    binary_cond_eq_op: $ => token(choice(
+      '=',
+      '==',
+      '~=',
+      )),
+
+    binary_exp_op: $ => token("**"),
+
     numeric_binary_expression: $ => choice(
-      ...[
-        [/[aA][nN][dD]/, 'logical_and'],
-        ['&&', 'logical_and'],
-        [/[oO][rR]/, 'logical_or'],
-        ['||', 'logical_or'],
-        ['>>', 'binary_shift'],
-        ['<<', 'binary_shift'],
-        ['&', 'bitwise_and'],
-        ['+', 'binary_plus'],
-        ['-', 'binary_plus'],
-        ['*', 'binary_times'],
-        ['/', 'binary_times'],
-        ['%', 'binary_times'],
-        ['**', 'binary_exp', 'right'],
-        ['<', 'binary_relation'],
-        ['<=', 'binary_relation'],
-        ['=<', 'binary_relation'],
-        ['==', 'binary_equality'],
-        ['~=', 'binary_equality'],
-        ['>=', 'binary_relation'],
-        ['=>', 'binary_relation'],
-        ['>', 'binary_relation'],
-        ['><', 'binary_relation'],
-        ['<>', 'binary_relation'],
-    ].map(([operator, precedence, associativity]) =>
-        (associativity === 'right' ? prec.right : prec.left)(precedence, seq(
-          field('left', $.numeric_expression),
-          field('operator', operator),
-          field('right', $.numeric_expression)
-        ))
-      ).concat(
-        [
-          ['<', 'binary_relation'],
-          ['<=', 'binary_relation'],
-          ['=<', 'binary_relation'],
-          ['==', 'binary_equality'],
-          ['~=', 'binary_equality'],
-          ['>=', 'binary_relation'],
-          ['=>', 'binary_relation'],
-          ['>', 'binary_relation'],
-          ['><', 'binary_relation'],
-          ['<>', 'binary_relation'],
-        ].map(([operator, precedence, associativity]) =>
-          (associativity === 'right' ? prec.right : prec.left)(precedence, seq(
-            field('left', $.string_expression),
-            field('operator', operator),
-            field('right', $.string_expression)
-          ))
-        )
-      )
+      prec.left('binary_relation',seq(
+        field('left', $.numeric_expression),
+        field('operator', $.binary_relation_operator),
+        field('right', $.numeric_expression)
+      )),
+      prec.left('logical_and',seq(
+        field('left', $.numeric_expression),
+        field('operator', $.logical_and_op),
+        field('right', $.numeric_expression)
+      )),
+      prec.left('logical_or',seq(
+        field('left', $.numeric_expression),
+        field('operator',$.logical_or_op),
+        field('right', $.numeric_expression)
+      )),
+      prec.left('binary_shift',seq(
+        field('left', $.numeric_expression),
+        field('operator', $.binary_shift_op),
+        field('right', $.numeric_expression)
+      )),
+      prec.left('binary_plus',seq(
+        field('left', $.numeric_expression),
+        field('operator', $.binary_plus_op),
+        field('right', $.numeric_expression)
+      )),
+      prec.left('binary_times',seq(
+        field('left', $.numeric_expression),
+        field('operator', $.binary_times_op),
+        field('right', $.numeric_expression)
+      )),
+      prec.left('binary_equality',seq(
+        field('left', $.numeric_expression),
+        field('operator', $.binary_eq_op),
+        field('right', $.numeric_expression)
+      )),
+      prec.right('binary_exp',seq(
+        field('left', $.numeric_expression),
+        field('operator', $.binary_exp_op),
+        field('right', $.numeric_expression)
+      )),
+      prec.left('binary_relation',seq(
+        field('left', $.string_expression),
+        field('operator', $.binary_relation_operator),
+        field('right', $.string_expression)
+      )),
+      prec.left('binary_equality',seq(
+        field('left', $.string_expression),
+        field('operator', $.binary_eq_op),
+        field('right', $.string_expression)
+      ))
     ),
 
     conditional_binary_expression: $ => choice(
-      ...[
-        [/[aA][nN][dD]/, 'logical_and'],
-        ['&&', 'logical_and'],
-        [/[oO][rR]/, 'logical_or'],
-        ['||', 'logical_or'],
-        ['>>', 'binary_shift'],
-        ['<<', 'binary_shift'],
-        ['&', 'bitwise_and'],
-        ['+', 'binary_plus'],
-        ['-', 'binary_plus'],
-        ['*', 'binary_times'],
-        ['/', 'binary_times'],
-        ['%', 'binary_times'],
-        ['**', 'binary_exp', 'right'],
-        ['<', 'binary_relation'],
-        ['<=', 'binary_relation'],
-        ['=<', 'binary_relation'],
-        ['==', 'binary_equality'],
-        ['=', 'binary_equality'],
-        ['~=', 'binary_equality'],
-        ['>=', 'binary_relation'],
-        ['=>', 'binary_relation'],
-        ['>', 'binary_relation'],
-        ['><', 'binary_relation'],
-        ['<>', 'binary_relation'],
-    ].map(([operator, precedence, associativity]) =>
-        (associativity === 'right' ? prec.right : prec.left)(precedence, seq(
-          field('left', $.conditional_expression),
-          field('operator', operator),
-          field('right', $.conditional_expression)
-        ))
-      ).concat(
-        [
-          ['<', 'binary_relation'],
-          ['<=', 'binary_relation'],
-          ['=<', 'binary_relation'],
-          ['==', 'binary_equality'],
-          ['=', 'binary_equality'],
-          ['~=', 'binary_equality'],
-          ['>=', 'binary_relation'],
-          ['=>', 'binary_relation'],
-          ['>', 'binary_relation'],
-          ['><', 'binary_relation'],
-          ['<>', 'binary_relation'],
-        ].map(([operator, precedence, associativity]) =>
-          (associativity === 'right' ? prec.right : prec.left)(precedence, seq(
-            field('left', $.conditional_string_expression),
-            field('operator', operator),
-            field('right', $.conditional_string_expression)
-          ))
-        )
-      )
+      prec.left('binary_relation',seq(
+        field('left', $.conditional_expression),
+        field('operator', $.binary_relation_operator),
+        field('right', $.conditional_expression)
+      )),
+      prec.left('logical_and',seq(
+        field('left', $.conditional_expression),
+        field('operator', $.logical_and_op),
+        field('right', $.conditional_expression)
+      )),
+      prec.left('logical_or',seq(
+        field('left', $.conditional_expression),
+        field('operator',$.logical_or_op),
+        field('right', $.conditional_expression)
+      )),
+      prec.left('binary_shift',seq(
+        field('left', $.conditional_expression),
+        field('operator', $.binary_shift_op),
+        field('right', $.conditional_expression)
+      )),
+      prec.left('binary_plus',seq(
+        field('left', $.conditional_expression),
+        field('operator', $.binary_plus_op),
+        field('right', $.conditional_expression)
+      )),
+      prec.left('binary_times',seq(
+        field('left', $.conditional_expression),
+        field('operator', $.binary_times_op),
+        field('right', $.conditional_expression)
+      )),
+      prec.left('binary_equality',seq(
+        field('left', $.conditional_expression),
+        field('operator', $.binary_eq_op),
+        field('right', $.conditional_expression)
+      )),
+      prec.right('binary_exp',seq(
+        field('left', $.conditional_expression),
+        field('operator', $.binary_exp_op),
+        field('right', $.conditional_expression)
+      )),
+      prec.left('binary_relation',seq(
+        field('left', $.conditional_string_expression),
+        field('operator', $.binary_relation_operator),
+        field('right', $.conditional_string_expression)
+      )),
+      prec.left('binary_equality',seq(
+        field('left', $.conditional_string_expression),
+        field('operator', $.binary_cond_eq_op),
+        field('right', $.conditional_string_expression)
+      ))
     ),
 
     numeric_unary_expression: $ => prec.left('unary_void', seq(
-      field('operator', choice('~', '-', '+', /[nN][oO][tT][ \t]*/)),
+      token(choice('~', '-', '+', /[nN][oO][tT][ \t]/)),
       field('argument', $.numeric_expression)
     )),
 
     conditional_unary_expression: $ => prec.left('unary_void', seq(
-      field('operator', choice('~', '-', '+', /[nN][oO][tT][ \t]*/)),
+      token(choice('~', '-', '+', /[nN][oO][tT][ \t]/)),
       field('argument', $.conditional_expression)
     )),
 
@@ -2243,13 +2291,13 @@ module.exports = grammar({
         field('arguments', $.arguments)
       ),
       seq(
-        alias(choice(...NUMERIC_SYSTEM_FUNCTIONS), $.function_name),
+        alias(token(choice(...NUMERIC_SYSTEM_FUNCTIONS)), $.function_name),
         optional(field('arguments', $.arguments))
       )
     ),
 
     string_system_function: $ => seq(
-      alias(choice(...STRING_SYSTEM_FUNCTIONS), $.function_name),
+      alias(token(choice(...STRING_SYSTEM_FUNCTIONS)), $.function_name),
       optional(field('arguments', $.arguments)),
       repeat(
         seq(
@@ -2442,13 +2490,13 @@ module.exports = grammar({
 
     numeric_forced_assignment_expression: $ => prec.right('assign', seq(
       field('left', $._numeric_reference),
-      choice(...FORCED_ASSIGNMENT_OPERATORS, "="),
+      token(choice(...FORCED_ASSIGNMENT_OPERATORS, "=")),
       field('right', $.numeric_expression)
     )),
 
     conditional_numeric_forced_assignment_expression: $ => prec.right('assign', seq(
       field('left', $._numeric_reference),
-      choice(...FORCED_ASSIGNMENT_OPERATORS),
+      token(choice(...FORCED_ASSIGNMENT_OPERATORS)),
       field('right', $.numeric_expression),
     )),
 

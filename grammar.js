@@ -349,7 +349,7 @@ module.exports = grammar({
   ],
 
   externals: $ => [
-    $.eol,
+    $._eol,
     $.comment
   ],
 
@@ -389,19 +389,24 @@ module.exports = grammar({
     line: $ => seq(
       optional($.line_number),
       optional($.label),
-      repeat(
-        choice(
-          $.continuation,
-          $.statement_separator
-        ),
-      ),
       choice(
+        seq(
+          repeat(
+            seq(
+              optional($._statement),
+              choice(
+                $.continuation,
+                $.statement_separator
+              ),
+            ),
+          ),
+          $._statement,
+        ),
         $._single_line_statement,
-        $._multi_line_statement,
         $.multiline_comment,
         $.doc_comment
       ),
-      seq($.eol,repeat($._line_end))
+      seq($._eol,repeat($._line_end))
     ),
 
     doc_comment: $ => seq(
@@ -430,20 +435,7 @@ module.exports = grammar({
 
     continuation: $ => /!:[\t ]*(\r?\n)?/,
 
-    _multi_line_statement: $ => seq(      
-      $.statement,
-      repeat(
-        seq(
-          choice(
-            $.continuation,
-            $.statement_separator
-          ),
-          optional($.statement),
-        )
-      )
-    ),
-
-    statement: $ => choice(
+    _statement: $ => choice(
       $.comment,
       seq(
         choice(

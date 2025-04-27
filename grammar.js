@@ -186,6 +186,7 @@ const STATEMENTS = {
   rewrite: token(/[rR][eE][wW][rR][iI][tT][eE]/),
   stop: token(/[sS][tT][oO][pP]/),
   trace: token(/[tT][rR][aA][cC][eE]/),
+  use: token(/[uU][sS][eE]/),
   while: token(/[wW][hH][iI][lL][eE]/),
   write: token(/[wW][rR][iI][tT][eE]/),
   end_select: token(/#[eE][nN][dD][ \t]+[sS][eE][lL][eE][cC][tT]#/),
@@ -208,6 +209,8 @@ const KEYWORD = {
   fields: /[fF][iI][eE][lL][dD][sS][ \t]/,
   files: /[fF][iI][lL][eE][sS]/,
   first: /[fF][iI][rR][sS][tT]/,
+  fkey: /[fF][kK][eE][yY]/,
+  fnkey: /[fF][nN][kK][eE][yY]/,
   free: /[fF][rR][eE][eE]/,
   help: /,[ \t]*[hH][eE][lL][pP][ \t]/,
   ignore: /[iI][gG][nN][oO][rR][eE]/,
@@ -715,10 +718,7 @@ module.exports = grammar({
       ))
     ),
 
-    error_condition: $ => choice(
-      seq(FNKEY, $.numeric_expression),
-      token(choice(...ERROR_CONDITION))
-    ),
+    error_condition: $ => token(choice(...ERROR_CONDITION)),
 
     line_reference: $ => /\d+/,
 
@@ -965,7 +965,7 @@ module.exports = grammar({
 
     end_def_statement: $ => STATEMENTS.end_def,
     end_if_statement: $ =>  STATEMENTS.end_if,
-    end_statement: $ => STATEMENTS.end,
+    end_statement: $ => seq(STATEMENTS.end, optional($.numeric_expression)),
     execute_statement: $ => seq(
       STATEMENTS.execute,
       $.string_expression,
@@ -1138,7 +1138,20 @@ module.exports = grammar({
       choice(
         seq(
           optional(seq(
+            $.input_wait_param,
+            ":"
+          )),
+          $._string_reference
+        ),
+        seq(
+          optional(seq(
             $.channel,
+            optional(
+              seq(
+                ",",
+                $.input_wait_param
+              )
+            ),
             ":"
           )),
           $._string_reference
@@ -1451,6 +1464,27 @@ module.exports = grammar({
     on_statement: $ => seq(
       STATEMENTS.on,
       choice(
+        seq(
+          choice(
+            KEYWORD.fkey,
+            KEYWORD.fnkey
+          ),
+          $.numeric_expression,
+          choice(
+            seq(
+              choice(
+                STATEMENTS.gosub,
+                STATEMENTS.goto
+              ),
+              choice(
+                $.line_reference,
+                $.label_reference
+              )
+            ),
+            KEYWORD.ignore,
+            KEYWORD.system,
+          )
+        ),
         seq(
           $.error_condition,
           choice(
@@ -1802,12 +1836,12 @@ module.exports = grammar({
 
     randomize_statement: $ => STATEMENTS.randomize,
 
-    rem_statement: $ => choice(
-      STATEMENTS.rem,
-      seq(
+    rem_statement: $ => seq(
+      choice(
         STATEMENTS.rem,
-        /[^(].*/
-      )
+        STATEMENTS.use
+      ),
+      optional(/[^(].*/)
     ),
 
     reread_statement: $ => seq(

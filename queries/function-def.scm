@@ -1,10 +1,12 @@
-(def_statement 
+((line (doc_comment)? @doc)
+.
+(line (def_statement 
   (library_keyword)? @library
   [
   (numeric_function_definition
   	(function_name) @function_name
     (parameter_list
-       [(required_paramter
+       [(required_parameter
           (parameter
             [
             (string_array_parameter
@@ -33,7 +35,7 @@
   (string_function_definition
   	(function_name) @function_name
     (parameter_list
-       [(required_paramter
+       [(required_parameter
           (parameter
             [
             (string_array_parameter
@@ -59,5 +61,5 @@
 			]))])
   (string_expression)? @expr)
   ]
-)
+))) @def
 (fnend_statement) @fnend

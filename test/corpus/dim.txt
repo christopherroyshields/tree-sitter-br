@@ -1,0 +1,72 @@
+============================================
+DIM
+============================================
+01230 dim quantity(50), price(100), discount(10), matrix(5,5), totalSales(1)
+01220 dim address$(10,5), customer$(20,3), inventory$(30,4)
+01200 dim name$*40, salary(10), matrix(5,5), description$(1)*255, counter(1)
+01210 dim firstName$*30, lastName$*30, address$*100, city$*40, state$*2, zipCode$*10
+---
+
+(source_file
+  (line
+    (line_number)
+    (dim_statement
+      (numberarray
+        (numberidentifier)
+        (dim_array_size))
+      (numberarray
+        (numberidentifier)
+        (dim_array_size))
+      (numberarray
+        (numberidentifier)
+        (dim_array_size))
+      (numberarray
+        (numberidentifier)
+        (dim_array_size))
+      (numberarray
+        (numberidentifier)
+        (dim_array_size))))
+  (line
+    (line_number)
+    (dim_statement
+      (stringarray
+        (stringidentifier)
+        (dim_array_size))
+      (stringarray
+        (stringidentifier)
+        (dim_array_size))
+      (stringarray
+        (stringidentifier)
+        (dim_array_size))))
+  (line
+    (line_number)
+    (dim_statement
+      (stringreference
+        (stringidentifier))
+      (numberarray
+        (numberidentifier)
+        (dim_array_size))
+      (numberarray
+        (numberidentifier)
+        (dim_array_size))
+      (stringarray
+        (stringidentifier)
+        (dim_array_size))
+      (numberarray
+        (numberidentifier)
+        (dim_array_size))))
+  (line
+    (line_number)
+    (dim_statement
+      (stringreference
+        (stringidentifier))
+      (stringreference
+        (stringidentifier))
+      (stringreference
+        (stringidentifier))
+      (stringreference
+        (stringidentifier))
+      (stringreference
+        (stringidentifier))
+      (stringreference
+        (stringidentifier)))))

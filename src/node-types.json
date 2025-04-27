@@ -855,7 +855,7 @@
     }
   },
   {
-    "type": "error_condition",
+    "type": "end_statement",
     "named": true,
     "fields": {},
     "children": {
@@ -3259,6 +3259,10 @@
           "named": true
         },
         {
+          "type": "input_wait_param",
+          "named": true
+        },
+        {
           "type": "numeric_expression",
           "named": true
         },
@@ -4646,7 +4650,7 @@
     "named": true
   },
   {
-    "type": "end_statement",
+    "type": "error_condition",
     "named": true
   },
   {

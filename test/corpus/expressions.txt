@@ -1,0 +1,624 @@
+==============================
+mat_numeric_array_expression
+==============================
+mat a(4)
+---
+
+(source_file
+  (line
+    (mat_statement
+      (mat_numeric_array_expression
+        (numberarray
+          (numberidentifier))
+        (mat_size
+          (numeric_expression
+            (numeric_primary_expression
+              (number))))))))
+
+==============================
+mat_string_array_expression
+==============================
+mat b$=("")
+---
+
+(source_file
+  (line
+    (mat_statement
+      (mat_string_array_expression
+        (stringarray
+          (stringidentifier))
+        (assignment_op)
+        (string_expression
+          (string_primary_expression
+            (string)))))))
+
+==============================
+string_array_expression
+==============================
+print mat f$
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (string_array_expression
+            (string_array_primary_expression
+              (stringarray
+                (stringidentifier)))))))))
+
+==============================
+numeric_array_expression
+==============================
+print mat f
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (numeric_array_expression
+            (numeric_array_primary_expression
+              (numberarray
+                (numberidentifier)))))))))
+
+==============================
+numeric_expression
+==============================
+print x
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier)))))))))
+
+==============================
+conditional_expression
+==============================
+if x = 1 then
+---
+
+(source_file
+  (line
+    (if_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (numberreference
+                (numberidentifier))))
+          (binary_cond_eq_op)
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (number))))))))
+
+==============================
+string_expression
+==============================
+print "string"
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (string_expression
+            (string_primary_expression
+              (string))))))))
+
+==============================
+conditional_string_expression
+==============================
+if x$="string" then
+---
+
+(source_file
+  (line
+    (if_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_string_expression
+            (conditional_string_primary_expression
+              (stringreference
+                (stringidentifier))))
+          (binary_cond_eq_op)
+          (conditional_string_expression
+            (conditional_string_primary_expression
+              (string))))))))
+
+==============================
+string_binary_expression
+==============================
+print a$&b$
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (string_expression
+            (string_binary_expression
+              (string_expression
+                (string_primary_expression
+                  (stringreference
+                    (stringidentifier))))
+              (concat_op)
+              (string_expression
+                (string_primary_expression
+                  (stringreference
+                    (stringidentifier)))))))))))
+
+==============================
+conditional_string_binary_expression
+==============================
+if x$&y$="test" then
+---
+
+(source_file
+  (line
+    (if_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_string_expression
+            (conditional_string_binary_expression
+              (conditional_string_expression
+                (conditional_string_primary_expression
+                  (stringreference
+                    (stringidentifier))))
+              (concat_op)
+              (conditional_string_expression
+                (conditional_string_primary_expression
+                  (stringreference
+                    (stringidentifier))))))
+          (binary_cond_eq_op)
+          (conditional_string_expression
+            (conditional_string_primary_expression
+              (string))))))))
+
+==============================
+numeric_binary_expression
+==============================
+print 1 + 1
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_binary_expression
+              (numeric_expression
+                (numeric_primary_expression
+                  (number)))
+              (binary_plus_op)
+              (numeric_expression
+                (numeric_primary_expression
+                  (number))))))))))
+
+==============================
+conditional_binary_expression
+==============================
+if 1 + 1 then
+---
+
+(source_file
+  (line
+    (if_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (number)))
+          (binary_plus_op)
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (number))))))))
+
+==============================
+numeric_unary_expression
+==============================
+print ~ 1
+print not 1
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_unary_expression
+              (unary_operator)
+              (numeric_expression
+                (numeric_primary_expression
+                  (number)))))))))
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_unary_expression
+              (unary_operator)
+              (numeric_expression
+                (numeric_primary_expression
+                  (number))))))))))
+
+==============================
+conditional_unary_expression
+==============================
+if ~x then
+---
+
+(source_file
+  (line
+    (if_statement
+      (conditional_expression
+        (conditional_unary_expression
+          (unary_operator)
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (numberreference
+                (numberidentifier)))))))))
+
+==============================
+numeric_array_primary_expression
+==============================
+print mat f
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (numeric_array_expression
+            (numeric_array_primary_expression
+              (numberarray
+                (numberidentifier)))))))))
+
+==============================
+string_array_primary_expression
+==============================
+print mat f$
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (string_array_expression
+            (string_array_primary_expression
+              (stringarray
+                (stringidentifier)))))))))
+
+==============================
+numeric_primary_expression
+==============================
+print a
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier)))))))))
+
+==============================
+numeric_conditional_primary_expression
+==============================
+if a then
+---
+
+(source_file
+  (line
+    (if_statement
+      (conditional_expression
+        (numeric_conditional_primary_expression
+          (numberreference
+            (numberidentifier)))))))
+
+==============================
+string_primary_expression
+==============================
+print f$
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (string_expression
+            (string_primary_expression
+              (stringreference
+                (stringidentifier)))))))))
+
+==============================
+conditional_string_primary_expression
+==============================
+if x$==y$ then
+---
+
+(source_file
+  (line
+    (if_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_string_expression
+            (conditional_string_primary_expression
+              (stringreference
+                (stringidentifier))))
+          (binary_cond_eq_op)
+          (conditional_string_expression
+            (conditional_string_primary_expression
+              (stringreference
+                (stringidentifier)))))))))
+
+==============================
+numeric_call_expression
+==============================
+print val(x$)
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numeric_call_expression
+                (numeric_system_function
+                  (function_name)
+                  (arguments
+                    (argument
+                      (expression
+                        (string_expression
+                          (string_primary_expression
+                            (stringreference
+                              (stringidentifier))))))))))))))))
+
+==============================
+string_call_expression
+==============================
+print str$(x)
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (string_expression
+            (string_primary_expression
+              (string_call_expression
+                (string_system_function
+                  (function_name)
+                  (arguments
+                    (argument
+                      (expression
+                        (numeric_expression
+                          (numeric_primary_expression
+                            (numberreference
+                              (numberidentifier))))))))))))))))
+
+==============================
+parenthesized_string_expression
+==============================
+print ("test")
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (string_expression
+            (string_primary_expression
+              (parenthesized_string_expression
+                (string_expression
+                  (string_primary_expression
+                    (string)))))))))))
+
+==============================
+conditional_parenthesized_string_expression
+==============================
+if a$==("test") then
+---
+
+(source_file
+  (line
+    (if_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_string_expression
+            (conditional_string_primary_expression
+              (stringreference
+                (stringidentifier))))
+          (binary_cond_eq_op)
+          (conditional_string_expression
+            (conditional_string_primary_expression
+              (conditional_parenthesized_string_expression
+                (conditional_string_expression
+                  (conditional_string_primary_expression
+                    (string)))))))))))
+
+==============================
+parenthesized_numeric_expression
+==============================
+print 1 + (2 + 3)
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_binary_expression
+              (numeric_expression
+                (numeric_primary_expression
+                  (number)))
+              (binary_plus_op)
+              (numeric_expression
+                (numeric_primary_expression
+                  (parenthesized_numeric_expression
+                    (numeric_expression
+                      (numeric_binary_expression
+                        (numeric_expression
+                          (numeric_primary_expression
+                            (number)))
+                        (binary_plus_op)
+                        (numeric_expression
+                          (numeric_primary_expression
+                            (number)))))))))))))))
+
+==============================
+conditional_parenthesized_numeric_expression
+==============================
+if 1 + (2 + 3) then
+---
+
+(source_file
+  (line
+    (if_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (number)))
+          (binary_plus_op)
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (conditional_parenthesized_numeric_expression
+                (conditional_expression
+                  (conditional_binary_expression
+                    (conditional_expression
+                      (numeric_conditional_primary_expression
+                        (number)))
+                    (binary_plus_op)
+                    (conditional_expression
+                      (numeric_conditional_primary_expression
+                        (number)))))))))))))
+
+==============================
+string_array_forced_assignment_expression
+==============================
+print mat x$:=("")
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (string_array_expression
+            (string_array_forced_assignment_expression
+              (stringarray
+                (stringidentifier))
+              (forced_assignment_op)
+              (string_expression
+                (string_primary_expression
+                  (string))))))))))
+
+==============================
+numeric_array_forced_assignment_expression
+==============================
+print mat f:=(1)
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (numeric_array_expression
+            (numeric_array_forced_assignment_expression
+              (numberarray
+                (numberidentifier))
+              (forced_assignment_op)
+              (numeric_expression
+                (numeric_primary_expression
+                  (number))))))))))
+
+==============================
+numeric_forced_assignment_expression
+==============================
+print x:=1
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_forced_assignment_expression
+              (numberreference
+                (numberidentifier))
+              (numeric_forced_assignment_op
+                (conditional_numeric_forced_assignment_op))
+              (numeric_expression
+                (numeric_primary_expression
+                  (number))))))))))
+
+==============================
+conditional_numeric_forced_assignment_expression
+==============================
+if a:=b==10 then
+---
+
+(source_file
+  (line
+    (if_statement
+      (conditional_expression
+        (conditional_numeric_forced_assignment_expression
+          (numberreference
+            (numberidentifier))
+          (conditional_numeric_forced_assignment_op)
+          (numeric_expression
+            (numeric_binary_expression
+              (numeric_expression
+                (numeric_primary_expression
+                  (numberreference
+                    (numberidentifier))))
+              (binary_eq_op)
+              (numeric_expression
+                (numeric_primary_expression
+                  (number))))))))))
+
+==============================
+string_forced_assignment_expression
+==============================
+print work$:="test"
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_output
+        (expression
+          (string_expression
+            (string_forced_assignment_expression
+              (stringreference
+                (stringidentifier))
+              (forced_assignment_op)
+              (string_expression
+                (string_primary_expression
+                  (string))))))))))

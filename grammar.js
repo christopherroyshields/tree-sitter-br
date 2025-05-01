@@ -363,8 +363,6 @@ module.exports = grammar({
 
   inline: $ => [
     $.int,
-    $.logical_operator,
-    $.comparison_operator,
     $.multi_spec,
     $.function_length,
     $.field_length,
@@ -1337,7 +1335,7 @@ module.exports = grammar({
     ),
 
     mat_assignment_numeric: $ => seq(
-      "=",
+      field("operator", $.assignment_op),
       choice(
         seq(
           alias($.numberreference, $.numberarray),
@@ -1421,7 +1419,7 @@ module.exports = grammar({
       ),
       optional(
         seq(
-          "=",
+          field("operator", $.assignment_op),
           choice(
             seq(
               alias($.string_name, $.stringarray),
@@ -2028,27 +2026,6 @@ module.exports = grammar({
 
     label: $ => /[a-zA-Z_]\w*:/,
 
-    logical_operator: $ => choice(
-      /[aA][nN][dD]/,
-      /[oO][rR]/,
-      "&&",
-      "||"
-    ),
-
-    comparison_operator: $ => choice(
-      "<>",
-      "><",
-      "<=",
-      "=<",
-      "<=",
-      ">=",
-      "=>",
-      "=",
-      "==",
-      ">",
-      "~="
-    ),
-
     expression: $ => choice(
       $.string_array_expression,
       $.numeric_array_expression,
@@ -2098,19 +2075,21 @@ module.exports = grammar({
 
     string_assignment: $ => prec.left(seq(
       field('left', $.string_expression),
-      field('operator', "="),
+      field('operator', $.assignment_op),
       field('right', $.string_expression)
     )),
 
+    concat_op: $ => "&",
+    
     string_binary_expression: $ => prec.left('binary_plus', seq(
       field('left', $.string_expression),
-      field('operator', "&"),
+      field('operator', $.concat_op),
       field('right', $.string_expression)
     )),
 
     conditional_string_binary_expression: $ => prec.left('binary_plus', seq(
       field('left', $.conditional_string_expression),
-      field('operator', "&"),
+      field('operator', $.concat_op),
       field('right', $.conditional_string_expression)
     )),
 
@@ -2270,13 +2249,15 @@ module.exports = grammar({
       ))
     ),
 
+    unary_operator: $ => token(choice('~', '-', '+', /[nN][oO][tT][ \t]/)),
+
     numeric_unary_expression: $ => prec.left('unary_void', seq(
-      token(choice('~', '-', '+', /[nN][oO][tT][ \t]/)),
+      field("operator", $.unary_operator),
       field('argument', $.numeric_expression)
     )),
 
     conditional_unary_expression: $ => prec.left('unary_void', seq(
-      token(choice('~', '-', '+', /[nN][oO][tT][ \t]/)),
+      field('operator', $.unary_operator),
       field('argument', $.conditional_expression)
     )),
 
@@ -2347,7 +2328,7 @@ module.exports = grammar({
 
     string_function_assignment: $ => prec.right('assign',seq(
       field('left', alias($.string_function_name, $.function_name)),
-      choice("=",":="),
+      field("operator", $.assignment_operator),
       field('right', $.string_expression)
     )),
 
@@ -2374,15 +2355,19 @@ module.exports = grammar({
       )
     ),
 
+    assignment_operator: $ => choice($.assignment_op,$.forced_assignment_op),
+
     numeric_function_assignment: $ => prec.right('assign',seq(
       field('left', alias($.numeric_function_name, $.function_name)),
-      choice("=",":="),
+      field("operator", $.assignment_operator),
       field('right', $.numeric_expression)
     )),
 
+    forced_assignment_op: $ => ":=",
+
     conditional_numeric_function_assignment: $ => prec.right('assign',seq(
       field('left', alias($.numeric_function_name, $.function_name)),
-      ":=",
+      field("operator", $.forced_assignment_op),
       field('right', $.numeric_expression)
     )),
 
@@ -2502,29 +2487,9 @@ module.exports = grammar({
       ')'
     ),
 
-    string_assignment_expression: $ => prec.right('assign', seq(
-      field('left', $._string_reference),
-      '=',
-      field('right', choice(
-        $.string_expression,
-        $.string_assignment_expression
-      ))
-    )),
-
-    numeric_assignment_expression: $ => prec.right('assign', seq(
-      field('left', choice(
-        $._numeric_reference
-      )),
-      '=',
-      field('right', choice(
-        $.numeric_expression,
-        $.numeric_assignment_expression
-      ))
-    )),
-
     string_array_forced_assignment_expression: $ => prec.right('assign', seq(
       field('left', $.stringarray),
-      ":=",
+      field("operator", $.forced_assignment_op),
       field('right', choice(
         seq(
           "(",
@@ -2540,7 +2505,7 @@ module.exports = grammar({
 
     numeric_array_forced_assignment_expression: $ => prec.right('assign', seq(
       field('left', $.numberarray),
-      ":=",
+      field("operator", $.forced_assignment_op),
       field('right', choice(
         seq(
           "(",
@@ -2554,27 +2519,33 @@ module.exports = grammar({
       ))
     )),
 
+    assignment_op: $ => "=",
+    conditional_numeric_forced_assignment_op: $ => token(choice(...FORCED_ASSIGNMENT_OPERATORS)),
+    numeric_forced_assignment_op: $ => choice($.conditional_numeric_forced_assignment_op, $.assignment_op),
+
     numeric_forced_assignment_expression: $ => prec.right('assign', seq(
       field('left', $._numeric_reference),
-      token(choice(...FORCED_ASSIGNMENT_OPERATORS, "=")),
+      field("operator", $.numeric_forced_assignment_op),
       field('right', $.numeric_expression)
     )),
 
     conditional_numeric_forced_assignment_expression: $ => prec.right('assign', seq(
       field('left', $._numeric_reference),
-      token(choice(...FORCED_ASSIGNMENT_OPERATORS)),
+      field("operator", $.conditional_numeric_forced_assignment_op),
       field('right', $.numeric_expression),
     )),
 
+    // string_forced_assignment_expression_op: $ => ":=",
+
     string_forced_assignment_expression: $ => prec.right('assign', seq(
       field('left', $._string_reference),
-      ":=",
+      field("operator", $.forced_assignment_op),
       field('right', $.string_expression)
     )),
 
     conditional_string_forced_assignment_expression: $ => prec.right('assign', seq(
       field('left', $._string_reference),
-      ":=",
+      field("operator", $.forced_assignment_op),
       field('right', $.conditional_string_expression)
     )),
 

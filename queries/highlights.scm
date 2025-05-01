@@ -20,4 +20,8 @@
   (#match? @function.builtin "[dD][iI][dD][xX]"))
 (_ (function_name)  @function)
 
+;; operators
 (_ operator: (_) @operator)
+
+;; keywords
+("statement") @keyword

@@ -448,10 +448,11 @@ module.exports = grammar({
       $.if_statement
     ),
 
-    continue_statement: $ => STATEMENTS.continue,
+    continue_statement: $ => alias(STATEMENTS.continue, "statement"),
 
     close_statement: $ => seq(
-      STATEMENTS.close,
+      alias(STATEMENTS.close,"statement"),
+      // STATEMENTS.close,
       "#",
       $.numeric_expression,
       optional(seq(",",choice(
@@ -466,7 +467,7 @@ module.exports = grammar({
     ),
 
     data_statement: $ => seq(
-      STATEMENTS.data,
+      alias(STATEMENTS.data, "statement"),
       optional(choice(
         $.unquoted_data,
         $.string,
@@ -484,7 +485,7 @@ module.exports = grammar({
     ),
 
     def_statement: $ => seq(
-      STATEMENTS.def,
+      alias(STATEMENTS.def, "statement"),
       optional($.library_keyword),      
       choice(
         $.string_function_definition,
@@ -495,7 +496,7 @@ module.exports = grammar({
     library_keyword: $ => KEYWORD.library,
 
     library_statement: $ => seq(
-      STATEMENTS.library,
+      alias(STATEMENTS.library, "statement"),
       optional(
         choice(
           seq(
@@ -611,7 +612,7 @@ module.exports = grammar({
     )),
 
     delete_statement: $ => seq(
-      STATEMENTS.delete,
+      alias(STATEMENTS.delete, "statement"),
       "#",
       $.numeric_expression,
       optional(
@@ -644,7 +645,7 @@ module.exports = grammar({
     ),
 
     dim_statement: $ => seq(
-      STATEMENTS.dim,
+      alias(STATEMENTS.dim, "statement"),
       commaSep1(
         choice(
           alias($.dim_number, $.numberreference),
@@ -690,7 +691,7 @@ module.exports = grammar({
     ),
 
     do_statement: $ => seq(
-      STATEMENTS.do,
+      alias(STATEMENTS.do, "statement"),
       optional(seq(
         choice(
           KEYWORD.while,
@@ -721,7 +722,7 @@ module.exports = grammar({
     line_reference: $ => /\d+/,
 
     chain_statement: $ => seq(
-      STATEMENTS.chain,
+      alias(STATEMENTS.chain, "statement"),
       $.string_expression,
       optional(
         seq(
@@ -923,7 +924,7 @@ module.exports = grammar({
     ),
 
     form_statement: $ => seq(
-      STATEMENTS.form,
+      alias(STATEMENTS.form, "statement"),
       commaSep1(
         choice(
           $.form_spec,
@@ -950,7 +951,7 @@ module.exports = grammar({
     )),
 
     else_statement: $ => prec.right(seq(
-      STATEMENTS.else,
+      alias(STATEMENTS.else, "statement"),
       optional(
         choice(
           $.comment,
@@ -961,17 +962,17 @@ module.exports = grammar({
       ),
     )),
 
-    end_def_statement: $ => STATEMENTS.end_def,
-    end_if_statement: $ =>  STATEMENTS.end_if,
-    end_statement: $ => seq(STATEMENTS.end, optional($.numeric_expression)),
+    end_def_statement: $ => alias(STATEMENTS.end_def, "statement"),
+    end_if_statement: $ =>  alias(STATEMENTS.end_if, "statement"),
+    end_statement: $ => seq(alias(STATEMENTS.end, "statement"), optional($.numeric_expression)),
     execute_statement: $ => seq(
-      STATEMENTS.execute,
+      alias(STATEMENTS.execute, "statement"),
       $.string_expression,
       optional($.error_condition_list)
     ),
-    exit_do_statement: $ => STATEMENTS.exit_do,
+    exit_do_statement: $ => alias(STATEMENTS.exit_do, "statement"),
     exit_statement: $ => seq(
-      STATEMENTS.exit,
+      alias(STATEMENTS.exit, "statement"),
       optional($.error_condition_list)
     ),
 
@@ -1043,7 +1044,7 @@ module.exports = grammar({
     )),
 
     if_statement: $ => prec.right(seq(
-      STATEMENTS.if,
+      alias(STATEMENTS.if, "statement"),
       $.conditional_expression,
       KEYWORD.then,
       optional(","),
@@ -1068,7 +1069,7 @@ module.exports = grammar({
     int: $ => /\d+/,
 
     for_statement: $ => seq(
-      STATEMENTS.for,
+      alias(STATEMENTS.for, "statement"),
       $.numberreference,
       "=",
       $.numeric_expression,
@@ -1080,12 +1081,12 @@ module.exports = grammar({
       ))
     ),
 
-    fnend_statement: $ => STATEMENTS.fnend,
+    fnend_statement: $ => alias(STATEMENTS.fnend, "statement"),
     string_function_name: $ => /[fF][nN]\w+\$/i,
     numeric_function_name: $ => /[fF][nN]\w+/i,
 
     gosub_statement: $ => seq(
-      STATEMENTS.gosub,
+      alias(STATEMENTS.gosub, "statement"),
       choice(
         $.line_reference,
         $.label_reference
@@ -1093,7 +1094,7 @@ module.exports = grammar({
     ),
 
     goto_statement: $ => seq(
-      STATEMENTS.goto,
+      alias(STATEMENTS.goto, "statement"),
       choice(
         $.line_reference,
         $.label_reference
@@ -1102,8 +1103,8 @@ module.exports = grammar({
 
     input_menu_statement: $ => seq(
       choice(
-        STATEMENTS.input,
-        STATEMENTS.display,
+        alias(STATEMENTS.input, "statement"),
+        alias(STATEMENTS.display, "statement"),
       ),
       optional(seq(
         $.channel,
@@ -1132,7 +1133,7 @@ module.exports = grammar({
     ),
 
     rinput_statement: $ => seq(
-      STATEMENTS.rinput,
+      alias(STATEMENTS.rinput, "statement"),
       choice(
         seq(
           optional(seq(
@@ -1188,7 +1189,7 @@ module.exports = grammar({
     ),
 
     input_statement: $ => seq(
-      STATEMENTS.input,
+      alias(STATEMENTS.input, "statement"),
       choice(
         seq(
           optional(seq(
@@ -1274,10 +1275,8 @@ module.exports = grammar({
       )
     ),
 
-    statement_linput: $ => STATEMENTS.linput,
-
     linput_statement: $ => seq(
-      field("statement", $.statement_linput),
+      alias(STATEMENTS.linput, "statement"),
       choice(
         $._string_reference,
         seq(
@@ -1307,7 +1306,7 @@ module.exports = grammar({
     ),
 
     loop_statement: $ => seq(
-      STATEMENTS.loop,
+      alias(STATEMENTS.loop, "statement"),
       optional(
         seq(
           choice(
@@ -1455,12 +1454,12 @@ module.exports = grammar({
     )),
 
     next_statement: $ => seq(
-      STATEMENTS.next,
+      alias(STATEMENTS.next, "statement"),
       $.numberreference
     ),
 
     on_statement: $ => seq(
-      STATEMENTS.on,
+      alias(STATEMENTS.on, "statement"),
       choice(
         seq(
           choice(
@@ -1471,8 +1470,8 @@ module.exports = grammar({
           choice(
             seq(
               choice(
-                STATEMENTS.gosub,
-                STATEMENTS.goto
+                alias(STATEMENTS.gosub, "statement"),
+                alias(STATEMENTS.goto, "statement")
               ),
               choice(
                 $.line_reference,
@@ -1495,8 +1494,8 @@ module.exports = grammar({
         seq(
           $.numeric_expression,
           choice(
-            STATEMENTS.goto,
-            STATEMENTS.gosub,
+            alias(STATEMENTS.goto, "statement"),
+            alias(STATEMENTS.gosub, "statement"),
           ),
           commaSep1(choice(
             $.line_reference,
@@ -1518,7 +1517,7 @@ module.exports = grammar({
 
     keyword_outin: $ => KEYWORD.outin,
     open_statement: $ => seq(
-      STATEMENTS.open,
+      alias(STATEMENTS.open, "statement"),
       $.channel,
       ":",
       $.string_expression,
@@ -1572,7 +1571,7 @@ module.exports = grammar({
     ),
 
     option_statement: $ => seq(
-      STATEMENTS.option,
+      alias(STATEMENTS.option, "statement"),
       commaSep1(
         choice(
           KEYWORD.invp,
@@ -1592,10 +1591,10 @@ module.exports = grammar({
       )
     ),
 
-    pause_statement: $ => STATEMENTS.pause,
+    pause_statement: $ => alias(STATEMENTS.pause, "statement"),
 
     print_statement: $ => seq(
-      STATEMENTS.print,
+      alias(STATEMENTS.print, "statement"),
       optional(choice(
         $.print_output,
         $.print_fields,
@@ -1717,7 +1716,7 @@ module.exports = grammar({
     ),
 
     read_statement: $ => seq(
-      STATEMENTS.read,
+      alias(STATEMENTS.read, "statement"),
       choice(
         $._read_variable_list,
         seq(
@@ -1762,7 +1761,7 @@ module.exports = grammar({
     ),
 
     release_statement: $ => seq(
-      STATEMENTS.release,
+      alias(STATEMENTS.release, "statement"),
       "#",
       $.numeric_expression,
       ":"
@@ -1832,18 +1831,18 @@ module.exports = grammar({
       )
     ),
 
-    randomize_statement: $ => STATEMENTS.randomize,
+    randomize_statement: $ => alias(STATEMENTS.randomize, "statement"),
 
     rem_statement: $ => seq(
       choice(
-        STATEMENTS.rem,
-        STATEMENTS.use
+        alias(STATEMENTS.rem, "statement"),
+        alias(STATEMENTS.use, "statement")
       ),
       optional(/[^(].*/)
     ),
 
     reread_statement: $ => seq(
-      STATEMENTS.reread,
+      alias(STATEMENTS.reread, "statement"),
       $.channel,
       optional(
         seq(
@@ -1873,7 +1872,7 @@ module.exports = grammar({
     ),
 
     restore_statement: $ => seq(
-      STATEMENTS.restore,
+      alias(STATEMENTS.restore, "statement"),
       choice(
         $.restore_data,
         $.restore_file,
@@ -1918,11 +1917,11 @@ module.exports = grammar({
         KEYWORD.same,
       ),
 
-    retry_statement: $ => STATEMENTS.retry,
-    return_statement: $ => STATEMENTS.return,
+    retry_statement: $ => alias(STATEMENTS.retry, "statement"),
+    return_statement: $ => alias(STATEMENTS.return, "statement"),
 
     rewrite_statement: $ => seq(
-      STATEMENTS.rewrite,
+      alias(STATEMENTS.rewrite, "statement"),
       $.channel,
       optional(seq(
         ",",
@@ -1951,7 +1950,7 @@ module.exports = grammar({
     ),
 
     write_statement: $ => seq(
-      STATEMENTS.write,
+      alias(STATEMENTS.write, "statement"),
       $.channel,
       optional(seq(
         ",",
@@ -1980,12 +1979,12 @@ module.exports = grammar({
     ),
 
     stop_statement: $ => seq(
-      STATEMENTS.stop,
+      alias(STATEMENTS.stop, "statement"),
       optional($.numeric_expression),
     ),
 
     trace_statement: $ => seq(
-      STATEMENTS.trace,
+      alias(STATEMENTS.trace, "statement"),
       choice(
         KEYWORD.on,
         KEYWORD.off,
@@ -1994,13 +1993,13 @@ module.exports = grammar({
     ),
 
     select_case_statement: $ => seq(
-      STATEMENTS.select,
+      alias(STATEMENTS.select, "statement"),
       $.expression,
       $.case_statement
     ),
 
     case_statement: $ => seq(
-      STATEMENTS.case,
+      alias(STATEMENTS.case, "statement"),
       $.expression,
       repeat(seq(
         "#",
@@ -2008,11 +2007,11 @@ module.exports = grammar({
       ))
     ),
 
-    case_else_statement: $ => STATEMENTS.case_else,
-    end_select_statement: $ => STATEMENTS.end_select,
+    case_else_statement: $ => alias(STATEMENTS.case_else, "statement"),
+    end_select_statement: $ => alias(STATEMENTS.end_select, "statement"),
 
     let_statement: $ => seq(
-      optional(STATEMENTS.let),
+      optional(alias(STATEMENTS.let, "statement")),
       choice(
         $.string_expression,
         $.numeric_expression
@@ -2668,7 +2667,7 @@ module.exports = grammar({
       ))
     },
 
-    unquoted_data: $ => /[^"'\n\s][^,\n]*/,
+    unquoted_data: $ => /[^"'\r\n\s][^,\r\n]*/,
 
   }
 });

@@ -1,0 +1,126 @@
+==================================
+delete key
+==================================
+delete #10, key="A0001234":
+---
+
+(source_file
+  (line
+    (delete_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))
+      (string_expression
+        (string_primary_expression
+          (string))))))
+
+==========================
+delete rec
+==========================
+delete #10, rec=100:
+---
+
+(source_file
+  (line
+    (delete_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))
+      (numeric_expression
+        (numeric_primary_expression
+          (number))))))
+
+==========================
+close #10, drop, release:
+==========================
+close #10, drop, release:
+---
+
+(source_file
+  (line
+    (close_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (number))))))
+
+==========================
+close #10, free, release:
+==========================
+close #10, free, release:
+---
+
+(source_file
+  (line
+    (close_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (number))))))
+
+==========================
+def library fntest
+==========================
+def library fntest
+---
+
+(source_file
+  (line
+    (def_statement
+      (library_keyword)
+      (numeric_function_definition
+        (function_name)))))
+
+==========================
+library release, nofiles,  "libfile": fnfoo
+==========================
+library release, nofiles,  "libfile": fnfoo
+---
+
+(source_file
+  (line
+    (library_statement
+      (string_expression
+        (string_primary_expression
+          (string)))
+      (library_function_list
+        (function_name)))))
+
+==========================
+print fields f$: x
+==========================
+print fields f$: x
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_fields
+        (string_expression
+          (string_primary_expression
+            (stringreference
+              (stringidentifier))))
+        (print_output
+          (expression
+            (numeric_expression
+              (numeric_primary_expression
+                (numberreference
+                  (numberidentifier))))))))))
+
+do while x==1
+do until y = 0                
+chain "program", a,b,c,d$
+if test then
+for i = 0 to 8 step 2
+input fields mat f$, attr "test", wait=10: a$
+00290    INPUT MENU TEXT: MAT M$ ! Rereads text only
+00300    INPUT MENU DATA: MAT PGM$
+00310    INPUT MENU STATUS: MAT STATUS$
+
+00140 INPUT #11,WAIT=30:X$ TIMEOUT 100
+input fields mat f$, attr "test", wait=10: a$
+input fields mat f$, attr "test", wait=10, help "test": a$
+
+00120 LINPUT WAIT=10:X$ TIMEOUT 100
+00120 LINPUT #10,WAIT=10:X$ TIMEOUT 100
+
+loop while x > 1
+loop until y < 5

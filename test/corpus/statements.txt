@@ -1603,13 +1603,11 @@ LInput
   (line
     (line_number)
     (linput_statement
-      (statement_linput)
       (stringreference
         (stringidentifier))))
   (line
     (line_number)
     (linput_statement
-      (statement_linput)
       (channel
         (numeric_expression
           (numeric_primary_expression

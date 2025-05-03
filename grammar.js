@@ -357,7 +357,8 @@ module.exports = grammar({
   ],
 
   extras: $ => [
-    /[ \t]/,
+    " ",
+    "\t",
     /!_.*\n/
   ],
 
@@ -493,7 +494,7 @@ module.exports = grammar({
       )
     ),
 
-    library_keyword: $ => keyword("library"),
+    library_keyword: $ => alias(/[lL][iI][bB]\w*/,"keyword"),
 
     library_statement: $ => seq(
       alias(STATEMENTS.library, "statement"),
@@ -1183,7 +1184,7 @@ module.exports = grammar({
 
     input_wait_param: $=> seq(
       keyword("wait"),
-      token.immediate("="),
+      field("operator", alias(token.immediate("="), $.assignment_op)),
       $.numeric_expression,
     ),
 
@@ -1252,6 +1253,7 @@ module.exports = grammar({
       optional(seq(
         ",",
         keyword("attr"),
+        token.immediate(/[ \t]/),
         choice(
           $.string_expression,
           $.stringarray,
@@ -1259,8 +1261,7 @@ module.exports = grammar({
       )),
       optional(seq(
         ",",
-        $._keyword_wait,
-        $.numeric_expression
+        $.input_wait_param,
       )),
       optional($.help_parameter),
       ":",
@@ -1285,8 +1286,7 @@ module.exports = grammar({
       choice(
         $._string_reference,
         seq(
-          $._keyword_wait,
-          $.numeric_expression,
+          $.input_wait_param,
           ":",
           $._string_reference,
         ),
@@ -1299,8 +1299,7 @@ module.exports = grammar({
             ),
             seq(
               ",",
-              $._keyword_wait,
-              $.numeric_expression,
+              $.input_wait_param,
               ":",
               $._string_reference,
             )
@@ -1520,7 +1519,6 @@ module.exports = grammar({
       ),
     ),
 
-    keyword_outin: $ => KEYWORD.outin,
     open_statement: $ => seq(
       alias(STATEMENTS.open, "statement"),
       $.channel,
@@ -1529,44 +1527,44 @@ module.exports = grammar({
       ",",
       choice(
         seq(
-          KEYWORD.display,
+          keyword("display"),
           ",",
           choice(
-            KEYWORD.input,
-            KEYWORD.output,
-            KEYWORD.outin,
+            keyword("input"),
+            keyword("output"),
+            keyword("outin"),
           )
         ),
         seq(
-          KEYWORD.external,
+          keyword("external"),
           ",",
           choice(
-            KEYWORD.input,
-            KEYWORD.output,
-            KEYWORD.outin,
+            keyword("input"),
+            keyword("output"),
+            keyword("outin"),
           ),
           optional(seq(
             ",",
             choice(
-              KEYWORD.sequential,
-              KEYWORD.relative
+              keyword("sequential"),
+              keyword("relative")
             )
           ))
         ),
         seq(
-          KEYWORD.internal,
+          keyword("internal"),
           ",",
           choice(
-            KEYWORD.input,
-            KEYWORD.output,
-            KEYWORD.outin,
+            keyword("input"),
+            keyword("output"),
+            keyword("outin"),
           ),
           optional(seq(
             ",",
             choice(
-              KEYWORD.sequential,
-              KEYWORD.relative,
-              KEYWORD.keyed,
+              keyword("sequential"),
+              keyword("relative"),
+              keyword("keyed"),
             )
           ))
         )
@@ -1579,19 +1577,19 @@ module.exports = grammar({
       alias(STATEMENTS.option, "statement"),
       commaSep1(
         choice(
-          KEYWORD.invp,
+          keyword("invp"),
           seq(
-            KEYWORD.base,
+            keyword("base"),
             choice("0","1")
           ),
           seq(
-            KEYWORD.collate,
+            keyword("collate"),
             choice(
-              KEYWORD.alternate,
-              KEYWORD.native,
+              keyword("alternate"),
+              keyword("native"),
             )
           ),
-          KEYWORD.retain
+          keyword("retain")
         )
       )
     ),
@@ -1627,7 +1625,8 @@ module.exports = grammar({
     ),
 
     print_using: $ => seq(
-      KEYWORD.using,
+      keyword("using"),
+      token.immediate(/[ \t]/),
       choice(
         $.string_expression,
         $.line_reference,
@@ -1638,7 +1637,7 @@ module.exports = grammar({
     ),
 
     print_border: $ => seq(
-      KEYWORD.border,
+      keyword("border"),
       optional(seq(
         /[ \t]/,
         $.string_expression
@@ -1773,7 +1772,7 @@ module.exports = grammar({
     ),
 
     link_seq: $ => seq(
-      KEYWORD.link,
+      keyword("link"),
       token.immediate("="),
       $.string_expression,
       optional(seq(
@@ -1787,44 +1786,44 @@ module.exports = grammar({
     ),
 
     positional_parameter: $ => choice(
-      KEYWORD.first,
-      KEYWORD.last,
-      KEYWORD.prior,
-      KEYWORD.next,
-      KEYWORD.same,
+      keyword("first"),
+      keyword("last"),
+      keyword("prior"),
+      keyword("next"),
+      keyword("same"),
     ),
 
-    keyonly_seq: $ => KEYWORD.keyonly,
+    keyonly_seq: $ => keyword("keyonly"),
 
-    rec_seq: $ => seq(
-      choice(
-        KEYWORD.rec
-      ),
-      token.immediate("="), 
-      $.numeric_expression
-    ),
+    // rec_seq: $ => seq(
+    //   choice(
+    //     KEYWORD.rec
+    //   ),
+    //   token.immediate("="), 
+    //   $.numeric_expression
+    // ),
 
     rec_pos_seq: $ => seq(
       choice(
-        KEYWORD.pos,
-        KEYWORD.rec
+        keyword("pos"),
+        keyword("rec")
       ),
-      token.immediate("="), 
+      field("operator", alias(token.immediate("="),$.assignment_op)), 
       $.numeric_expression
     ),
 
     key_search_seq: $ => seq(
       choice(
-        KEYWORD.key,
-        KEYWORD.search
+        keyword("key"),
+        keyword("search")
       ),
-      choice("=",">="), 
+      field("operator", alias(token.immediate(choice("=",">=")), $.search_op)), 
       $.string_expression,
     ),
 
     record_locking_rule: $ => choice(
-      KEYWORD.release,
-      KEYWORD.reserve,
+      keyword("release"),
+      keyword("reserve"),
     ),
 
     _read_variable_list: $ => commaSep1(
@@ -1864,7 +1863,7 @@ module.exports = grammar({
     ),
 
     reread_using: $ => seq(
-      KEYWORD.using,
+      keyword("using"),
       choice(
         $.string_expression,
         $.line_reference,
@@ -1915,11 +1914,11 @@ module.exports = grammar({
 
     restore_positional_parameter: $ => 
       choice(
-        KEYWORD.first,
-        KEYWORD.last,
-        KEYWORD.prior,
-        KEYWORD.next,
-        KEYWORD.same,
+        keyword("first"),
+        keyword("last"),
+        keyword("prior"),
+        keyword("next"),
+        keyword("same"),
       ),
 
     retry_statement: $ => alias(STATEMENTS.retry, "statement"),
@@ -1949,7 +1948,7 @@ module.exports = grammar({
     ),
 
     write_key_seq: $ => seq(
-      KEYWORD.key,
+      keyword("key"),
       "=", 
       $.string_expression
     ),
@@ -1975,7 +1974,7 @@ module.exports = grammar({
     ),
 
     write_using_seq: $ => seq(
-      KEYWORD.using,
+      keyword("using"),
       choice(
         $.string_expression,
         $.line_reference,
@@ -1991,9 +1990,9 @@ module.exports = grammar({
     trace_statement: $ => seq(
       alias(STATEMENTS.trace, "statement"),
       choice(
-        KEYWORD.on,
-        KEYWORD.off,
-        KEYWORD.print
+        keyword("on"),
+        keyword("off"),
+        keyword("print")
       )
     ),
 

@@ -105,22 +105,1161 @@ print fields f$: x
                 (numberreference
                   (numberidentifier))))))))))
 
+=======================
+do while
+=======================
 do while x==1
+
+---
+
+(source_file
+  (line
+    (do_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (numberreference
+                (numberidentifier))))
+          (binary_cond_eq_op)
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (number))))))))
+
+=======================
+do until y = 0
+=======================
 do until y = 0                
-chain "program", a,b,c,d$
-if test then
-for i = 0 to 8 step 2
-input fields mat f$, attr "test", wait=10: a$
-00290    INPUT MENU TEXT: MAT M$ ! Rereads text only
-00300    INPUT MENU DATA: MAT PGM$
-00310    INPUT MENU STATUS: MAT STATUS$
+---
 
-00140 INPUT #11,WAIT=30:X$ TIMEOUT 100
-input fields mat f$, attr "test", wait=10: a$
-input fields mat f$, attr "test", wait=10, help "test": a$
+(source_file
+  (line
+    (do_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (numberreference
+                (numberidentifier))))
+          (binary_cond_eq_op)
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (number))))))))
 
-00120 LINPUT WAIT=10:X$ TIMEOUT 100
-00120 LINPUT #10,WAIT=10:X$ TIMEOUT 100
-
+=======================
+loop while
+=======================
 loop while x > 1
+---
+
+(source_file
+  (line
+    (loop_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (numberreference
+                (numberidentifier))))
+          (binary_relation_operator)
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (number))))))))
+
+=======================
+loop until
+=======================
 loop until y < 5
+---
+
+(source_file
+  (line
+    (loop_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (numberreference
+                (numberidentifier))))
+          (binary_relation_operator)
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (number))))))))
+
+===========================
+files
+===========================
+chain "program", files,b,c,d$
+---
+
+(source_file
+  (line
+    (chain_statement
+      (string_expression
+        (string_primary_expression
+          (string)))
+      (chain_var_list
+        (numberreference
+          (numberidentifier))
+        (numberreference
+          (numberidentifier))
+        (stringreference
+          (stringidentifier))))))
+
+===========================
+then
+===========================
+if test then
+---
+
+(source_file
+  (line
+    (if_statement
+      (conditional_expression
+        (numeric_conditional_primary_expression
+          (numberreference
+            (numberidentifier)))))))
+
+===========================
+to step
+===========================
+for i = 0 to 8 step 2
+---
+
+(source_file
+  (line
+    (for_statement
+      (numberreference
+        (numberidentifier))
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))
+      (numeric_expression
+        (numeric_primary_expression
+          (number))))))
+
+===========================
+attr wait
+===========================
+input fields mat f$, attr "test", wait=10: a$
+---
+
+(source_file
+  (line
+    (input_statement
+      (stringarray
+        (stringidentifier))
+      (string_expression
+        (string_primary_expression
+          (string)))
+      (input_wait_param
+        (assignment_op)
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (variable_list
+        (stringreference
+          (stringidentifier))))))
+
+===========================
+menu text
+===========================
+00290    INPUT MENU TEXT: MAT M$ ! Rereads text only
+---
+
+(source_file
+  (line
+    (line_number)
+    (input_menu_statement
+      (string_array_expression
+        (string_array_primary_expression
+          (stringarray
+            (stringidentifier)))))
+    (comment)))
+
+===========================
+MENU DATA
+===========================
+00300    INPUT MENU DATA: MAT PGM$
+---
+
+(source_file
+  (line
+    (line_number)
+    (input_menu_statement
+      (string_array_expression
+        (string_array_primary_expression
+          (stringarray
+            (stringidentifier)))))))
+
+===========================
+MENU STATUS
+===========================
+00310    INPUT MENU STATUS: MAT STATUS$
+---
+
+(source_file
+  (line
+    (line_number)
+    (input_menu_statement
+      (string_array_expression
+        (string_array_primary_expression
+          (stringarray
+            (stringidentifier)))))))
+
+===============================================
+timeout
+===============================================
+00140 INPUT #11,WAIT=30:X$ TIMEOUT 100
+---
+
+(source_file
+  (line
+    (line_number)
+    (input_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (input_wait_param
+        (assignment_op)
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (variable_list
+        (stringreference
+          (stringidentifier)))
+      (error_condition_list
+        (error_condition)
+        (line_reference)))))
+
+===============================================
+input fields mat f$, attr "test", wait=10: a$
+===============================================
+input fields mat f$, attr "test", wait=10: a$
+---
+
+(source_file
+  (line
+    (input_statement
+      (stringarray
+        (stringidentifier))
+      (string_expression
+        (string_primary_expression
+          (string)))
+      (input_wait_param
+        (assignment_op)
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (variable_list
+        (stringreference
+          (stringidentifier))))))
+
+===============================================
+input fields mat f$, attr "test", wait=10, help "test": a$
+===============================================
+input fields mat f$, attr "test", wait=10, help "test": a$
+---
+
+(source_file
+  (line
+    (input_statement
+      (stringarray
+        (stringidentifier))
+      (string_expression
+        (string_primary_expression
+          (string)))
+      (input_wait_param
+        (assignment_op)
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (help_parameter
+        (string_expression
+          (string_primary_expression
+            (string))))
+      (variable_list
+        (stringreference
+          (stringidentifier))))))
+
+===============================================
+00120 LINPUT WAIT=10:X$ TIMEOUT 100
+===============================================
+00120 LINPUT WAIT=10:X$ TIMEOUT 100
+---
+
+(source_file
+  (line
+    (line_number)
+    (linput_statement
+      (input_wait_param
+        (assignment_op)
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (stringreference
+        (stringidentifier))
+      (error_condition_list
+        (error_condition)
+        (line_reference)))))
+
+===============================================
+00120 LINPUT #10,WAIT=10:X$ TIMEOUT 100
+===============================================
+00120 LINPUT #10,WAIT=10:X$ TIMEOUT 100
+---
+
+(source_file
+  (line
+    (line_number)
+    (linput_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (input_wait_param
+        (assignment_op)
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (stringreference
+        (stringidentifier))
+      (error_condition_list
+        (error_condition)
+        (line_reference)))))
+
+===============================================
+input fields mat f$, wait=10, help "test": a$
+===============================================
+input fields mat f$, wait=10, help "test": a$
+---
+
+(source_file
+  (line
+    (input_statement
+      (stringarray
+        (stringidentifier))
+      (input_wait_param
+        (assignment_op)
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (help_parameter
+        (string_expression
+          (string_primary_expression
+            (string))))
+      (variable_list
+        (stringreference
+          (stringidentifier))))))
+
+===============================================
+restore #10, pos=1:
+===============================================
+restore #10, pos=1:
+---
+
+(source_file
+  (line
+    (restore_statement
+      (restore_file
+        (channel
+          (numeric_expression
+            (numeric_primary_expression
+              (number))))
+        (rec_pos_seq
+          (assignment_op)
+          (numeric_expression
+            (numeric_primary_expression
+              (number))))))))
+
+===============================================
+restore
+===============================================
+restore #10, rec=1:
+---
+
+(source_file
+  (line
+    (restore_statement
+      (restore_file
+        (channel
+          (numeric_expression
+            (numeric_primary_expression
+              (number))))
+        (rec_pos_seq
+          (assignment_op)
+          (numeric_expression
+            (numeric_primary_expression
+              (number))))))))
+
+===============================================
+restore #10, key>="test":
+===============================================
+restore #10, key>="test":
+---
+
+(source_file
+  (line
+    (restore_statement
+      (restore_file
+        (channel
+          (numeric_expression
+            (numeric_primary_expression
+              (number))))
+        (key_search_seq
+          (search_op)
+          (string_expression
+            (string_primary_expression
+              (string))))))))
+
+===============================================
+restore #10, search="test":
+===============================================
+restore #10, search="test":
+---
+
+(source_file
+  (line
+    (restore_statement
+      (restore_file
+        (channel
+          (numeric_expression
+            (numeric_primary_expression
+              (number))))
+        (key_search_seq
+          (search_op)
+          (string_expression
+            (string_primary_expression
+              (string))))))))
+
+===============================================
+restore #10, search>="test":
+===============================================
+restore #10, search>="test":
+---
+
+(source_file
+  (line
+    (restore_statement
+      (restore_file
+        (channel
+          (numeric_expression
+            (numeric_primary_expression
+              (number))))
+        (key_search_seq
+          (search_op)
+          (string_expression
+            (string_primary_expression
+              (string))))))))
+
+===============================================
+print #1,using a: x
+===============================================
+print #1,using a: x
+---
+
+(source_file
+  (line
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_using
+        (label_reference)
+        (print_output
+          (expression
+            (numeric_expression
+              (numeric_primary_expression
+                (numberreference
+                  (numberidentifier))))))))))
+
+===============================================
+def library fntest(a,b,c)
+===============================================
+def library fntest(a,b,c)
+---
+
+(source_file
+  (line
+    (def_statement
+      (library_keyword)
+      (numeric_function_definition
+        (function_name)
+        (parameter_list
+          (required_parameter
+            (parameter
+              (numeric_parameter
+                (numberreference
+                  (numberidentifier)))))
+          (required_parameter
+            (parameter
+              (numeric_parameter
+                (numberreference
+                  (numberidentifier)))))
+          (required_parameter
+            (parameter
+              (numeric_parameter
+                (numberreference
+                  (numberidentifier))))))))))
+
+===============================================
+def libfoo fntest(a,b,c) ! weird keyword quirk
+===============================================
+def libfoo fntest(a,b,c) ! weird keyword quirk
+---
+
+(source_file
+  (line
+    (def_statement
+      (library_keyword)
+      (numeric_function_definition
+        (function_name)
+        (parameter_list
+          (required_parameter
+            (parameter
+              (numeric_parameter
+                (numberreference
+                  (numberidentifier)))))
+          (required_parameter
+            (parameter
+              (numeric_parameter
+                (numberreference
+                  (numberidentifier)))))
+          (required_parameter
+            (parameter
+              (numeric_parameter
+                (numberreference
+                  (numberidentifier))))))))
+    (comment)))
+
+===============================================
+open #1: "name=test", internal, input, keyed
+===============================================
+open #1: "name=test", internal, input, keyed
+---
+
+(source_file
+  (line
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string))))))
+
+===============================================
+open #1: "name=test", internal, input, sequential
+===============================================
+open #1: "name=test", internal, input, sequential
+---
+
+(source_file
+  (line
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string))))))
+
+===============================================
+open #1: "name=test", internal, input, relative
+===============================================
+open #1: "name=test", internal, input, relative
+---
+
+(source_file
+  (line
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string))))))
+
+===============================================
+open #1: "name=test", internal, output, relative
+===============================================
+open #1: "name=test", internal, output, relative
+---
+
+(source_file
+  (line
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string))))))
+
+===============================================
+open #1: "name=test", internal, outin, relative
+===============================================
+open #1: "name=test", internal, outin, relative
+---
+
+(source_file
+  (line
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string))))))
+
+===============================================
+open #1: "name=test", external, outin, relative
+===============================================
+open #1: "name=test", external, outin, relative
+---
+
+(source_file
+  (line
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string))))))
+
+===============================================
+open #1: "name=test", display, outin
+===============================================
+open #1: "name=test", display, outin
+---
+
+(source_file
+  (line
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string))))))
+
+===============================================
+invp
+===============================================
+00010 OPTION INVP !invp
+---
+
+(source_file
+  (line
+    (line_number)
+    (option_statement)
+    (comment)))
+
+===============================================
+ignore
+===============================================
+on error ignore !ignore
+---
+
+(source_file
+  (line
+    (on_statement
+      (error_condition))
+    (comment)))
+
+===============================================
+system
+===============================================
+on error system !system
+---
+
+(source_file
+  (line
+    (on_statement
+      (error_condition))
+    (comment)))
+
+===============================================
+none
+===============================================
+on test goto 100,200 none 300 ! none
+---
+
+(source_file
+  (line
+    (on_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (numberreference
+            (numberidentifier))))
+      (line_reference)
+      (line_reference)
+      (line_reference))
+    (comment)))
+
+===============================================
+base
+===============================================
+option base 0! base
+---
+
+(source_file
+  (line
+    (option_statement)
+    (comment)))
+
+===============================================
+alternate
+===============================================
+option collate alternate! collate alternate
+---
+
+(source_file
+  (line
+    (option_statement)
+    (comment)))
+
+===============================================
+native
+===============================================
+option collate native! native
+---
+
+(source_file
+  (line
+    (option_statement)
+    (comment)))
+
+===============================================
+retain
+===============================================
+option retain! retain
+---
+
+(source_file
+  (line
+    (option_statement)
+    (comment)))
+
+===============================================
+using
+===============================================
+print #1,using a: x! using
+---
+
+(source_file
+  (line
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_using
+        (label_reference)
+        (print_output
+          (expression
+            (numeric_expression
+              (numeric_primary_expression
+                (numberreference
+                  (numberidentifier))))))))
+    (comment)))
+
+===============================================
+border
+===============================================
+print border test$: "test" ! border
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_border
+        (string_expression
+          (string_primary_expression
+            (stringreference
+              (stringidentifier))))
+        (string_expression
+          (string_primary_expression
+            (string)))))
+    (comment)))
+
+===============================================
+fields
+===============================================
+print fields f$: x! fields
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_fields
+        (string_expression
+          (string_primary_expression
+            (stringreference
+              (stringidentifier))))
+        (print_output
+          (expression
+            (numeric_expression
+              (numeric_primary_expression
+                (numberreference
+                  (numberidentifier))))))))
+    (comment)))
+
+===============================================
+link
+===============================================
+read #10, link="test": a! link
+---
+
+(source_file
+  (line
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (link_seq
+        (string_expression
+          (string_primary_expression
+            (string))))
+      (numberreference
+        (numberidentifier)))
+    (comment)))
+
+===============================================
+first
+===============================================
+read #10, first: a! link ! first
+---
+
+(source_file
+  (line
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (positional_parameter)
+      (numberreference
+        (numberidentifier)))
+    (comment)))
+
+===============================================
+last
+===============================================
+read #10, last: a! last
+---
+
+(source_file
+  (line
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (positional_parameter)
+      (numberreference
+        (numberidentifier)))
+    (comment)))
+
+===============================================
+prior
+===============================================
+read #10, prior: a! prior
+---
+
+(source_file
+  (line
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (positional_parameter)
+      (numberreference
+        (numberidentifier)))
+    (comment)))
+
+===============================================
+next
+===============================================
+read #10, next: a! next
+---
+
+(source_file
+  (line
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (positional_parameter)
+      (numberreference
+        (numberidentifier)))
+    (comment)))
+
+===============================================
+same
+===============================================
+read #10, same: a! same
+---
+
+(source_file
+  (line
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (positional_parameter)
+      (numberreference
+        (numberidentifier)))
+    (comment)))
+
+===============================================
+keyonly
+===============================================
+read #10, keyonly: a! keyonly
+---
+
+(source_file
+  (line
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (keyonly_seq)
+      (numberreference
+        (numberidentifier)))
+    (comment)))
+
+===============================================
+pos
+===============================================
+read #10, pos=1: a! pos
+---
+
+(source_file
+  (line
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (rec_pos_seq
+        (assignment_op)
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (numberreference
+        (numberidentifier)))
+    (comment)))
+
+===============================================
+rec
+===============================================
+read #10, rec=1: a! rec
+---
+
+(source_file
+  (line
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (rec_pos_seq
+        (assignment_op)
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (numberreference
+        (numberidentifier)))
+    (comment)))
+
+===============================================
+key
+===============================================
+read #10, key="testkey": a! key
+---
+
+(source_file
+  (line
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (key_search_seq
+        (search_op)
+        (string_expression
+          (string_primary_expression
+            (string))))
+      (numberreference
+        (numberidentifier)))
+    (comment)))
+
+===============================================
+key
+===============================================
+read #10, key>="testkey": a! key
+---
+
+(source_file
+  (line
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (key_search_seq
+        (search_op)
+        (string_expression
+          (string_primary_expression
+            (string))))
+      (numberreference
+        (numberidentifier)))
+    (comment)))
+
+===============================================
+search
+===============================================
+read #10, search="testkey": a! search
+---
+
+(source_file
+  (line
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (key_search_seq
+        (search_op)
+        (string_expression
+          (string_primary_expression
+            (string))))
+      (numberreference
+        (numberidentifier)))
+    (comment)))
+
+===============================================
+release
+===============================================
+read #10, key="testkey", release: a! release
+---
+
+(source_file
+  (line
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (key_search_seq
+        (search_op)
+        (string_expression
+          (string_primary_expression
+            (string))))
+      (record_locking_rule)
+      (numberreference
+        (numberidentifier)))
+    (comment)))
+
+===============================================
+reserve
+===============================================
+read #10, key="testkey", reserve: a! reserve
+---
+
+(source_file
+  (line
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (key_search_seq
+        (search_op)
+        (string_expression
+          (string_primary_expression
+            (string))))
+      (record_locking_rule)
+      (numberreference
+        (numberidentifier)))
+    (comment)))
+
+===============================================
+using
+===============================================
+read #10, using form$, key="testkey", reserve: a! using
+---
+
+(source_file
+  (line
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (write_using_seq
+        (string_expression
+          (string_primary_expression
+            (stringreference
+              (stringidentifier)))))
+      (key_search_seq
+        (search_op)
+        (string_expression
+          (string_primary_expression
+            (string))))
+      (record_locking_rule)
+      (numberreference
+        (numberidentifier)))
+    (comment)))
+
+===============================================
+on
+===============================================
+trace on ! on
+---
+
+(source_file
+  (line
+    (trace_statement)
+    (comment)))
+
+===============================================
+off
+===============================================
+trace off ! off
+---
+
+(source_file
+  (line
+    (trace_statement)
+    (comment)))
+
+===============================================
+print
+===============================================
+trace print ! print
+---
+
+(source_file
+  (line
+    (trace_statement)
+    (comment)))

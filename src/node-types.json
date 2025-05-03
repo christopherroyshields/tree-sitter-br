@@ -1455,18 +1455,7 @@
   {
     "type": "input_statement",
     "named": true,
-    "fields": {
-      "operator": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "assignment_op",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
@@ -1488,10 +1477,6 @@
           "named": true
         },
         {
-          "type": "numeric_expression",
-          "named": true
-        },
-        {
           "type": "string_expression",
           "named": true
         },
@@ -1509,7 +1494,18 @@
   {
     "type": "input_wait_param",
     "named": true,
-    "fields": {},
+    "fields": {
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "assignment_op",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,
@@ -1543,7 +1539,18 @@
   {
     "type": "key_search_seq",
     "named": true,
-    "fields": {},
+    "fields": {
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "search_op",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,
@@ -1554,6 +1561,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "keyonly_seq",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "label_reference",
@@ -1907,18 +1919,7 @@
   {
     "type": "linput_statement",
     "named": true,
-    "fields": {
-      "operator": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "assignment_op",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
@@ -1932,7 +1933,7 @@
           "named": true
         },
         {
-          "type": "numeric_expression",
+          "type": "input_wait_param",
           "named": true
         },
         {
@@ -3179,7 +3180,18 @@
   {
     "type": "rec_pos_seq",
     "named": true,
-    "fields": {},
+    "fields": {
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "assignment_op",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,
@@ -3454,18 +3466,7 @@
   {
     "type": "rinput_statement",
     "named": true,
-    "fields": {
-      "operator": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "assignment_op",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
@@ -3488,10 +3489,6 @@
         },
         {
           "type": "input_wait_param",
-          "named": true
-        },
-        {
-          "type": "numeric_expression",
           "named": true
         },
         {
@@ -4832,10 +4829,6 @@
     "named": false
   },
   {
-    "type": ">=",
-    "named": false
-  },
-  {
     "type": "`",
     "named": false
   },
@@ -4904,10 +4897,6 @@
     "named": true
   },
   {
-    "type": "keyonly_seq",
-    "named": true
-  },
-  {
     "type": "keyword",
     "named": false
   },
@@ -4953,6 +4942,10 @@
   },
   {
     "type": "pos_spec",
+    "named": true
+  },
+  {
+    "type": "search_op",
     "named": true
   },
   {

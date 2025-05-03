@@ -22,7 +22,6 @@ Chain
       (string_expression
         (string_primary_expression
           (string)))
-      (chain_files)
       (chain_var_list
         (stringreference
           (stringidentifier)))))
@@ -1444,6 +1443,7 @@ Input
     (line_number)
     (input_statement
       (input_wait_param
+        (assignment_op)
         (numeric_expression
           (numeric_primary_expression
             (number))))
@@ -2666,6 +2666,7 @@ read #FScreenFld, using form$(FScreenFld), release : mat SearchScreenFld$, mat S
       (write_using_seq
         (label_reference))
       (key_search_seq
+        (search_op)
         (string_expression
           (string_primary_expression
             (stringreference
@@ -2682,6 +2683,7 @@ read #FScreenFld, using form$(FScreenFld), release : mat SearchScreenFld$, mat S
       (write_using_seq
         (label_reference))
       (key_search_seq
+        (search_op)
         (string_expression
           (string_primary_expression
             (stringreference
@@ -2791,6 +2793,7 @@ Restore File
             (numeric_primary_expression
               (number))))
         (rec_pos_seq
+          (assignment_op)
           (numeric_expression
             (numeric_primary_expression
               (number))))
@@ -2806,6 +2809,7 @@ Restore File
             (numeric_primary_expression
               (number))))
         (key_search_seq
+          (search_op)
           (string_expression
             (string_primary_expression
               (stringreference
@@ -2822,6 +2826,7 @@ Restore File
             (numeric_primary_expression
               (number))))
         (rec_pos_seq
+          (assignment_op)
           (numeric_expression
             (numeric_binary_expression
               (numeric_expression
@@ -2888,6 +2893,7 @@ Rewrite
       (write_using_seq
         (label_reference))
       (rec_pos_seq
+        (assignment_op)
         (numeric_expression
           (numeric_primary_expression
             (numberreference
@@ -3008,6 +3014,7 @@ Rinput
     (line_number)
     (rinput_statement
       (input_wait_param
+        (assignment_op)
         (numeric_expression
           (numeric_primary_expression
             (number))))
@@ -3024,6 +3031,7 @@ Rinput
           (numeric_primary_expression
             (number))))
       (input_wait_param
+        (assignment_op)
         (numeric_expression
           (numeric_primary_expression
             (number))))
@@ -3047,9 +3055,11 @@ Rinput fields
       (string_expression
         (string_primary_expression
           (string)))
-      (numeric_expression
-        (numeric_primary_expression
-          (number)))
+      (input_wait_param
+        (assignment_op)
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
       (expression
         (string_expression
           (string_primary_expression

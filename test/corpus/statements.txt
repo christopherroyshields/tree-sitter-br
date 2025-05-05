@@ -276,10 +276,12 @@ Data
     (dim_statement
       (numberarray
         (numberidentifier)
-        (dim_array_size))
+        (dim_array_size
+          (int)))
       (stringarray
         (stringidentifier)
-        (dim_array_size))))
+        (dim_array_size
+          (int)))))
   (line
     (line_number)
     (data_statement
@@ -372,6 +374,7 @@ Def
               (numeric_parameter
                 (numberreference
                   (numberidentifier))))))
+        (assignment_op)
         (numeric_expression
           (numeric_binary_expression
             (numeric_expression
@@ -444,6 +447,7 @@ Def
               (numeric_parameter
                 (numberreference
                   (numberidentifier))))))
+        (assignment_op)
         (numeric_expression
           (numeric_binary_expression
             (numeric_expression
@@ -691,6 +695,7 @@ Def
     (def_statement
       (numeric_function_definition
         (function_name)
+        (assignment_op)
         (numeric_expression
           (numeric_binary_expression
             (numeric_expression
@@ -755,63 +760,88 @@ Dim
     (dim_statement
       (numberarray
         (numberidentifier)
-        (dim_array_size))
+        (dim_array_size
+          (int)))
       (numberarray
         (numberidentifier)
-        (dim_array_size))
+        (dim_array_size
+          (int)))
       (numberarray
         (numberidentifier)
-        (dim_array_size))
+        (dim_array_size
+          (int)))
       (numberarray
         (numberidentifier)
-        (dim_array_size))
+        (dim_array_size
+          (int)
+          (int)))
       (numberarray
         (numberidentifier)
-        (dim_array_size))))
+        (dim_array_size
+          (int)))))
   (line
     (line_number)
     (dim_statement
       (stringarray
         (stringidentifier)
-        (dim_array_size))
+        (dim_array_size
+          (int)
+          (int)))
       (stringarray
         (stringidentifier)
-        (dim_array_size))
+        (dim_array_size
+          (int)
+          (int)))
       (stringarray
         (stringidentifier)
-        (dim_array_size))))
+        (dim_array_size
+          (int)
+          (int)))))
   (line
     (line_number)
     (dim_statement
       (stringreference
-        (stringidentifier))
+        (stringidentifier)
+        (int))
       (numberarray
         (numberidentifier)
-        (dim_array_size))
+        (dim_array_size
+          (int)))
       (numberarray
         (numberidentifier)
-        (dim_array_size))
+        (dim_array_size
+          (int)
+          (int)))
       (stringarray
         (stringidentifier)
-        (dim_array_size))
+        (dim_array_size
+          (int))
+        (int))
       (numberarray
         (numberidentifier)
-        (dim_array_size))))
+        (dim_array_size
+          (int)))))
   (line
     (line_number)
     (dim_statement
       (stringreference
-        (stringidentifier))
+        (stringidentifier)
+        (int))
       (stringreference
-        (stringidentifier))
+        (stringidentifier)
+        (int))
       (stringreference
-        (stringidentifier))
+        (stringidentifier)
+        (int))
       (stringreference
-        (stringidentifier))
+        (stringidentifier)
+        (int))
       (stringreference
-        (stringidentifier))
+        (stringidentifier)
+        (int))
       (stringreference
-        (stringidentifier)))))
+        (stringidentifier)
+        (int)))))
 
 ===========================================
 Display Menu
@@ -1198,91 +1228,93 @@ Form
     (line_number)
     (form_statement
       (spec_group
+        (multi_spec
+          (int)
+          (_))
         (form_spec
-          (string_form_spec
-            (string_spec)))
+          (string_spec)
+          (int))
         (form_spec
-          (string_form_spec
-            (string_spec)))
+          (string_spec)
+          (int))
         (form_spec
-          (string_form_spec
-            (string_spec))))))
+          (string_spec)
+          (int)))))
   (line
     (line_number)
     (form_statement
       (form_spec
-        (string_form_spec
+        (multi_spec
           (numberreference
             (numberidentifier))
-          (string_spec)))
+          (_))
+        (string_spec)
+        (int))
       (form_spec
-        (string_form_spec
-          (string_spec)))))
+        (string_spec)
+        (int))))
   (line
     (line_number)
     (form_statement
       (form_spec
-        (literal_string_form_spec
-          (literal_string_spec)))
+        (literal_string_spec
+          (string)))
       (form_spec
-        (string_form_spec
-          (string_spec)))))
-  (line
-    (line_number)
-    (label)
-    (form_statement
-      (form_spec
-        (pos_form_spec
-          (pos_spec)))
-      (form_spec
-        (string_form_spec
-          (string_spec)))
-      (form_spec
-        (x_form_spec
-          (x_spec)))
-      (form_spec
-        (string_form_spec
-          (string_spec)))
-      (form_spec
-        (x_form_spec
-          (x_spec)))
-      (form_spec
-        (string_form_spec
-          (string_spec)))
-      (form_spec
-        (x_form_spec
-          (x_spec)))
-      (form_spec
-        (string_form_spec
-          (string_spec)))
-      (form_spec
-        (x_form_spec
-          (x_spec)))
-      (form_spec
-        (string_form_spec
-          (string_spec)))
-      (form_spec
-        (skip_form_spec
-          (skip_spec)))))
+        (string_spec)
+        (int))))
   (line
     (line_number)
     (label)
     (form_statement
       (form_spec
-        (string_form_spec
-          (string_spec)))
+        (pos_spec)
+        (int))
       (form_spec
-        (string_form_spec
-          (string_spec)))
+        (string_spec)
+        (int))
       (form_spec
-        (pic_form_spec
-          (pic_spec)))
+        (x_spec)
+        (int))
       (form_spec
-        (pic_form_spec
-          (pic_spec)))
+        (string_spec)
+        (int))
       (form_spec
-        (skip_form_spec
-          (skip_spec))))))
+        (x_spec)
+        (int))
+      (form_spec
+        (string_spec)
+        (int))
+      (form_spec
+        (x_spec)
+        (int))
+      (form_spec
+        (string_spec)
+        (int))
+      (form_spec
+        (x_spec)
+        (int))
+      (form_spec
+        (string_spec)
+        (int))
+      (form_spec
+        (skip_spec)
+        (int))))
+  (line
+    (line_number)
+    (label)
+    (form_statement
+      (form_spec
+        (string_spec)
+        (int))
+      (form_spec
+        (string_spec)
+        (int))
+      (form_spec
+        (pic_spec))
+      (form_spec
+        (pic_spec))
+      (form_spec
+        (skip_spec)))))
 
 ===========================================
 GoSub

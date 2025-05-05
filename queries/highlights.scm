@@ -1,6 +1,7 @@
 ;; literals
 (string) @string
 (number) @number
+(int) @number
 
 ;; variables
 (stringidentifier) @variable
@@ -26,3 +27,4 @@
 ;; keywords
 ("statement") @keyword
 ("keyword") @keyword
+;; (_ spec: (_) @keyword)

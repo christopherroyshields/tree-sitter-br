@@ -196,66 +196,6 @@ const STATEMENTS = {
   library: token(/[lL][iI][bB][rR][aA][rR][yY]/),
 }
 
-const KEYWORD = {
-  alternate: /[aA][lL][tT][eE][rR][nN][aA][tT][eE]/,
-  attr: /[aA][tT][tT][rR][ \t]/,
-  base: /[bB][aA][sS][eE]/,
-  border: /[bB][oO][rR][dD][eE][rR]/,
-  collate: /[cC][oO][lL][lL][aA][tT][eE]/,
-  data: /[dD][aA][tT][aA]/,
-  display: /[dD][iI][sS][pP][lL][aA][yY]/,
-  drop: /[dD][rR][oO][pP]/,
-  external: /[eE][xX][tT][eE][rR][nN][aA][lL]/,
-  fields: token(/fields/i),
-  files: /[fF][iI][lL][eE][sS]/,
-  first: /[fF][iI][rR][sS][tT]/,
-  fkey: /[fF][kK][eE][yY]/,
-  fnkey: /[fF][nN][kK][eE][yY]/,
-  free: /[fF][rR][eE][eE]/,
-  help: /,[ \t]*[hH][eE][lL][pP][ \t]/,
-  ignore: /[iI][gG][nN][oO][rR][eE]/,
-  input: /[iI][nN][pP][uU][tT]/,
-  internal: /[iI][nN][tT][eE][rR][nN][aA][lL]/,
-  invp: /[iI][nN][vV][pP]/,
-  key: /[kK][eE][yY]/,
-  keyed: /[kK][eE][yY][eE][dD]/,
-  keyonly: /[kK][eE][yY][oO][nN][lL][yY]/,
-  last: /[lL][aA][sS][tT]/,
-  library: /[lL][iI][bB]\w*/,
-  link: /[lL][iI][nN][kK]/,
-  menu: /[mM][eE][nN][uU]/,
-  native: /[nN][aA][tT][iI][vV][eE]/,
-  next: /[nN][eE][xX][tT]/,
-  nofiles: /[Nn][Oo][Ff][Ii][Ll][Ee][Ss]/,
-  none: /[nN][oO][nN][eE]/,
-  off: /[oO][fF][fF]/,
-  on: /[oO][nN]/,
-  outin: /[oO][uU][tT][iI][nN]/,
-  output: /[oO][uU][tT][pP][uU][tT]/,
-  pos: /[pP][oO][sS]/,
-  print: /[pP][rR][iI][nN][tT]/,
-  prior: /[pP][rR][iI][oO][rR]/,
-  rec: /[rR][eE][cC]/,
-  relative: /[rR][eE][lL][aA][tT][iI][vV][eE]/,
-  release: /[rR][eE][lL][eE][aA][sS][eE]/,
-  reserve: /[rR][eE][sS][eE][rR][vV][eE]/,
-  retain: /[Rr][Ee][Tt][Aa][Ii][Nn]/,
-  same: /[sS][aA][mM][eE]/,
-  search: /[sS][eE][aA][rR][cC][hH]/,
-  select: /[sS][eE][lL][eE][cC][tT]/,
-  sequential: /[sS][eE][qQ][uU][eE][nN][tT][iI][aA][lL]/,
-  status: /[sS][tT][aA][tT][uU][sS]/,
-  step: /[sS][tT][eE][pP]/,
-  system: /[sS][yY][sS][tT][eE][mM]/,
-  text: /[tT][eE][xX][tT]/,
-  then: /[tT][hH][eE][nN]/,
-  to: /[tT][oO]/,
-  until: /[uU][nN][tT][iI][lL]/,
-  using: /[uU][sS][iI][nN][gG][ \t]/,
-  wait: /[wW][aA][iI][tT]=/,
-  while: /[wW][hH][iI][lL][eE]/,
-}
-
 const ERROR_CONDITION = [
   /[aA][tT][tT][nN]/,
   /[cC][oO][nN][vV]/,
@@ -363,30 +303,22 @@ module.exports = grammar({
   ],
 
   inline: $ => [
-    $.int,
-    $.multi_spec,
-    $.function_length,
-    $.field_length,
-    $.fractional_length,
+    $.internal_form_spec,
+    $.string_form_spec,
+    $.numeric_form_spec,
+    $.floating_point_form_spec,
+    $.skip_form_spec,
+    $.pos_form_spec,
+    $.x_form_spec,
+    $.literal_string_form_spec,
+    $.pic_form_spec
   ],
 
   rules: {
-    source_file: $ => repeat($.line),
-
-    // source_file: $ => choice($.foo),
-    // foo: $ => seq(optional(seq(/\w+/,"*")),/foo/),
-
-    // fnname: $ => /fntest/,
-    
-    // foo: $ => seq(
-    //   $.fnname,
-    //   "=",
-    //   "1"
-    // ),
-
-    // bar: $ => seq(
-    //   $.fnname
-    // ),
+    source_file: $ => seq(
+      optional(seq($._eol,repeat($._line_end))), // skip whitespace
+      repeat($.line)
+    ),
 
     line: $ => seq(
       optional($.line_number),
@@ -453,7 +385,6 @@ module.exports = grammar({
 
     close_statement: $ => seq(
       alias(STATEMENTS.close,"statement"),
-      // STATEMENTS.close,
       "#",
       $.numeric_expression,
       optional(seq(",",choice(
@@ -542,7 +473,7 @@ module.exports = grammar({
       optional($.function_length),
       optional($.parameter_list),
       optional(seq(
-        "=",
+        field("operator", $.assignment_op),
         $.string_expression
       ))
     ),
@@ -551,7 +482,7 @@ module.exports = grammar({
       alias($.numeric_function_name, $.function_name),
       optional($.parameter_list),
       optional(seq(
-        "=",
+        field("operator", $.assignment_op),
         $.numeric_expression
       ))
     ),
@@ -751,7 +682,7 @@ module.exports = grammar({
       )
     ),
 
-    string_spec: $ => token(choice(
+    string_spec: $ => alias(token(choice(
       /[Cc]/,
       /[Cc][Cc]/,
       /[Cc][Rr]/,
@@ -759,37 +690,40 @@ module.exports = grammar({
       /[Vv]/,
       /[Vv][Ll]/,
       /[Vv][Uu]/
-    )),
+    )), "keyword"),
 
-    internal_spec: $ => token(choice(
+    internal_spec: $ => alias(token(choice(
       /[Bb]/,
       /[Bb][Ll]/,
       /[Bb][Hh]/,
       /[Pp][Dd]/,
       /[Zp][Dd]/
-    )),
+    )), "keyword"),
 
-    numeric_spec: $ => token(choice(
+    numeric_spec: $ => alias(token(choice(
       /[Gg]/,
       /[Gg][Zz]/,
       /[Nn]/,
       /[Nn][Zz]/,
-    )),
+    )),"keyword"),
 
-    floating_point_spec: $ => token(choice(
+    floating_point_spec: $ => alias(token(choice(
       /[Dd]/,
       /[Ss]/,
       /[Ll]/,
-    )),
+    )),"keyword"),
 
     string_form_spec: $ => seq(
       optional($.multi_spec),
       $.string_spec,
       optional(
-        choice(
-          $.int,
-          $.numberreference
-        )
+        seq(
+          /[ \t]+/,
+          choice(
+            $.int,
+            $.numberreference
+          )
+        ),
       )
     ),
 
@@ -798,6 +732,7 @@ module.exports = grammar({
       $.internal_spec,
       optional(
         seq(
+          /[ \t]+/,
           $.field_length,
           optional($.fractional_length)
         )
@@ -809,6 +744,7 @@ module.exports = grammar({
       $.numeric_spec,
       optional(
         seq(
+          /[ \t]+/,
           $.field_length,
           optional($.fractional_length)
         )
@@ -828,28 +764,31 @@ module.exports = grammar({
     fractional_length: $ => seq(
       ".",
       choice(
-        token.immediate(/\d+/),
+        alias(token.immediate(/\d+/), $.int),
         $.numberreference
       )
     ),
 
-    pos_spec: $ => token(/[Pp][Oo][Ss]/),
+    pos_spec: $ => keyword("pos"),
     pos_form_spec: $ => seq(
       $.pos_spec,
+      /[ \t]+/,
       choice(
         $.int,
         $.numberreference
       )
     ),
 
-    skip_spec: $ => token(/[Ss][Kk][Ii][Pp]/),
+    skip_spec: $ => keyword("skip"),
     skip_form_spec: $ => seq(
       $.skip_spec,
       optional(
+        seq(
+        /[ \t]+/,
         choice(
           $.int,
           $.numberreference
-        )
+        ))
       )
     ),
 
@@ -857,14 +796,22 @@ module.exports = grammar({
     x_form_spec: $ => seq(
       $.x_spec,
       optional(
-        choice(
-          $.int,
-          $.numberreference
+        seq(
+          /[ \t]+/,
+          choice(
+            $.int,
+            $.numberreference
+          )
         )
       )
     ),
 
-    pic_spec: $ => token(/[pP][iI][cC]\([^)\n]*\)/),
+    pic_spec: $ => seq(
+      keyword(/pic/i),
+      token.immediate("("),
+      token(/[^)\r\n]*/),
+      ")",
+    ),
 
     pic_form_spec: $ => seq(
       optional($.multi_spec),
@@ -876,7 +823,7 @@ module.exports = grammar({
         alias($.multi_spec_var_name, $.numberreference),
         $.int
       ),
-      "*"
+      field("operator", alias("*", $._))
     ),
 
     multi_spec_var_name: $ => field("name", choice(
@@ -911,11 +858,11 @@ module.exports = grammar({
       $.pic_form_spec
     ),
 
-    literal_string_spec: $ => token(choice(
+    literal_string_spec: $ => alias(token(choice(
       /"[^"\n]*"/,
       /'[^'\n]*'/,
       /`[^`\n]*`/,
-    )),
+    )),$.string),
 
     literal_string_form_spec: $ => seq(
       optional($.multi_spec),
@@ -1019,23 +966,6 @@ module.exports = grammar({
         ),
         $.comment,
       ),
-      // repeat1(
-      //   seq(
-      //     choice(
-      //       $.continuation,
-      //       $.statement_separator
-      //     ),
-      //     choice(
-      //       seq(
-      //         choice(
-      //           ...getStatements($),
-      //         ),
-      //         optional($.comment)
-      //       ),
-      //       $.comment,
-      //     )
-      //   )
-      // ),
       optional(choice(
         $.single_line_if_trailing_else,
         $.single_line_else_with_cont
@@ -1402,12 +1332,6 @@ module.exports = grammar({
       commaSep1($.numeric_expression),
     ),
 
-    // mat_range: $ => prec.right(seq(
-    //   $.numeric_expression,
-    //   ":",
-    //   $.numeric_expression      
-    // )),
-
     mat_string_array_expression: $ => seq(
       alias($.string_name, $.stringarray),
       optional(
@@ -1681,23 +1605,6 @@ module.exports = grammar({
         )))
       )
     ,
-    // print_output: $ => seq(
-    //   repeat(choice(
-    //     ";",
-    //     ","
-    //   )),
-    //   repeat1(
-    //   seq(
-    //     choice(
-    //       ",",
-    //       ";"
-    //     ),
-    //     optional(choice(
-    //       $.expression,
-    //       $.array_group
-    //     ))
-    //   )
-    // )),
 
     array_group: $ => seq(
       "(",
@@ -1794,14 +1701,6 @@ module.exports = grammar({
     ),
 
     keyonly_seq: $ => keyword("keyonly"),
-
-    // rec_seq: $ => seq(
-    //   choice(
-    //     KEYWORD.rec
-    //   ),
-    //   token.immediate("="), 
-    //   $.numeric_expression
-    // ),
 
     rec_pos_seq: $ => seq(
       choice(

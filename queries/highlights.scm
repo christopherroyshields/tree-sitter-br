@@ -27,4 +27,4 @@
 ;; keywords
 ("statement") @keyword
 ("keyword") @keyword
-;; (_ spec: (_) @keyword)
+

@@ -12828,5 +12828,6 @@
     "literal_string_form_spec",
     "pic_form_spec"
   ],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }

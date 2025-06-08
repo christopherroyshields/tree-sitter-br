@@ -23,12 +23,12 @@
     "node-addon-api": "^8.2.1",
     "node-gyp-build": "^4.8.2",
     "prebuildify": "^6.0.1",
-    "tree-sitter": "^0.22.4",
-    "tree-sitter-cli": "^0.24.7",
+    "tree-sitter": "^0.25.0",
+    "tree-sitter-cli": "^0.25.6",
     "typescript": "^5.8.3"
   },
   "peerDependencies": {
-    "tree-sitter": "^0.22.4"
+    "tree-sitter": "^0.25.0"
   },
   "peerDependenciesMeta": {
     "tree-sitter": {

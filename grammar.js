@@ -1389,7 +1389,7 @@ module.exports = grammar({
     on_statement: $ => seq(
       alias(STATEMENTS.on, "statement"),
       choice(
-        prec(1,seq(
+        seq(
           alias(token(/fkey[ \t]+/i), "keyword"),
           $.numeric_expression,
           choice(
@@ -1416,7 +1416,7 @@ module.exports = grammar({
             )
           ),
           optional($.error_condition_list)
-        )),
+        ),
         seq(
           $.error_condition,
           choice(
@@ -1426,7 +1426,7 @@ module.exports = grammar({
             keyword("system"),
           )
         ),
-        prec(10,seq(
+        seq(
           $.numeric_expression,
           choice(
             alias(STATEMENTS.goto, "statement"),
@@ -1446,7 +1446,7 @@ module.exports = grammar({
             )
           ),
           optional($.error_condition_list)
-        ))
+        )
       ),
     ),
 

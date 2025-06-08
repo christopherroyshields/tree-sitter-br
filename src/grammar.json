@@ -454,7 +454,8 @@
       "type": "ALIAS",
       "content": {
         "type": "PATTERN",
-        "value": "[cC][oO][nN][tT][iI][nN][uU][eE]"
+        "value": "continue",
+        "flags": "i"
       },
       "named": false,
       "value": "statement"
@@ -468,7 +469,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[cC][lL][oO][sS][eE]"
+              "value": "close",
+              "flags": "i"
             }
           },
           "named": false,
@@ -578,7 +580,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[dD][aA][tT][aA]"
+              "value": "data",
+              "flags": "i"
             }
           },
           "named": false,
@@ -659,7 +662,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[dD][eE][fF]"
+              "value": "def",
+              "flags": "i"
             }
           },
           "named": false,
@@ -696,7 +700,8 @@
       "type": "ALIAS",
       "content": {
         "type": "PATTERN",
-        "value": "[lL][iI][bB]\\w*"
+        "value": "lib\\w*",
+        "flags": "i"
       },
       "named": false,
       "value": "keyword"
@@ -710,7 +715,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[lL][iI][bB][rR][aA][rR][yY]"
+              "value": "library",
+              "flags": "i"
             }
           },
           "named": false,
@@ -1310,7 +1316,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[dD][eE][lL][eE][tT][eE]"
+              "value": "delete",
+              "flags": "i"
             }
           },
           "named": false,
@@ -1446,7 +1453,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[dD][iI][mM]"
+              "value": "dim",
+              "flags": "i"
             }
           },
           "named": false,
@@ -1705,7 +1713,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[dD][oO]"
+              "value": "do",
+              "flags": "i"
             }
           },
           "named": false,
@@ -1821,59 +1830,73 @@
         "members": [
           {
             "type": "PATTERN",
-            "value": "[aA][tT][tT][nN]"
+            "value": "attn",
+            "flags": "i"
           },
           {
             "type": "PATTERN",
-            "value": "[cC][oO][nN][vV]"
+            "value": "conv",
+            "flags": "i"
           },
           {
             "type": "PATTERN",
-            "value": "[eE][oO][fF]"
+            "value": "eof",
+            "flags": "i"
           },
           {
             "type": "PATTERN",
-            "value": "[eE][rR][rR][oO][rR]"
+            "value": "error",
+            "flags": "i"
           },
           {
             "type": "PATTERN",
-            "value": "[hH][eE][lL][pP]"
+            "value": "help",
+            "flags": "i"
           },
           {
             "type": "PATTERN",
-            "value": "[iI][oO][eE][rR][rR]"
+            "value": "ioerr",
+            "flags": "i"
           },
           {
             "type": "PATTERN",
-            "value": "[lL][oO][cC][kK][eE][dD]"
+            "value": "locked",
+            "flags": "i"
           },
           {
             "type": "PATTERN",
-            "value": "[oO][fF][lL][oO][wW]"
+            "value": "oflow",
+            "flags": "i"
           },
           {
             "type": "PATTERN",
-            "value": "[pP][aA][gG][eE][oO][fF][lL][oO][wW]"
+            "value": "pageoflow",
+            "flags": "i"
           },
           {
             "type": "PATTERN",
-            "value": "[sS][oO][fF][lL][oO][wW]"
+            "value": "soflow",
+            "flags": "i"
           },
           {
             "type": "PATTERN",
-            "value": "[tT][iI][mM][eE][oO][uU][tT]"
+            "value": "timeout",
+            "flags": "i"
           },
           {
             "type": "PATTERN",
-            "value": "[zZ][dD][iI][vV]"
+            "value": "zdiv",
+            "flags": "i"
           },
           {
             "type": "PATTERN",
-            "value": "[nN][oO][rR][eE][cC]"
+            "value": "norec",
+            "flags": "i"
           },
           {
             "type": "PATTERN",
-            "value": "[nN][oO][kK][eE][yY]"
+            "value": "nokey",
+            "flags": "i"
           }
         ]
       }
@@ -1891,7 +1914,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[cC][hH][aA]?[iI]?[nN]?"
+              "value": "cha?i?n?",
+              "flags": "i"
             }
           },
           "named": false,
@@ -2070,31 +2094,38 @@
           "members": [
             {
               "type": "PATTERN",
-              "value": "[Cc]"
+              "value": "c",
+              "flags": "i"
             },
             {
               "type": "PATTERN",
-              "value": "[Cc][Cc]"
+              "value": "cc",
+              "flags": "i"
             },
             {
               "type": "PATTERN",
-              "value": "[Cc][Rr]"
+              "value": "cr",
+              "flags": "i"
             },
             {
               "type": "PATTERN",
-              "value": "[Cc][Uu]"
+              "value": "cu",
+              "flags": "i"
             },
             {
               "type": "PATTERN",
-              "value": "[Vv]"
+              "value": "v",
+              "flags": "i"
             },
             {
               "type": "PATTERN",
-              "value": "[Vv][Ll]"
+              "value": "vl",
+              "flags": "i"
             },
             {
               "type": "PATTERN",
-              "value": "[Vv][Uu]"
+              "value": "vu",
+              "flags": "i"
             }
           ]
         }
@@ -2111,23 +2142,28 @@
           "members": [
             {
               "type": "PATTERN",
-              "value": "[Bb]"
+              "value": "b",
+              "flags": "i"
             },
             {
               "type": "PATTERN",
-              "value": "[Bb][Ll]"
+              "value": "bl",
+              "flags": "i"
             },
             {
               "type": "PATTERN",
-              "value": "[Bb][Hh]"
+              "value": "bh",
+              "flags": "i"
             },
             {
               "type": "PATTERN",
-              "value": "[Pp][Dd]"
+              "value": "pd",
+              "flags": "i"
             },
             {
               "type": "PATTERN",
-              "value": "[Zp][Dd]"
+              "value": "zd",
+              "flags": "i"
             }
           ]
         }
@@ -2144,19 +2180,23 @@
           "members": [
             {
               "type": "PATTERN",
-              "value": "[Gg]"
+              "value": "g",
+              "flags": "i"
             },
             {
               "type": "PATTERN",
-              "value": "[Gg][Zz]"
+              "value": "gz",
+              "flags": "i"
             },
             {
               "type": "PATTERN",
-              "value": "[Nn]"
+              "value": "n",
+              "flags": "i"
             },
             {
               "type": "PATTERN",
-              "value": "[Nn][Zz]"
+              "value": "nz",
+              "flags": "i"
             }
           ]
         }
@@ -2173,15 +2213,18 @@
           "members": [
             {
               "type": "PATTERN",
-              "value": "[Dd]"
+              "value": "d",
+              "flags": "i"
             },
             {
               "type": "PATTERN",
-              "value": "[Ss]"
+              "value": "s",
+              "flags": "i"
             },
             {
               "type": "PATTERN",
-              "value": "[Ll]"
+              "value": "l",
+              "flags": "i"
             }
           ]
         }
@@ -2501,7 +2544,8 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[Xx]"
+        "value": "x",
+        "flags": "i"
       }
     },
     "x_form_spec": {
@@ -2860,7 +2904,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[fF][oO][rR][mM]"
+              "value": "form",
+              "flags": "i"
             }
           },
           "named": false,
@@ -3178,7 +3223,8 @@
               "type": "TOKEN",
               "content": {
                 "type": "PATTERN",
-                "value": "[eE][lL][sS][eE]"
+                "value": "else",
+                "flags": "i"
               }
             },
             "named": false,
@@ -3432,7 +3478,8 @@
         "type": "TOKEN",
         "content": {
           "type": "PATTERN",
-          "value": "[eE][nN][dD][ \\t]+[dD][eE][fF]"
+          "value": "end[ \\t]+def",
+          "flags": "i"
         }
       },
       "named": false,
@@ -3444,7 +3491,8 @@
         "type": "TOKEN",
         "content": {
           "type": "PATTERN",
-          "value": "[eE][nN][dD][ \\t]+[iI][fF]"
+          "value": "end[ \\t]+if",
+          "flags": "i"
         }
       },
       "named": false,
@@ -3459,7 +3507,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[eE][nN][dD]"
+              "value": "end",
+              "flags": "i"
             }
           },
           "named": false,
@@ -3488,7 +3537,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[eE][xX][eE][cC][uU][tT][eE][ \\t]"
+              "value": "execute[ \\t]",
+              "flags": "i"
             }
           },
           "named": false,
@@ -3518,7 +3568,8 @@
         "type": "TOKEN",
         "content": {
           "type": "PATTERN",
-          "value": "[eE][xX][iI][tT][ \\t]+[dD][oO]"
+          "value": "exit[ \\t]+do",
+          "flags": "i"
         }
       },
       "named": false,
@@ -3533,7 +3584,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[eE][xX][iI][tT]"
+              "value": "exit",
+              "flags": "i"
             }
           },
           "named": false,
@@ -4134,7 +4186,8 @@
               "type": "TOKEN",
               "content": {
                 "type": "PATTERN",
-                "value": "[iI][fF]"
+                "value": "if",
+                "flags": "i"
               }
             },
             "named": false,
@@ -4450,7 +4503,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[fF][oO][rR]"
+              "value": "for",
+              "flags": "i"
             }
           },
           "named": false,
@@ -4517,7 +4571,8 @@
         "type": "TOKEN",
         "content": {
           "type": "PATTERN",
-          "value": "[fF][nN][eE][nN][dD]"
+          "value": "fnend",
+          "flags": "i"
         }
       },
       "named": false,
@@ -4525,12 +4580,12 @@
     },
     "string_function_name": {
       "type": "PATTERN",
-      "value": "[fF][nN]\\w+\\$",
+      "value": "fn\\w+\\$",
       "flags": "i"
     },
     "numeric_function_name": {
       "type": "PATTERN",
-      "value": "[fF][nN]\\w+",
+      "value": "fn\\w+",
       "flags": "i"
     },
     "gosub_statement": {
@@ -4542,7 +4597,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[gG][oO][sS][uU][bB]"
+              "value": "gosub",
+              "flags": "i"
             }
           },
           "named": false,
@@ -4572,7 +4628,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[gG][oO][tT][oO]"
+              "value": "goto",
+              "flags": "i"
             }
           },
           "named": false,
@@ -4605,7 +4662,8 @@
                 "type": "TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "[iI][nN][pP][uU][tT]"
+                  "value": "input",
+                  "flags": "i"
                 }
               },
               "named": false,
@@ -4617,7 +4675,8 @@
                 "type": "TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "[dD][iI][sS][pP][lL][aA][yY]"
+                  "value": "display",
+                  "flags": "i"
                 }
               },
               "named": false,
@@ -4749,7 +4808,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[rR][iI][nN][pP][uU][tT]"
+              "value": "rinput",
+              "flags": "i"
             }
           },
           "named": false,
@@ -5028,7 +5088,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[iI][nN][pP][uU][tT]"
+              "value": "input",
+              "flags": "i"
             }
           },
           "named": false,
@@ -5530,7 +5591,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[lL][iI][nN][pP][uU][tT]"
+              "value": "linput",
+              "flags": "i"
             }
           },
           "named": false,
@@ -5633,7 +5695,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[lL][oO][oO][pP]"
+              "value": "loop",
+              "flags": "i"
             }
           },
           "named": false,
@@ -5953,11 +6016,13 @@
                       "members": [
                         {
                           "type": "PATTERN",
-                          "value": "[aA][iI][dD][xX]"
+                          "value": "aidx",
+                          "flags": "i"
                         },
                         {
                           "type": "PATTERN",
-                          "value": "[dD][iI][dD][xX]"
+                          "value": "didx",
+                          "flags": "i"
                         }
                       ]
                     }
@@ -6252,7 +6317,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[nN][eE][xX][tT]"
+              "value": "next",
+              "flags": "i"
             }
           },
           "named": false,
@@ -6273,7 +6339,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[oO][nN]"
+              "value": "on",
+              "flags": "i"
             }
           },
           "named": false,
@@ -6317,7 +6384,8 @@
                                 "type": "TOKEN",
                                 "content": {
                                   "type": "PATTERN",
-                                  "value": "[gG][oO][sS][uU][bB]"
+                                  "value": "gosub",
+                                  "flags": "i"
                                 }
                               },
                               "named": false,
@@ -6329,7 +6397,8 @@
                                 "type": "TOKEN",
                                 "content": {
                                   "type": "PATTERN",
-                                  "value": "[gG][oO][tT][oO]"
+                                  "value": "goto",
+                                  "flags": "i"
                                 }
                               },
                               "named": false,
@@ -6482,7 +6551,8 @@
                         "type": "TOKEN",
                         "content": {
                           "type": "PATTERN",
-                          "value": "[gG][oO][tT][oO]"
+                          "value": "goto",
+                          "flags": "i"
                         }
                       },
                       "named": false,
@@ -6494,7 +6564,8 @@
                         "type": "TOKEN",
                         "content": {
                           "type": "PATTERN",
-                          "value": "[gG][oO][sS][uU][bB]"
+                          "value": "gosub",
+                          "flags": "i"
                         }
                       },
                       "named": false,
@@ -6608,7 +6679,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[oO][pP][eE][nN]"
+              "value": "open",
+              "flags": "i"
             }
           },
           "named": false,
@@ -6926,7 +6998,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[oO][pP][tT][iI][oO][nN]"
+              "value": "option",
+              "flags": "i"
             }
           },
           "named": false,
@@ -7143,7 +7216,8 @@
         "type": "TOKEN",
         "content": {
           "type": "PATTERN",
-          "value": "[pP][aA][uU][sS][eE]"
+          "value": "pause",
+          "flags": "i"
         }
       },
       "named": false,
@@ -7158,7 +7232,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[pP][rR][iI][nN][tT]"
+              "value": "print",
+              "flags": "i"
             }
           },
           "named": false,
@@ -7558,7 +7633,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[rR][eE][aA][dD]"
+              "value": "read",
+              "flags": "i"
             }
           },
           "named": false,
@@ -7754,7 +7830,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[Rr][Ee][Ll][Ee][Aa][Ss][Ee]"
+              "value": "release",
+              "flags": "i"
             }
           },
           "named": false,
@@ -8106,7 +8183,8 @@
         "type": "TOKEN",
         "content": {
           "type": "PATTERN",
-          "value": "[rR][aA][nN][dD][oO][mM][iI][zZ][eE]"
+          "value": "randomize",
+          "flags": "i"
         }
       },
       "named": false,
@@ -8124,7 +8202,8 @@
                 "type": "TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "[rR][eE][mM]"
+                  "value": "rem",
+                  "flags": "i"
                 }
               },
               "named": false,
@@ -8136,7 +8215,8 @@
                 "type": "TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "[uU][sS][eE]"
+                  "value": "use",
+                  "flags": "i"
                 }
               },
               "named": false,
@@ -8167,7 +8247,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[rR][eE][rR][eE][aA][dD]"
+              "value": "reread",
+              "flags": "i"
             }
           },
           "named": false,
@@ -8299,7 +8380,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[rR][eE][sS][tT][oO][rR][eE]"
+              "value": "restore",
+              "flags": "i"
             }
           },
           "named": false,
@@ -8491,7 +8573,8 @@
         "type": "TOKEN",
         "content": {
           "type": "PATTERN",
-          "value": "[rR][eE][tT][rR][yY]"
+          "value": "retry",
+          "flags": "i"
         }
       },
       "named": false,
@@ -8503,7 +8586,8 @@
         "type": "TOKEN",
         "content": {
           "type": "PATTERN",
-          "value": "[rR][eE][tT][uU][rR][nN]"
+          "value": "return",
+          "flags": "i"
         }
       },
       "named": false,
@@ -8518,7 +8602,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[rR][eE][wW][rR][iI][tT][eE]"
+              "value": "rewrite",
+              "flags": "i"
             }
           },
           "named": false,
@@ -8675,7 +8760,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[wW][rR][iI][tT][eE]"
+              "value": "write",
+              "flags": "i"
             }
           },
           "named": false,
@@ -8832,7 +8918,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[sS][tT][oO][pP]"
+              "value": "stop",
+              "flags": "i"
             }
           },
           "named": false,
@@ -8861,7 +8948,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "[tT][rR][aA][cC][eE]"
+              "value": "trace",
+              "flags": "i"
             }
           },
           "named": false,
@@ -8913,7 +9001,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "#[sS][eE][lL][eE][cC][tT]#"
+              "value": "#select#",
+              "flags": "i"
             }
           },
           "named": false,
@@ -8938,7 +9027,8 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "#[cC][aA][sS][eE]#"
+              "value": "#case#",
+              "flags": "i"
             }
           },
           "named": false,
@@ -8972,7 +9062,8 @@
         "type": "TOKEN",
         "content": {
           "type": "PATTERN",
-          "value": "#[cC][aA][sS][eE][ \\t]+[eE][lL][sS][eE]#"
+          "value": "#case[ \\t]+else#",
+          "flags": "i"
         }
       },
       "named": false,
@@ -8984,7 +9075,8 @@
         "type": "TOKEN",
         "content": {
           "type": "PATTERN",
-          "value": "#[eE][nN][dD][ \\t]+[sS][eE][lL][eE][cC][tT]#"
+          "value": "#end[ \\t]+select#",
+          "flags": "i"
         }
       },
       "named": false,
@@ -9002,7 +9094,8 @@
                 "type": "TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "[lL][eE][tT]"
+                  "value": "let",
+                  "flags": "i"
                 }
               },
               "named": false,
@@ -9341,7 +9434,8 @@
         "members": [
           {
             "type": "PATTERN",
-            "value": "[aA][nN][dD][ \\t]"
+            "value": "and[ \\t]",
+            "flags": "i"
           },
           {
             "type": "STRING",
@@ -9357,7 +9451,8 @@
         "members": [
           {
             "type": "PATTERN",
-            "value": "[oO][rR][ \\t]"
+            "value": "or[ \\t]",
+            "flags": "i"
           },
           {
             "type": "STRING",
@@ -10150,7 +10245,8 @@
           },
           {
             "type": "PATTERN",
-            "value": "[nN][oO][tT][ \\t]"
+            "value": "not[ \\t]",
+            "flags": "i"
           }
         ]
       }
@@ -10344,7 +10440,8 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "[uU][dD][iI][mM]"
+            "value": "udim",
+            "flags": "i"
           },
           "named": true,
           "value": "function_name"
@@ -10472,7 +10569,8 @@
               "type": "ALIAS",
               "content": {
                 "type": "PATTERN",
-                "value": "[rR][eE][mM]"
+                "value": "rem",
+                "flags": "i"
               },
               "named": true,
               "value": "function_name"
@@ -10499,287 +10597,358 @@
                   "members": [
                     {
                       "type": "PATTERN",
-                      "value": "[aA][bB][sS]"
+                      "value": "abs",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[aA][tT][nN]"
+                      "value": "atn",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[bB][eE][lL][lL]"
+                      "value": "bell",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[cC][eE][iI][lL]"
+                      "value": "ceil",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[cC][mM][dD][kK][eE][yY]"
+                      "value": "cmdkey",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[cC][nN][tT]"
+                      "value": "cnt",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[cC][oO][dD][eE]"
+                      "value": "code",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[cC][oO][sS]"
+                      "value": "cos",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[cC][uU][rR][cC][oO][lL]"
+                      "value": "curcol",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[cC][uU][rR][fF][lL][dD]"
+                      "value": "curfld",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[cC][uU][rR][pP][oO][sS]"
+                      "value": "curpos",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[cC][uU][rR][rR][oO][wW]"
+                      "value": "currow",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[cC][uU][rR][tT][aA][bB]"
+                      "value": "curtab",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[cC][uU][rR][wW][iI][nN][dD][oO][wW]"
+                      "value": "curwindow",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[dD][aA][tT][eE]"
+                      "value": "date",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[dD][aA][yY][sS]"
+                      "value": "days",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[dD][eE][bB][uU][gG]_[sS][tT][rR]"
+                      "value": "debug_str",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[eE][rR][rR]"
+                      "value": "err",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[eE][xX][iI][sS][tT][sS]"
+                      "value": "exists",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[eE][xX][pP]"
+                      "value": "exp",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[fF][iI][lL][eE]"
+                      "value": "file",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[fF][iI][lL][eE][nN][uU][mM]"
+                      "value": "filenum",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[fF][kK][eE][yY]"
+                      "value": "fkey",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[fF][pP]"
+                      "value": "fp",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[fF][rR][eE][eE][sS][pP]"
+                      "value": "freesp",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[iI][nN][fF]"
+                      "value": "inf",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[iI][nN][tT]"
+                      "value": "int",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[iI][pP]"
+                      "value": "ip",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[kK][lL][nN]"
+                      "value": "kln",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[kK][pP][sS]"
+                      "value": "kps",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[kK][rR][eE][cC]"
+                      "value": "krec",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[lL][eE][nN]"
+                      "value": "len",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[lL][iI][nN][eE]"
+                      "value": "line",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[lL][iI][nN][eE][sS]"
+                      "value": "lines",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[lL][iI][nN][eE][sS][pP][pP]"
+                      "value": "linespp",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[lL][oO][gG]"
+                      "value": "log",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[lL][rR][eE][cC]"
+                      "value": "lrec",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[mM][aA][tT]2[sS][tT][rR]"
+                      "value": "mat2str",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[mM][aA][xX]"
+                      "value": "max",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[mM][iI][nN]"
+                      "value": "min",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[mM][oO][dD]"
+                      "value": "mod",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[mM][sS][gG]"
+                      "value": "msg",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[mM][sS][gG][bB][oO][xX]"
+                      "value": "msgbox",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[nN][eE][wW][pP][aA][gG][eE]"
+                      "value": "newpage",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[nN][eE][xX][tT]"
+                      "value": "next",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[nN][xX][tT][cC][oO][lL]"
+                      "value": "nxtcol",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[nN][xX][tT][fF][lL][dD]"
+                      "value": "nxtfld",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[nN][xX][tT][rR][oO][wW]"
+                      "value": "nxtrow",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[oO][rR][dD]"
+                      "value": "ord",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[pP][iI]"
+                      "value": "pi",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[pP][oO][sS]"
+                      "value": "pos",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[pP][rR][iI][nN][tT][eE][rR]_[lL][iI][sS][tT]"
+                      "value": "printer_list",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[pP][rR][oO][cC][iI][nN]"
+                      "value": "procin",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[rR][eE][cC]"
+                      "value": "rec",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[rR][lL][nN]"
+                      "value": "rln",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[rR][nN][dD]"
+                      "value": "rnd",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[rR][oO][uU][nN][dD]"
+                      "value": "round",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[sS][eE][rR][iI][aA][lL]"
+                      "value": "serial",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[sS][eE][tT][eE][nN][vV]"
+                      "value": "setenv",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[sS][gG][nN]"
+                      "value": "sgn",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[sS][iI][nN]"
+                      "value": "sin",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[sS][lL][eE][eE][pP]"
+                      "value": "sleep",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[sS][qQ][rR]"
+                      "value": "sqr",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[sS][rR][cC][hH]"
+                      "value": "srch",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[sS][tT][rR]2[mM][aA][tT]"
+                      "value": "str2mat",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[sS][uU][mM]"
+                      "value": "sum",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[tT][aA][bB]"
+                      "value": "tab",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[tT][aA][nN]"
+                      "value": "tan",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[tT][iI][mM][eE][rR]"
+                      "value": "timer",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[vV][aA][lL]"
+                      "value": "val",
+                      "flags": "i"
                     },
                     {
                       "type": "PATTERN",
-                      "value": "[vV][eE][rR][sS][iI][oO][nN]"
+                      "value": "version",
+                      "flags": "i"
                     }
                   ]
                 }
@@ -10819,159 +10988,198 @@
               "members": [
                 {
                   "type": "PATTERN",
-                  "value": "[bB][rR]_[fF][iI][lL][eE][nN][aA][mM][eE]\\$"
+                  "value": "br_filename\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[bB][rR][eE][rR][rR]\\$"
+                  "value": "brerr\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[cC][fF][oO][rR][mM]\\$"
+                  "value": "cform\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[cC][hH][rR]\\$"
+                  "value": "chr\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[cC][nN][vV][rR][tT]\\$"
+                  "value": "cnvrt\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[dD][aA][tT][eE]\\$"
+                  "value": "date\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[dD][eE][cC][rR][yY][pP][tT]\\$"
+                  "value": "decrypt\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[eE][nN][cC][rR][yY][pP][tT]\\$"
+                  "value": "encrypt\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[eE][nN][vV]\\$"
+                  "value": "env\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[fF][iI][lL][eE]\\$"
+                  "value": "file\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[hH][eE][lL][pP]\\$"
+                  "value": "help\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[hH][eE][xX]\\$"
+                  "value": "hex\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[kK][sS][tT][aA][tT]\\$"
+                  "value": "kstat\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[lL][oO][gG][iI][nN]_[nN][aA][mM][eE]\\$"
+                  "value": "login_name\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[lL][pP][aA][dD]\\$"
+                  "value": "lpad\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[lL][tT][rR][mM]\\$"
+                  "value": "ltrm\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[lL][wW][rR][cC]\\$"
+                  "value": "lwrc\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[mM][aA][xX]\\$"
+                  "value": "max\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[mM][iI][nN]\\$"
+                  "value": "min\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[mM][sS][gG]\\$"
+                  "value": "msg\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[oO][sS]_[fF][iI][lL][eE][nN][aA][mM][eE]\\$"
+                  "value": "os_filename\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[pP][iI][cC]\\$"
+                  "value": "pic\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[pP][rR][oO][gG][rR][aA][mM]\\$"
+                  "value": "program\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[rR][pP][aA][dD]\\$"
+                  "value": "rpad\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[rR][pP][tT]\\$"
+                  "value": "rpt\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[rR][tT][rR][mM]\\$"
+                  "value": "rtrm\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[sS][eE][sS][sS][iI][oO][nN]\\$"
+                  "value": "session\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[sS][rR][eE][pP]\\$"
+                  "value": "srep\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[sS][tT][rR]\\$"
+                  "value": "str\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[tT][iI][mM][eE]\\$"
+                  "value": "time\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[tT][rR][iI][mM]\\$"
+                  "value": "trim\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[uU][nN][hH][eE][xX]\\$"
+                  "value": "unhex\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[uU][pP][rR][cC]\\$"
+                  "value": "uprc\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[uU][sS][eE][rR][iI][dD]\\$"
+                  "value": "userid\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[vV][aA][rR][iI][aA][bB][lL][eE]\\$"
+                  "value": "variable\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[wW][bB][pP][lL][aA][tT][fF][oO][rR][mM]\\$"
+                  "value": "wbplatform\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[wW][bB][vV][eE][rR][sS][iI][oO][nN]\\$"
+                  "value": "wbversion\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[wW][sS][iI][dD]\\$"
+                  "value": "wsid\\$",
+                  "flags": "i"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[xX][lL][aA][tT][eE]\\$"
+                  "value": "xlate\\$",
+                  "flags": "i"
                 }
               ]
             }
@@ -12205,7 +12413,8 @@
     },
     "_mat": {
       "type": "PATTERN",
-      "value": "[mM][aA][tT][ \\t]"
+      "value": "mat[ \\t]",
+      "flags": "i"
     },
     "identifier": {
       "type": "PATTERN",

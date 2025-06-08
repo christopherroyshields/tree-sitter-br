@@ -1,3 +1,1 @@
-PRINT val("123")
-print sum(1, 2, 3)
-PRINT val("Hello, World!",
+form B 1,BL 2,BH 3,ZD

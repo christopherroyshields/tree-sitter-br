@@ -4,6 +4,9 @@
     {
       "name": "br",
       "camelcase": "Br",
+      "highlights": [
+        "queries/highlights.scm"
+      ],
       "title": "Br Parser",
       "scope": "source.br",
       "file-types": [

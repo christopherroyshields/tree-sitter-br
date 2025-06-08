@@ -1,152 +1,3216 @@
-============================================
-Form Statement
-============================================
-FORM 2*(C 3, 2*C 10),BH 2.1,PIC(###.##)
+===========================================
+Chain
+===========================================
+00350 CHAIN "MAIN\MENU"
+00900 CHAIN "C:\GLPROG\GLEDIT" ,FILES,D$
+00900 CHAIN "PROC=GLPOST"
+00080 NAME$="EDITLIST.PRC"
+00090 X$="SUBPROC=GLPROG\"&NAME$
+00100 CHAIN X$
 ---
-    (source_file
-      (line
-        (statement
-          (form_statement
-            (form_multiplier
-              (int))
-            (formspec
-              (spec)
-              (number))
-            (formspec
-              (form_multiplier
-                (int))
-              (spec)
-              (number))
-            (formspec
-              (spec)
-              (number))
-            (formspec)))
-        (eol)))
 
-============================================
-CLOSE STATEMENT
-============================================
-00060 CLOSE #1,FREE,RELEASE:
-00060 CLOSE #foo,DROP: ERROR IGNORE, ERROR 10
+(source_file
+  (line
+    (line_number)
+    (chain_statement
+      (string_expression
+        (string_primary_expression
+          (string)))))
+  (line
+    (line_number)
+    (chain_statement
+      (string_expression
+        (string_primary_expression
+          (string)))
+      (chain_var_list
+        (stringreference
+          (stringidentifier)))))
+  (line
+    (line_number)
+    (chain_statement
+      (string_expression
+        (string_primary_expression
+          (string)))))
+  (line
+    (line_number)
+    (let_statement
+      (string_expression
+        (string_assignment
+          (string_expression
+            (string_primary_expression
+              (stringreference
+                (stringidentifier))))
+          (assignment_op)
+          (string_expression
+            (string_primary_expression
+              (string)))))))
+  (line
+    (line_number)
+    (let_statement
+      (string_expression
+        (string_binary_expression
+          (string_expression
+            (string_assignment
+              (string_expression
+                (string_primary_expression
+                  (stringreference
+                    (stringidentifier))))
+              (assignment_op)
+              (string_expression
+                (string_primary_expression
+                  (string)))))
+          (concat_op)
+          (string_expression
+            (string_primary_expression
+              (stringreference
+                (stringidentifier))))))))
+  (line
+    (line_number)
+    (chain_statement
+      (string_expression
+        (string_primary_expression
+          (stringreference
+            (stringidentifier)))))))
+
+===========================================
+Close
+===========================================
+9100 CLOSE #1:
+6000 CLOSE #2,FREE:  IOERR 9300
+00030 PRINT FIELDS "3,14,C 18,R":"Original contents"
+00040 OPEN #1: "SROW=2,SCOL=2,EROW=20,ECOL=70,BORDER=DR",DISPLAY,OUTIN
+00050 PRINT #1,FIELDS "6,14,C 18,R":"New contents"
+00060 CLOSE #1:
 ---
-    (source_file
-      (line
-        (statement
-          (form_statement
-            (form_multiplier
-              (int))
-            (formspec
-              (spec)
-              (number))
-            (formspec
-              (form_multiplier
-                (int))
-              (spec)
-              (number))
-            (formspec
-              (spec)
-              (number))
-            (formspec)))
-        (eol)))      
 
-============================================
-CONTINUE
-============================================
+(source_file
+  (line
+    (line_number)
+    (close_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))))
+  (line
+    (line_number)
+    (close_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))
+      (error_condition_list
+        (error_condition)
+        (line_reference))))
+  (line
+    (line_number)
+    (print_statement
+      (print_fields
+        (string_expression
+          (string_primary_expression
+            (string)))
+        (print_output
+          (expression
+            (string_expression
+              (string_primary_expression
+                (string))))))))
+  (line
+    (line_number)
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string)))))
+  (line
+    (line_number)
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_fields
+        (string_expression
+          (string_primary_expression
+            (string)))
+        (print_output
+          (expression
+            (string_expression
+              (string_primary_expression
+                (string))))))))
+  (line
+    (line_number)
+    (close_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (number))))))
+
+===========================================
+Continue
+===========================================
+00160 FOR I=1 TO 132
+00170 PRINT #255:I PAGEOFLOW TOPOFPAGE
+00180 NEXT I
+00190 STOP
+00320 TOPOFPAGE: ! routine for top of page
+00330 PRINT #255: NEWPAGE ! reset counter
+00340 GOSUB HEADINGS
 00350 CONTINUE
 ---
-    (source_file
-      (line
-        (statement
-          (form_statement
-            (form_multiplier
-              (int))
-            (formspec
-              (spec)
-              (number))
-            (formspec
-              (form_multiplier
-                (int))
-              (spec)
-              (number))
-            (formspec
-              (spec)
-              (number))
-            (formspec)))
-        (eol)))
 
-============================================
-DATA
-============================================
-data "First Name","Last Name","Address","City","State","Zip Code","Shipping","Item 1","Item 2","Item 3"
-data 10,10,10,10,4,9,3,3,3,3,1x32,
-DATA 5.2E3, -5.2e+2, +5e-4
+(source_file
+  (line
+    (line_number)
+    (for_statement
+      (numberreference
+        (numberidentifier))
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))))
+  (line
+    (line_number)
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier))))))
+      (error_condition_list
+        (error_condition)
+        (label_reference))))
+  (line
+    (line_number)
+    (next_statement
+      (numberreference
+        (numberidentifier))))
+  (line
+    (line_number)
+    (stop_statement))
+  (line
+    (line_number)
+    (label)
+    (comment))
+  (line
+    (line_number)
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numeric_call_expression
+                (numeric_system_function
+                  (function_name))))))))
+    (comment))
+  (line
+    (line_number)
+    (gosub_statement
+      (label_reference)))
+  (line
+    (line_number)
+    (continue_statement)))
+
+===========================================
+Data
+===========================================
+00010 DATA 5.2E3, -5.2e+2, +5e-4
+00020 READ A, B, C
+00030 PRINT A, B, C
+00100 DIM Zip(100), CITY$(100)
+00110 DATA PENNSYLVANIA, 2
+00120 DATA 17837, Lewisburg
+00130 DATA 17701, Williamsport
+00140 READ STATE$, NZIPS
+00150 FOR I=1 TO NZIPS
+00160 READ Zip(I), CITY$(I)
+00170 NEXT I
 ---
-    (source_file
-      (line
-        (statement
-          (form_statement
-            (form_multiplier
-              (int))
-            (formspec
-              (spec)
-              (number))
-            (formspec
-              (form_multiplier
-                (int))
-              (spec)
-              (number))
-            (formspec
-              (spec)
-              (number))
-            (formspec)))
-        (eol)))
 
-============================================
-DELETE
-============================================
+(source_file
+  (line
+    (line_number)
+    (data_statement
+      (number)
+      (number)
+      (number)))
+  (line
+    (line_number)
+    (read_statement
+      (numberreference
+        (numberidentifier))
+      (numberreference
+        (numberidentifier))
+      (numberreference
+        (numberidentifier))))
+  (line
+    (line_number)
+    (print_statement
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier)))))
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier)))))
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier))))))))
+  (line
+    (line_number)
+    (dim_statement
+      (numberarray
+        (numberidentifier)
+        (dim_array_size
+          (int)))
+      (stringarray
+        (stringidentifier)
+        (dim_array_size
+          (int)))))
+  (line
+    (line_number)
+    (data_statement
+      (unquoted_data)
+      (number)))
+  (line
+    (line_number)
+    (data_statement
+      (number)
+      (unquoted_data)))
+  (line
+    (line_number)
+    (data_statement
+      (number)
+      (unquoted_data)))
+  (line
+    (line_number)
+    (read_statement
+      (stringreference
+        (stringidentifier))
+      (numberreference
+        (numberidentifier))))
+  (line
+    (line_number)
+    (for_statement
+      (numberreference
+        (numberidentifier))
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))
+      (numeric_expression
+        (numeric_primary_expression
+          (numberreference
+            (numberidentifier))))))
+  (line
+    (line_number)
+    (read_statement
+      (numberelement
+        (numberarray
+          (numberidentifier))
+        (element_subscript
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier))))))
+      (stringarray
+        (stringidentifier)
+        (element_subscript
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier))))))))
+  (line
+    (line_number)
+    (next_statement
+      (numberreference
+        (numberidentifier)))))
+
+===========================================
+Def
+===========================================
+00010 DEF FNY(X)=(X-INT(X/100)*100)*10000+INT(X/100)
+00020 DEF FNM(X)=(X-INT(X/10000)*10000)*100+INT(X/10000)
+00010 DEF FNX(X)
+00020 X=X*5
+00030 FNX=X
+00040 FNEND
+00050 X=2
+00060 PRINT FNX(X)
+00070 PRINT X
+00010 DEF FNP(&X)
+00020 X=X*2 : FNP=X
+00030 FNEND
+00040 A=2 : X=5
+00050 PRINT FNP(A)
+00060 PRINT A,X
+00010 DEF FNX=Y*2+Z
+00020 PRINT FNX
+---
+
+(source_file
+  (line
+    (line_number)
+    (def_statement
+      (numeric_function_definition
+        (function_name)
+        (parameter_list
+          (required_parameter
+            (parameter
+              (numeric_parameter
+                (numberreference
+                  (numberidentifier))))))
+        (assignment_op)
+        (numeric_expression
+          (numeric_binary_expression
+            (numeric_expression
+              (numeric_binary_expression
+                (numeric_expression
+                  (numeric_primary_expression
+                    (parenthesized_numeric_expression
+                      (numeric_expression
+                        (numeric_binary_expression
+                          (numeric_expression
+                            (numeric_primary_expression
+                              (numberreference
+                                (numberidentifier))))
+                          (binary_plus_op)
+                          (numeric_expression
+                            (numeric_binary_expression
+                              (numeric_expression
+                                (numeric_primary_expression
+                                  (numeric_call_expression
+                                    (numeric_system_function
+                                      (function_name)
+                                      (arguments
+                                        (argument
+                                          (expression
+                                            (numeric_expression
+                                              (numeric_binary_expression
+                                                (numeric_expression
+                                                  (numeric_primary_expression
+                                                    (numberreference
+                                                      (numberidentifier))))
+                                                (binary_times_op)
+                                                (numeric_expression
+                                                  (numeric_primary_expression
+                                                    (number))))))))))))
+                              (binary_times_op)
+                              (numeric_expression
+                                (numeric_primary_expression
+                                  (number))))))))))
+                (binary_times_op)
+                (numeric_expression
+                  (numeric_primary_expression
+                    (number)))))
+            (binary_plus_op)
+            (numeric_expression
+              (numeric_primary_expression
+                (numeric_call_expression
+                  (numeric_system_function
+                    (function_name)
+                    (arguments
+                      (argument
+                        (expression
+                          (numeric_expression
+                            (numeric_binary_expression
+                              (numeric_expression
+                                (numeric_primary_expression
+                                  (numberreference
+                                    (numberidentifier))))
+                              (binary_times_op)
+                              (numeric_expression
+                                (numeric_primary_expression
+                                  (number)))))))))))))))))
+  (line
+    (line_number)
+    (def_statement
+      (numeric_function_definition
+        (function_name)
+        (parameter_list
+          (required_parameter
+            (parameter
+              (numeric_parameter
+                (numberreference
+                  (numberidentifier))))))
+        (assignment_op)
+        (numeric_expression
+          (numeric_binary_expression
+            (numeric_expression
+              (numeric_binary_expression
+                (numeric_expression
+                  (numeric_primary_expression
+                    (parenthesized_numeric_expression
+                      (numeric_expression
+                        (numeric_binary_expression
+                          (numeric_expression
+                            (numeric_primary_expression
+                              (numberreference
+                                (numberidentifier))))
+                          (binary_plus_op)
+                          (numeric_expression
+                            (numeric_binary_expression
+                              (numeric_expression
+                                (numeric_primary_expression
+                                  (numeric_call_expression
+                                    (numeric_system_function
+                                      (function_name)
+                                      (arguments
+                                        (argument
+                                          (expression
+                                            (numeric_expression
+                                              (numeric_binary_expression
+                                                (numeric_expression
+                                                  (numeric_primary_expression
+                                                    (numberreference
+                                                      (numberidentifier))))
+                                                (binary_times_op)
+                                                (numeric_expression
+                                                  (numeric_primary_expression
+                                                    (number))))))))))))
+                              (binary_times_op)
+                              (numeric_expression
+                                (numeric_primary_expression
+                                  (number))))))))))
+                (binary_times_op)
+                (numeric_expression
+                  (numeric_primary_expression
+                    (number)))))
+            (binary_plus_op)
+            (numeric_expression
+              (numeric_primary_expression
+                (numeric_call_expression
+                  (numeric_system_function
+                    (function_name)
+                    (arguments
+                      (argument
+                        (expression
+                          (numeric_expression
+                            (numeric_binary_expression
+                              (numeric_expression
+                                (numeric_primary_expression
+                                  (numberreference
+                                    (numberidentifier))))
+                              (binary_times_op)
+                              (numeric_expression
+                                (numeric_primary_expression
+                                  (number)))))))))))))))))
+  (line
+    (line_number)
+    (def_statement
+      (numeric_function_definition
+        (function_name)
+        (parameter_list
+          (required_parameter
+            (parameter
+              (numeric_parameter
+                (numberreference
+                  (numberidentifier)))))))))
+  (line
+    (line_number)
+    (let_statement
+      (numeric_expression
+        (numeric_forced_assignment_expression
+          (numberreference
+            (numberidentifier))
+          (numeric_forced_assignment_op
+            (assignment_op))
+          (numeric_expression
+            (numeric_binary_expression
+              (numeric_expression
+                (numeric_primary_expression
+                  (numberreference
+                    (numberidentifier))))
+              (binary_times_op)
+              (numeric_expression
+                (numeric_primary_expression
+                  (number)))))))))
+  (line
+    (line_number)
+    (let_statement
+      (numeric_expression
+        (numeric_function_assignment
+          (function_name)
+          (assignment_operator
+            (assignment_op))
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier))))))))
+  (line
+    (line_number)
+    (fnend_statement))
+  (line
+    (line_number)
+    (let_statement
+      (numeric_expression
+        (numeric_forced_assignment_expression
+          (numberreference
+            (numberidentifier))
+          (numeric_forced_assignment_op
+            (assignment_op))
+          (numeric_expression
+            (numeric_primary_expression
+              (number)))))))
+  (line
+    (line_number)
+    (print_statement
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numeric_call_expression
+                (numeric_user_function
+                  (function_name)
+                  (arguments
+                    (argument
+                      (expression
+                        (numeric_expression
+                          (numeric_primary_expression
+                            (numberreference
+                              (numberidentifier)))))))))))))))
+  (line
+    (line_number)
+    (print_statement
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier))))))))
+  (line
+    (line_number)
+    (def_statement
+      (numeric_function_definition
+        (function_name)
+        (parameter_list
+          (required_parameter
+            (parameter
+              (numeric_parameter
+                (numberreference
+                  (numberidentifier)))))))))
+  (line
+    (line_number)
+    (let_statement
+      (numeric_expression
+        (numeric_forced_assignment_expression
+          (numberreference
+            (numberidentifier))
+          (numeric_forced_assignment_op
+            (assignment_op))
+          (numeric_expression
+            (numeric_binary_expression
+              (numeric_expression
+                (numeric_primary_expression
+                  (numberreference
+                    (numberidentifier))))
+              (binary_times_op)
+              (numeric_expression
+                (numeric_primary_expression
+                  (number))))))))
+    (statement_separator)
+    (let_statement
+      (numeric_expression
+        (numeric_function_assignment
+          (function_name)
+          (assignment_operator
+            (assignment_op))
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier))))))))
+  (line
+    (line_number)
+    (fnend_statement))
+  (line
+    (line_number)
+    (let_statement
+      (numeric_expression
+        (numeric_forced_assignment_expression
+          (numberreference
+            (numberidentifier))
+          (numeric_forced_assignment_op
+            (assignment_op))
+          (numeric_expression
+            (numeric_primary_expression
+              (number))))))
+    (statement_separator)
+    (let_statement
+      (numeric_expression
+        (numeric_forced_assignment_expression
+          (numberreference
+            (numberidentifier))
+          (numeric_forced_assignment_op
+            (assignment_op))
+          (numeric_expression
+            (numeric_primary_expression
+              (number)))))))
+  (line
+    (line_number)
+    (print_statement
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numeric_call_expression
+                (numeric_user_function
+                  (function_name)
+                  (arguments
+                    (argument
+                      (expression
+                        (numeric_expression
+                          (numeric_primary_expression
+                            (numberreference
+                              (numberidentifier)))))))))))))))
+  (line
+    (line_number)
+    (print_statement
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier)))))
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier))))))))
+  (line
+    (line_number)
+    (def_statement
+      (numeric_function_definition
+        (function_name)
+        (assignment_op)
+        (numeric_expression
+          (numeric_binary_expression
+            (numeric_expression
+              (numeric_binary_expression
+                (numeric_expression
+                  (numeric_primary_expression
+                    (numberreference
+                      (numberidentifier))))
+                (binary_times_op)
+                (numeric_expression
+                  (numeric_primary_expression
+                    (number)))))
+            (binary_plus_op)
+            (numeric_expression
+              (numeric_primary_expression
+                (numberreference
+                  (numberidentifier)))))))))
+  (line
+    (line_number)
+    (print_statement
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numeric_call_expression
+                (numeric_user_function
+                  (function_name))))))))))
+
+===========================================
+Delete (statement)
+===========================================
 00530 Delete #1,Key=badrec$: Nokey KeyNotFoundLine
 ---
-    (source_file
-      (line
-        (statement
-          (form_statement
-            (form_multiplier
-              (int))
-            (formspec
-              (spec)
-              (number))
-            (formspec
-              (form_multiplier
-                (int))
-              (spec)
-              (number))
-            (formspec
-              (spec)
-              (number))
-            (formspec)))
-        (eol)))
 
-============================================
-DIM
-============================================
-dim a,b,c,d$,e$*20,e$(1)*20,e(1)
+(source_file
+  (line
+    (line_number)
+    (delete_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))
+      (string_expression
+        (string_primary_expression
+          (stringreference
+            (stringidentifier))))
+      (error_condition_list
+        (error_condition)
+        (label_reference)))))
+
+===========================================
+Dim
+===========================================
+01230 dim quantity(50), price(100), discount(10), matrix(5,5), totalSales(1)
+01220 dim address$(10,5), customer$(20,3), inventory$(30,4)
+01200 dim name$*40, salary(10), matrix(5,5), description$(1)*255, counter(1)
+01210 dim firstName$*30, lastName$*30, address$*100, city$*40, state$*2, zipCode$*10
 ---
-    (source_file
-      (line
-        (statement
-          (form_statement
-            (form_multiplier
-              (int))
-            (formspec
-              (spec)
-              (number))
-            (formspec
-              (form_multiplier
-                (int))
-              (spec)
-              (number))
-            (formspec
-              (spec)
-              (number))
-            (formspec)))
-        (eol)))
+
+(source_file
+  (line
+    (line_number)
+    (dim_statement
+      (numberarray
+        (numberidentifier)
+        (dim_array_size
+          (int)))
+      (numberarray
+        (numberidentifier)
+        (dim_array_size
+          (int)))
+      (numberarray
+        (numberidentifier)
+        (dim_array_size
+          (int)))
+      (numberarray
+        (numberidentifier)
+        (dim_array_size
+          (int)
+          (int)))
+      (numberarray
+        (numberidentifier)
+        (dim_array_size
+          (int)))))
+  (line
+    (line_number)
+    (dim_statement
+      (stringarray
+        (stringidentifier)
+        (dim_array_size
+          (int)
+          (int)))
+      (stringarray
+        (stringidentifier)
+        (dim_array_size
+          (int)
+          (int)))
+      (stringarray
+        (stringidentifier)
+        (dim_array_size
+          (int)
+          (int)))))
+  (line
+    (line_number)
+    (dim_statement
+      (stringreference
+        (stringidentifier)
+        (int))
+      (numberarray
+        (numberidentifier)
+        (dim_array_size
+          (int)))
+      (numberarray
+        (numberidentifier)
+        (dim_array_size
+          (int)
+          (int)))
+      (stringarray
+        (stringidentifier)
+        (dim_array_size
+          (int))
+        (int))
+      (numberarray
+        (numberidentifier)
+        (dim_array_size
+          (int)))))
+  (line
+    (line_number)
+    (dim_statement
+      (stringreference
+        (stringidentifier)
+        (int))
+      (stringreference
+        (stringidentifier)
+        (int))
+      (stringreference
+        (stringidentifier)
+        (int))
+      (stringreference
+        (stringidentifier)
+        (int))
+      (stringreference
+        (stringidentifier)
+        (int))
+      (stringreference
+        (stringidentifier)
+        (int)))))
+
+===========================================
+Display Menu
+===========================================
+00260    display MENU: MAT M$, MAT PGM$, MAT STATUS$  !Displays menu
+---
+
+(source_file
+  (line
+    (line_number)
+    (input_menu_statement
+      (string_array_expression
+        (string_array_primary_expression
+          (stringarray
+            (stringidentifier))))
+      (string_array_expression
+        (string_array_primary_expression
+          (stringarray
+            (stringidentifier))))
+      (string_array_expression
+        (string_array_primary_expression
+          (stringarray
+            (stringidentifier)))))
+    (comment)))
+
+===========================================
+Do
+===========================================
+00350     do
+00360        input fields "22,14,CHECK 8,,10;23,14,CHECK 8,,11;24,14,CHECK 8,,12": Box$(1),Box$(2),Box$(3)
+00370        print fields "24,1,N 2": Fkey
+00380     loop While Fkey~=99
+---
+
+(source_file
+  (line
+    (line_number)
+    (do_statement))
+  (line
+    (line_number)
+    (input_statement
+      (string_expression
+        (string_primary_expression
+          (string)))
+      (variable_list
+        (stringarray
+          (stringidentifier)
+          (element_subscript
+            (numeric_expression
+              (numeric_primary_expression
+                (number)))))
+        (stringarray
+          (stringidentifier)
+          (element_subscript
+            (numeric_expression
+              (numeric_primary_expression
+                (number)))))
+        (stringarray
+          (stringidentifier)
+          (element_subscript
+            (numeric_expression
+              (numeric_primary_expression
+                (number))))))))
+  (line
+    (line_number)
+    (print_statement
+      (print_fields
+        (string_expression
+          (string_primary_expression
+            (string)))
+        (print_output
+          (expression
+            (numeric_expression
+              (numeric_primary_expression
+                (numeric_call_expression
+                  (numeric_system_function
+                    (function_name))))))))))
+  (line
+    (line_number)
+    (loop_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (numeric_call_expression
+                (numeric_system_function
+                  (function_name)))))
+          (binary_cond_eq_op)
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (number))))))))
+
+===========================================
+Do Loop
+===========================================
+00010 do while fkey <> 99                  ! loop will stop if user presses ESC
+00020    let kstat$(1)
+00030    print "FKEY is now "&str$(FKEY)
+00040 loop until fkey = 12                 ! loop will stop if user presses F12
+---
+
+(source_file
+  (line
+    (line_number)
+    (do_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (numeric_call_expression
+                (numeric_system_function
+                  (function_name)))))
+          (binary_relation_operator)
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (number))))))
+    (comment))
+  (line
+    (line_number)
+    (let_statement
+      (string_expression
+        (string_primary_expression
+          (string_call_expression
+            (string_system_function
+              (function_name)
+              (arguments
+                (argument
+                  (expression
+                    (numeric_expression
+                      (numeric_primary_expression
+                        (number))))))))))))
+  (line
+    (line_number)
+    (print_statement
+      (print_output
+        (expression
+          (string_expression
+            (string_binary_expression
+              (string_expression
+                (string_primary_expression
+                  (string)))
+              (concat_op)
+              (string_expression
+                (string_primary_expression
+                  (string_call_expression
+                    (string_system_function
+                      (function_name)
+                      (arguments
+                        (argument
+                          (expression
+                            (numeric_expression
+                              (numeric_primary_expression
+                                (numeric_call_expression
+                                  (numeric_system_function
+                                    (function_name))))))))))))))))))
+  (line
+    (line_number)
+    (loop_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (numeric_call_expression
+                (numeric_system_function
+                  (function_name)))))
+          (binary_cond_eq_op)
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (number))))))
+    (comment)))
+
+===========================================
+Else
+===========================================
+00015  ELSE
+00030  ELSE Y=1
+---
+
+(source_file
+  (line
+    (line_number)
+    (else_statement))
+  (line
+    (line_number)
+    (else_statement
+      (let_statement
+        (numeric_expression
+          (numeric_forced_assignment_expression
+            (numberreference
+              (numberidentifier))
+            (numeric_forced_assignment_op
+              (assignment_op))
+            (numeric_expression
+              (numeric_primary_expression
+                (number)))))))))
+
+===========================================
+End
+===========================================
+00055 END 12
+---
+
+(source_file
+  (line
+    (line_number)
+    (end_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (number))))))
+
+===========================================
+End def
+===========================================
+END DEF
+---
+
+(source_file
+  (line
+    (end_def_statement)))
+
+===========================================
+End If
+===========================================
+00060 END IF
+---
+
+(source_file
+  (line
+    (line_number)
+    (end_if_statement)))
+
+===========================================
+Execute
+===========================================
+00130 Execute "COPY "&FILENAME$&" TEMP.FYL -DN"
+00140 Execute "FREE "&FILENAME$&" -N"
+00150 Execute "RENAME TEMP.FYL "&FILENAME$&" -N"
+---
+
+(source_file
+  (line
+    (line_number)
+    (execute_statement
+      (string_expression
+        (string_binary_expression
+          (string_expression
+            (string_binary_expression
+              (string_expression
+                (string_primary_expression
+                  (string)))
+              (concat_op)
+              (string_expression
+                (string_primary_expression
+                  (stringreference
+                    (stringidentifier))))))
+          (concat_op)
+          (string_expression
+            (string_primary_expression
+              (string)))))))
+  (line
+    (line_number)
+    (execute_statement
+      (string_expression
+        (string_binary_expression
+          (string_expression
+            (string_binary_expression
+              (string_expression
+                (string_primary_expression
+                  (string)))
+              (concat_op)
+              (string_expression
+                (string_primary_expression
+                  (stringreference
+                    (stringidentifier))))))
+          (concat_op)
+          (string_expression
+            (string_primary_expression
+              (string)))))))
+  (line
+    (line_number)
+    (execute_statement
+      (string_expression
+        (string_binary_expression
+          (string_expression
+            (string_binary_expression
+              (string_expression
+                (string_primary_expression
+                  (string)))
+              (concat_op)
+              (string_expression
+                (string_primary_expression
+                  (stringreference
+                    (stringidentifier))))))
+          (concat_op)
+          (string_expression
+            (string_primary_expression
+              (string))))))))
+
+===========================================
+Exit
+===========================================
+00600  EXIT EOF DONEREADING, LOCKED L895
+---
+
+(source_file
+  (line
+    (line_number)
+    (exit_statement
+      (error_condition_list
+        (error_condition)
+        (label_reference)
+        (error_condition)
+        (label_reference)))))
+
+===========================================
+Exit do
+===========================================
+EXIT DO
+---
+
+(source_file
+  (line
+    (exit_do_statement)))
+
+===========================================
+Fnend
+===========================================
+FNEND
+---
+
+(source_file
+  (line
+    (fnend_statement)))
+
+===========================================
+For
+===========================================
+00055 FOR X=1 TO 7 STEP 2
+07720 FOR R=2 TO 10 STEP 2
+---
+
+(source_file
+  (line
+    (line_number)
+    (for_statement
+      (numberreference
+        (numberidentifier))
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))))
+  (line
+    (line_number)
+    (for_statement
+      (numberreference
+        (numberidentifier))
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))
+      (numeric_expression
+        (numeric_primary_expression
+          (number))))))
+
+===========================================
+Form
+===========================================
+00010 FORM 3*(C 10,C 1,C 4)
+00020 FORM A*C 5,C 10
+00020 FORM "TYPE A", C 10
+00510 nameform2: form pos 16,c 30,x 9,c 6,x 16,c 7,x 24,c 2,x 16,c 8, skip 3
+00600 T1: FORM C 11,C 26,PIC(-,---,---.##),PIC(ZZZZZ#),SKIP
+---
+
+(source_file
+  (line
+    (line_number)
+    (form_statement
+      (spec_group
+        (multi_spec
+          (int)
+          (_))
+        (form_spec
+          (string_spec)
+          (int))
+        (form_spec
+          (string_spec)
+          (int))
+        (form_spec
+          (string_spec)
+          (int)))))
+  (line
+    (line_number)
+    (form_statement
+      (form_spec
+        (multi_spec
+          (numberreference
+            (numberidentifier))
+          (_))
+        (string_spec)
+        (int))
+      (form_spec
+        (string_spec)
+        (int))))
+  (line
+    (line_number)
+    (form_statement
+      (form_spec
+        (literal_string_spec
+          (string)))
+      (form_spec
+        (string_spec)
+        (int))))
+  (line
+    (line_number)
+    (label)
+    (form_statement
+      (form_spec
+        (pos_spec)
+        (int))
+      (form_spec
+        (string_spec)
+        (int))
+      (form_spec
+        (x_spec)
+        (int))
+      (form_spec
+        (string_spec)
+        (int))
+      (form_spec
+        (x_spec)
+        (int))
+      (form_spec
+        (string_spec)
+        (int))
+      (form_spec
+        (x_spec)
+        (int))
+      (form_spec
+        (string_spec)
+        (int))
+      (form_spec
+        (x_spec)
+        (int))
+      (form_spec
+        (string_spec)
+        (int))
+      (form_spec
+        (skip_spec)
+        (int))))
+  (line
+    (line_number)
+    (label)
+    (form_statement
+      (form_spec
+        (string_spec)
+        (int))
+      (form_spec
+        (string_spec)
+        (int))
+      (form_spec
+        (pic_spec))
+      (form_spec
+        (pic_spec))
+      (form_spec
+        (skip_spec)))))
+
+===========================================
+GoSub
+===========================================
+08450 GOSUB 9000
+09000 gosub test_label
+---
+
+(source_file
+  (line
+    (line_number)
+    (gosub_statement
+      (line_reference)))
+  (line
+    (line_number)
+    (gosub_statement
+      (label_reference))))
+
+===========================================
+GoTo
+===========================================
+100 goto 10
+200 goto test_label
+---
+
+(source_file
+  (line
+    (line_number)
+    (goto_statement
+      (line_reference)))
+  (line
+    (line_number)
+    (goto_statement
+      (label_reference))))
+
+===========================================
+If
+===========================================
+00030 if grade >= 60 then print "Passed"
+00030 if grade >= 60 then
+00030 if grade >= 90 AND grade <= 100 then 
+00050 else if grade >= 80 AND grade <= 89 then 
+---
+
+(source_file
+  (line
+    (line_number)
+    (if_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (numberreference
+                (numberidentifier))))
+          (binary_relation_operator)
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (number)))))
+      (print_statement
+        (print_output
+          (expression
+            (string_expression
+              (string_primary_expression
+                (string))))))))
+  (line
+    (line_number)
+    (if_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (numberreference
+                (numberidentifier))))
+          (binary_relation_operator)
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (number)))))))
+  (line
+    (line_number)
+    (if_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_expression
+            (conditional_binary_expression
+              (conditional_expression
+                (numeric_conditional_primary_expression
+                  (numberreference
+                    (numberidentifier))))
+              (binary_relation_operator)
+              (conditional_expression
+                (numeric_conditional_primary_expression
+                  (number)))))
+          (logical_and_op)
+          (conditional_expression
+            (conditional_binary_expression
+              (conditional_expression
+                (numeric_conditional_primary_expression
+                  (numberreference
+                    (numberidentifier))))
+              (binary_relation_operator)
+              (conditional_expression
+                (numeric_conditional_primary_expression
+                  (number)))))))))
+  (line
+    (line_number)
+    (else_statement
+      (if_statement
+        (conditional_expression
+          (conditional_binary_expression
+            (conditional_expression
+              (conditional_binary_expression
+                (conditional_expression
+                  (numeric_conditional_primary_expression
+                    (numberreference
+                      (numberidentifier))))
+                (binary_relation_operator)
+                (conditional_expression
+                  (numeric_conditional_primary_expression
+                    (number)))))
+            (logical_and_op)
+            (conditional_expression
+              (conditional_binary_expression
+                (conditional_expression
+                  (numeric_conditional_primary_expression
+                    (numberreference
+                      (numberidentifier))))
+                (binary_relation_operator)
+                (conditional_expression
+                  (numeric_conditional_primary_expression
+                    (number)))))))))))
+
+===========================================
+Input
+===========================================
+00110 INPUT NAME$
+00130 INPUT MO,DAY,YR
+00100 INPUT WAIT=10:X$ TIMEOUT 100
+---
+
+(source_file
+  (line
+    (line_number)
+    (input_statement
+      (variable_list
+        (stringreference
+          (stringidentifier)))))
+  (line
+    (line_number)
+    (input_statement
+      (variable_list
+        (numberreference
+          (numberidentifier))
+        (numberreference
+          (numberidentifier))
+        (numberreference
+          (numberidentifier)))))
+  (line
+    (line_number)
+    (input_statement
+      (input_wait_param
+        (assignment_op)
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (variable_list
+        (stringreference
+          (stringidentifier)))
+      (error_condition_list
+        (error_condition)
+        (line_reference)))))
+
+===========================================
+Input Fields
+===========================================
+00020 INPUT FIELDS "5,10,PIC(##/##/##),r": D
+00020 INPUT FIELDS A$: (MAT B$,MAT C),X$
+---
+
+(source_file
+  (line
+    (line_number)
+    (input_statement
+      (string_expression
+        (string_primary_expression
+          (string)))
+      (variable_list
+        (numberreference
+          (numberidentifier)))))
+  (line
+    (line_number)
+    (input_statement
+      (string_expression
+        (string_primary_expression
+          (stringreference
+            (stringidentifier))))
+      (variable_list
+        (stringarray
+          (stringidentifier))
+        (numberarray
+          (numberidentifier))
+        (stringreference
+          (stringidentifier))))))
+
+===========================================
+Input Select
+===========================================
+00160 INPUT SELECT FSPEC$,ATTR "R",HELP C$: MAT MENU$
+---
+
+(source_file
+  (line
+    (line_number)
+    (input_statement
+      (string_expression
+        (string_primary_expression
+          (stringreference
+            (stringidentifier))))
+      (string_expression
+        (string_primary_expression
+          (string)))
+      (help_parameter
+        (string_expression
+          (string_primary_expression
+            (stringreference
+              (stringidentifier)))))
+      (variable_list
+        (stringarray
+          (stringidentifier))))))
+
+===========================================
+Let
+===========================================
+00770 LET AREA=PI*RADIUS**2
+---
+
+(source_file
+  (line
+    (line_number)
+    (let_statement
+      (numeric_expression
+        (numeric_forced_assignment_expression
+          (numberreference
+            (numberidentifier))
+          (numeric_forced_assignment_op
+            (assignment_op))
+          (numeric_expression
+            (numeric_binary_expression
+              (numeric_expression
+                (numeric_primary_expression
+                  (numeric_call_expression
+                    (numeric_system_function
+                      (function_name)))))
+              (binary_times_op)
+              (numeric_expression
+                (numeric_binary_expression
+                  (numeric_expression
+                    (numeric_primary_expression
+                      (numberreference
+                        (numberidentifier))))
+                  (binary_exp_op)
+                  (numeric_expression
+                    (numeric_primary_expression
+                      (number))))))))))))
+
+===========================================
+Library (statement)
+===========================================
+52400 DEF LIBRARY FNPRESLIB2
+01000 LIBRARY "PRESLIB": FNPRESLIB2
+---
+
+(source_file
+  (line
+    (line_number)
+    (def_statement
+      (library_keyword)
+      (numeric_function_definition
+        (function_name))))
+  (line
+    (line_number)
+    (library_statement
+      (string_expression
+        (string_primary_expression
+          (string)))
+      (library_function_list
+        (function_name)))))
+
+===========================================
+Line Continuation
+===========================================
+00010 TOP: ! !:
+      Print Newpage
+---
+
+(source_file
+  (line
+    (line_number)
+    (label)
+    (comment)
+    (continuation)
+    (print_statement
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numeric_call_expression
+                (numeric_system_function
+                  (function_name))))))))))
+
+===========================================
+LInput
+===========================================
+00110 LINPUT LINE3$
+00200 linput #Dirfile: Dummy$ eof IGNORE
+---
+
+(source_file
+  (line
+    (line_number)
+    (linput_statement
+      (stringreference
+        (stringidentifier))))
+  (line
+    (line_number)
+    (linput_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (numberreference
+              (numberidentifier)))))
+      (stringreference
+        (stringidentifier))
+      (error_condition_list
+        (error_condition)
+        (label_reference)))))
+
+===========================================
+Loop
+===========================================
+00100 loop
+00380 loop While Fkey~=99
+---
+
+(source_file
+  (line
+    (line_number)
+    (loop_statement))
+  (line
+    (line_number)
+    (loop_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (numeric_call_expression
+                (numeric_system_function
+                  (function_name)))))
+          (binary_cond_eq_op)
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (number))))))))
+
+===========================================
+Mat
+===========================================
+00100 MAT A(6:10)=B     ! copies B(1)..B(5) into A(6)..A(10);
+00110 MAT B=A(6:10)     ! B dimensioned for 5 elements.
+00120 MAT B(1:5)=A(6:10)  ! Copy part of 1 array to part of another
+00100 MAT A = (0)
+00200 MAT A$ = ("")
+00100 MAT A = B + C
+00200 MAT A = B - C
+00300 MAT A=(X)+B
+00400 MAT A=(X)*B
+00500 MAT A=(-X)+B
+00600 MAT A=(1/X)*B
+00200 MAT N$(L)
+00300 MAT A(L)=AIDX(N$)
+00200 MAT A(100)=A
+---
+
+(source_file
+  (line
+    (line_number)
+    (mat_statement
+      (mat_numeric_array_expression
+        (numberarray
+          (numberidentifier))
+        (mat_range
+          (numeric_expression
+            (numeric_primary_expression
+              (number)))
+          (numeric_expression
+            (numeric_primary_expression
+              (number))))
+        (mat_assignment_numeric
+          (assignment_op)
+          (numberarray
+            (numberidentifier)))))
+    (comment))
+  (line
+    (line_number)
+    (mat_statement
+      (mat_numeric_array_expression
+        (numberarray
+          (numberidentifier))
+        (mat_assignment_numeric
+          (assignment_op)
+          (numberarray
+            (numberidentifier))
+          (mat_range
+            (numeric_expression
+              (numeric_primary_expression
+                (number)))
+            (numeric_expression
+              (numeric_primary_expression
+                (number)))))))
+    (comment))
+  (line
+    (line_number)
+    (mat_statement
+      (mat_numeric_array_expression
+        (numberarray
+          (numberidentifier))
+        (mat_range
+          (numeric_expression
+            (numeric_primary_expression
+              (number)))
+          (numeric_expression
+            (numeric_primary_expression
+              (number))))
+        (mat_assignment_numeric
+          (assignment_op)
+          (numberarray
+            (numberidentifier))
+          (mat_range
+            (numeric_expression
+              (numeric_primary_expression
+                (number)))
+            (numeric_expression
+              (numeric_primary_expression
+                (number)))))))
+    (comment))
+  (line
+    (line_number)
+    (mat_statement
+      (mat_numeric_array_expression
+        (numberarray
+          (numberidentifier))
+        (mat_assignment_numeric
+          (assignment_op)
+          (numeric_expression
+            (numeric_primary_expression
+              (number)))))))
+  (line
+    (line_number)
+    (mat_statement
+      (mat_string_array_expression
+        (stringarray
+          (stringidentifier))
+        (assignment_op)
+        (string_expression
+          (string_primary_expression
+            (string))))))
+  (line
+    (line_number)
+    (mat_statement
+      (mat_numeric_array_expression
+        (numberarray
+          (numberidentifier))
+        (mat_assignment_numeric
+          (assignment_op)
+          (numberarray
+            (numberidentifier))
+          (numberarray
+            (numberidentifier))))))
+  (line
+    (line_number)
+    (mat_statement
+      (mat_numeric_array_expression
+        (numberarray
+          (numberidentifier))
+        (mat_assignment_numeric
+          (assignment_op)
+          (numberarray
+            (numberidentifier))
+          (numberarray
+            (numberidentifier))))))
+  (line
+    (line_number)
+    (mat_statement
+      (mat_numeric_array_expression
+        (numberarray
+          (numberidentifier))
+        (mat_assignment_numeric
+          (assignment_op)
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier))))
+          (numberarray
+            (numberidentifier))))))
+  (line
+    (line_number)
+    (mat_statement
+      (mat_numeric_array_expression
+        (numberarray
+          (numberidentifier))
+        (mat_assignment_numeric
+          (assignment_op)
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier))))
+          (numberarray
+            (numberidentifier))))))
+  (line
+    (line_number)
+    (mat_statement
+      (mat_numeric_array_expression
+        (numberarray
+          (numberidentifier))
+        (mat_assignment_numeric
+          (assignment_op)
+          (numeric_expression
+            (numeric_unary_expression
+              (unary_operator)
+              (numeric_expression
+                (numeric_primary_expression
+                  (numberreference
+                    (numberidentifier))))))
+          (numberarray
+            (numberidentifier))))))
+  (line
+    (line_number)
+    (mat_statement
+      (mat_numeric_array_expression
+        (numberarray
+          (numberidentifier))
+        (mat_assignment_numeric
+          (assignment_op)
+          (numeric_expression
+            (numeric_binary_expression
+              (numeric_expression
+                (numeric_primary_expression
+                  (number)))
+              (binary_times_op)
+              (numeric_expression
+                (numeric_primary_expression
+                  (numberreference
+                    (numberidentifier))))))
+          (numberarray
+            (numberidentifier))))))
+  (line
+    (line_number)
+    (mat_statement
+      (mat_string_array_expression
+        (stringarray
+          (stringidentifier))
+        (mat_size
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier))))))))
+  (line
+    (line_number)
+    (mat_statement
+      (mat_numeric_array_expression
+        (numberarray
+          (numberidentifier))
+        (mat_size
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier)))))
+        (mat_assignment_numeric
+          (assignment_op)
+          (function_name)
+          (stringarray
+            (stringidentifier))))))
+  (line
+    (line_number)
+    (mat_statement
+      (mat_numeric_array_expression
+        (numberarray
+          (numberidentifier))
+        (mat_size
+          (numeric_expression
+            (numeric_primary_expression
+              (number))))
+        (mat_assignment_numeric
+          (assignment_op)
+          (numberarray
+            (numberidentifier)))))))
+
+===========================================
+Next (statement)
+===========================================
+00410     next I
+---
+
+(source_file
+  (line
+    (line_number)
+    (next_statement
+      (numberreference
+        (numberidentifier)))))
+
+===========================================
+On Error
+===========================================
+00010 ON ZDIV GOTO 7700
+00020 ON ZDIV IGNORE
+00030 ON ZDIV SYSTEM
+00410 ON ERROR GOTO 80000
+---
+
+(source_file
+  (line
+    (line_number)
+    (on_statement
+      (error_condition)
+      (goto_statement
+        (line_reference))))
+  (line
+    (line_number)
+    (on_statement
+      (error_condition)))
+  (line
+    (line_number)
+    (on_statement
+      (error_condition)))
+  (line
+    (line_number)
+    (on_statement
+      (error_condition)
+      (goto_statement
+        (line_reference)))))
+
+===========================================
+On FKey
+===========================================
+00040     on fkey 8 ignore
+00060     on fkey x goto 40
+00060     on fkey x goto test
+00060     on fkey x gosub test
+00060     on fkey x gosub 100
+---
+
+(source_file
+  (line
+    (line_number)
+    (on_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))))
+  (line
+    (line_number)
+    (on_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (numberreference
+            (numberidentifier))))
+      (line_reference)))
+  (line
+    (line_number)
+    (on_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (numberreference
+            (numberidentifier))))
+      (label_reference)))
+  (line
+    (line_number)
+    (on_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (numberreference
+            (numberidentifier))))
+      (label_reference)))
+  (line
+    (line_number)
+    (on_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (numberreference
+            (numberidentifier))))
+      (line_reference))))
+
+===========================================
+On GoSub
+===========================================
+00860 ON T/X + 1 GOSUB 640,740,840 NONE 90
+---
+
+(source_file
+  (line
+    (line_number)
+    (on_statement
+      (numeric_expression
+        (numeric_binary_expression
+          (numeric_expression
+            (numeric_binary_expression
+              (numeric_expression
+                (numeric_primary_expression
+                  (numberreference
+                    (numberidentifier))))
+              (binary_times_op)
+              (numeric_expression
+                (numeric_primary_expression
+                  (numberreference
+                    (numberidentifier))))))
+          (binary_plus_op)
+          (numeric_expression
+            (numeric_primary_expression
+              (number)))))
+      (line_reference)
+      (line_reference)
+      (line_reference)
+      (line_reference))))
+
+===========================================
+On Goto
+===========================================
+02220 ON DAY GOTO 10,30,50,70,90 NONE 110
+---
+
+(source_file
+  (line
+    (line_number)
+    (on_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (numberreference
+            (numberidentifier))))
+      (line_reference)
+      (line_reference)
+      (line_reference)
+      (line_reference)
+      (line_reference)
+      (line_reference))))
+
+===========================================
+Open Communications
+===========================================
+00100 OPEN #1: "NAME=COM1:,FORMAT=ASYNC",DISPLAY,OUTIN ! for IBM PC
+00200 OPEN #2: "NAME=:/dev/tty22,FORMAT=ASYNC",DISPLAY,OUTIN ! Unix
+---
+
+(source_file
+  (line
+    (line_number)
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string))))
+    (comment))
+  (line
+    (line_number)
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string))))
+    (comment)))
+
+===========================================
+Open Display
+===========================================
+00500 OPEN #2:"name=STATES",DISPLAY,INPUT
+00510 OPEN #3:"NAME=zipcodes,NEW",DISPLAY,OUTPUT
+---
+
+(source_file
+  (line
+    (line_number)
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string)))))
+  (line
+    (line_number)
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string))))))
+
+===========================================
+Open External
+===========================================
+00100 Open #1: "Name=text.dat,RecL=50", External, Input, Relative
+OPEN #1:"NAME=TEST,NOCLOSE",INTERNAL,INPUT,RELATIVE
+---
+
+(source_file
+  (line
+    (line_number)
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string)))))
+  (line
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string))))))
+
+===========================================
+Open Internal
+===========================================
+00150   Open #1: "Name=test.int,RecL=128,Use",internal,outin
+00100 OPEN #1:"NAME=TEST,NOCLOSE",INTERNAL,INPUT,RELATIVE
+---
+
+(source_file
+  (line
+    (line_number)
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string)))))
+  (line
+    (line_number)
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string))))))
+
+===========================================
+Open Window
+===========================================
+00010 OPEN #1:"rows=10,cols=10,EROW=10,ECOL=10",DISPLAY,OUTPUT
+00200   open #2: "srow=2,scol=2,EROW=10,ECOL=30,border=b, caption=Happy Border",display,outin
+---
+
+(source_file
+  (line
+    (line_number)
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string)))))
+  (line
+    (line_number)
+    (open_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string))))))
+
+===========================================
+Option (statement)
+===========================================
+08000 OPTION BASE 0, COLLATE ALTERNATE
+08000 OPTION BASE 0, COLLATE NATIVE
+00010 OPTION INVP
+---
+
+(source_file
+  (line
+    (line_number)
+    (option_statement))
+  (line
+    (line_number)
+    (option_statement))
+  (line
+    (line_number)
+    (option_statement)))
+
+===========================================
+Pause
+===========================================
+06340 PAUSE
+---
+
+(source_file
+  (line
+    (line_number)
+    (pause_statement)))
+
+===========================================
+Print
+===========================================
+00110 PRINT #0: "The total is  -"; TOTAL
+00120 PRINT "The total is  -"; TOTAL
+00130 PRINT BELL
+00140 PRINT #255: BELL
+---
+
+(source_file
+  (line
+    (line_number)
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_output
+        (expression
+          (string_expression
+            (string_primary_expression
+              (string))))
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier))))))))
+  (line
+    (line_number)
+    (print_statement
+      (print_output
+        (expression
+          (string_expression
+            (string_primary_expression
+              (string))))
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier))))))))
+  (line
+    (line_number)
+    (print_statement
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numeric_call_expression
+                (numeric_system_function
+                  (function_name)))))))))
+  (line
+    (line_number)
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numeric_call_expression
+                (numeric_system_function
+                  (function_name))))))))))
+
+===========================================
+Print Border
+===========================================
+print #102,border "┌┘[Y]": "< Available Colors " 
+16040    print #101,border "S": "< Copy Security Maintenance from User to User(s) "
+print #0, border: Oldwindowcaption$
+---
+
+(source_file
+  (line
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_border
+        (string_expression
+          (string_primary_expression
+            (string)))
+        (string_expression
+          (string_primary_expression
+            (string))))))
+  (line
+    (line_number)
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_border
+        (string_expression
+          (string_primary_expression
+            (string)))
+        (string_expression
+          (string_primary_expression
+            (string))))))
+  (line
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_border
+        (string_expression
+          (string_primary_expression
+            (stringreference
+              (stringidentifier))))))))
+
+===========================================
+Print Fields
+===========================================
+00020 PRINT FIELDS A$: (MAT B$,MAT C),X$
+00020 PRINT FIELDS A$:B$(1),C(1),B$(2),C(2),B$(3),C(3),B$(4),C(4),B$(5),C(5),X$
+00110     print fields Mat Clientform$: Mat Clientwords$
+---
+
+(source_file
+  (line
+    (line_number)
+    (print_statement
+      (print_fields
+        (string_expression
+          (string_primary_expression
+            (stringreference
+              (stringidentifier))))
+        (print_output
+          (array_group
+            (string_array_expression
+              (string_array_primary_expression
+                (stringarray
+                  (stringidentifier))))
+            (numeric_array_expression
+              (numeric_array_primary_expression
+                (numberarray
+                  (numberidentifier)))))
+          (expression
+            (string_expression
+              (string_primary_expression
+                (stringreference
+                  (stringidentifier)))))))))
+  (line
+    (line_number)
+    (print_statement
+      (print_fields
+        (string_expression
+          (string_primary_expression
+            (stringreference
+              (stringidentifier))))
+        (print_output
+          (expression
+            (string_expression
+              (string_primary_expression
+                (stringarray
+                  (stringidentifier)
+                  (element_subscript
+                    (numeric_expression
+                      (numeric_primary_expression
+                        (number))))))))
+          (expression
+            (numeric_expression
+              (numeric_primary_expression
+                (numberelement
+                  (numberarray
+                    (numberidentifier))
+                  (element_subscript
+                    (numeric_expression
+                      (numeric_primary_expression
+                        (number))))))))
+          (expression
+            (string_expression
+              (string_primary_expression
+                (stringarray
+                  (stringidentifier)
+                  (element_subscript
+                    (numeric_expression
+                      (numeric_primary_expression
+                        (number))))))))
+          (expression
+            (numeric_expression
+              (numeric_primary_expression
+                (numberelement
+                  (numberarray
+                    (numberidentifier))
+                  (element_subscript
+                    (numeric_expression
+                      (numeric_primary_expression
+                        (number))))))))
+          (expression
+            (string_expression
+              (string_primary_expression
+                (stringarray
+                  (stringidentifier)
+                  (element_subscript
+                    (numeric_expression
+                      (numeric_primary_expression
+                        (number))))))))
+          (expression
+            (numeric_expression
+              (numeric_primary_expression
+                (numberelement
+                  (numberarray
+                    (numberidentifier))
+                  (element_subscript
+                    (numeric_expression
+                      (numeric_primary_expression
+                        (number))))))))
+          (expression
+            (string_expression
+              (string_primary_expression
+                (stringarray
+                  (stringidentifier)
+                  (element_subscript
+                    (numeric_expression
+                      (numeric_primary_expression
+                        (number))))))))
+          (expression
+            (numeric_expression
+              (numeric_primary_expression
+                (numberelement
+                  (numberarray
+                    (numberidentifier))
+                  (element_subscript
+                    (numeric_expression
+                      (numeric_primary_expression
+                        (number))))))))
+          (expression
+            (string_expression
+              (string_primary_expression
+                (stringarray
+                  (stringidentifier)
+                  (element_subscript
+                    (numeric_expression
+                      (numeric_primary_expression
+                        (number))))))))
+          (expression
+            (numeric_expression
+              (numeric_primary_expression
+                (numberelement
+                  (numberarray
+                    (numberidentifier))
+                  (element_subscript
+                    (numeric_expression
+                      (numeric_primary_expression
+                        (number))))))))
+          (expression
+            (string_expression
+              (string_primary_expression
+                (stringreference
+                  (stringidentifier)))))))))
+  (line
+    (line_number)
+    (print_statement
+      (print_fields
+        (stringarray
+          (stringidentifier))
+        (print_output
+          (expression
+            (string_array_expression
+              (string_array_primary_expression
+                (stringarray
+                  (stringidentifier))))))))))
+
+===========================================
+Print Newpage
+===========================================
+00150 PRINT NEWPAGE
+00160 PRINT #255: NEWPAGE
+---
+
+(source_file
+  (line
+    (line_number)
+    (print_statement
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numeric_call_expression
+                (numeric_system_function
+                  (function_name)))))))))
+  (line
+    (line_number)
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_output
+        (expression
+          (numeric_expression
+            (numeric_primary_expression
+              (numeric_call_expression
+                (numeric_system_function
+                  (function_name))))))))))
+
+===========================================
+Print Using
+===========================================
+00220 PRINT #255,USING 230: BAL, COMPANY$
+01000 print #255,using dateform: " ",Protect$,Q$,C1,E$
+01010 print #255,using payamountform: B(6)
+---
+
+(source_file
+  (line
+    (line_number)
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_using
+        (line_reference)
+        (print_output
+          (expression
+            (numeric_expression
+              (numeric_primary_expression
+                (numberreference
+                  (numberidentifier)))))
+          (expression
+            (string_expression
+              (string_primary_expression
+                (stringreference
+                  (stringidentifier)))))))))
+  (line
+    (line_number)
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_using
+        (label_reference)
+        (print_output
+          (expression
+            (string_expression
+              (string_primary_expression
+                (string))))
+          (expression
+            (string_expression
+              (string_primary_expression
+                (stringreference
+                  (stringidentifier)))))
+          (expression
+            (string_expression
+              (string_primary_expression
+                (stringreference
+                  (stringidentifier)))))
+          (expression
+            (numeric_expression
+              (numeric_primary_expression
+                (numberreference
+                  (numberidentifier)))))
+          (expression
+            (string_expression
+              (string_primary_expression
+                (stringreference
+                  (stringidentifier)))))))))
+  (line
+    (line_number)
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_using
+        (label_reference)
+        (print_output
+          (expression
+            (numeric_expression
+              (numeric_primary_expression
+                (numberelement
+                  (numberarray
+                    (numberidentifier))
+                  (element_subscript
+                    (numeric_expression
+                      (numeric_primary_expression
+                        (number)))))))))))))
+
+===========================================
+Randomize
+===========================================
+01470 RANDOMIZE
+---
+
+(source_file
+  (line
+    (line_number)
+    (randomize_statement)))
+
+===========================================
+Read Data
+===========================================
+00045 DATA 2, 4, 8
+00055 READ T, F, E, S, X, M
+00030 READ MAT A EOF 40
+---
+
+(source_file
+  (line
+    (line_number)
+    (data_statement
+      (number)
+      (number)
+      (number)))
+  (line
+    (line_number)
+    (read_statement
+      (numberreference
+        (numberidentifier))
+      (numberreference
+        (numberidentifier))
+      (numberreference
+        (numberidentifier))
+      (numberreference
+        (numberidentifier))
+      (numberreference
+        (numberidentifier))
+      (numberreference
+        (numberidentifier))))
+  (line
+    (line_number)
+    (read_statement
+      (numberarray
+        (numberidentifier))
+      (error_condition_list
+        (error_condition)
+        (line_reference)))))
+
+===========================================
+Read file
+===========================================
+03950 READ #6,USING 3960: COMPANY$
+00110 READ #5,USING F5,KEY=K1$: QTY1
+00130 READ #5,USING F5,KEY=K2$: QTY2
+read #FScreenFld, using form$(FScreenFld), release : mat SearchScreenFld$, mat SearchScreenFld eof Ignore
+---
+
+(source_file
+  (line
+    (line_number)
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (write_using_seq
+        (line_reference))
+      (stringreference
+        (stringidentifier))))
+  (line
+    (line_number)
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (write_using_seq
+        (label_reference))
+      (key_search_seq
+        (search_op)
+        (string_expression
+          (string_primary_expression
+            (stringreference
+              (stringidentifier)))))
+      (numberreference
+        (numberidentifier))))
+  (line
+    (line_number)
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (write_using_seq
+        (label_reference))
+      (key_search_seq
+        (search_op)
+        (string_expression
+          (string_primary_expression
+            (stringreference
+              (stringidentifier)))))
+      (numberreference
+        (numberidentifier))))
+  (line
+    (read_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (numberreference
+              (numberidentifier)))))
+      (write_using_seq
+        (string_expression
+          (string_primary_expression
+            (stringarray
+              (stringidentifier)
+              (element_subscript
+                (numeric_expression
+                  (numeric_primary_expression
+                    (numberreference
+                      (numberidentifier)))))))))
+      (record_locking_rule)
+      (stringarray
+        (stringidentifier))
+      (numberarray
+        (numberidentifier))
+      (error_condition_list
+        (error_condition)
+        (label_reference)))))
+
+===========================================
+Rem (statement)
+===========================================
+00010 REM ***** A U T O F O R M A T
+00020 REM ***** by Andrea Schulton
+---
+
+(source_file
+  (line
+    (line_number)
+    (rem_statement))
+  (line
+    (line_number)
+    (rem_statement)))
+
+===========================================
+Reread
+===========================================
+00570 REREAD #2, USING F2FULL: MAT A$, MAT AMTS
+---
+
+(source_file
+  (line
+    (line_number)
+    (reread_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (reread_using
+        (label_reference))
+      (stringarray
+        (stringidentifier))
+      (numberarray
+        (numberidentifier)))))
+
+===========================================
+Restore Data
+===========================================
+LayoutWizardData: restore LayoutWizardData ! Restore Data Statements
+---
+
+(source_file
+  (line
+    (label)
+    (restore_statement
+      (restore_data
+        (label_reference)))
+    (comment)))
+
+===========================================
+Restore File
+===========================================
+00300 RESTORE #1:
+00310 RESTORE #2,REC=25: NOREC 920
+00320 RESTORE #3,KEY=CUSTNUM$: NOKEY 930
+00330 RESTORE #4,POS=25*RLN(4)+1: NOREC 920
+---
+
+(source_file
+  (line
+    (line_number)
+    (restore_statement
+      (restore_file
+        (channel
+          (numeric_expression
+            (numeric_primary_expression
+              (number)))))))
+  (line
+    (line_number)
+    (restore_statement
+      (restore_file
+        (channel
+          (numeric_expression
+            (numeric_primary_expression
+              (number))))
+        (rec_pos_seq
+          (assignment_op)
+          (numeric_expression
+            (numeric_primary_expression
+              (number))))
+        (error_condition_list
+          (error_condition)
+          (line_reference)))))
+  (line
+    (line_number)
+    (restore_statement
+      (restore_file
+        (channel
+          (numeric_expression
+            (numeric_primary_expression
+              (number))))
+        (key_search_seq
+          (search_op)
+          (string_expression
+            (string_primary_expression
+              (stringreference
+                (stringidentifier)))))
+        (error_condition_list
+          (error_condition)
+          (line_reference)))))
+  (line
+    (line_number)
+    (restore_statement
+      (restore_file
+        (channel
+          (numeric_expression
+            (numeric_primary_expression
+              (number))))
+        (rec_pos_seq
+          (assignment_op)
+          (numeric_expression
+            (numeric_binary_expression
+              (numeric_expression
+                (numeric_binary_expression
+                  (numeric_expression
+                    (numeric_primary_expression
+                      (number)))
+                  (binary_times_op)
+                  (numeric_expression
+                    (numeric_primary_expression
+                      (numeric_call_expression
+                        (numeric_system_function
+                          (function_name)
+                          (arguments
+                            (argument
+                              (expression
+                                (numeric_expression
+                                  (numeric_primary_expression
+                                    (number))))))))))))
+              (binary_plus_op)
+              (numeric_expression
+                (numeric_primary_expression
+                  (number))))))
+        (error_condition_list
+          (error_condition)
+          (line_reference))))))
+
+===========================================
+Retry
+===========================================
+00920 RETRY
+---
+
+(source_file
+  (line
+    (line_number)
+    (retry_statement)))
+
+===========================================
+Return
+===========================================
+00920 RETRY
+---
+
+(source_file
+  (line
+    (line_number)
+    (retry_statement)))
+
+===========================================
+Rewrite
+===========================================
+00910           rewrite #1, using RECFORM, rec=Therecordnumber: Firstname$(Index), Lastname$(Index), Address$(Index), City$(Index), State$(Index), Zipcodes$(Index), Shipmethod$(Index), Item1(Index), Item2(Index), Item3(Index)
+---
+
+(source_file
+  (line
+    (line_number)
+    (rewrite_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (write_using_seq
+        (label_reference))
+      (rec_pos_seq
+        (assignment_op)
+        (numeric_expression
+          (numeric_primary_expression
+            (numberreference
+              (numberidentifier)))))
+      (expression
+        (string_expression
+          (string_primary_expression
+            (stringarray
+              (stringidentifier)
+              (element_subscript
+                (numeric_expression
+                  (numeric_primary_expression
+                    (numberreference
+                      (numberidentifier)))))))))
+      (expression
+        (string_expression
+          (string_primary_expression
+            (stringarray
+              (stringidentifier)
+              (element_subscript
+                (numeric_expression
+                  (numeric_primary_expression
+                    (numberreference
+                      (numberidentifier)))))))))
+      (expression
+        (string_expression
+          (string_primary_expression
+            (stringarray
+              (stringidentifier)
+              (element_subscript
+                (numeric_expression
+                  (numeric_primary_expression
+                    (numberreference
+                      (numberidentifier)))))))))
+      (expression
+        (string_expression
+          (string_primary_expression
+            (stringarray
+              (stringidentifier)
+              (element_subscript
+                (numeric_expression
+                  (numeric_primary_expression
+                    (numberreference
+                      (numberidentifier)))))))))
+      (expression
+        (string_expression
+          (string_primary_expression
+            (stringarray
+              (stringidentifier)
+              (element_subscript
+                (numeric_expression
+                  (numeric_primary_expression
+                    (numberreference
+                      (numberidentifier)))))))))
+      (expression
+        (string_expression
+          (string_primary_expression
+            (stringarray
+              (stringidentifier)
+              (element_subscript
+                (numeric_expression
+                  (numeric_primary_expression
+                    (numberreference
+                      (numberidentifier)))))))))
+      (expression
+        (string_expression
+          (string_primary_expression
+            (stringarray
+              (stringidentifier)
+              (element_subscript
+                (numeric_expression
+                  (numeric_primary_expression
+                    (numberreference
+                      (numberidentifier)))))))))
+      (expression
+        (numeric_expression
+          (numeric_primary_expression
+            (numberelement
+              (numberarray
+                (numberidentifier))
+              (element_subscript
+                (numeric_expression
+                  (numeric_primary_expression
+                    (numberreference
+                      (numberidentifier)))))))))
+      (expression
+        (numeric_expression
+          (numeric_primary_expression
+            (numberelement
+              (numberarray
+                (numberidentifier))
+              (element_subscript
+                (numeric_expression
+                  (numeric_primary_expression
+                    (numberreference
+                      (numberidentifier)))))))))
+      (expression
+        (numeric_expression
+          (numeric_primary_expression
+            (numberelement
+              (numberarray
+                (numberidentifier))
+              (element_subscript
+                (numeric_expression
+                  (numeric_primary_expression
+                    (numberreference
+                      (numberidentifier))))))))))))
+
+===========================================
+Rinput
+===========================================
+00010 RINPUT WAIT=1: X$ TIMEOUT 100
+00010 RINPUT #10,WAIT=1: X$ TIMEOUT 100
+---
+
+(source_file
+  (line
+    (line_number)
+    (rinput_statement
+      (input_wait_param
+        (assignment_op)
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (stringreference
+        (stringidentifier))
+      (error_condition_list
+        (error_condition)
+        (line_reference))))
+  (line
+    (line_number)
+    (rinput_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (input_wait_param
+        (assignment_op)
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (stringreference
+        (stringidentifier))
+      (error_condition_list
+        (error_condition)
+        (line_reference)))))
+
+===========================================
+Rinput fields
+===========================================
+00002 RINPUT FIELDS "10,10,C 10",WAIT=10:X$ TIMEOUT 100
+00010 RINPUT #121, FIELDS "10, 10, C 20, UH; 10, 12, PIC(##/##/##), UH;#124,10, 10, C 30, UH": AAA$, BBB$, CCC$
+---
+
+(source_file
+  (line
+    (line_number)
+    (rinput_statement
+      (string_expression
+        (string_primary_expression
+          (string)))
+      (input_wait_param
+        (assignment_op)
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (expression
+        (string_expression
+          (string_primary_expression
+            (stringreference
+              (stringidentifier)))))
+      (error_condition_list
+        (error_condition)
+        (line_reference))))
+  (line
+    (line_number)
+    (rinput_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (string_expression
+        (string_primary_expression
+          (string)))
+      (expression
+        (string_expression
+          (string_primary_expression
+            (stringreference
+              (stringidentifier)))))
+      (expression
+        (string_expression
+          (string_primary_expression
+            (stringreference
+              (stringidentifier)))))
+      (expression
+        (string_expression
+          (string_primary_expression
+            (stringreference
+              (stringidentifier))))))))
+
+===========================================
+Rinput select
+===========================================
+00200 RINPUT SELECT MAT SPEC$,ATTR MAT ATTRS$: MAT DATA$
+00170 RINPUT FIELDS MAT FD$: X, Y, Z$
+---
+
+(source_file
+  (line
+    (line_number)
+    (rinput_statement
+      (stringarray
+        (stringidentifier))
+      (stringarray
+        (stringidentifier))
+      (expression
+        (string_array_expression
+          (string_array_primary_expression
+            (stringarray
+              (stringidentifier)))))))
+  (line
+    (line_number)
+    (rinput_statement
+      (stringarray
+        (stringidentifier))
+      (expression
+        (numeric_expression
+          (numeric_primary_expression
+            (numberreference
+              (numberidentifier)))))
+      (expression
+        (numeric_expression
+          (numeric_primary_expression
+            (numberreference
+              (numberidentifier)))))
+      (expression
+        (string_expression
+          (string_primary_expression
+            (stringreference
+              (stringidentifier))))))))
+
+===========================================
+Stop (statement)
+===========================================
+00130 STOP 1
+00130 STOP
+---
+
+(source_file
+  (line
+    (line_number)
+    (stop_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))))
+  (line
+    (line_number)
+    (stop_statement)))
+
+===========================================
+Trace
+===========================================
+1230 TRACE ON
+1230 TRACE OFF
+1230 TRACE PRINT
+---
+
+(source_file
+  (line
+    (line_number)
+    (trace_statement))
+  (line
+    (line_number)
+    (trace_statement))
+  (line
+    (line_number)
+    (trace_statement)))
+
+===========================================
+Use (statement)
+===========================================
+10 USE comment
+---
+
+(source_file
+  (line
+    (line_number)
+    (rem_statement)))

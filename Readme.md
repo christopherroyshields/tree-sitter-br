@@ -1,6 +1,6 @@
 # Tree-sitter BR
 
-A [Tree-sitter](https://tree-sitter.github.io/tree-sitter/) parser for the Business Rules! (BR) programming language.
+This is a [Tree-sitter](https://tree-sitter.github.io/tree-sitter/) grammar definition for the Business Rules! (BR) programming language.  It is primarily intended to as a tool for a VS Code language extension.
 
 ## Overview
 
@@ -19,28 +19,20 @@ Business Rules! (BR) is a BASIC-like programming language that supports:
 
 ### Prerequisites
 - Node.js (for npm and build tools)
-- C compiler (for native bindings) - only needed if prebuilt binaries are not available
-- Tree-sitter CLI: `npm install -g tree-sitter-cli` (for development)
-
-### Install from npm
-```bash
-npm install tree-sitter-br
-```
-
-The package includes prebuilt binaries for common platforms (Windows, macOS, Linux) and architectures (x64, ARM64), so compilation is usually not required.
-
-### Build from source
-```bash
-git clone https://github.com/christopherroyshields/tree-sitter-br.git
-cd tree-sitter-br
-npm install
-npm run build
-```
+- C compiler (for native bindings) - only needed if prebuilt binaries are not available eg. MS Visual C++, GCC, etc.
+- Tree-sitter CLI: `npm install -g tree-sitter-cli`
 
 ## Usage
 
 ### Command Line
 ```bash
+# Clone repository
+git clone https://github.com/christopherroyshields/tree-sitter-br.git
+cd tree-sitter-br
+
+# Install dependencies 
+npm install
+
 # Generate parser from grammar
 tree-sitter generate
 
@@ -93,7 +85,7 @@ parser.setLanguage(language);
 - `grammar.js` - Main grammar definition file
 - `src/scanner.c` - External scanner for context-sensitive parsing
 - `test/corpus/` - Test cases with expected parse trees
-- `queries/` - Syntax highlighting queries
+- `queries/` - Syntax highlighting queries.  used by 'tree-sitter highlight example.brs'
 - `bindings/` - Language-specific bindings
 
 ### Building
@@ -234,3 +226,4 @@ input code here
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for release notes and version history.
+

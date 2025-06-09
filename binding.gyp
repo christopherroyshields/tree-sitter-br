@@ -23,10 +23,16 @@
           "cflags_c": [
             "-std=c11",
           ],
+          "cflags_cc": [
+            "-std=c++17",
+          ],
         }, { # OS == "win"
           "cflags_c": [
             "/std:c11",
             "/utf-8",
+          ],
+          "cflags_cc": [
+            "/std:c++17",
           ],
         }],
       ],

@@ -39,14 +39,17 @@ npm run build
 
 ### Command Line
 ```bash
-# Parse a BR file
-tree-sitter parse example.brs
-
-# Test the parser
-tree-sitter test
-
 # Generate parser from grammar
 tree-sitter generate
+
+# build for cli
+tree-sitter build
+
+# Run tree-sitter test suite
+tree-sitter test
+
+# Parse a BR file
+tree-sitter parse example.brs
 ```
 
 ### Node.js
@@ -97,14 +100,12 @@ parser.setLanguage(language);
 # Generate parser from grammar
 tree-sitter generate
 
-# Build native bindings
-npm run build
+# Build bindings for electron
+npm run build:electron
 
-# Build WASM version
+# Build WASM version and test it in sandbox
 tree-sitter build --wasm
-
-# Build C library
-make
+tree-sitter playground
 ```
 
 ### Testing

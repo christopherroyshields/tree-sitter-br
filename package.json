@@ -41,6 +41,8 @@
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
     "test": "tree-sitter test",
-    "build": "tree-sitter generate && tree-sitter build && npx electron-rebuild -v 34.3.2 -f -w ."
+    "build": "tree-sitter generate && tree-sitter build",
+    "build:electron": "npx electron-rebuild -v 34.3.2 -f -w .",
+    "build:wasm": "tree-sitter build --wasm"
   }
 }

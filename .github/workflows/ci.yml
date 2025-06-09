@@ -10,7 +10,7 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-20.04, windows-latest, macos-latest]
         node: [20]
     
     runs-on: ${{ matrix.os }}
@@ -23,8 +23,22 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install Python setuptools
+        run: pip install setuptools
+        
+      - name: Install tree-sitter CLI
+        run: npm install -g tree-sitter-cli
+          
       - name: Install dependencies
         run: npm install
+        
+      - name: Generate parser
+        run: tree-sitter generate
         
       - name: Run tests
         run: npm test

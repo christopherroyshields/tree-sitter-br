@@ -287,7 +287,7 @@ module.exports = grammar({
     ['assign','call'],
     ['assign','logical_and'],
     ['assign','logical_or'],
-    [$.mat_size, $.mat_range],
+    // [$.mat_size, $.mat_range],
     [$.udim, $.stringreference, $.numberreference],
   ],
 
@@ -1374,12 +1374,11 @@ module.exports = grammar({
       )
     ),
 
-    mat_range: $ => prec.right(seq(
+    mat_range: $ => seq(
       $.numeric_expression,
-      optional(seq(
-        ":",
-      $.numeric_expression)),
-    )),
+      ":",
+      $.numeric_expression
+    ),
 
     next_statement: $ => seq(
       alias(STATEMENTS.next, "statement"),

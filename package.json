@@ -1,6 +1,7 @@
 {
   "name": "tree-sitter-br",
   "version": "0.25.1",
+  "version": "0.25.1",
   "description": "Tree-sitter parser for Business Rules! language.",
   "main": "bindings/node/index.js",
   "types": "bindings/node",

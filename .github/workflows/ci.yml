@@ -48,4 +48,4 @@ jobs:
         
       - name: Verify prebuild
         run: |
-          node -e "./bindings/node/binding_test.js"
+          node "./bindings/node/binding_test.js"

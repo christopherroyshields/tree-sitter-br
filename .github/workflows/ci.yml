@@ -48,4 +48,4 @@ jobs:
         
       - name: Verify prebuild
         run: |
-          node -e "const binding = require('.'); console.log('Binding loaded successfully:', binding.Language)"
+          node -e "./bindings/node/binding_test.js"

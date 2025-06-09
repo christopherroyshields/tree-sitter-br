@@ -13,7 +13,7 @@ mat a(4)
         (mat_size
           (numeric_expression
             (numeric_primary_expression
-              (numberx))))))))
+              (number))))))))
 
 ==============================
 mat_string_array_expression

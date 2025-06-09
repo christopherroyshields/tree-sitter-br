@@ -1,5 +1,8 @@
+./*.brs
+
 # Rust artifacts
 target/
+build/
 
 # Node artifacts
 # build/

@@ -1,6 +1,6 @@
 # Tree-sitter BR
 
-A [Tree-sitter](https://tree-sitter.github.io/tree-sitter/) parser for the Business Rules! (BR) programming language.
+This is a [Tree-sitter](https://tree-sitter.github.io/tree-sitter/) grammar definition for the Business Rules! (BR) programming language.  It is primarily intended to as a tool for a VS Code language extension.
 
 ## Overview
 
@@ -19,26 +19,20 @@ Business Rules! (BR) is a BASIC-like programming language that supports:
 
 ### Prerequisites
 - Node.js (for npm and build tools)
-- C compiler (for native bindings)
+- C compiler (for native bindings) - only needed if prebuilt binaries are not available eg. MS Visual C++, GCC, etc.
 - Tree-sitter CLI: `npm install -g tree-sitter-cli`
-
-### Install from npm
-```bash
-npm install tree-sitter-br
-```
-
-### Build from source
-```bash
-git clone https://github.com/christopherroyshields/tree-sitter-br.git
-cd tree-sitter-br
-npm install
-npm run build
-```
 
 ## Usage
 
 ### Command Line
 ```bash
+# Clone repository
+git clone https://github.com/christopherroyshields/tree-sitter-br.git
+cd tree-sitter-br
+
+# Install dependencies 
+npm install
+
 # Generate parser from grammar
 tree-sitter generate
 
@@ -91,7 +85,7 @@ parser.setLanguage(language);
 - `grammar.js` - Main grammar definition file
 - `src/scanner.c` - External scanner for context-sensitive parsing
 - `test/corpus/` - Test cases with expected parse trees
-- `queries/` - Syntax highlighting queries
+- `queries/` - Syntax highlighting queries.  used by 'tree-sitter highlight example.brs'
 - `bindings/` - Language-specific bindings
 
 ### Building
@@ -100,13 +94,38 @@ parser.setLanguage(language);
 # Generate parser from grammar
 tree-sitter generate
 
-# Build bindings for electron
+# Build native bindings
+npm run build
+
+# Build bindings for Electron
 npm run build:electron
 
 # Build WASM version and test it in sandbox
 tree-sitter build --wasm
 tree-sitter playground
+
+# Build prebuilt binaries
+npm run prebuild              # For current Node version
+npm run prebuild:electron     # For Electron v34.3.2
+npm run prebuild:all          # Both Node and Electron
 ```
+
+### Prebuilt Binaries
+
+This package uses `prebuildify` and `node-gyp-build` to provide prebuilt binaries for faster installation. Prebuilt binaries are automatically:
+
+- Downloaded during `npm install` if available for your platform
+- Built in CI/CD for multiple platforms and Node versions
+- Included in npm releases to avoid compilation on user machines
+
+Supported platforms:
+- **Windows**: x64
+- **macOS**: x64 and ARM64 (Apple Silicon)
+- **Linux**: x64 and ARM64
+
+Supported Node.js versions: 18, 20, 22
+
+If prebuilt binaries are not available for your platform, the package will fall back to building from source automatically.
 
 ### Testing
 
@@ -207,3 +226,4 @@ input code here
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for release notes and version history.
+

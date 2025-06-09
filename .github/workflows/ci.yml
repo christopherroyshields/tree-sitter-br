@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node: [20]
+    
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install Python setuptools
+        run: pip install setuptools
+        
+      - name: Install tree-sitter CLI
+        run: npm install -g tree-sitter-cli
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Generate parser
+        run: tree-sitter generate
+        
+      - name: Run tests
+        run: npm test
+        
+      - name: Test prebuild
+        run: npm run prebuild
+        
+      - name: Verify prebuild
+        run: |
+          node "./bindings/node/binding_test.js"

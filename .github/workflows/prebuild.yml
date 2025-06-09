@@ -1,0 +1,120 @@
+name: Prebuild Binaries
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  prebuild:
+    strategy:
+      matrix:
+        include:
+          # Windows
+          - os: windows-latest
+            platform: win32
+            arch: x64
+            node: 20
+          
+          # macOS x64
+          - os: macos-13
+            platform: darwin
+            arch: x64
+            node: 20
+          
+          # macOS ARM64
+          - os: macos-14
+            platform: darwin
+            arch: arm64
+            node: 20
+          
+          # Linux x64
+          - os: ubuntu-latest
+            platform: linux
+            arch: x64
+            node: 20
+          
+          # Linux ARM64
+          - os: ubuntu-latest
+            platform: linux
+            arch: arm64
+            node: 20
+
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install Python setuptools
+        run: pip install setuptools
+        
+      - name: Install tree-sitter CLI
+        run: npm install -g tree-sitter-cli
+          
+      - name: Setup QEMU (for ARM64 Linux)
+        if: matrix.platform == 'linux' && matrix.arch == 'arm64'
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+          
+      - name: Install dependencies
+        run: npm install --ignore-scripts
+        
+      - name: Generate parser
+        run: npm run build
+        
+      - name: Build prebuilds
+        run: |
+          npm run prebuild -- --arch=${{ matrix.arch }}
+          npm run prebuild:electron -- --arch=${{ matrix.arch }}
+        
+      - name: Upload prebuilds
+        uses: actions/upload-artifact@v4
+        with:
+          name: prebuilds-${{ matrix.platform }}-${{ matrix.arch }}-node${{ matrix.node }}
+          path: prebuilds/
+          
+  package:
+    needs: prebuild
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download all prebuilds
+        uses: actions/download-artifact@v4
+        with:
+          pattern: prebuilds-*
+          merge-multiple: true
+          path: prebuilds/
+          
+      - name: Display structure
+        run: ls -la prebuilds/
+        
+      - name: Create tarball
+        run: tar -czf prebuilds.tar.gz prebuilds/
+        
+      - name: Upload combined prebuilds
+        uses: actions/upload-artifact@v4
+        with:
+          name: all-prebuilds
+          path: prebuilds.tar.gz
+          
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: prebuilds.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

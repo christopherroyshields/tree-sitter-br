@@ -1,8 +1,8 @@
 {
   "name": "tree-sitter-br",
-  "version": "0.25.1",
+  "version": "0.25.2",
   "description": "Tree-sitter parser for Business Rules! language.",
-  "main": "index.js",
+  "main": "bindings/node/index.js",
   "types": "bindings/node",
   "keywords": [
     "incremental",
@@ -13,9 +13,10 @@
   "author": "Christopher Shields",
   "license": "ISC",
   "files": [
-    "build/Release/tree_sitter_br_binding.node",
-    "index.js",
-    "src/node-types.json"
+    "prebuilds/",
+    "src/node-types.json",
+    "bindings/node/index.d.ts",
+    "bindings/node/index.js"
   ],
   "devDependencies": {
     "electron-rebuild": "^3.2.9",
@@ -43,6 +44,10 @@
     "test": "tree-sitter test",
     "build": "tree-sitter generate && tree-sitter build",
     "build:electron": "npx electron-rebuild -v 34.3.2 -f -w .",
-    "build:wasm": "tree-sitter build --wasm"
+    "build:wasm": "tree-sitter build --wasm",
+    "prebuild": "prebuildify --napi --strip",
+    "prebuild:electron": "prebuildify --runtime=electron -t electron@34.3.2 --strip --download-mirror=https://github.com/electron/electron/releases/download/v",
+    "prebuild:all": "npm run prebuild && npm run prebuild:electron",
+    "prebuild:cross": "prebuildify-cross --napi --strip"
   }
 }

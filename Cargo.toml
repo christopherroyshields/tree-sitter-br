@@ -1,9 +1,9 @@
 [package]
 name = "tree-sitter-br"
-description = "Business Rules! Language Parser"
-version = "0.1.0"
-authors = ["Chris Shields <christopherroyshields@gmail.com>"]
-license = "MIT"
+description = "Tree-sitter parser for Business Rules! language."
+version = "0.25.2"
+authors = ["Christopher Shields"]
+license = "ISC"
 readme = "README.md"
 keywords = ["incremental", "parsing", "tree-sitter", "br"]
 categories = ["parser-implementations", "parsing", "text-editors"]

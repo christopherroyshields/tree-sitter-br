@@ -1568,10 +1568,7 @@ module.exports = grammar({
 
     print_border: $ => seq(
       keyword("border"),
-      optional(seq(
-        /[ \t]/,
-        $.string_expression
-      )),
+      optional($.string_expression),
       ":",
       $.string_expression
     ),

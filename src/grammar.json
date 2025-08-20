@@ -7390,17 +7390,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "PATTERN",
-                  "value": "[ \\t]"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "string_expression"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "string_expression"
             },
             {
               "type": "BLANK"

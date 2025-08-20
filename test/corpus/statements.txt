@@ -2347,6 +2347,37 @@ print #0, border: Oldwindowcaption$
               (stringidentifier))))))))
 
 ===========================================
+Print Border Compact Syntax
+===========================================
+print border"test": "output"
+print #1,border"compact": "no space"
+---
+
+(source_file
+  (line
+    (print_statement
+      (print_border
+        (string_expression
+          (string_primary_expression
+            (string)))
+        (string_expression
+          (string_primary_expression
+            (string))))))
+  (line
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_border
+        (string_expression
+          (string_primary_expression
+            (string)))
+        (string_expression
+          (string_primary_expression
+            (string)))))))
+
+===========================================
 Print Fields
 ===========================================
 00020 PRINT FIELDS A$: (MAT B$,MAT C),X$

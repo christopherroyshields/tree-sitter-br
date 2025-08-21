@@ -67,9 +67,6 @@ bool tree_sitter_br_external_scanner_scan(
 
   if (!(valid_symbols[EOL] || valid_symbols[COMMENT])) return false;
 
-  bool var_found = false;
-  bool var_done = false;
-
   for (;;) {
     if (valid_symbols[EOL]){
       if (lexer->lookahead == 0 || lexer->lookahead == NEWLINE){

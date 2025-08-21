@@ -2303,7 +2303,8 @@ Print Border
 ===========================================
 print #102,border "┌┘[Y]": "< Available Colors " 
 16040    print #101,border "S": "< Copy Security Maintenance from User to User(s) "
-print #0, border: Oldwindowcaption$
+print #0, border "": Oldwindowcaption$
+print #5, border "B":
 ---
 
 (source_file
@@ -2343,8 +2344,21 @@ print #0, border: Oldwindowcaption$
       (print_border
         (string_expression
           (string_primary_expression
+            (string)))
+        (string_expression
+          (string_primary_expression
             (stringreference
-              (stringidentifier))))))))
+              (stringidentifier)))))))
+  (line
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_border
+        (string_expression
+          (string_primary_expression
+            (string)))))))
 
 ===========================================
 Print Fields

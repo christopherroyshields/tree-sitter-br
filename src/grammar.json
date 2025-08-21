@@ -7387,33 +7387,28 @@
           "value": "keyword"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "PATTERN",
-                  "value": "[ \\t]"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "string_expression"
-                }
-              ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "PATTERN",
+          "value": "[ \\t]"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_expression"
         },
         {
           "type": "STRING",
           "value": ":"
         },
         {
-          "type": "SYMBOL",
-          "name": "string_expression"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "string_expression"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },

@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-/// <reference types="tree-sitter-cli/dsl" />
+/// <reference path="./types.d.ts" />
 // @ts-check
 
 const NUM_VAR = /[a-zA-Z_]\w*/

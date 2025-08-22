@@ -50,3 +50,4 @@ zig-out/
 *.tar.gz
 *.tgz
 *.zip
+.claude/settings.local.json

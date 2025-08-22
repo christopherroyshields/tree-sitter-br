@@ -7,19 +7,6 @@
 /// <reference path="./types.d.ts" />
 // @ts-check
 
-const {
-  grammar,
-  token,
-  seq,
-  choice,
-  optional,
-  repeat,
-  repeat1,
-  field,
-  alias,
-  prec
-} = require('tree-sitter-cli/dsl');
-
 const NUM_VAR = /[a-zA-Z_]\w*/
 
 const NUMERIC_SYSTEM_FUNCTIONS = [

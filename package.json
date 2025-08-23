@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-br",
-  "version": "0.25.3",
+  "version": "0.25.4",
   "description": "Tree-sitter parser for Business Rules! language.",
   "main": "bindings/node/index.js",
   "types": "bindings/node",
@@ -16,7 +16,8 @@
     "prebuilds/",
     "src/node-types.json",
     "bindings/node/index.d.ts",
-    "bindings/node/index.js"
+    "bindings/node/index.js",
+    "tree-sitter-br.wasm"
   ],
   "devDependencies": {
     "electron-rebuild": "^3.2.9",

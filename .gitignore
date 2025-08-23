@@ -1,5 +1,6 @@
 /*.brs
 prebuilds/
+nul
 
 # Rust artifacts
 target/

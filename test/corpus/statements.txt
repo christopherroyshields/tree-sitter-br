@@ -2305,6 +2305,8 @@ print #102,border "┌┘[Y]": "< Available Colors "
 16040    print #101,border "S": "< Copy Security Maintenance from User to User(s) "
 print #0, border "": Oldwindowcaption$
 print #5, border "B":
+print #5, border : "caption"
+print #5, border: "caption"
 ---
 
 (source_file
@@ -2349,6 +2351,26 @@ print #5, border "B":
           (string_primary_expression
             (stringreference
               (stringidentifier)))))))
+  (line
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_border
+        (string_expression
+          (string_primary_expression
+            (string))))))
+  (line
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (number))))
+      (print_border
+        (string_expression
+          (string_primary_expression
+            (string))))))
   (line
     (print_statement
       (channel

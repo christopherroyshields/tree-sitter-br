@@ -1563,7 +1563,7 @@ module.exports = grammar({
         $.label_reference
       ),
       ":",
-      $.print_output
+      optional($.print_output)
     ),
 
     print_border: $ => seq(

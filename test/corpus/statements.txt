@@ -2240,6 +2240,7 @@ Print
 00120 PRINT "The total is  -"; TOTAL
 00130 PRINT BELL
 00140 PRINT #255: BELL
+71260 print #FILENO,using Form850: 
 ---
 
 (source_file
@@ -2296,7 +2297,17 @@ Print
             (numeric_primary_expression
               (numeric_call_expression
                 (numeric_system_function
-                  (function_name))))))))))
+                  (function_name)))))))))
+  (line
+    (line_number)
+    (print_statement
+      (channel
+        (numeric_expression
+          (numeric_primary_expression
+            (numberreference
+              (numberidentifier)))))
+      (print_using
+        (label_reference)))))
 
 ===========================================
 Print Border

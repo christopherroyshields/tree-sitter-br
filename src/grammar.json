@@ -7368,8 +7368,16 @@
           "value": ":"
         },
         {
-          "type": "SYMBOL",
-          "name": "print_output"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "print_output"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },

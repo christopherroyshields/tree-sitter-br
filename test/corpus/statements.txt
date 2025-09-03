@@ -1221,6 +1221,7 @@ Form
 00020 FORM "TYPE A", C 10
 00510 nameform2: form pos 16,c 30,x 9,c 6,x 16,c 7,x 24,c 2,x 16,c 8, skip 3
 00600 T1: FORM C 11,C 26,PIC(-,---,---.##),PIC(ZZZZZ#),SKIP
+00700 form x ,c ,d
 ---
 
 (source_file
@@ -1314,7 +1315,16 @@ Form
       (form_spec
         (pic_spec))
       (form_spec
-        (skip_spec)))))
+        (skip_spec))))
+  (line
+    (line_number)
+    (form_statement
+      (form_spec
+        (x_spec))
+      (form_spec
+        (string_spec))
+      (form_spec
+        (floating_point_spec)))))
 
 ===========================================
 GoSub

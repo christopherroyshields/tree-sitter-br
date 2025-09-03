@@ -302,15 +302,15 @@ module.exports = grammar({
   ],
 
   inline: $ => [
-    // $.internal_form_spec,
-    // $.string_form_spec,
-    // $.numeric_form_spec,
-    // $.floating_point_form_spec,
-    // $.skip_form_spec,
-    // $.pos_form_spec,
-    // $.x_form_spec,
-    // $.literal_string_form_spec,
-    // $.pic_form_spec
+    $.internal_form_spec,
+    $.string_form_spec,
+    $.numeric_form_spec,
+    $.floating_point_form_spec,
+    $.skip_form_spec,
+    $.pos_form_spec,
+    $.x_form_spec,
+    $.literal_string_form_spec,
+    $.pic_form_spec
   ],
 
   rules: {
@@ -681,15 +681,15 @@ module.exports = grammar({
       )
     ),
 
-    string_spec: $ => alias(choice(
-      /c[ \t]*/i,
+    string_spec: $ => alias(token(choice(
+      /c/i,
       /cc/i,
       /cr/i,
       /cu/i,
       /v/i,
       /vl/i,
       /vu/i
-    ), "keyword"),
+    )), "keyword"),
 
     internal_spec: $ => alias(token(choice(
       /b/i,
@@ -715,9 +715,9 @@ module.exports = grammar({
     string_form_spec: $ => seq(
       optional($.multi_spec),
       $.string_spec,
+      /[ \t]?/,
       optional(
         seq(
-          /[ \t]/,
           choice(
             $.int,
             $.numberreference
@@ -782,6 +782,8 @@ module.exports = grammar({
     skip_form_spec: $ => seq(
       $.skip_spec,
       optional(
+      choice(
+        /[ \t]+/,
         seq(
         /[ \t]+/,
         choice(
@@ -789,14 +791,15 @@ module.exports = grammar({
           $.numberreference
         ))
       )
+      )
     ),
 
-    x_spec: $ => token(/x[ \t]*/i),
+    x_spec: $ => token(/x/i),
     x_form_spec: $ => seq(
       $.x_spec,
+      /[ \t]?/,
       optional(
         seq(
-          /[ \t]+/,
           choice(
             $.int,
             $.numberreference

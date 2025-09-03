@@ -1351,6 +1351,92 @@ GoTo
       (label_reference))))
 
 ===========================================
+If Then/Else with trailin continuation
+===========================================
+10 if x then !: print x else !: !rwar
+20 if x then !: print x else !: print foo
+20 if x then !: print x else !: print foo ! test
+---
+
+(source_file
+  (line
+    (line_number)
+    (if_statement
+      (conditional_expression
+        (numeric_conditional_primary_expression
+          (numberreference
+            (numberidentifier))))
+      (single_line_if
+        (continuation)
+        (print_statement
+          (print_output
+            (expression
+              (numeric_expression
+                (numeric_primary_expression
+                  (numberreference
+                    (numberidentifier)))))))
+        (single_line_if_trailing_else
+          (else_statement
+            (single_line_else
+              (continuation)
+              (comment)))))))
+  (line
+    (line_number)
+    (if_statement
+      (conditional_expression
+        (numeric_conditional_primary_expression
+          (numberreference
+            (numberidentifier))))
+      (single_line_if
+        (continuation)
+        (print_statement
+          (print_output
+            (expression
+              (numeric_expression
+                (numeric_primary_expression
+                  (numberreference
+                    (numberidentifier)))))))
+        (single_line_if_trailing_else
+          (else_statement
+            (single_line_else
+              (continuation)
+              (print_statement
+                (print_output
+                  (expression
+                    (numeric_expression
+                      (numeric_primary_expression
+                        (numberreference
+                          (numberidentifier)))))))))))))
+  (line
+    (line_number)
+    (if_statement
+      (conditional_expression
+        (numeric_conditional_primary_expression
+          (numberreference
+            (numberidentifier))))
+      (single_line_if
+        (continuation)
+        (print_statement
+          (print_output
+            (expression
+              (numeric_expression
+                (numeric_primary_expression
+                  (numberreference
+                    (numberidentifier)))))))
+        (single_line_if_trailing_else
+          (else_statement
+            (single_line_else
+              (continuation)
+              (print_statement
+                (print_output
+                  (expression
+                    (numeric_expression
+                      (numeric_primary_expression
+                        (numberreference
+                          (numberidentifier)))))))))
+          (comment))))))
+
+===========================================
 If
 ===========================================
 00030 if grade >= 60 then print "Passed"
@@ -1694,6 +1780,7 @@ Mat
 00200 MAT N$(L)
 00300 MAT A(L)=AIDX(N$)
 00200 MAT A(100)=A
+70200 mat F$(NAME_LD)=UNH$(NAME_LH)
 ---
 
 (source_file
@@ -1908,7 +1995,26 @@ Mat
         (mat_assignment_numeric
           (assignment_op)
           (numberarray
-            (numberidentifier)))))))
+            (numberidentifier))))))
+  (line
+    (line_number)
+    (mat_statement
+      (mat_string_array_expression
+        (stringarray
+          (stringidentifier))
+        (mat_size
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier)))))
+        (assignment_op)
+        (stringarray
+          (stringidentifier))
+        (mat_size
+          (numeric_expression
+            (numeric_primary_expression
+              (numberreference
+                (numberidentifier)))))))))
 
 ===========================================
 Next (statement)

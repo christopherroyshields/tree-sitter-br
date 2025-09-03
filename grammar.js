@@ -232,7 +232,6 @@ const getStatements = $ => [
   $.mat_statement,
   $.print_statement,
   $.let_statement,
-  $.form_statement,
   $.fnend_statement,
   $.form_statement,
   $.for_statement,
@@ -303,15 +302,15 @@ module.exports = grammar({
   ],
 
   inline: $ => [
-    $.internal_form_spec,
-    $.string_form_spec,
-    $.numeric_form_spec,
-    $.floating_point_form_spec,
-    $.skip_form_spec,
-    $.pos_form_spec,
-    $.x_form_spec,
-    $.literal_string_form_spec,
-    $.pic_form_spec
+    // $.internal_form_spec,
+    // $.string_form_spec,
+    // $.numeric_form_spec,
+    // $.floating_point_form_spec,
+    // $.skip_form_spec,
+    // $.pos_form_spec,
+    // $.x_form_spec,
+    // $.literal_string_form_spec,
+    // $.pic_form_spec
   ],
 
   rules: {
@@ -682,15 +681,15 @@ module.exports = grammar({
       )
     ),
 
-    string_spec: $ => alias(token(choice(
-      /c/i,
+    string_spec: $ => alias(choice(
+      /c[ \t]*/i,
       /cc/i,
       /cr/i,
       /cu/i,
       /v/i,
       /vl/i,
       /vu/i
-    )), "keyword"),
+    ), "keyword"),
 
     internal_spec: $ => alias(token(choice(
       /b/i,
@@ -718,13 +717,13 @@ module.exports = grammar({
       $.string_spec,
       optional(
         seq(
-          /[ \t]+/,
+          /[ \t]/,
           choice(
             $.int,
             $.numberreference
           )
         ),
-      )
+      ),
     ),
 
     internal_form_spec: $ => seq(
@@ -792,7 +791,7 @@ module.exports = grammar({
       )
     ),
 
-    x_spec: $ => token(/x/i),
+    x_spec: $ => token(/x[ \t]*/i),
     x_form_spec: $ => seq(
       $.x_spec,
       optional(
@@ -888,10 +887,15 @@ module.exports = grammar({
             $.statement_separator
           ),
           choice(
-            ...getStatements($),
-            $.if_statement
+            $.comment,
+            seq(
+            choice(
+                ...getStatements($),
+                $.if_statement
+              ),
+              optional($.comment)
+            )
           ),
-          optional($.comment)
         )
       )
     )),
@@ -1350,17 +1354,23 @@ module.exports = grammar({
           choice(
             seq(
               alias($.string_name, $.stringarray),
-              optional(seq(
-                "(",
-                $.mat_range,
-                ")",
-              )),
+              optional(        
+                seq(
+                  "(",
+                  choice(
+                    $.mat_size,
+                    $.mat_range
+                  ),
+                  ")"
+                )
+              ),
             ),
             seq(                  
               "(",
               $.string_expression,
               ")"
             )
+
           )
         )
       )

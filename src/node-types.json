@@ -1078,6 +1078,25 @@
     }
   },
   {
+    "type": "floating_point_form_spec",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "floating_point_spec",
+          "named": true
+        },
+        {
+          "type": "multi_spec",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "floating_point_spec",
     "named": true,
     "fields": {}
@@ -1111,63 +1130,43 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "field_length",
+          "type": "floating_point_form_spec",
           "named": true
         },
         {
-          "type": "floating_point_spec",
+          "type": "internal_form_spec",
           "named": true
         },
         {
-          "type": "fractional_length",
+          "type": "literal_string_form_spec",
           "named": true
         },
         {
-          "type": "int",
+          "type": "numeric_form_spec",
           "named": true
         },
         {
-          "type": "internal_spec",
+          "type": "pic_form_spec",
           "named": true
         },
         {
-          "type": "literal_string_spec",
+          "type": "pos_form_spec",
           "named": true
         },
         {
-          "type": "multi_spec",
+          "type": "skip_form_spec",
           "named": true
         },
         {
-          "type": "numberreference",
+          "type": "string_form_spec",
           "named": true
         },
         {
-          "type": "numeric_spec",
-          "named": true
-        },
-        {
-          "type": "pic_spec",
-          "named": true
-        },
-        {
-          "type": "pos_spec",
-          "named": true
-        },
-        {
-          "type": "skip_spec",
-          "named": true
-        },
-        {
-          "type": "string_spec",
-          "named": true
-        },
-        {
-          "type": "x_spec",
+          "type": "x_form_spec",
           "named": true
         }
       ]
@@ -1593,6 +1592,33 @@
     "fields": {}
   },
   {
+    "type": "internal_form_spec",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "field_length",
+          "named": true
+        },
+        {
+          "type": "fractional_length",
+          "named": true
+        },
+        {
+          "type": "internal_spec",
+          "named": true
+        },
+        {
+          "type": "multi_spec",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "internal_spec",
     "named": true,
     "fields": {}
@@ -2003,6 +2029,25 @@
         },
         {
           "type": "stringreference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "literal_string_form_spec",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "literal_string_spec",
+          "named": true
+        },
+        {
+          "type": "multi_spec",
           "named": true
         }
       ]
@@ -2624,6 +2669,33 @@
     }
   },
   {
+    "type": "numeric_form_spec",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "field_length",
+          "named": true
+        },
+        {
+          "type": "fractional_length",
+          "named": true
+        },
+        {
+          "type": "multi_spec",
+          "named": true
+        },
+        {
+          "type": "numeric_spec",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "numeric_function_assignment",
     "named": true,
     "fields": {
@@ -3014,9 +3086,51 @@
     "fields": {}
   },
   {
+    "type": "pic_form_spec",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "multi_spec",
+          "named": true
+        },
+        {
+          "type": "pic_spec",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "pic_spec",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "pos_form_spec",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "numberreference",
+          "named": true
+        },
+        {
+          "type": "pos_spec",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "pos_spec",
@@ -4067,6 +4181,29 @@
     }
   },
   {
+    "type": "skip_form_spec",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "numberreference",
+          "named": true
+        },
+        {
+          "type": "skip_spec",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "skip_spec",
     "named": true,
     "fields": {}
@@ -4398,6 +4535,33 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "string_form_spec",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "multi_spec",
+          "named": true
+        },
+        {
+          "type": "numberreference",
+          "named": true
+        },
+        {
+          "type": "string_spec",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -4800,6 +4964,29 @@
         },
         {
           "type": "string_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "x_form_spec",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "numberreference",
+          "named": true
+        },
+        {
+          "type": "x_spec",
           "named": true
         }
       ]

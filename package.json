@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-br",
-  "version": "0.25.4",
+  "version": "0.25.5",
   "description": "Tree-sitter parser for Business Rules! language.",
   "main": "bindings/node/index.js",
   "types": "bindings/node",
@@ -23,6 +23,7 @@
     "electron-rebuild": "^3.2.9",
     "gulp": "^5.0.0",
     "node-addon-api": "^8.2.1",
+    "node-gyp": "^11.4.2",
     "node-gyp-build": "^4.8.2",
     "prebuildify": "^6.0.1",
     "tree-sitter": "^0.25.0",
@@ -45,9 +46,6 @@
     "build": "tree-sitter generate && tree-sitter build",
     "build:electron": "npx electron-rebuild -v 34.3.2 -f -w .",
     "build:wasm": "tree-sitter build --wasm",
-    "prebuild": "prebuildify --napi --strip",
-    "prebuild:electron": "prebuildify --runtime=electron -t electron@34.3.2 --strip --download-mirror=https://github.com/electron/electron/releases/download/v",
-    "prebuild:all": "npm run prebuild && npm run prebuild:electron",
-    "prebuild:cross": "prebuildify-cross --napi --strip"
+    "prebuild": "prebuildify --napi --strip"
   }
 }

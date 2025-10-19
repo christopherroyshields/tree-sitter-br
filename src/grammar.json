@@ -6349,7 +6349,7 @@
                     "type": "TOKEN",
                     "content": {
                       "type": "PATTERN",
-                      "value": "fkey[ \\t]+",
+                      "value": "fn?key[ \\t]+",
                       "flags": "i"
                     }
                   },

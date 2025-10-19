@@ -2046,6 +2046,7 @@ On Error
 00020 ON ZDIV IGNORE
 00030 ON ZDIV SYSTEM
 00410 ON ERROR GOTO 80000
+00500 on fnkey 9 goto 10
 ---
 
 (source_file
@@ -2068,7 +2069,14 @@ On Error
     (on_statement
       (error_condition)
       (goto_statement
-        (line_reference)))))
+        (line_reference))))
+  (line
+    (line_number)
+    (on_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))
+      (line_reference))))
 
 ===========================================
 On FKey

@@ -1402,7 +1402,7 @@ module.exports = grammar({
       alias(STATEMENTS.on, "statement"),
       choice(
         seq(
-          alias(token(/fkey[ \t]+/i), "keyword"),
+          alias(token(/fn?key[ \t]+/i), "keyword"),
           $.numeric_expression,
           choice(
             seq(

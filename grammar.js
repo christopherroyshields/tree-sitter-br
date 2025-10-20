@@ -1331,6 +1331,10 @@ module.exports = grammar({
             ")"
           )),
           ")"
+        ),
+        choice(
+          $.numberelement,
+          $.numeric_call_expression
         )
       )
     ),

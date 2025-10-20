@@ -6086,6 +6086,19 @@
                   "value": ")"
                 }
               ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "numberelement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "numeric_call_expression"
+                }
+              ]
             }
           ]
         }

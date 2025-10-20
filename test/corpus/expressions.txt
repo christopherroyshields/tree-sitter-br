@@ -33,6 +33,28 @@ mat b$=("")
             (string)))))))
 
 ==============================
+mat_numeric_array_expression with array element
+==============================
+mat notes=f(1)
+---
+
+(source_file
+  (line
+    (mat_statement
+      (mat_numeric_array_expression
+        (numberarray
+          (numberidentifier))
+        (mat_assignment_numeric
+          (assignment_op)
+          (numberelement
+            (numberarray
+              (numberidentifier))
+            (element_subscript
+              (numeric_expression
+                (numeric_primary_expression
+                  (number))))))))))
+
+==============================
 string_array_expression
 ==============================
 print mat f$

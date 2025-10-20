@@ -2158,6 +2158,8 @@ On Error
 00010 ON ZDIV GOTO 7700
 00020 ON ZDIV IGNORE
 00030 ON ZDIV SYSTEM
+00040 ON DUPREC GOTO 8000
+00050 ON EXIT GOTO 9000
 00410 ON ERROR GOTO 80000
 00500 on fnkey 9 goto 10
 ---
@@ -2177,6 +2179,18 @@ On Error
     (line_number)
     (on_statement
       (error_condition)))
+  (line
+    (line_number)
+    (on_statement
+      (error_condition)
+      (goto_statement
+        (line_reference))))
+  (line
+    (line_number)
+    (on_statement
+      (error_condition)
+      (goto_statement
+        (line_reference))))
   (line
     (line_number)
     (on_statement

@@ -199,18 +199,20 @@ const STATEMENTS = {
 const ERROR_CONDITION = [
   /attn/i,
   /conv/i,
+  /duprec/i,
   /eof/i,
   /error/i,
+  /exit/i,
   /help/i,
   /ioerr/i,
   /locked/i,
+  /nokey/i,
+  /norec/i,
   /oflow/i,
   /pageoflow/i,
   /soflow/i,
   /timeout/i,
-  /zdiv/i,
-  /norec/i,
-  /nokey/i
+  /zdiv/i
 ]
 
 const FNKEY = /fnkey/i

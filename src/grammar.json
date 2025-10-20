@@ -1840,12 +1840,22 @@
           },
           {
             "type": "PATTERN",
+            "value": "duprec",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
             "value": "eof",
             "flags": "i"
           },
           {
             "type": "PATTERN",
             "value": "error",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "exit",
             "flags": "i"
           },
           {
@@ -1861,6 +1871,16 @@
           {
             "type": "PATTERN",
             "value": "locked",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "nokey",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "norec",
             "flags": "i"
           },
           {
@@ -1886,16 +1906,6 @@
           {
             "type": "PATTERN",
             "value": "zdiv",
-            "flags": "i"
-          },
-          {
-            "type": "PATTERN",
-            "value": "norec",
-            "flags": "i"
-          },
-          {
-            "type": "PATTERN",
-            "value": "nokey",
             "flags": "i"
           }
         ]

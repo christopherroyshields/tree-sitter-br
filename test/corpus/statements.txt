@@ -868,6 +868,89 @@ Display Menu
     (comment)))
 
 ===========================================
+Display Buttons
+===========================================
+DISPLAY BUTTONS "1,"&STR$(B*10-9)&",c 9,,"&STR$(FK): BUTTON_TEXT$
+---
+
+(source_file
+  (line
+    (display_buttons_statement
+      (string_expression
+        (string_binary_expression
+          left: (string_expression
+            (string_binary_expression
+              left: (string_expression
+                (string_binary_expression
+                  left: (string_expression
+                    (string_primary_expression
+                      (string)))
+                  operator: (concat_op)
+                  right: (string_expression
+                    (string_primary_expression
+                      (string_call_expression
+                        (string_system_function
+                          (function_name)
+                          arguments: (arguments
+                            (argument
+                              (expression
+                                (numeric_expression
+                                  (numeric_binary_expression
+                                    left: (numeric_expression
+                                      (numeric_binary_expression
+                                        left: (numeric_expression
+                                          (numeric_primary_expression
+                                            (numberreference
+                                              name: (numberidentifier))))
+                                        operator: (binary_times_op)
+                                        right: (numeric_expression
+                                          (numeric_primary_expression
+                                            (number)))))
+                                    operator: (binary_plus_op)
+                                    right: (numeric_expression
+                                      (numeric_primary_expression
+                                        (number))))))))))))))
+              operator: (concat_op)
+              right: (string_expression
+                (string_primary_expression
+                  (string)))))
+          operator: (concat_op)
+          right: (string_expression
+            (string_primary_expression
+              (string_call_expression
+                (string_system_function
+                  (function_name)
+                  arguments: (arguments
+                    (argument
+                      (expression
+                        (numeric_expression
+                          (numeric_primary_expression
+                            (numberreference
+                              name: (numberidentifier)))))))))))))
+      (string_expression
+        (string_primary_expression
+          (stringreference
+            name: (stringidentifier)))))))
+
+===========================================
+Display Buttons with arrays
+===========================================
+DISPLAY BUTTONS mat X$: mat Y$
+---
+
+(source_file
+  (line
+    (display_buttons_statement
+      (string_array_expression
+        (string_array_primary_expression
+          (stringarray
+            name: (stringidentifier))))
+      (string_array_expression
+        (string_array_primary_expression
+          (stringarray
+            name: (stringidentifier)))))))
+
+===========================================
 Do
 ===========================================
 00350     do
@@ -1388,8 +1471,8 @@ If Then/Else with trailin continuation
         (single_line_if_trailing_else
           (else_statement
             (single_line_else
-              (continuation)
-              (comment)))))))
+              (continuation)))
+          (comment)))))
   (line
     (line_number)
     (if_statement

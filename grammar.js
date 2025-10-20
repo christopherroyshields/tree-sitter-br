@@ -262,7 +262,8 @@ const getStatements = $ => [
   $.library_statement,
   $.input_menu_statement,
   $.release_statement,
-  $.rinput_statement
+  $.rinput_statement,
+  $.display_buttons_statement
 ]
 
 module.exports = grammar({
@@ -890,7 +891,7 @@ module.exports = grammar({
             $.continuation,
             $.statement_separator
           ),
-          choice(
+          optional(choice(
             $.comment,
             seq(
             choice(
@@ -899,7 +900,7 @@ module.exports = grammar({
               ),
               optional($.comment)
             )
-          ),
+          )),
         )
       )
     )),
@@ -1066,6 +1067,20 @@ module.exports = grammar({
           ":",
           $.string_array_expression,
         ),
+      )
+    ),
+
+    display_buttons_statement: $ => seq(
+      alias(STATEMENTS.display, "statement"),
+      keyword("buttons"),
+      choice(
+        $.string_expression,
+        $.string_array_expression
+      ),
+      ":",
+      choice(
+        $.string_expression,
+        $.string_array_expression
       )
     ),
 

@@ -2074,10 +2074,6 @@
           "named": true
         },
         {
-          "type": "numeric_call_expression",
-          "named": true
-        },
-        {
           "type": "numeric_expression",
           "named": true
         },

@@ -2808,6 +2808,18 @@
           ]
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ","
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "STRING",
           "value": ")"
         }
@@ -6088,17 +6100,8 @@
               ]
             },
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "numberelement"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "numeric_call_expression"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "numberelement"
             }
           ]
         }

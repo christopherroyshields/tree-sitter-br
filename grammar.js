@@ -845,6 +845,7 @@ module.exports = grammar({
       commaSep1(
         $.form_spec
       ),
+      optional(","),
       ")"
     ),
 
@@ -1332,10 +1333,7 @@ module.exports = grammar({
           )),
           ")"
         ),
-        choice(
-          $.numberelement,
-          $.numeric_call_expression
-        )
+        $.numberelement
       )
     ),
 

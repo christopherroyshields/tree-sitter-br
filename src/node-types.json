@@ -694,6 +694,25 @@
     }
   },
   {
+    "type": "display_buttons_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "string_array_expression",
+          "named": true
+        },
+        {
+          "type": "string_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "do_statement",
     "named": true,
     "fields": {},
@@ -770,6 +789,10 @@
         },
         {
           "type": "delete_statement",
+          "named": true
+        },
+        {
+          "type": "display_buttons_statement",
           "named": true
         },
         {
@@ -1333,6 +1356,10 @@
           "named": true
         },
         {
+          "type": "display_buttons_statement",
+          "named": true
+        },
+        {
           "type": "do_statement",
           "named": true
         },
@@ -1759,6 +1786,10 @@
           "named": true
         },
         {
+          "type": "display_buttons_statement",
+          "named": true
+        },
+        {
           "type": "do_statement",
           "named": true
         },
@@ -2067,6 +2098,10 @@
         },
         {
           "type": "numberarray",
+          "named": true
+        },
+        {
+          "type": "numberelement",
           "named": true
         },
         {
@@ -3639,6 +3674,10 @@
           "named": true
         },
         {
+          "type": "display_buttons_statement",
+          "named": true
+        },
+        {
           "type": "do_statement",
           "named": true
         },
@@ -3874,6 +3913,10 @@
         },
         {
           "type": "delete_statement",
+          "named": true
+        },
+        {
+          "type": "display_buttons_statement",
           "named": true
         },
         {

@@ -199,18 +199,20 @@ const STATEMENTS = {
 const ERROR_CONDITION = [
   /attn/i,
   /conv/i,
+  /duprec/i,
   /eof/i,
   /error/i,
+  /exit/i,
   /help/i,
   /ioerr/i,
   /locked/i,
+  /nokey/i,
+  /norec/i,
   /oflow/i,
   /pageoflow/i,
   /soflow/i,
   /timeout/i,
-  /zdiv/i,
-  /norec/i,
-  /nokey/i
+  /zdiv/i
 ]
 
 const FNKEY = /fnkey/i
@@ -232,7 +234,6 @@ const getStatements = $ => [
   $.mat_statement,
   $.print_statement,
   $.let_statement,
-  $.form_statement,
   $.fnend_statement,
   $.form_statement,
   $.for_statement,
@@ -263,7 +264,8 @@ const getStatements = $ => [
   $.library_statement,
   $.input_menu_statement,
   $.release_statement,
-  $.rinput_statement
+  $.rinput_statement,
+  $.display_buttons_statement
 ]
 
 module.exports = grammar({
@@ -716,15 +718,15 @@ module.exports = grammar({
     string_form_spec: $ => seq(
       optional($.multi_spec),
       $.string_spec,
+      /[ \t]?/,
       optional(
         seq(
-          /[ \t]+/,
           choice(
             $.int,
             $.numberreference
           )
         ),
-      )
+      ),
     ),
 
     internal_form_spec: $ => seq(
@@ -783,6 +785,8 @@ module.exports = grammar({
     skip_form_spec: $ => seq(
       $.skip_spec,
       optional(
+      choice(
+        /[ \t]+/,
         seq(
         /[ \t]+/,
         choice(
@@ -790,14 +794,15 @@ module.exports = grammar({
           $.numberreference
         ))
       )
+      )
     ),
 
     x_spec: $ => token(/x/i),
     x_form_spec: $ => seq(
       $.x_spec,
+      /[ \t]?/,
       optional(
         seq(
-          /[ \t]+/,
           choice(
             $.int,
             $.numberreference
@@ -843,6 +848,7 @@ module.exports = grammar({
       commaSep1(
         $.form_spec
       ),
+      optional(","),
       ")"
     ),
 
@@ -887,11 +893,16 @@ module.exports = grammar({
             $.continuation,
             $.statement_separator
           ),
-          choice(
-            ...getStatements($),
-            $.if_statement
-          ),
-          optional($.comment)
+          optional(choice(
+            $.comment,
+            seq(
+            choice(
+                ...getStatements($),
+                $.if_statement
+              ),
+              optional($.comment)
+            )
+          )),
         )
       )
     )),
@@ -1058,6 +1069,20 @@ module.exports = grammar({
           ":",
           $.string_array_expression,
         ),
+      )
+    ),
+
+    display_buttons_statement: $ => seq(
+      alias(STATEMENTS.display, "statement"),
+      keyword("buttons"),
+      choice(
+        $.string_expression,
+        $.string_array_expression
+      ),
+      ":",
+      choice(
+        $.string_expression,
+        $.string_array_expression
       )
     ),
 
@@ -1324,7 +1349,8 @@ module.exports = grammar({
             ")"
           )),
           ")"
-        )
+        ),
+        $.numberelement
       )
     ),
 
@@ -1350,17 +1376,23 @@ module.exports = grammar({
           choice(
             seq(
               alias($.string_name, $.stringarray),
-              optional(seq(
-                "(",
-                $.mat_range,
-                ")",
-              )),
+              optional(        
+                seq(
+                  "(",
+                  choice(
+                    $.mat_size,
+                    $.mat_range
+                  ),
+                  ")"
+                )
+              ),
             ),
             seq(                  
               "(",
               $.string_expression,
               ")"
             )
+
           )
         )
       )
@@ -1389,7 +1421,7 @@ module.exports = grammar({
       alias(STATEMENTS.on, "statement"),
       choice(
         seq(
-          alias(token(/fkey[ \t]+/i), "keyword"),
+          alias(token(/fn?key[ \t]+/i), "keyword"),
           $.numeric_expression,
           choice(
             seq(
@@ -1563,7 +1595,7 @@ module.exports = grammar({
         $.label_reference
       ),
       ":",
-      $.print_output
+      optional($.print_output)
     ),
 
     print_border: $ => seq(
@@ -2157,6 +2189,58 @@ module.exports = grammar({
         field('left', $.conditional_string_expression),
         field('operator', $.binary_cond_eq_op),
         field('right', $.conditional_string_expression)
+      )),
+      // Mixed-type logical operations (numeric and string)
+      prec.left('logical_and',seq(
+        field('left', $.conditional_expression),
+        field('operator', $.logical_and_op),
+        field('right', $.conditional_string_expression)
+      )),
+      prec.left('logical_and',seq(
+        field('left', $.conditional_string_expression),
+        field('operator', $.logical_and_op),
+        field('right', $.conditional_expression)
+      )),
+      prec.left('logical_and',seq(
+        field('left', $.conditional_string_expression),
+        field('operator', $.logical_and_op),
+        field('right', $.conditional_string_expression)
+      )),
+      prec.left('logical_or',seq(
+        field('left', $.conditional_expression),
+        field('operator',$.logical_or_op),
+        field('right', $.conditional_string_expression)
+      )),
+      prec.left('logical_or',seq(
+        field('left', $.conditional_string_expression),
+        field('operator',$.logical_or_op),
+        field('right', $.conditional_expression)
+      )),
+      prec.left('logical_or',seq(
+        field('left', $.conditional_string_expression),
+        field('operator',$.logical_or_op),
+        field('right', $.conditional_string_expression)
+      )),
+      // Cross-type comparisons (numeric with string)
+      prec.left('binary_equality',seq(
+        field('left', $.conditional_expression),
+        field('operator', $.binary_cond_eq_op),
+        field('right', $.conditional_string_expression)
+      )),
+      prec.left('binary_equality',seq(
+        field('left', $.conditional_string_expression),
+        field('operator', $.binary_cond_eq_op),
+        field('right', $.conditional_expression)
+      )),
+      prec.left('binary_relation',seq(
+        field('left', $.conditional_expression),
+        field('operator', $.binary_relation_operator),
+        field('right', $.conditional_string_expression)
+      )),
+      prec.left('binary_relation',seq(
+        field('left', $.conditional_string_expression),
+        field('operator', $.binary_relation_operator),
+        field('right', $.conditional_expression)
       ))
     ),
 

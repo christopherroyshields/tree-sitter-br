@@ -2170,6 +2170,58 @@ module.exports = grammar({
         field('left', $.conditional_string_expression),
         field('operator', $.binary_cond_eq_op),
         field('right', $.conditional_string_expression)
+      )),
+      // Mixed-type logical operations (numeric and string)
+      prec.left('logical_and',seq(
+        field('left', $.conditional_expression),
+        field('operator', $.logical_and_op),
+        field('right', $.conditional_string_expression)
+      )),
+      prec.left('logical_and',seq(
+        field('left', $.conditional_string_expression),
+        field('operator', $.logical_and_op),
+        field('right', $.conditional_expression)
+      )),
+      prec.left('logical_and',seq(
+        field('left', $.conditional_string_expression),
+        field('operator', $.logical_and_op),
+        field('right', $.conditional_string_expression)
+      )),
+      prec.left('logical_or',seq(
+        field('left', $.conditional_expression),
+        field('operator',$.logical_or_op),
+        field('right', $.conditional_string_expression)
+      )),
+      prec.left('logical_or',seq(
+        field('left', $.conditional_string_expression),
+        field('operator',$.logical_or_op),
+        field('right', $.conditional_expression)
+      )),
+      prec.left('logical_or',seq(
+        field('left', $.conditional_string_expression),
+        field('operator',$.logical_or_op),
+        field('right', $.conditional_string_expression)
+      )),
+      // Cross-type comparisons (numeric with string)
+      prec.left('binary_equality',seq(
+        field('left', $.conditional_expression),
+        field('operator', $.binary_cond_eq_op),
+        field('right', $.conditional_string_expression)
+      )),
+      prec.left('binary_equality',seq(
+        field('left', $.conditional_string_expression),
+        field('operator', $.binary_cond_eq_op),
+        field('right', $.conditional_expression)
+      )),
+      prec.left('binary_relation',seq(
+        field('left', $.conditional_expression),
+        field('operator', $.binary_relation_operator),
+        field('right', $.conditional_string_expression)
+      )),
+      prec.left('binary_relation',seq(
+        field('left', $.conditional_string_expression),
+        field('operator', $.binary_relation_operator),
+        field('right', $.conditional_expression)
       ))
     ),
 

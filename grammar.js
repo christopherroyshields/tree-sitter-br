@@ -210,7 +210,8 @@ const ERROR_CONDITION = [
   /timeout/i,
   /zdiv/i,
   /norec/i,
-  /nokey/i
+  /nokey/i,
+  /duprec/i
 ]
 
 const FNKEY = /fnkey/i

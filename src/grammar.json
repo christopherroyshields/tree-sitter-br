@@ -1893,6 +1893,11 @@
             "type": "PATTERN",
             "value": "nokey",
             "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "duprec",
+            "flags": "i"
           }
         ]
       }

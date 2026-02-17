@@ -10650,362 +10650,8 @@
               {
                 "type": "ALIAS",
                 "content": {
-                  "type": "TOKEN",
-                  "content": {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "PATTERN",
-                        "value": "abs",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "atn",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "bell",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "ceil",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "cmdkey",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "cnt",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "code",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "cos",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "curcol",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "curfld",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "curpos",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "currow",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "curtab",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "curwindow",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "date",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "days",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "debug_str",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "err",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "exists",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "exp",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "file",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "filenum",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "fkey",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "fp",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "freesp",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "inf",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "int",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "ip",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "kln",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "kps",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "krec",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "len",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "line",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "lines",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "linespp",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "log",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "lrec",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "mat2str",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "max",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "min",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "mod",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "msg",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "msgbox",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "newpage",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "next",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "nxtcol",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "nxtfld",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "nxtrow",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "ord",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "pi",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "pos",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "printer_list",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "procin",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "rec",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "rln",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "rnd",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "round",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "serial",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "setenv",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "sgn",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "sin",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "sleep",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "sqr",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "srch",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "str2mat",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "sum",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "tan",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "timer",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "val",
-                        "flags": "i"
-                      },
-                      {
-                        "type": "PATTERN",
-                        "value": "version",
-                        "flags": "i"
-                      }
-                    ]
-                  }
+                  "type": "SYMBOL",
+                  "name": "_numeric_system_function_keyword"
                 },
                 "named": true,
                 "value": "function_name"
@@ -12444,6 +12090,368 @@
         }
       ]
     },
+    "_numeric_system_function_keyword": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": -1,
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "abs",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "atn",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "bell",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "ceil",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "cmdkey",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "cnt",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "code",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "cos",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "curcol",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "curfld",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "curpos",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "currow",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "curtab",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "curwindow",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "date",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "days",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "debug_str",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "err",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "exists",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "exp",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "file",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "filenum",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "fkey",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "fp",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "freesp",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "inf",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "int",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "ip",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "kln",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "kps",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "krec",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "len",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "line",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "lines",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "linespp",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "log",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "lrec",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "mat2str",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "max",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "min",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "mod",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "msg",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "msgbox",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "newpage",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "next",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "nxtcol",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "nxtfld",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "nxtrow",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "ord",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "pi",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "pos",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "printer_list",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "procin",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "rec",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "rln",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "rnd",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "round",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "serial",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "setenv",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "sgn",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "sin",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "sleep",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "sqr",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "srch",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "str2mat",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "sum",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "tan",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "timer",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "val",
+              "flags": "i"
+            },
+            {
+              "type": "PATTERN",
+              "value": "version",
+              "flags": "i"
+            }
+          ]
+        }
+      }
+    },
     "_numberidentifier": {
       "type": "CHOICE",
       "members": [
@@ -12459,362 +12467,8 @@
           }
         },
         {
-          "type": "TOKEN",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "abs",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "atn",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "bell",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "ceil",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "cmdkey",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "cnt",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "code",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "cos",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "curcol",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "curfld",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "curpos",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "currow",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "curtab",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "curwindow",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "date",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "days",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "debug_str",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "err",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "exists",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "exp",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "file",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "filenum",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "fkey",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "fp",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "freesp",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "inf",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "int",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "ip",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "kln",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "kps",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "krec",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "len",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "line",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "lines",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "linespp",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "log",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "lrec",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "mat2str",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "max",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "min",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "mod",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "msg",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "msgbox",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "newpage",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "next",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "nxtcol",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "nxtfld",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "nxtrow",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "ord",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "pi",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "pos",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "printer_list",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "procin",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "rec",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "rln",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "rnd",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "round",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "serial",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "setenv",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "sgn",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "sin",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "sleep",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "sqr",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "srch",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "str2mat",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "sum",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "tan",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "timer",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "val",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "version",
-                "flags": "i"
-              }
-            ]
-          }
+          "type": "SYMBOL",
+          "name": "_numeric_system_function_keyword"
         }
       ]
     },
@@ -12833,362 +12487,8 @@
           }
         },
         {
-          "type": "TOKEN",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "abs",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "atn",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "bell",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "ceil",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "cmdkey",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "cnt",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "code",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "cos",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "curcol",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "curfld",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "curpos",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "currow",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "curtab",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "curwindow",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "date",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "days",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "debug_str",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "err",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "exists",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "exp",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "file",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "filenum",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "fkey",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "fp",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "freesp",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "inf",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "int",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "ip",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "kln",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "kps",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "krec",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "len",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "line",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "lines",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "linespp",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "log",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "lrec",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "mat2str",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "max",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "min",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "mod",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "msg",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "msgbox",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "newpage",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "next",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "nxtcol",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "nxtfld",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "nxtrow",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "ord",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "pi",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "pos",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "printer_list",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "procin",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "rec",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "rln",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "rnd",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "round",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "serial",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "setenv",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "sgn",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "sin",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "sleep",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "sqr",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "srch",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "str2mat",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "sum",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "tan",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "timer",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "val",
-                "flags": "i"
-              },
-              {
-                "type": "PATTERN",
-                "value": "version",
-                "flags": "i"
-              }
-            ]
-          }
+          "type": "SYMBOL",
+          "name": "_numeric_system_function_keyword"
         }
       ]
     },

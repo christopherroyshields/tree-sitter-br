@@ -2267,7 +2267,7 @@ module.exports = grammar({
         field('arguments', $.arguments)
       ),
       prec(1, seq(
-        alias(token(choice(...NUMERIC_SYSTEM_FUNCTIONS)), $.function_name),
+        alias($._numeric_system_function_keyword, $.function_name),
         optional(field('arguments', $.arguments))
       ))
     ),
@@ -2570,13 +2570,15 @@ module.exports = grammar({
       optional($.dimension)
     ),
 
+    _numeric_system_function_keyword: $ => token(prec(-1, choice(...NUMERIC_SYSTEM_FUNCTIONS))),
+
     _numberidentifier: $ => choice(
       token(prec(-1, /[a-zA-Z_]\w*/)),
-      token(choice(...NUMERIC_SYSTEM_FUNCTIONS)),
+      $._numeric_system_function_keyword,
     ),
     numberidentifier: $ => choice(
       token(prec(-1, /[a-zA-Z_]\w*/)),
-      token(choice(...NUMERIC_SYSTEM_FUNCTIONS)),
+      $._numeric_system_function_keyword,
     ),
 
     _mat: $ => /mat[ \t]/i,

@@ -622,3 +622,43 @@ print work$:="test"
               (string_expression
                 (string_primary_expression
                   (string))))))))))
+
+==============================
+system_function_name_as_variable
+==============================
+let curpos=max(1,curcol-3)
+---
+
+(source_file
+  (line
+    (let_statement
+      (numeric_expression
+        (numeric_forced_assignment_expression
+          (numberreference
+            (numberidentifier))
+          (numeric_forced_assignment_op
+            (assignment_op))
+          (numeric_expression
+            (numeric_primary_expression
+              (numeric_call_expression
+                (numeric_system_function
+                  (function_name)
+                  (arguments
+                    (argument
+                      (expression
+                        (numeric_expression
+                          (numeric_primary_expression
+                            (number)))))
+                    (argument
+                      (expression
+                        (numeric_expression
+                          (numeric_binary_expression
+                            (numeric_expression
+                              (numeric_primary_expression
+                                (numeric_call_expression
+                                  (numeric_system_function
+                                    (function_name)))))
+                            (binary_plus_op)
+                            (numeric_expression
+                              (numeric_primary_expression
+                                (number)))))))))))))))))

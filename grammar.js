@@ -76,7 +76,6 @@ const NUMERIC_SYSTEM_FUNCTIONS = [
   /srch/i,
   /str2mat/i,
   /sum/i,
-  /tab/i,
   /tan/i,
   /timer/i,
   /val/i,
@@ -293,7 +292,8 @@ module.exports = grammar({
 
   externals: $ => [
     $._eol,
-    $.comment
+    $.comment,
+    $.tab_function
   ],
 
   extras: $ => [
@@ -2263,9 +2263,13 @@ module.exports = grammar({
         field('arguments', $.arguments)
       ),
       seq(
+        alias($.tab_function, $.function_name),
+        field('arguments', $.arguments)
+      ),
+      prec(1, seq(
         alias(token(choice(...NUMERIC_SYSTEM_FUNCTIONS)), $.function_name),
         optional(field('arguments', $.arguments))
-      )
+      ))
     ),
 
     string_system_function: $ => seq(
@@ -2566,8 +2570,14 @@ module.exports = grammar({
       optional($.dimension)
     ),
 
-    _numberidentifier: $ => token(prec(-1,/[a-zA-Z_]\w*/)),
-    numberidentifier: $ => token(prec(-1,/[a-zA-Z_]\w*/)),
+    _numberidentifier: $ => choice(
+      token(prec(-1, /[a-zA-Z_]\w*/)),
+      token(choice(...NUMERIC_SYSTEM_FUNCTIONS)),
+    ),
+    numberidentifier: $ => choice(
+      token(prec(-1, /[a-zA-Z_]\w*/)),
+      token(choice(...NUMERIC_SYSTEM_FUNCTIONS)),
+    ),
 
     _mat: $ => /mat[ \t]/i,
 

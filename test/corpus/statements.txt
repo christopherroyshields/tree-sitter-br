@@ -3377,3 +3377,35 @@ Use (statement)
   (line
     (line_number)
     (rem_statement)))
+
+===========================================
+Display Buttons (string expression)
+===========================================
+00100 DISPLAY BUTTONS "1,1,C 10,,X02": "Page Up"
+---
+
+(source_file
+  (line
+    (line_number)
+    (display_buttons_statement
+      (string_expression
+        (string_primary_expression
+          (string)))
+      (string_expression
+        (string_primary_expression
+          (string))))))
+
+===========================================
+Display Buttons (mat form)
+===========================================
+00100 DISPLAY BUTTONS mat X$: mat Y$
+---
+
+(source_file
+  (line
+    (line_number)
+    (display_buttons_statement
+      (stringarray
+        (stringidentifier))
+      (stringarray
+        (stringidentifier)))))

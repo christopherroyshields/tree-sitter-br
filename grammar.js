@@ -261,6 +261,7 @@ const getStatements = $ => [
   $.end_select_statement,
   $.library_statement,
   $.input_menu_statement,
+  $.display_buttons_statement,
   $.release_statement,
   $.rinput_statement
 ]
@@ -813,7 +814,7 @@ module.exports = grammar({
       keyword(/pic/i),
       token.immediate("("),
       token(/[^)\r\n]*/),
-      ")",
+      token(/\)+/),
     ),
 
     pic_form_spec: $ => seq(
@@ -1066,6 +1067,20 @@ module.exports = grammar({
           ":",
           $.string_array_expression,
         ),
+      )
+    ),
+
+    display_buttons_statement: $ => seq(
+      alias(STATEMENTS.display, "statement"),
+      keyword("buttons"),
+      choice(
+        $.stringarray,
+        $.string_expression
+      ),
+      ":",
+      choice(
+        $.stringarray,
+        $.string_expression
       )
     ),
 

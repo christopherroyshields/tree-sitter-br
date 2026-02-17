@@ -414,6 +414,10 @@
                 },
                 {
                   "type": "SYMBOL",
+                  "name": "display_buttons_statement"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "release_statement"
                 },
                 {
@@ -2625,8 +2629,11 @@
           }
         },
         {
-          "type": "STRING",
-          "value": ")"
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\)+"
+          }
         }
       ]
     },
@@ -3197,6 +3204,10 @@
                             },
                             {
                               "type": "SYMBOL",
+                              "name": "display_buttons_statement"
+                            },
+                            {
+                              "type": "SYMBOL",
                               "name": "release_statement"
                             },
                             {
@@ -3445,6 +3456,10 @@
                           {
                             "type": "SYMBOL",
                             "name": "input_menu_statement"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "display_buttons_statement"
                           },
                           {
                             "type": "SYMBOL",
@@ -3890,6 +3905,10 @@
                                 },
                                 {
                                   "type": "SYMBOL",
+                                  "name": "display_buttons_statement"
+                                },
+                                {
+                                  "type": "SYMBOL",
                                   "name": "release_statement"
                                 },
                                 {
@@ -4127,6 +4146,10 @@
                       {
                         "type": "SYMBOL",
                         "name": "input_menu_statement"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "display_buttons_statement"
                       },
                       {
                         "type": "SYMBOL",
@@ -4422,6 +4445,10 @@
                           {
                             "type": "SYMBOL",
                             "name": "input_menu_statement"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "display_buttons_statement"
                           },
                           {
                             "type": "SYMBOL",
@@ -4798,6 +4825,64 @@
                   "name": "string_array_expression"
                 }
               ]
+            }
+          ]
+        }
+      ]
+    },
+    "display_buttons_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "display",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "statement"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "buttons",
+            "flags": "i"
+          },
+          "named": false,
+          "value": "keyword"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "stringarray"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "string_expression"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "stringarray"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "string_expression"
             }
           ]
         }

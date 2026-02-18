@@ -2622,18 +2622,8 @@
           }
         },
         {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "[^)\\r\\n]*"
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "\\)+"
-          }
+          "type": "SYMBOL",
+          "name": "_pic_body_close"
         }
       ]
     },
@@ -2997,17 +2987,20 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "continuation"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "statement_separator"
-                    }
-                  ]
+                  "type": "REPEAT1",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "continuation"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "statement_separator"
+                      }
+                    ]
+                  }
                 },
                 {
                   "type": "CHOICE",
@@ -13184,6 +13177,10 @@
     {
       "type": "SYMBOL",
       "name": "tab_function"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_pic_body_close"
     }
   ],
   "inline": [

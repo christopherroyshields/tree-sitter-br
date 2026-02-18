@@ -294,7 +294,8 @@ module.exports = grammar({
   externals: $ => [
     $._eol,
     $.comment,
-    $.tab_function
+    $.tab_function,
+    $._pic_body_close,
   ],
 
   extras: $ => [
@@ -813,8 +814,7 @@ module.exports = grammar({
     pic_spec: $ => seq(
       keyword(/pic/i),
       token.immediate("("),
-      token(/[^)\r\n]*/),
-      token(/\)+/),
+      $._pic_body_close,
     ),
 
     pic_form_spec: $ => seq(
@@ -887,10 +887,10 @@ module.exports = grammar({
     single_line_else: $ => prec.right(seq(
       repeat1(
         seq(
-          choice(
+          repeat1(choice(
             $.continuation,
             $.statement_separator
-          ),
+          )),
           choice(
             $.comment,
             seq(

@@ -1447,6 +1447,199 @@ If Then/Else with trailin continuation
           (comment))))))
 
 ===========================================
+Else branch with colon before continuation
+===========================================
+67752 MSCLK: IF SRCH(MOUSECODES$,HIT$)=SCPT THEN LET HIT$="0D" !:
+      GOTO PICKOUT ELSE !:
+      LET MPT=SRCH(MOUSECODES$,HIT$) !:
+      LET SCPT=MPT !:
+      LET FNPRTPAG(MAX(1,AT-LPP+1),MIN(AT,PICK_OPS)): !:
+      GOTO GETIT
+---
+
+(source_file
+  (line
+    (line_number)
+    (label)
+    (if_statement
+      (conditional_expression
+        (conditional_binary_expression
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (numeric_call_expression
+                (numeric_system_function
+                  (function_name)
+                  (arguments
+                    (argument
+                      (expression
+                        (string_expression
+                          (string_primary_expression
+                            (stringreference
+                              (stringidentifier))))))
+                    (argument
+                      (expression
+                        (string_expression
+                          (string_primary_expression
+                            (stringreference
+                              (stringidentifier)))))))))))
+          (binary_cond_eq_op)
+          (conditional_expression
+            (numeric_conditional_primary_expression
+              (numberreference
+                (numberidentifier))))))
+      (let_statement
+        (string_expression
+          (string_assignment
+            (string_expression
+              (string_primary_expression
+                (stringreference
+                  (stringidentifier))))
+            (assignment_op)
+            (string_expression
+              (string_primary_expression
+                (string))))))
+      (single_line_if
+        (continuation)
+        (goto_statement
+          (label_reference))
+        (single_line_if_trailing_else
+          (else_statement
+            (single_line_else
+              (continuation)
+              (let_statement
+                (numeric_expression
+                  (numeric_forced_assignment_expression
+                    (numberreference
+                      (numberidentifier))
+                    (numeric_forced_assignment_op
+                      (assignment_op))
+                    (numeric_expression
+                      (numeric_primary_expression
+                        (numeric_call_expression
+                          (numeric_system_function
+                            (function_name)
+                            (arguments
+                              (argument
+                                (expression
+                                  (string_expression
+                                    (string_primary_expression
+                                      (stringreference
+                                        (stringidentifier))))))
+                              (argument
+                                (expression
+                                  (string_expression
+                                    (string_primary_expression
+                                      (stringreference
+                                        (stringidentifier))))))))))))))
+              (continuation)
+              (let_statement
+                (numeric_expression
+                  (numeric_forced_assignment_expression
+                    (numberreference
+                      (numberidentifier))
+                    (numeric_forced_assignment_op
+                      (assignment_op))
+                    (numeric_expression
+                      (numeric_primary_expression
+                        (numberreference
+                          (numberidentifier)))))))
+              (continuation)
+              (let_statement
+                (numeric_expression
+                  (numeric_primary_expression
+                    (numeric_call_expression
+                      (numeric_user_function
+                        (function_name)
+                        (arguments
+                          (argument
+                            (expression
+                              (numeric_expression
+                                (numeric_primary_expression
+                                  (numeric_call_expression
+                                    (numeric_system_function
+                                      (function_name)
+                                      (arguments
+                                        (argument
+                                          (expression
+                                            (numeric_expression
+                                              (numeric_primary_expression
+                                                (number)))))
+                                        (argument
+                                          (expression
+                                            (numeric_expression
+                                              (numeric_binary_expression
+                                                (numeric_expression
+                                                  (numeric_binary_expression
+                                                    (numeric_expression
+                                                      (numeric_primary_expression
+                                                        (numberreference
+                                                          (numberidentifier))))
+                                                    (binary_plus_op)
+                                                    (numeric_expression
+                                                      (numeric_primary_expression
+                                                        (numberreference
+                                                          (numberidentifier))))))
+                                                (binary_plus_op)
+                                                (numeric_expression
+                                                  (numeric_primary_expression
+                                                    (number))))))))))))))
+                          (argument
+                            (expression
+                              (numeric_expression
+                                (numeric_primary_expression
+                                  (numeric_call_expression
+                                    (numeric_system_function
+                                      (function_name)
+                                      (arguments
+                                        (argument
+                                          (expression
+                                            (numeric_expression
+                                              (numeric_primary_expression
+                                                (numberreference
+                                                  (numberidentifier))))))
+                                        (argument
+                                          (expression
+                                            (numeric_expression
+                                              (numeric_primary_expression
+                                                (numberreference
+                                                  (numberidentifier)))))))))))))))))))
+              (statement_separator)
+              (continuation)
+              (goto_statement
+                (label_reference)))))))))
+
+===========================================
+PIC inside spec_group
+===========================================
+01610 P4: FORM POS 5,C 21,POS 32,4*(PIC(----------#),PIC(----,---,---.##)),SKIP
+---
+
+(source_file
+  (line
+    (line_number)
+    (label)
+    (form_statement
+      (form_spec
+        (pos_spec)
+        (int))
+      (form_spec
+        (string_spec)
+        (int))
+      (form_spec
+        (pos_spec)
+        (int))
+      (spec_group
+        (multi_spec
+          (int)
+          (_))
+        (form_spec
+          (pic_spec))
+        (form_spec
+          (pic_spec)))
+      (form_spec
+        (skip_spec)))))
+
+===========================================
 If
 ===========================================
 00030 if grade >= 60 then print "Passed"

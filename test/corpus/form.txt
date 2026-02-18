@@ -217,3 +217,24 @@ form PIC(##/##/##), PIC($$$,$$$), PIC($********.**), 2*PIC(---),2*PIC(ZZZZZ-), P
         (pic_spec))
       (form_spec
         (pic_spec)))))
+
+=============================================================
+spec_group with trailing comma
+=============================================================
+form 6*(G 2,',',)
+---
+
+(source_file
+  (line
+    (form_statement
+      (spec_group
+        (multi_spec
+          (int)
+          (_))
+        (form_spec
+          (numeric_spec)
+          (field_length
+            (int)))
+        (form_spec
+          (literal_string_spec
+            (string)))))))

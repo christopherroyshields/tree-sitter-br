@@ -702,11 +702,11 @@
       "required": true,
       "types": [
         {
-          "type": "string_expression",
+          "type": "string_array_expression",
           "named": true
         },
         {
-          "type": "stringarray",
+          "type": "string_expression",
           "named": true
         }
       ]
@@ -2098,6 +2098,10 @@
         },
         {
           "type": "numberarray",
+          "named": true
+        },
+        {
+          "type": "numberelement",
           "named": true
         },
         {

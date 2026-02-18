@@ -868,6 +868,89 @@ Display Menu
     (comment)))
 
 ===========================================
+Display Buttons
+===========================================
+DISPLAY BUTTONS "1,"&STR$(B*10-9)&",c 9,,"&STR$(FK): BUTTON_TEXT$
+---
+
+(source_file
+  (line
+    (display_buttons_statement
+      (string_expression
+        (string_binary_expression
+          left: (string_expression
+            (string_binary_expression
+              left: (string_expression
+                (string_binary_expression
+                  left: (string_expression
+                    (string_primary_expression
+                      (string)))
+                  operator: (concat_op)
+                  right: (string_expression
+                    (string_primary_expression
+                      (string_call_expression
+                        (string_system_function
+                          (function_name)
+                          arguments: (arguments
+                            (argument
+                              (expression
+                                (numeric_expression
+                                  (numeric_binary_expression
+                                    left: (numeric_expression
+                                      (numeric_binary_expression
+                                        left: (numeric_expression
+                                          (numeric_primary_expression
+                                            (numberreference
+                                              name: (numberidentifier))))
+                                        operator: (binary_times_op)
+                                        right: (numeric_expression
+                                          (numeric_primary_expression
+                                            (number)))))
+                                    operator: (binary_plus_op)
+                                    right: (numeric_expression
+                                      (numeric_primary_expression
+                                        (number))))))))))))))
+              operator: (concat_op)
+              right: (string_expression
+                (string_primary_expression
+                  (string)))))
+          operator: (concat_op)
+          right: (string_expression
+            (string_primary_expression
+              (string_call_expression
+                (string_system_function
+                  (function_name)
+                  arguments: (arguments
+                    (argument
+                      (expression
+                        (numeric_expression
+                          (numeric_primary_expression
+                            (numberreference
+                              name: (numberidentifier)))))))))))))
+      (string_expression
+        (string_primary_expression
+          (stringreference
+            name: (stringidentifier)))))))
+
+===========================================
+Display Buttons with arrays
+===========================================
+DISPLAY BUTTONS mat X$: mat Y$
+---
+
+(source_file
+  (line
+    (display_buttons_statement
+      (string_array_expression
+        (string_array_primary_expression
+          (stringarray
+            name: (stringidentifier))))
+      (string_array_expression
+        (string_array_primary_expression
+          (stringarray
+            name: (stringidentifier)))))))
+
+===========================================
 Do
 ===========================================
 00350     do
@@ -1736,6 +1819,36 @@ If
                     (number)))))))))))
 
 ===========================================
+If with mixed-type conditional (numeric OR string)
+===========================================
+if (1 or x$)=foo$ then
+---
+
+(source_file
+  (line
+    (if_statement
+      (conditional_expression
+        (conditional_binary_expression
+          left: (conditional_expression
+            (numeric_conditional_primary_expression
+              (conditional_parenthesized_numeric_expression
+                (conditional_expression
+                  (conditional_binary_expression
+                    left: (conditional_expression
+                      (numeric_conditional_primary_expression
+                        (number)))
+                    operator: (logical_or_op)
+                    right: (conditional_string_expression
+                      (conditional_string_primary_expression
+                        (stringreference
+                          name: (stringidentifier)))))))))
+          operator: (binary_cond_eq_op)
+          right: (conditional_string_expression
+            (conditional_string_primary_expression
+              (stringreference
+                name: (stringidentifier)))))))))
+
+===========================================
 Input
 ===========================================
 00110 INPUT NAME$
@@ -2238,7 +2351,10 @@ On Error
 00010 ON ZDIV GOTO 7700
 00020 ON ZDIV IGNORE
 00030 ON ZDIV SYSTEM
+00040 ON DUPREC GOTO 8000
+00050 ON EXIT GOTO 9000
 00410 ON ERROR GOTO 80000
+00500 on fnkey 9 goto 10
 ---
 
 (source_file
@@ -2261,7 +2377,26 @@ On Error
     (on_statement
       (error_condition)
       (goto_statement
-        (line_reference)))))
+        (line_reference))))
+  (line
+    (line_number)
+    (on_statement
+      (error_condition)
+      (goto_statement
+        (line_reference))))
+  (line
+    (line_number)
+    (on_statement
+      (error_condition)
+      (goto_statement
+        (line_reference))))
+  (line
+    (line_number)
+    (on_statement
+      (numeric_expression
+        (numeric_primary_expression
+          (number)))
+      (line_reference))))
 
 ===========================================
 On FKey
@@ -3598,7 +3733,11 @@ Display Buttons (mat form)
   (line
     (line_number)
     (display_buttons_statement
-      (stringarray
-        (stringidentifier))
-      (stringarray
-        (stringidentifier)))))
+      (string_array_expression
+        (string_array_primary_expression
+          (stringarray
+            (stringidentifier))))
+      (string_array_expression
+        (string_array_primary_expression
+          (stringarray
+            (stringidentifier)))))))

@@ -4,7 +4,7 @@ endif
 
 LANGUAGE_NAME := tree-sitter-br
 HOMEPAGE_URL := https://github.com/christopherroyshields/tree-sitter-br
-VERSION := 0.1.0
+VERSION := 0.25.6
 
 # repository
 SRC_DIR := src

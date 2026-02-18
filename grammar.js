@@ -76,7 +76,6 @@ const NUMERIC_SYSTEM_FUNCTIONS = [
   /srch/i,
   /str2mat/i,
   /sum/i,
-  /tab/i,
   /tan/i,
   /timer/i,
   /val/i,
@@ -212,7 +211,10 @@ const ERROR_CONDITION = [
   /pageoflow/i,
   /soflow/i,
   /timeout/i,
-  /zdiv/i
+  /zdiv/i,
+  /norec/i,
+  /nokey/i,
+  /duprec/i
 ]
 
 const FNKEY = /fnkey/i
@@ -263,6 +265,7 @@ const getStatements = $ => [
   $.end_select_statement,
   $.library_statement,
   $.input_menu_statement,
+  $.display_buttons_statement,
   $.release_statement,
   $.rinput_statement,
   $.display_buttons_statement
@@ -295,7 +298,9 @@ module.exports = grammar({
 
   externals: $ => [
     $._eol,
-    $.comment
+    $.comment,
+    $.tab_function,
+    $._pic_body_close,
   ],
 
   extras: $ => [
@@ -814,8 +819,7 @@ module.exports = grammar({
     pic_spec: $ => seq(
       keyword(/pic/i),
       token.immediate("("),
-      token(/[^)\r\n]*/),
-      ")",
+      $._pic_body_close,
     ),
 
     pic_form_spec: $ => seq(
@@ -889,11 +893,11 @@ module.exports = grammar({
     single_line_else: $ => prec.right(seq(
       repeat1(
         seq(
-          choice(
+          repeat1(choice(
             $.continuation,
             $.statement_separator
-          ),
-          optional(choice(
+          )),
+          choice(
             $.comment,
             seq(
             choice(
@@ -902,7 +906,7 @@ module.exports = grammar({
               ),
               optional($.comment)
             )
-          )),
+          ),
         )
       )
     )),
@@ -2333,9 +2337,13 @@ module.exports = grammar({
         field('arguments', $.arguments)
       ),
       seq(
-        alias(token(choice(...NUMERIC_SYSTEM_FUNCTIONS)), $.function_name),
+        alias($.tab_function, $.function_name),
+        field('arguments', $.arguments)
+      ),
+      prec(1, seq(
+        alias($._numeric_system_function_keyword, $.function_name),
         optional(field('arguments', $.arguments))
-      )
+      ))
     ),
 
     string_system_function: $ => seq(
@@ -2636,8 +2644,16 @@ module.exports = grammar({
       optional($.dimension)
     ),
 
-    _numberidentifier: $ => token(prec(-1,/[a-zA-Z_]\w*/)),
-    numberidentifier: $ => token(prec(-1,/[a-zA-Z_]\w*/)),
+    _numeric_system_function_keyword: $ => token(prec(-1, choice(...NUMERIC_SYSTEM_FUNCTIONS))),
+
+    _numberidentifier: $ => choice(
+      token(prec(-1, /[a-zA-Z_]\w*/)),
+      $._numeric_system_function_keyword,
+    ),
+    numberidentifier: $ => choice(
+      token(prec(-1, /[a-zA-Z_]\w*/)),
+      $._numeric_system_function_keyword,
+    ),
 
     _mat: $ => /mat[ \t]/i,
 

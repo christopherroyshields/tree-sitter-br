@@ -275,9 +275,8 @@ menu text
     (line_number)
     (input_menu_statement
       (string_array_expression
-        (string_array_primary_expression
-          (stringarray
-            (stringidentifier)))))
+        (stringarray
+          (stringidentifier))))
     (comment)))
 
 ===========================
@@ -291,9 +290,8 @@ MENU DATA
     (line_number)
     (input_menu_statement
       (string_array_expression
-        (string_array_primary_expression
-          (stringarray
-            (stringidentifier)))))))
+        (stringarray
+          (stringidentifier))))))
 
 ===========================
 MENU STATUS
@@ -306,9 +304,8 @@ MENU STATUS
     (line_number)
     (input_menu_statement
       (string_array_expression
-        (string_array_primary_expression
-          (stringarray
-            (stringidentifier)))))))
+        (stringarray
+          (stringidentifier))))))
 
 ===============================================
 timeout

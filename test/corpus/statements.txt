@@ -854,17 +854,14 @@ Display Menu
     (line_number)
     (input_menu_statement
       (string_array_expression
-        (string_array_primary_expression
-          (stringarray
-            (stringidentifier))))
+        (stringarray
+          (stringidentifier)))
       (string_array_expression
-        (string_array_primary_expression
-          (stringarray
-            (stringidentifier))))
+        (stringarray
+          (stringidentifier)))
       (string_array_expression
-        (string_array_primary_expression
-          (stringarray
-            (stringidentifier)))))
+        (stringarray
+          (stringidentifier))))
     (comment)))
 
 ===========================================
@@ -942,13 +939,11 @@ DISPLAY BUTTONS mat X$: mat Y$
   (line
     (display_buttons_statement
       (string_array_expression
-        (string_array_primary_expression
-          (stringarray
-            name: (stringidentifier))))
+        (stringarray
+          name: (stringidentifier)))
       (string_array_expression
-        (string_array_primary_expression
-          (stringarray
-            name: (stringidentifier)))))))
+        (stringarray
+          name: (stringidentifier))))))
 
 ===========================================
 Do
@@ -2857,13 +2852,11 @@ Print Fields
         (print_output
           (array_group
             (string_array_expression
-              (string_array_primary_expression
-                (stringarray
-                  (stringidentifier))))
+              (stringarray
+                (stringidentifier)))
             (numeric_array_expression
-              (numeric_array_primary_expression
-                (numberarray
-                  (numberidentifier)))))
+              (numberarray
+                (numberidentifier))))
           (expression
             (string_expression
               (string_primary_expression
@@ -2987,9 +2980,8 @@ Print Fields
         (print_output
           (expression
             (string_array_expression
-              (string_array_primary_expression
-                (stringarray
-                  (stringidentifier))))))))))
+              (stringarray
+                (stringidentifier)))))))))
 
 ===========================================
 Print Newpage
@@ -3634,9 +3626,8 @@ Rinput select
         (stringidentifier))
       (expression
         (string_array_expression
-          (string_array_primary_expression
-            (stringarray
-              (stringidentifier)))))))
+          (stringarray
+            (stringidentifier))))))
   (line
     (line_number)
     (rinput_statement
@@ -3734,10 +3725,8 @@ Display Buttons (mat form)
     (line_number)
     (display_buttons_statement
       (string_array_expression
-        (string_array_primary_expression
-          (stringarray
-            (stringidentifier))))
+        (stringarray
+          (stringidentifier)))
       (string_array_expression
-        (string_array_primary_expression
-          (stringarray
-            (stringidentifier)))))))
+        (stringarray
+          (stringidentifier))))))

@@ -212,9 +212,6 @@ const ERROR_CONDITION = [
   /soflow/i,
   /timeout/i,
   /zdiv/i,
-  /norec/i,
-  /nokey/i,
-  /duprec/i
 ]
 
 const FNKEY = /fnkey/i
@@ -265,7 +262,6 @@ const getStatements = $ => [
   $.end_select_statement,
   $.library_statement,
   $.input_menu_statement,
-  $.display_buttons_statement,
   $.release_statement,
   $.rinput_statement,
   $.display_buttons_statement
@@ -309,6 +305,11 @@ module.exports = grammar({
     /!_.*\n/
   ],
 
+  conflicts: $ => [
+    [$._conditional_any_expression, $.conditional_unary_expression],
+    [$._conditional_any_expression, $.conditional_binary_expression],
+  ],
+
   inline: $ => [
     $.internal_form_spec,
     $.string_form_spec,
@@ -318,7 +319,11 @@ module.exports = grammar({
     $.pos_form_spec,
     $.x_form_spec,
     $.literal_string_form_spec,
-    $.pic_form_spec
+    $.pic_form_spec,
+    $._line_or_label_reference,
+    $._io_mode,
+    $._statement_body,
+    $._string_reference,
   ],
 
   rules: {
@@ -376,12 +381,12 @@ module.exports = grammar({
 
     continuation: $ => /!:[\t ]*(\r?\n)?/,
 
+    _statement_body: $ => choice(...getStatements($)),
+
     _statement: $ => choice(
       $.comment,
       seq(
-        choice(
-          ...getStatements($)
-        ),
+        $._statement_body,
         optional($.comment)
       ),
       $.else_statement,
@@ -640,19 +645,18 @@ module.exports = grammar({
       ))
     ),
 
+    _line_or_label_reference: $ => choice(
+      $.line_reference,
+      $.label_reference
+    ),
+
     error_condition_list: $ => seq(
       $.error_condition,
-      choice(
-        $.line_reference,
-        $.label_reference
-      ),
+      $._line_or_label_reference,
       repeat(seq(
         optional(","),
         $.error_condition,
-        choice(
-          $.line_reference,
-          $.label_reference
-        ),
+        $._line_or_label_reference,
       ))
     ),
 
@@ -901,7 +905,7 @@ module.exports = grammar({
             $.comment,
             seq(
             choice(
-                ...getStatements($),
+                $._statement_body,
                 $.if_statement
               ),
               optional($.comment)
@@ -916,7 +920,7 @@ module.exports = grammar({
       optional(
         choice(
           $.comment,
-          seq(choice(...getStatements($)),optional($.comment)),
+          seq($._statement_body,optional($.comment)),
           $.if_statement,
           $.single_line_else
         )
@@ -959,13 +963,11 @@ module.exports = grammar({
         seq(
           optional(choice(
             seq(
-              choice(
-                ...getStatements($),
-              ),
+              $._statement_body,
               optional($.comment)
             ),
             $.comment,
-          )), 
+          )),
           choice(
             $.continuation,
             $.statement_separator
@@ -974,9 +976,7 @@ module.exports = grammar({
       ),
       choice(
         seq(
-          choice(
-            ...getStatements($),
-          ),
+          $._statement_body,
           optional($.comment)
         ),
         $.comment,
@@ -995,9 +995,8 @@ module.exports = grammar({
       optional(choice(
         $.comment,
         seq(
-          choice(
-          ...getStatements($),
-        ),optional($.comment),
+          $._statement_body,
+          optional($.comment),
           optional(choice(
             $.single_line_if,
             $.single_line_if_trailing_else,
@@ -1031,18 +1030,12 @@ module.exports = grammar({
 
     gosub_statement: $ => seq(
       alias(STATEMENTS.gosub, "statement"),
-      choice(
-        $.line_reference,
-        $.label_reference
-      )
+      $._line_or_label_reference
     ),
 
     goto_statement: $ => seq(
       alias(STATEMENTS.goto, "statement"),
-      choice(
-        $.line_reference,
-        $.label_reference
-      )
+      $._line_or_label_reference
     ),
 
     input_menu_statement: $ => seq(
@@ -1233,11 +1226,6 @@ module.exports = grammar({
         $.string_expression,
         $.stringarray
       )
-    ),
-
-    _keyword_wait: $ => seq(
-      keyword("wait"),
-      field("operator", $.assignment_op),
     ),
 
     linput_statement: $ => seq(
@@ -1433,10 +1421,7 @@ module.exports = grammar({
                 alias(STATEMENTS.gosub, "statement"),
                 alias(STATEMENTS.goto, "statement")
               ),
-              choice(
-                $.line_reference,
-                $.label_reference
-              ),
+              $._line_or_label_reference,
             ),
             keyword("ignore"),
             keyword("system"),
@@ -1444,10 +1429,7 @@ module.exports = grammar({
           optional(
             seq(
               keyword("none"),
-              choice(
-                $.line_reference,
-                $.label_reference
-              )              
+              $._line_or_label_reference,
             )
           ),
           optional($.error_condition_list)
@@ -1467,22 +1449,22 @@ module.exports = grammar({
             alias(STATEMENTS.goto, "statement"),
             alias(STATEMENTS.gosub, "statement"),
           ),
-          commaSep1(choice(
-            $.line_reference,
-            $.label_reference
-          )),
+          commaSep1($._line_or_label_reference),
           optional(
             seq(
               keyword("none"),
-              choice(
-                $.line_reference,
-                $.label_reference
-              )              
+              $._line_or_label_reference,
             )
           ),
           optional($.error_condition_list)
         )
       ),
+    ),
+
+    _io_mode: $ => choice(
+      keyword("input"),
+      keyword("output"),
+      keyword("outin"),
     ),
 
     open_statement: $ => seq(
@@ -1495,20 +1477,12 @@ module.exports = grammar({
         seq(
           keyword("display"),
           ",",
-          choice(
-            keyword("input"),
-            keyword("output"),
-            keyword("outin"),
-          )
+          $._io_mode
         ),
         seq(
           keyword("external"),
           ",",
-          choice(
-            keyword("input"),
-            keyword("output"),
-            keyword("outin"),
-          ),
+          $._io_mode,
           optional(seq(
             ",",
             choice(
@@ -1520,11 +1494,7 @@ module.exports = grammar({
         seq(
           keyword("internal"),
           ",",
-          choice(
-            keyword("input"),
-            keyword("output"),
-            keyword("outin"),
-          ),
+          $._io_mode,
           optional(seq(
             ",",
             choice(
@@ -1595,8 +1565,7 @@ module.exports = grammar({
       token.immediate(/[ \t]/),
       choice(
         $.string_expression,
-        $.line_reference,
-        $.label_reference
+        $._line_or_label_reference
       ),
       ":",
       optional($.print_output)
@@ -1810,8 +1779,7 @@ module.exports = grammar({
       keyword("using"),
       choice(
         $.string_expression,
-        $.line_reference,
-        $.label_reference
+        $._line_or_label_reference
       ),
       optional(seq(
         ",",
@@ -1827,17 +1795,14 @@ module.exports = grammar({
       )
     ),
 
-    restore_data: $ => choice(
-      $.line_reference,
-      $.label_reference,
-    ),
+    restore_data: $ => $._line_or_label_reference,
 
     restore_file: $ => seq(
       $.channel,
       optional(seq(
         ",",
         choice(
-          $.restore_positional_parameter,
+          $.positional_parameter,
           $.rec_pos_seq,
           $.key_search_seq
         ),
@@ -1849,21 +1814,6 @@ module.exports = grammar({
       ":",
       optional($.error_condition_list)
     ),
-
-    _restore_record_selection: $ => choice(
-      $.restore_positional_parameter,
-      $.rec_pos_seq,
-      $.key_search_seq
-    ),
-
-    restore_positional_parameter: $ => 
-      choice(
-        keyword("first"),
-        keyword("last"),
-        keyword("prior"),
-        keyword("next"),
-        keyword("same"),
-      ),
 
     retry_statement: $ => alias(STATEMENTS.retry, "statement"),
     return_statement: $ => alias(STATEMENTS.return, "statement"),
@@ -1891,12 +1841,6 @@ module.exports = grammar({
       optional($.error_condition_list)
     ),
 
-    write_key_seq: $ => seq(
-      keyword("key"),
-      "=", 
-      $.string_expression
-    ),
-
     write_statement: $ => seq(
       alias(STATEMENTS.write, "statement"),
       $.channel,
@@ -1921,8 +1865,7 @@ module.exports = grammar({
       keyword("using"),
       choice(
         $.string_expression,
-        $.line_reference,
-        $.label_reference,
+        $._line_or_label_reference,
       )
     ),
 
@@ -1982,12 +1925,12 @@ module.exports = grammar({
 
     string_array_expression: $ => choice(
       $.string_array_forced_assignment_expression,
-      $.string_array_primary_expression
+      $.stringarray,
     ),
 
     numeric_array_expression: $ => choice(
       $.numeric_array_forced_assignment_expression,
-      $.numeric_array_primary_expression
+      $.numberarray,
     ),
 
     numeric_expression: $ => choice(
@@ -2143,22 +2086,34 @@ module.exports = grammar({
       ))
     ),
 
+    _conditional_any_expression: $ => choice(
+      $.conditional_expression,
+      $.conditional_string_expression,
+    ),
+
     conditional_binary_expression: $ => choice(
+      // Relation/equality/logical accept both numeric and string conditional expressions
       prec.left('binary_relation',seq(
-        field('left', $.conditional_expression),
+        field('left', $._conditional_any_expression),
         field('operator', $.binary_relation_operator),
-        field('right', $.conditional_expression)
+        field('right', $._conditional_any_expression)
+      )),
+      prec.left('binary_equality',seq(
+        field('left', $._conditional_any_expression),
+        field('operator', $.binary_cond_eq_op),
+        field('right', $._conditional_any_expression)
       )),
       prec.left('logical_and',seq(
-        field('left', $.conditional_expression),
+        field('left', $._conditional_any_expression),
         field('operator', $.logical_and_op),
-        field('right', $.conditional_expression)
+        field('right', $._conditional_any_expression)
       )),
       prec.left('logical_or',seq(
-        field('left', $.conditional_expression),
+        field('left', $._conditional_any_expression),
         field('operator',$.logical_or_op),
-        field('right', $.conditional_expression)
+        field('right', $._conditional_any_expression)
       )),
+      // Numeric-only operators
       prec.left('binary_shift',seq(
         field('left', $.conditional_expression),
         field('operator', $.binary_shift_op),
@@ -2174,78 +2129,11 @@ module.exports = grammar({
         field('operator', $.binary_times_op),
         field('right', $.conditional_expression)
       )),
-      prec.left('binary_equality',seq(
-        field('left', $.conditional_expression),
-        field('operator', $.binary_cond_eq_op),
-        field('right', $.conditional_expression)
-      )),
       prec.right('binary_exp',seq(
         field('left', $.conditional_expression),
         field('operator', $.binary_exp_op),
         field('right', $.conditional_expression)
       )),
-      prec.left('binary_relation',seq(
-        field('left', $.conditional_string_expression),
-        field('operator', $.binary_relation_operator),
-        field('right', $.conditional_string_expression)
-      )),
-      prec.left('binary_equality',seq(
-        field('left', $.conditional_string_expression),
-        field('operator', $.binary_cond_eq_op),
-        field('right', $.conditional_string_expression)
-      )),
-      // Mixed-type logical operations (numeric and string)
-      prec.left('logical_and',seq(
-        field('left', $.conditional_expression),
-        field('operator', $.logical_and_op),
-        field('right', $.conditional_string_expression)
-      )),
-      prec.left('logical_and',seq(
-        field('left', $.conditional_string_expression),
-        field('operator', $.logical_and_op),
-        field('right', $.conditional_expression)
-      )),
-      prec.left('logical_and',seq(
-        field('left', $.conditional_string_expression),
-        field('operator', $.logical_and_op),
-        field('right', $.conditional_string_expression)
-      )),
-      prec.left('logical_or',seq(
-        field('left', $.conditional_expression),
-        field('operator',$.logical_or_op),
-        field('right', $.conditional_string_expression)
-      )),
-      prec.left('logical_or',seq(
-        field('left', $.conditional_string_expression),
-        field('operator',$.logical_or_op),
-        field('right', $.conditional_expression)
-      )),
-      prec.left('logical_or',seq(
-        field('left', $.conditional_string_expression),
-        field('operator',$.logical_or_op),
-        field('right', $.conditional_string_expression)
-      )),
-      // Cross-type comparisons (numeric with string)
-      prec.left('binary_equality',seq(
-        field('left', $.conditional_expression),
-        field('operator', $.binary_cond_eq_op),
-        field('right', $.conditional_string_expression)
-      )),
-      prec.left('binary_equality',seq(
-        field('left', $.conditional_string_expression),
-        field('operator', $.binary_cond_eq_op),
-        field('right', $.conditional_expression)
-      )),
-      prec.left('binary_relation',seq(
-        field('left', $.conditional_expression),
-        field('operator', $.binary_relation_operator),
-        field('right', $.conditional_string_expression)
-      )),
-      prec.left('binary_relation',seq(
-        field('left', $.conditional_string_expression),
-        field('operator', $.binary_relation_operator),
-        field('right', $.conditional_expression)
-      ))
     ),
 
     unary_operator: $ => token(choice('~', '-', '+', /not[ \t]/i)),
@@ -2259,14 +2147,6 @@ module.exports = grammar({
       field('operator', $.unary_operator),
       field('argument', $.conditional_expression)
     )),
-
-    numeric_array_primary_expression: $ => choice(
-      $.numberarray
-    ),
-
-    string_array_primary_expression: $ => choice(
-      $.stringarray,
-    ),
 
     numeric_primary_expression: $ => choice(
       $._numeric_reference,
@@ -2568,12 +2448,6 @@ module.exports = grammar({
       $.numeric_expression
     ),
 
-    conditional_range: $ => seq(
-      $.conditional_expression,
-      ':',
-      $.conditional_expression
-    ),
-
     element_subscript: $ => seq(
       "(",
       commaSep1($.numeric_expression),
@@ -2646,10 +2520,6 @@ module.exports = grammar({
 
     _numeric_system_function_keyword: $ => token(prec(-1, choice(...NUMERIC_SYSTEM_FUNCTIONS))),
 
-    _numberidentifier: $ => choice(
-      token(prec(-1, /[a-zA-Z_]\w*/)),
-      $._numeric_system_function_keyword,
-    ),
     numberidentifier: $ => choice(
       token(prec(-1, /[a-zA-Z_]\w*/)),
       $._numeric_system_function_keyword,
@@ -2686,10 +2556,6 @@ module.exports = grammar({
 
 function commaSep1(rule) {
   return seq(rule, repeat(seq(',', rule)));
-}
-
-function commaSep(rule) {
-  return optional(commaSep1(rule));
 }
 
 function keyword(keyword) {

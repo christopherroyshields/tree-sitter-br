@@ -66,9 +66,8 @@ print mat f$
       (print_output
         (expression
           (string_array_expression
-            (string_array_primary_expression
-              (stringarray
-                (stringidentifier)))))))))
+            (stringarray
+              (stringidentifier))))))))
 
 ==============================
 numeric_array_expression
@@ -82,9 +81,8 @@ print mat f
       (print_output
         (expression
           (numeric_array_expression
-            (numeric_array_primary_expression
-              (numberarray
-                (numberidentifier)))))))))
+            (numberarray
+              (numberidentifier))))))))
 
 ==============================
 numeric_expression
@@ -305,9 +303,8 @@ print mat f
       (print_output
         (expression
           (numeric_array_expression
-            (numeric_array_primary_expression
-              (numberarray
-                (numberidentifier)))))))))
+            (numberarray
+              (numberidentifier))))))))
 
 ==============================
 string_array_primary_expression
@@ -321,9 +318,8 @@ print mat f$
       (print_output
         (expression
           (string_array_expression
-            (string_array_primary_expression
-              (stringarray
-                (stringidentifier)))))))))
+            (stringarray
+              (stringidentifier))))))))
 
 ==============================
 numeric_primary_expression

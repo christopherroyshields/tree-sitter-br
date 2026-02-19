@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-br"
 description = "Tree-sitter parser for Business Rules! language."
-version = "0.25.6"
+version = "0.25.7"
 authors = ["Christopher Shields"]
 license = "ISC"
 readme = "README.md"
